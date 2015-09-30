@@ -1,0 +1,179 @@
+@font-face{
+    font-family:"PT Serif Caption";
+    font-style:normal;
+    font-weight:400;
+    src:local("Cambria"),local("PT Serif Caption"),local("PTSerif-Caption"),url(https://themes.googleusercontent.com/static/fonts/ptserifcaption/v6/7xkFOeTxxO1GMC1suOUYWWhBabBbEjGd1iRmpyoZukE.woff)format('woff')
+}
+
+@font-face{
+    font-family:"Open Sans Light";
+    font-style:normal;
+    font-weight:300;
+    src:local("Segoe UI Light"),local("Open Sans Light"),local("OpenSans-Light"),url(https://themes.googleusercontent.com/static/fonts/opensans/v8/DXI1ORHCpsQm3Vp6mXoaTZ1r3JsPcQLi8jytr04NNhU.woff)format('woff')
+}
+
+@font-face{
+    font-family:"Open Sans";
+    font-style:normal;
+    font-weight:400;
+    src:local("Segoe UI"),local("Open Sans"),local("OpenSans"),url(https://themes.googleusercontent.com/static/fonts/opensans/v8/K88pR3goAWT7BTt32Z01mz8E0i7KZn-EPnyo3HZu7kw.woff)format('woff')
+}
+
+@font-face{
+    font-family:"Open Sans Bold";
+    font-style:normal;
+    font-weight:700;
+    src:local("Segoe UI Bold"),local("Open Sans Bold"),local("OpenSans-Bold"),url(https://themes.googleusercontent.com/static/fonts/opensans/v8/k3k702ZOKiLJc3WVjuplzJ1r3JsPcQLi8jytr04NNhU.woff)format('woff')
+}
+
+body {
+    margin: 2px;
+    padding-bottom: 150px;
+    font-family: "Segoe UI","Open Sans",sans-serif,serif;
+}
+
+/* no rounded corners */
+.btn { border-radius: 0; }
+.nav-pills a, .nav-tabs a { border-radius: 0 !important; }
+.form-control { border-radius: 0; }
+
+.nav-pills a { font-weight: 700; }
+
+.tab-content {
+    padding: 10px 10px 10px 10px;
+}
+
+.num-button {
+    float: left;
+    margin: 10px 0px 10px 0px;
+    width: 75px;
+    text-align: center;
+}
+
+.btn-song, .btn-bible-chapter, .btn-bible-verse {
+    width: 50px;
+}
+
+.book-button {
+    float: left;
+    margin: 10px;
+}
+
+#play {
+    margin: 10px 0px 10px 0px;
+}
+
+#player-row-selection {
+    padding: 5px 0px 5px 0px;
+    border-bottom: 1px solid #E7E7E7;
+}
+
+#player-playlist-controls {
+    margin-bottom: 5px;
+}
+
+/* range input */
+/* ----------- */
+
+input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+
+    /*fix for FF unable to apply focus style bug */
+    /*border: 1px solid white;*/
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border: 1px solid #aaa;
+    border-radius: 50%;
+    background: #fff;
+    margin-top: -4px;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-moz-range-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border: 1px solid #aaa;
+    border-radius: 50%;
+    background: #fff;
+}
+
+/*hide the outline behind the border*/
+input[type=range]:-moz-focusring{
+    outline: 1px solid white;
+    outline-offset: -1px;
+}
+
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 5px;
+
+    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+    background: transparent;
+
+    /*leave room for the larger thumb to overflow with a transparent border */
+    border-color: transparent;
+    border-width: 6px 0;
+
+    /*remove default tick marks*/
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: #777;
+    border-radius: 10px;
+}
+input[type=range]::-ms-fill-upper {
+    background: #ddd;
+    border-radius: 10px;
+}
+input[type=range]::-ms-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border: 1px solid #aaa;
+    border-radius: 50%;
+    background: #fff;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: #888;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: #ccc;
+}
+
+.range {
+    position: relative;
+    height: 25px;
+    margin-top: 20px;
+}
+
+/* Settings */
+#volume {
+    border: 0px;
+    box-shadow: none;
+}

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html ng-app="rameplayer">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link href="css/rameplayer.css" rel="stylesheet">
+    <title>RaMePlayer</title>
+</head>
+
+<body>
+    <div class="container" ng-controller="MediaController as demo">
+        <tabset type="pills">
+            <tab heading="USB">
+                <div class="row">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Filename</th><th>Length</th><th>Date</th><th>Title</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>abc_123.mp4</td><td>1 h 20 min</td><td>1.6.2015</td><td>Media title 1</td></tr>
+                            <tr><td>csong_123.mp3</td><td>3 min</td><td></td><td>Song title 10</td></tr>
+                            <tr><td>gdfag_432.mp4</td><td>10 min</td><td>2.6.2015</td><td>Media title 2</td></tr>
+                            <tr><td>ysfdfs_a.mp4</td><td>1 h 20 min</td><td>3.6.2015</td><td>Media title 3</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </tab>
+
+            <tab>
+                <tab-heading>
+                    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+                </tab-heading>
+                <h1>Settings</h1>
+                <div class="row">
+                    <div class="col-md-6">
+                        <form>
+                            <div class="form-group">
+                                <label for="language">Language</label>
+                                <select name="language" id="language" class="form-control">
+                                    <option>English</option>
+                                    <option>Latviešu</option>
+                                    <option>Lietuvių kalba</option>
+                                    <option>suomi</option>
+                                    <option>eesti</option>
+                                    <option>汉语</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="hostname">Hostname</label>
+                                <input type="text" name="hostname" id="hostname" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>DHCP Server</label>
+                                <br>
+                                <input checked data-toggle="toggle" type="checkbox" name="dhcp" id="dhcp-server">
+                            </div>
+                            <div class="form-group">
+                                <label>IP</label>
+                                <input type="text" name="ip" id="ip" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Volume</label>
+                                <input type="range" name="volumne" id="volume" class="form-control"/>
+                            </div>
+                            <button type="submit" class="btn btn-default">Save</button>
+                        </form>
+                    </div> <!-- .col -->
+                </div> <!-- .row -->
+            </tab>
+        </tabset>
+    </div> <!-- .container -->
+
+    <!-- playback controls -->
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container" ng-controller="PlaybackController as playback">
+            <div class="row" id="player-row-selection">
+                <div class="col-xs-12 text-right">
+                    Selected: 102 Song Title
+                    <button id="add-to-playlist" type="button" class="btn btn-default btn-xs" title="Add to playlist">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </div>
+            </div> <!-- .row -->
+            <div class="row">
+                <div class="col-xs-2">
+                    <button type="button" class="btn btn-default {{ playback.playPauseClasses }}" id="play" title="Play" ng-click="playback.togglePlay()">
+                        <span class="glyphicon {{ playback.playPause }}"></span>
+                    </button>
+                </div>
+                <div class="col-xs-10">
+                    <div class="range">
+                        <input type="range" value="50" max="100" min="1" name="range"></input>
+                    </div>
+                </div>
+            </div> <!-- .row -->
+            <div class="row" id="player-playlist-controls">
+                <div class="col-xs-3">
+                    <button id="previous" type="button" class="btn btn-default btn-xs" disabled="disabled" title="Previous">
+                        <span class="glyphicon glyphicon-step-backward"></span>
+                    </button>
+                </div>
+                <div class="col-xs-6 text-center">
+                    0:00 / 3:34 &ndash; 52 Song
+                </div>
+                <div class="col-xs-3 text-right">
+                    <button id="next" type="button" class="btn btn-default btn-xs" title="Next">
+                        <span class="glyphicon glyphicon-step-forward"></span>
+                    </button>
+                </div>
+            </div> <!-- .row -->
+        </div> <!-- .container -->
+    </nav>
+
+    <!-- libraries -->
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.4.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+
+    <!-- application -->
+    <script src="rameplayer/rameplayer.module.js"></script>
+
+    <!-- media module -->
+    <script src="rameplayer/media/media.module.js"></script>
+    <script src="rameplayer/media/media.js"></script>
+
+    <!-- playback module -->
+    <script src="rameplayer/playback/playback.module.js"></script>
+    <script src="rameplayer/playback/playback.js"></script>
+
+    <!-- settings module -->
+    <script src="rameplayer/settings/settings.module.js"></script>
+
+</body>
+
+</html>
