@@ -4,7 +4,7 @@
     angular.module('rameplayer', [
         'rameplayer.core',
         'rameplayer.media',
-        'rameplayer.playback',
+        'rameplayer.player',
         'rameplayer.settings'
     ]);
 

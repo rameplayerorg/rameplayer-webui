@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('rameplayer.playback')
-        .controller('PlaybackController', PlaybackController);
+        .module('rameplayer.player')
+        .controller('PlayerController', PlayerController);
 
-    PlaybackController.$inject = ['$log', 'dataService'];
+    PlayerController.$inject = ['$log', 'dataService'];
 
-    function PlaybackController($log, dataService) {
+    function PlayerController($log, dataService) {
         var vm = this;
 
         vm.playPause = 'glyphicon-play';
