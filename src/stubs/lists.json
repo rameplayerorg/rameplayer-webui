@@ -1,0 +1,20 @@
+[
+    {
+        "id": "file://foo",
+        "title": "USB",
+        "medias": [
+            {
+                "uri": "file://tmp/test01.mp4",
+                "title": "test01.mp4",
+                "duration": 45.0,
+                "created": 1444161031000
+            },
+            {
+                "uri": "file://tmp/testi02.mp4",
+                "title": "test02.mp4",
+                "duration": 3890.51,
+                "created": 1444161046000
+            }
+        ]
+    }
+]

@@ -8,6 +8,8 @@
     dataService.$inject = ['$http'];
 
     function dataService($http) {
+        var urlPrefix = 'stubs';
+
         var service = {
             getLists: getLists,
             play: play,
@@ -17,15 +19,15 @@
         return service;
 
         function getLists() {
-            return $http.get('stub/lists.json');
+            return $http.get(urlPrefix + '/lists.json');
         }
 
         function play(media) {
-            return $http.get('player/play');
+            return $http.get(urlPrefix + '/player/play');
         }
 
         function pause() {
-            return $http.get('player/pause');
+            return $http.get(urlPrefix + '/player/pause');
         }
     }
 })();

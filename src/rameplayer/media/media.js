@@ -3,9 +3,27 @@
 
     angular
         .module('rameplayer.media')
-        .controller('MediaController', ['$http', '$log', '$q', MediaController]);
+        .controller('MediaController', MediaController);
 
-    function MediaController($http, $log, $q) {
+    MediaController.$inject = ['$log', 'dataService'];
+
+    function MediaController($log, dataService) {
         var vm = this;
+        vm.lists = [];
+
+        loadLists();
+
+        function loadLists() {
+            return getMedias().then(function() {
+                $log.info('Lists loaded', vm.lists);
+            });
+        }
+
+        function getMedias() {
+            return dataService.getLists().then(function(data) {
+                vm.lists = data.data;
+                return vm.lists;
+            });
+        }
     }
 })();

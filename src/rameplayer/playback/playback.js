@@ -5,9 +5,9 @@
         .module('rameplayer.playback')
         .controller('PlaybackController', PlaybackController);
 
-    PlaybackController.$inject = ['$http', '$log', 'dataService'];
+    PlaybackController.$inject = ['$log', 'dataService'];
 
-    function PlaybackController($http, $log, dataService) {
+    function PlaybackController($log, dataService) {
         var vm = this;
 
         vm.playPause = 'glyphicon-play';

@@ -10,21 +10,22 @@
 </head>
 
 <body>
-    <div class="container" ng-controller="MediaController as demo">
+    <div class="container" ng-controller="MediaController as media">
         <tabset type="pills">
             <tab heading="USB">
                 <div class="row">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Filename</th><th>Length</th><th>Date</th><th>Title</th>
+                                <th>Title</th><th>Length</th><th>Date</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>abc_123.mp4</td><td>1 h 20 min</td><td>1.6.2015</td><td>Media title 1</td></tr>
-                            <tr><td>csong_123.mp3</td><td>3 min</td><td></td><td>Song title 10</td></tr>
-                            <tr><td>gdfag_432.mp4</td><td>10 min</td><td>2.6.2015</td><td>Media title 2</td></tr>
-                            <tr><td>ysfdfs_a.mp4</td><td>1 h 20 min</td><td>3.6.2015</td><td>Media title 3</td></tr>
+                            <tr ng-repeat="mediaItem in media.lists[0].medias">
+                                <td>{{ mediaItem.title }}</td>
+                                <td>{{ mediaItem.duration }}</td>
+                                <td>{{ mediaItem.created | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
