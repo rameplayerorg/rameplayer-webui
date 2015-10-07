@@ -1,3 +1,14 @@
+/**
+ * Rameplayer-WebUI
+ * Copyright (C) 2015
+ *
+ * See LICENSE.
+ */
+
+/**
+ * Data Service
+ * @namespace Factories
+ */
 (function() {
     'use strict';
 
@@ -7,10 +18,16 @@
 
     dataService.$inject = ['$http'];
 
+    /**
+     * @namespace DataService
+     * @desc Application wide service for REST API
+     * @memberof Factories
+     */
     function dataService($http) {
         var urlPrefix = 'stubs';
 
         var service = {
+            selected: function() { },
             getLists: getLists,
             play: play,
             pause: pause
@@ -23,7 +40,9 @@
         }
 
         function play(media) {
-            return $http.get(urlPrefix + '/player/play');
+            var url = '/player/play/';
+            url += window.encodeURIComponent(media.uri);
+            return $http.get(url);
         }
 
         function pause() {

@@ -5,13 +5,25 @@
         .module('rameplayer.player')
         .controller('PlayerController', PlayerController);
 
-    PlayerController.$inject = ['$log', 'dataService'];
+    PlayerController.$inject = ['$log', 'playerService', 'dataService'];
 
-    function PlayerController($log, dataService) {
+    function PlayerController($log, playerService, dataService) {
         var vm = this;
 
+        // media when nothing has selected
+        var dummyMedia = {
+            title: 'None'
+        };
+
+        vm.selectedMedia = dummyMedia;
         vm.playPause = 'glyphicon-play';
         vm.playPauseClasses = 'btn-primary';
+
+        // implement playerService.selectMedia()
+        playerService.selectMedia = function(media) {
+            $log.info('Selected media', media);
+            vm.selectedMedia = media;
+        };
 
         vm.togglePlay = function() {
             if (vm.playPause === 'glyphicon-pause') {
@@ -24,7 +36,7 @@
             }
             else {
                 $log.info('Playing started');
-                dataService.play().then(function(data) {
+                dataService.play(vm.selectedMedia).then(function(data) {
                     $log.info('Response', data);
                 });
                 vm.playPause = 'glyphicon-pause';

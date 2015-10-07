@@ -21,7 +21,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="mediaItem in media.lists[0].medias">
+                            <tr ng-repeat="mediaItem in media.lists[0].medias" ng-click="media.selectMedia(mediaItem)">
                                 <td>{{ mediaItem.title }}</td>
                                 <td>{{ mediaItem.duration }}</td>
                                 <td>{{ mediaItem.created | date:'yyyy-MM-dd HH:mm:ss' }}</td>
@@ -35,7 +35,7 @@
                 <tab-heading>
                     <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
                 </tab-heading>
-                <h1>Settings</h1>
+                <h1 translate>Settings</h1>
                 <div class="row">
                     <div class="col-md-6">
                         <form>
@@ -77,10 +77,10 @@
 
     <!-- playback controls -->
     <nav class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container" ng-controller="PlayerController as playback">
+        <div class="container" ng-controller="PlayerController as player">
             <div class="row" id="player-row-selection">
                 <div class="col-xs-12 text-right">
-                    Selected: 102 Song Title
+                  {{ 'Selected' | translate }}: {{ player.selectedMedia.title }}
                     <button id="add-to-playlist" type="button" class="btn btn-default btn-xs" title="Add to playlist">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
@@ -88,8 +88,8 @@
             </div> <!-- .row -->
             <div class="row">
                 <div class="col-xs-2">
-                    <button type="button" class="btn btn-default {{ playback.playPauseClasses }}" id="play" title="Play" ng-click="playback.togglePlay()">
-                        <span class="glyphicon {{ playback.playPause }}"></span>
+                    <button type="button" class="btn btn-default {{ player.playPauseClasses }}" id="play" title="Play" ng-click="player.togglePlay()">
+                        <span class="glyphicon {{ player.playPause }}"></span>
                     </button>
                 </div>
                 <div class="col-xs-10">
@@ -132,14 +132,15 @@
     <script src="rameplayer/core/core.module.js"></script>
     <script src="rameplayer/core/config.js"></script>
     <script src="rameplayer/core/dataservice.js"></script>
-
-    <!-- media module -->
-    <script src="rameplayer/media/media.module.js"></script>
-    <script src="rameplayer/media/media.js"></script>
+    <script src="rameplayer/core/playerservice.js"></script>
 
     <!-- playback module -->
     <script src="rameplayer/player/player.module.js"></script>
     <script src="rameplayer/player/player.js"></script>
+
+    <!-- media module -->
+    <script src="rameplayer/media/media.module.js"></script>
+    <script src="rameplayer/media/media.js"></script>
 
     <!-- settings module -->
     <script src="rameplayer/settings/settings.module.js"></script>

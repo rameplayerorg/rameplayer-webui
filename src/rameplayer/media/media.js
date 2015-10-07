@@ -5,11 +5,17 @@
         .module('rameplayer.media')
         .controller('MediaController', MediaController);
 
-    MediaController.$inject = ['$log', 'dataService'];
+    MediaController.$inject = ['$log', 'dataService', 'playerService'];
 
-    function MediaController($log, dataService) {
+    function MediaController($log, dataService, playerService) {
         var vm = this;
         vm.lists = [];
+
+        vm.selectMedia = function(mediaItem) {
+            // tell PlayerController through PlayerService that
+            // media item was selected
+            playerService.selectMedia(mediaItem);
+        };
 
         loadLists();
 
