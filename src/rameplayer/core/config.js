@@ -21,7 +21,7 @@
             'Date': 'Pvm',
             'Selected': 'Valittu'
         });
-        $translateProvider.preferredLanguage('en');
+        $translateProvider.preferredLanguage('fi');
         // http://angular-translate.github.io/docs/#/guide/19_security
         $translateProvider.useSanitizeValueStrategy('sanitize');
     }
