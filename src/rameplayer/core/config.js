@@ -10,14 +10,14 @@
         $translateProvider.translations('en', {
             Settings: 'Settings',
             Title: 'Title',
-            Duration: 'Duration',
+            Length: 'Length',
             'Date': 'Date',
             'Selected': 'Selected'
         });
         $translateProvider.translations('fi', {
             Settings: 'Asetukset',
             Title: 'Otsikko',
-            Duration: 'Kesto',
+            Length: 'Pituus',
             'Date': 'Pvm',
             'Selected': 'Valittu'
         });

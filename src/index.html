@@ -17,13 +17,13 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th translate>Title</th><th translate>Duration</th><th translate>Date</th>
+                                <th translate>Title</th><th translate>Length</th><th translate>Date</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="mediaItem in media.lists[0].medias" ng-class="{ active: mediaItem === media.selectedMedia }" ng-click="media.selectMedia(mediaItem)">
                                 <td>{{ mediaItem.title }}</td>
-                                <td>{{ mediaItem.duration }}</td>
+                                <td>{{ mediaItem.duration | playerTime }}</td>
                                 <td>{{ mediaItem.created | date:'yyyy-MM-dd HH:mm:ss' }}</td>
                             </tr>
                         </tbody>
