@@ -11,7 +11,10 @@
         var vm = this;
         vm.lists = [];
 
+        vm.selectedMedia = undefined;
         vm.selectMedia = function(mediaItem) {
+            vm.selectedMedia = mediaItem;
+
             // tell PlayerController through PlayerService that
             // media item was selected
             playerService.selectMedia(mediaItem);
