@@ -12,13 +12,10 @@
         vm.lists = [];
 
         vm.selectedMedia = undefined;
-        vm.selectMedia = function(mediaItem) {
-            vm.selectedMedia = mediaItem;
+        vm.selectMedia = selectMedia;
 
-            // tell PlayerController through PlayerService that
-            // media item was selected
-            playerService.selectMedia(mediaItem);
-        };
+        playerService.onMediaSelected(mediaSelected);
+        playerService.onStateChanged(stateChanged);
 
         loadLists();
 
@@ -33,6 +30,18 @@
                 vm.lists = data.data;
                 return vm.lists;
             });
+        }
+
+        function selectMedia(mediaItem) {
+            playerService.selectMedia(mediaItem);
+        }
+
+        function mediaSelected(mediaItem) {
+            vm.selectedMedia = mediaItem;
+        }
+
+        function stateChanged(state) {
+            $log.info('MediaController: state changed to', state);
         }
     }
 })();

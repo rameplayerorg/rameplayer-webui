@@ -5,9 +5,9 @@
         .module('rameplayer.player')
         .controller('PlayerController', PlayerController);
 
-    PlayerController.$inject = ['$log', 'playerService', 'dataService'];
+    PlayerController.$inject = ['$rootScope', '$log', 'playerService', 'dataService'];
 
-    function PlayerController($log, playerService, dataService) {
+    function PlayerController($rootScope, $log, playerService, dataService) {
         var vm = this;
 
         // media when nothing has selected
@@ -18,30 +18,33 @@
         vm.selectedMedia = dummyMedia;
         vm.playPause = 'glyphicon-play';
         vm.playPauseClasses = 'btn-primary';
+        vm.state = undefined;
+        vm.togglePlay = togglePlay;
 
-        // implement playerService.selectMedia()
-        playerService.selectMedia = function(media) {
-            $log.info('Selected media', media);
-            vm.selectedMedia = media;
-        };
+        playerService.onMediaSelected(mediaSelected);
+        playerService.onStateChanged(stateChanged);
 
-        vm.togglePlay = function() {
-            if (vm.playPause === 'glyphicon-pause') {
+        function togglePlay() {
+            if (vm.state === playerService.states.playing) {
+                playerService.setPlayerState(playerService.states.paused);
                 dataService.pause().then(function(data) {
                     $log.info('Response', data);
                 });
-                $log.info('Paused');
-                vm.playPause = 'glyphicon-play';
-                vm.playPauseClasses = 'btn-primary';
             }
             else {
-                $log.info('Playing started');
+                playerService.setPlayerState(playerService.states.playing);
                 dataService.play(vm.selectedMedia).then(function(data) {
                     $log.info('Response', data);
                 });
-                vm.playPause = 'glyphicon-pause';
-                vm.playPauseClasses = 'btn-warning';
             }
-       };
-   }
+        }
+
+        function mediaSelected(media) {
+            vm.selectedMedia = media;
+        }
+
+        function stateChanged(state) {
+            vm.state = state;
+        }
+    }
 })();
