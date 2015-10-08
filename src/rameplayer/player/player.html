@@ -26,7 +26,12 @@
             </button>
         </div>
         <div class="col-xs-6 text-center">
-            0:00 / 3:34 &ndash; {{ player.playingMedia.title }}
+            <div ng-show="player.playingMedia">
+                {{ player.position | playerTime:player.playingMedia.duration }} /
+                {{ player.playingMedia.duration | playerTime }}
+                &ndash;
+                {{ player.playingMedia.title }}
+            </div>
         </div>
         <div class="col-xs-3 text-right">
             <button id="next" type="button" class="btn btn-default btn-xs disabled" title="Next">

@@ -10,6 +10,7 @@
     function PlayerController($log, playerService, dataService) {
         var vm = this;
 
+        vm.position = 0;
         vm.selectedMedia = null;
         vm.playingMedia = null;
         vm.state = undefined;
