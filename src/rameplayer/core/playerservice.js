@@ -16,15 +16,13 @@
         .module('rameplayer.core')
         .factory('playerService', playerService);
 
-    playerService.$inject = ['$rootScope'];
-
     /**
      * @namespace PlayerService
      * @desc Application wide service for communicating with
      *       PlayerController
      * @memberof Factories
      */
-    function playerService($rootScope) {
+    function playerService() {
         var state;
         var stateChangedCallbacks = [];
         var mediaSelectedCallbacks = [];

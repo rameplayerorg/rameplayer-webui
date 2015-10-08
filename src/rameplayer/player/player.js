@@ -5,9 +5,9 @@
         .module('rameplayer.player')
         .controller('PlayerController', PlayerController);
 
-    PlayerController.$inject = ['$rootScope', '$log', 'playerService', 'dataService'];
+    PlayerController.$inject = ['$log', 'playerService', 'dataService'];
 
-    function PlayerController($rootScope, $log, playerService, dataService) {
+    function PlayerController($log, playerService, dataService) {
         var vm = this;
 
         // media when nothing has selected
