@@ -7,10 +7,15 @@
     <link href="//gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link href="css/rameplayer.css" rel="stylesheet">
     <title>RaMePlayer</title>
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container" ng-controller="MediaController as media">
+    <div class="container" ng-controller="MediaController as media" ng-cloak>
         <tabset type="pills">
             <tab heading="USB">
                 <div class="row">
@@ -76,7 +81,7 @@
     </div> <!-- .container -->
 
     <!-- player controls -->
-    <nav class="navbar navbar-default navbar-fixed-bottom" ng-include="'rameplayer/player/player.html'">
+    <nav class="navbar navbar-default navbar-fixed-bottom" ng-include="'rameplayer/player/player.html'" ng-cloak>
     </nav>
 
     <!-- libraries -->
