@@ -10,14 +10,8 @@
     function PlayerController($log, playerService, dataService) {
         var vm = this;
 
-        // media when nothing has selected
-        var dummyMedia = {
-            title: 'None'
-        };
-
-        vm.selectedMedia = dummyMedia;
-        vm.playPause = 'glyphicon-play';
-        vm.playPauseClasses = 'btn-primary';
+        vm.selectedMedia = null;
+        vm.playingMedia = null;
         vm.state = undefined;
         vm.togglePlay = togglePlay;
 
@@ -36,6 +30,7 @@
                 dataService.play(vm.selectedMedia).then(function(data) {
                     $log.info('Response', data);
                 });
+                vm.playingMedia = vm.selectedMedia;
             }
         }
 

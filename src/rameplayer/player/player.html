@@ -9,7 +9,7 @@
     </div> <!-- .row -->
     <div class="row">
         <div class="col-xs-2">
-            <button type="button" class="btn btn-default" ng-class="{ 'btn-primary': player.state !== 'playing', 'btn-warning': player.state === 'playing' }" id="play" title="{{ 'Play' | translate }}" ng-click="player.togglePlay()">
+            <button type="button" class="btn btn-default" ng-class="{ 'btn-primary': player.state !== 'playing', 'btn-warning': player.state === 'playing', disabled: player.selectedMedia === null }" id="play" title="{{ 'Play' | translate }}" ng-click="player.togglePlay()">
                 <span class="glyphicon" ng-class="{ 'glyphicon-play': player.state !== 'playing', 'glyphicon-pause': player.state === 'playing' }"></span>
             </button>
         </div>
@@ -26,7 +26,7 @@
             </button>
         </div>
         <div class="col-xs-6 text-center">
-            0:00 / 3:34 &ndash; 52 Song
+            0:00 / 3:34 &ndash; {{ player.playingMedia.title }}
         </div>
         <div class="col-xs-3 text-right">
             <button id="next" type="button" class="btn btn-default btn-xs disabled" title="Next">
