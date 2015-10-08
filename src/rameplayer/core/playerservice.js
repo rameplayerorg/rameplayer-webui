@@ -26,6 +26,7 @@
         var state;
         var stateChangedCallbacks = [];
         var mediaSelectedCallbacks = [];
+        var playingMedia;
         var service = {
             states: {
                 stopped: 'stopped',
@@ -36,8 +37,10 @@
             onStateChanged:  onStateChanged,
             onMediaSelected: onMediaSelected,
             selectMedia:     selectMedia,
-            setPlayerState:  setPlayerState,
             getPlayerState:  getPlayerState,
+            setPlayerState:  setPlayerState,
+            getPlayingMedia: getPlayingMedia,
+            setPlayingMedia: setPlayingMedia
         };
         return service;
 
@@ -62,15 +65,24 @@
             }
         }
 
-        function setPlayerState(newState) {
+        function getPlayerState() {
+            return playerState;
+        }
+
+        function setPlayerState(newState, media) {
             state = newState;
+            playingMedia = media ? media : null;
             for (var i = 0; i < stateChangedCallbacks.length; i++) {
                 stateChangedCallbacks[i](state);
             }
         }
 
-        function getPlayerState() {
-            return playerState;
+        function getPlayingMedia() {
+            return playingMedia;
+        }
+
+        function setPlayingMedia(media) {
+            playingMedia = media;
         }
     }
 })();

@@ -21,13 +21,13 @@
 
         function togglePlay() {
             if (vm.state === playerService.states.playing) {
-                playerService.setPlayerState(playerService.states.paused);
+                playerService.setPlayerState(playerService.states.paused, vm.playingMedia);
                 dataService.pause().then(function(data) {
                     $log.info('Response', data);
                 });
             }
             else {
-                playerService.setPlayerState(playerService.states.playing);
+                playerService.setPlayerState(playerService.states.playing, vm.selectedMedia);
                 dataService.play(vm.selectedMedia).then(function(data) {
                     $log.info('Response', data);
                 });

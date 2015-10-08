@@ -59,6 +59,10 @@ body {
     margin: 10px;
 }
 
+.col-playing {
+    width: 30px;
+}
+
 #play {
     margin: 10px 0px 10px 0px;
 }
