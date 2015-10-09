@@ -59,8 +59,14 @@ body {
     margin: 10px;
 }
 
+/* Media list view */
+
 .col-playing {
     width: 30px;
+}
+
+.table-media-list tbody tr {
+  cursor: pointer;
 }
 
 #play {
