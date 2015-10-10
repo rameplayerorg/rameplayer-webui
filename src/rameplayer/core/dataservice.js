@@ -28,7 +28,8 @@
             getLists: getLists,
             getPlayerStatus: getPlayerStatus,
             play: play,
-            pause: pause
+            pause: pause,
+            stop: stop
         };
 
         return service;
@@ -49,6 +50,10 @@
 
         function pause() {
             return $http.get(settings.urls.player + '/pause');
+        }
+
+        function stop() {
+            return $http.get(settings.urls.player + '/stop');
         }
     }
 })();

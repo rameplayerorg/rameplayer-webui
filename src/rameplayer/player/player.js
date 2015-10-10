@@ -13,23 +13,52 @@
         vm.selectedMedia = null;
         vm.playerStatus = playerService.getStatus();
         vm.togglePlay = togglePlay;
+        vm.toggleStop = toggleStop;
 
         playerService.onMediaSelected(mediaSelected);
         playerService.onStatusChanged(statusChanged);
 
         function togglePlay() {
             if (vm.playerStatus.state === playerService.states.playing) {
-                playerService.changeStatus(playerService.states.paused, vm.playerStatus.media);
-                dataService.pause().then(function(data) {
-                    $log.info('Response', data);
-                });
+                pause();
             }
             else {
-                playerService.changeStatus(playerService.states.playing, vm.selectedMedia);
-                dataService.play(vm.selectedMedia).then(function(data) {
-                    $log.info('Response', data);
-                });
+                play();
             }
+        }
+
+        function play() {
+            var media = vm.playerStatus.media ? vm.playerStatus.media : vm.selectedMedia;
+            playerService.changeStatus(playerService.states.playing, media);
+            dataService.play(media).then(function(data) {
+                $log.info('Response', data);
+            });
+        }
+
+        function pause() {
+            playerService.changeStatus(playerService.states.paused, vm.playerStatus.media);
+            dataService.pause().then(function(data) {
+                $log.info('Response', data);
+            });
+        }
+
+        function toggleStop() {
+            if (vm.playerStatus.state === playerService.states.playing) {
+                stop();
+            }
+            else {
+                stepBackward();
+            }
+        }
+
+        function stop() {
+            playerService.changeStatus(playerService.states.stopped);
+            dataService.stop().then(function(data) {
+                $log.info('Response', data);
+            });
+        }
+
+        function stepBackward() {
         }
 
         function mediaSelected(media) {

@@ -21,8 +21,8 @@
     </div> <!-- .row -->
     <div class="row" id="player-playlist-controls">
         <div class="col-xs-3">
-            <button id="previous" type="button" class="btn btn-default btn-xs disabled" title="{{ 'Previous' | translate }}">
-                <span class="glyphicon glyphicon-step-backward"></span>
+            <button id="previous" type="button" class="btn btn-default btn-xs" title="{{ 'Previous' | translate }}" ng-click="player.toggleStop()">
+                <span class="glyphicon" ng-class="{ 'glyphicon-step-backward': player.playerStatus.state !== 'playing', 'glyphicon-stop': player.playerStatus.state === 'playing' }"></span>
             </button>
         </div>
         <div class="col-xs-6 text-center">
