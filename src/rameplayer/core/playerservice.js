@@ -107,6 +107,7 @@
          * @memberof Factories.PlayerService
          */
         function simulatePollStatus() {
+            $log.info('Status simulation enabled, not using status service');
             playerStatus.state = service.states.stopped;
             playerStatus.position = 0;
 
