@@ -42,7 +42,6 @@
         }
 
         function statusChanged(playerStatus) {
-            $log.info('MediaController: status changed', playerStatus);
             vm.playerStatus = playerStatus;
         }
     }

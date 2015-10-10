@@ -4,5 +4,9 @@
         "lists": "stubs/lists.json",
         "player": "player"
     },
-    "statusPollingInterval": 1000
+    "statusPollingInterval": 1000,
+    "development": {
+        "enabled": true,
+        "simulateStatus": true
+    }
 }

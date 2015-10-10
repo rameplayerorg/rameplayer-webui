@@ -60,7 +60,7 @@
         /**
          * @name selectMedia
          * @desc Call this when a media item is selected.
-         *       It fires registered callbacks.
+         *       Fires registered callbacks.
          * @param {Media} media Selected media item
          * @memberof Factories.PlayerService
          */
@@ -73,25 +73,63 @@
         function changeStatus(newState, media) {
             playerStatus.state = newState;
             playerStatus.media = media ? media : null;
+            notifyChangedStatus();
+        }
+
+        function notifyChangedStatus() {
             for (var i = 0; i < statusChangedCallbacks.length; i++) {
                 statusChangedCallbacks[i](playerStatus);
             }
         }
 
         function pollStatus() {
+            if (settings.development.enabled && settings.development.simulateStatus) {
+                return simulatePollStatus();
+            }
+
             dataService.getPlayerStatus().then(function(response) {
                 var newStatus = response.data;
                 // notify only when status changes
                 if (!angular.equals(newStatus, playerStatus)) {
                     playerStatus = newStatus;
-                    for (var i = 0; i < statusChangedCallbacks.length; i++) {
-                        statusChangedCallbacks[i](playerStatus);
-                    }
+                    notifyChangedStatus();
                 }
                 $timeout(pollStatus, settings.statusPollingInterval);
             }, function(errorResponse) {
                 $log.error('Status polling failed', errorResponse);
             });
+        }
+
+        /**
+         * @name simulatePollStatus
+         * @desc For development purposes only.
+         *       Primitive status polling simulation.
+         * @memberof Factories.PlayerService
+         */
+        function simulatePollStatus() {
+            playerStatus.state = service.states.stopped;
+            var playingStarted = null;
+
+            onStatusChanged(function(newStatus) {
+                if (newStatus.state === service.states.stopped) {
+                    playerStatus.position = 0;
+                }
+            });
+
+            poller();
+
+            function poller() {
+                if (playerStatus.state === service.states.playing) {
+                    playerStatus.position += 1.0;
+                    if (playerStatus.position >= playerStatus.media.duration) {
+                        playerStatus.state = service.states.stopped;
+                        playerStatus.media = undefined;
+                    }
+                }
+                notifyChangedStatus();
+
+                $timeout(poller, settings.statusPollingInterval);
+            }
         }
     }
 })();
