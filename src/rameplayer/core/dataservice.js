@@ -24,10 +24,9 @@
      * @memberof Factories
      */
     function dataService($http, settings) {
-        var urlPrefix = 'stubs';
-
         var service = {
             getLists: getLists,
+            getPlayerStatus: getPlayerStatus,
             play: play,
             pause: pause
         };
@@ -36,6 +35,10 @@
 
         function getLists() {
             return $http.get(settings.urls.lists);
+        }
+
+        function getPlayerStatus() {
+            return $http.get(settings.urls.player + '/status');
         }
 
         function play(media) {

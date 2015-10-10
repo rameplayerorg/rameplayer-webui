@@ -3,5 +3,6 @@
     "urls": {
         "lists": "stubs/lists.json",
         "player": "player"
-    }
+    },
+    "statusPollingInterval": 1000
 }

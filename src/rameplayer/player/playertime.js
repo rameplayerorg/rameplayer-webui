@@ -38,6 +38,7 @@
          * @memberOf Filters.PlayerTime
          */
         function playerTimeFilter(seconds, measure) {
+            seconds = seconds ? seconds : 0;
             measure = measure ? measure : seconds;
             seconds = Math.floor(seconds);
             if (measure >= 3600) {
@@ -49,7 +50,6 @@
                 return digits(seconds % 3600, 60) + ':' +
                     digits(seconds % 60, 1, true);
             }
-            return str;
         }
 
         function digits(value, divider, twoDigit) {

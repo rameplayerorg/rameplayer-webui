@@ -13,11 +13,10 @@
 
         vm.selectedMedia = undefined;
         vm.selectMedia = selectMedia;
-        vm.playingMedia = null;
-        vm.playerState = undefined;
+        vm.playerStatus = playerService.getStatus();
 
         playerService.onMediaSelected(mediaSelected);
-        playerService.onStateChanged(stateChanged);
+        playerService.onStatusChanged(statusChanged);
 
         loadLists();
 
@@ -42,10 +41,9 @@
             vm.selectedMedia = mediaItem;
         }
 
-        function stateChanged(state) {
-            $log.info('MediaController: state changed to', state);
-            vm.playerState = state;
-            vm.playingMedia = playerService.getPlayingMedia();
+        function statusChanged(playerStatus) {
+            $log.info('MediaController: status changed', playerStatus);
+            vm.playerStatus = playerStatus;
         }
     }
 })();

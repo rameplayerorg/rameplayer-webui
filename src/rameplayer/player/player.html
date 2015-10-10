@@ -9,8 +9,8 @@
     </div> <!-- .row -->
     <div class="row">
         <div class="col-xs-2">
-            <button type="button" class="btn btn-default" ng-class="{ 'btn-primary': player.state !== 'playing', 'btn-warning': player.state === 'playing', disabled: player.selectedMedia === null }" id="play" title="{{ 'Play' | translate }}" ng-click="player.togglePlay()">
-                <span class="glyphicon" ng-class="{ 'glyphicon-play': player.state !== 'playing', 'glyphicon-pause': player.state === 'playing' }"></span>
+            <button type="button" class="btn btn-default" ng-class="{ 'btn-primary': player.playerStatus.state !== 'playing', 'btn-warning': player.playerStatus.state === 'playing', disabled: player.selectedMedia === null }" id="play" title="{{ 'Play' | translate }}" ng-click="player.togglePlay()">
+                <span class="glyphicon" ng-class="{ 'glyphicon-play': player.playerStatus.state !== 'playing', 'glyphicon-pause': player.playerStatus.state === 'playing' }"></span>
             </button>
         </div>
         <div class="col-xs-10">
@@ -26,11 +26,11 @@
             </button>
         </div>
         <div class="col-xs-6 text-center">
-            <div ng-show="player.playingMedia">
-                {{ player.position | playerTime:player.playingMedia.duration }} /
-                {{ player.playingMedia.duration | playerTime }}
+            <div ng-show="player.playerStatus.media">
+                {{ player.playerStatus.position | playerTime:player.playerStatus.media.duration }} /
+                {{ player.playerStatus.media.duration | playerTime }}
                 &ndash;
-                {{ player.playingMedia.title }}
+                {{ player.playerStatus.media.title }}
             </div>
         </div>
         <div class="col-xs-3 text-right">

@@ -16,17 +16,18 @@
         .module('rameplayer.core')
         .factory('playerService', playerService);
 
+    playerService.$inject = ['$log', '$timeout', 'dataService', 'settings'];
+
     /**
      * @namespace PlayerService
      * @desc Application wide service for communicating with
      *       PlayerController
      * @memberof Factories
      */
-    function playerService() {
-        var state;
-        var stateChangedCallbacks = [];
+    function playerService($log, $timeout, dataService, settings) {
+        var playerStatus = {};
+        var statusChangedCallbacks = [];
         var mediaSelectedCallbacks = [];
-        var playingMedia;
         var service = {
             states: {
                 stopped: 'stopped',
@@ -34,18 +35,22 @@
                 paused:  'paused',
                 error:   'error'
             },
-            onStateChanged:  onStateChanged,
+            getStatus:       getStatus,
+            onStatusChanged: onStatusChanged,
             onMediaSelected: onMediaSelected,
             selectMedia:     selectMedia,
-            getPlayerState:  getPlayerState,
-            setPlayerState:  setPlayerState,
-            getPlayingMedia: getPlayingMedia,
-            setPlayingMedia: setPlayingMedia
+            changeStatus:    changeStatus
         };
+
+        pollStatus();
         return service;
 
-        function onStateChanged(func) {
-            stateChangedCallbacks.push(func);
+        function getStatus() {
+            return playerStatus;
+        }
+
+        function onStatusChanged(func) {
+            statusChangedCallbacks.push(func);
         }
 
         function onMediaSelected(func) {
@@ -65,24 +70,28 @@
             }
         }
 
-        function getPlayerState() {
-            return playerState;
-        }
-
-        function setPlayerState(newState, media) {
-            state = newState;
-            playingMedia = media ? media : null;
-            for (var i = 0; i < stateChangedCallbacks.length; i++) {
-                stateChangedCallbacks[i](state);
+        function changeStatus(newState, media) {
+            playerStatus.state = newState;
+            playerStatus.media = media ? media : null;
+            for (var i = 0; i < statusChangedCallbacks.length; i++) {
+                statusChangedCallbacks[i](playerStatus);
             }
         }
 
-        function getPlayingMedia() {
-            return playingMedia;
-        }
-
-        function setPlayingMedia(media) {
-            playingMedia = media;
+        function pollStatus() {
+            dataService.getPlayerStatus().then(function(response) {
+                var newStatus = response.data;
+                // notify only when status changes
+                if (!angular.equals(newStatus, playerStatus)) {
+                    playerStatus = newStatus;
+                    for (var i = 0; i < statusChangedCallbacks.length; i++) {
+                        statusChangedCallbacks[i](playerStatus);
+                    }
+                }
+                $timeout(pollStatus, settings.statusPollingInterval);
+            }, function(errorResponse) {
+                $log.error('Status polling failed', errorResponse);
+            });
         }
     }
 })();

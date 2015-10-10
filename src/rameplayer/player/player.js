@@ -10,28 +10,25 @@
     function PlayerController($log, playerService, dataService) {
         var vm = this;
 
-        vm.position = 0;
         vm.selectedMedia = null;
-        vm.playingMedia = null;
-        vm.state = undefined;
+        vm.playerStatus = playerService.getStatus();
         vm.togglePlay = togglePlay;
 
         playerService.onMediaSelected(mediaSelected);
-        playerService.onStateChanged(stateChanged);
+        playerService.onStatusChanged(statusChanged);
 
         function togglePlay() {
-            if (vm.state === playerService.states.playing) {
-                playerService.setPlayerState(playerService.states.paused, vm.playingMedia);
+            if (vm.playerStatus.state === playerService.states.playing) {
+                playerService.changeStatus(playerService.states.paused, vm.playerStatus.media);
                 dataService.pause().then(function(data) {
                     $log.info('Response', data);
                 });
             }
             else {
-                playerService.setPlayerState(playerService.states.playing, vm.selectedMedia);
+                playerService.changeStatus(playerService.states.playing, vm.selectedMedia);
                 dataService.play(vm.selectedMedia).then(function(data) {
                     $log.info('Response', data);
                 });
-                vm.playingMedia = vm.selectedMedia;
             }
         }
 
@@ -39,8 +36,8 @@
             vm.selectedMedia = media;
         }
 
-        function stateChanged(state) {
-            vm.state = state;
+        function statusChanged(playerStatus) {
+            vm.playerStatus = playerStatus;
         }
     }
 })();
