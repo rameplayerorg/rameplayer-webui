@@ -15,7 +15,7 @@
         </div>
         <div class="col-xs-10">
             <div class="range">
-                <input type="range" value="0" max="100" min="1" name="range" class="disabled"></input>
+                <input id="time-slider" type="range" value="{{ player.playerStatus.position }}" max="{{ player.playerStatus.media.duration }}" min="0" step="1" name="range"></input>
             </div>
         </div>
     </div> <!-- .row -->
