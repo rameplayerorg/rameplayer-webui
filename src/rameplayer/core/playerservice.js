@@ -108,7 +108,7 @@
          */
         function simulatePollStatus() {
             playerStatus.state = service.states.stopped;
-            var playingStarted = null;
+            playerStatus.position = 0;
 
             onStatusChanged(function(newStatus) {
                 if (newStatus.state === service.states.stopped) {
@@ -122,6 +122,7 @@
                 if (playerStatus.state === service.states.playing) {
                     playerStatus.position += 1.0;
                     if (playerStatus.position >= playerStatus.media.duration) {
+                        $log.info('Simulating end of media: stop');
                         playerStatus.state = service.states.stopped;
                         playerStatus.media = undefined;
                     }
