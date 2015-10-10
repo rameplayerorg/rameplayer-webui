@@ -10,10 +10,12 @@
     function PlayerController($log, playerService, dataService) {
         var vm = this;
 
+        vm.timeSlider = 0;
         vm.selectedMedia = null;
         vm.playerStatus = playerService.getStatus();
         vm.togglePlay = togglePlay;
         vm.toggleStop = toggleStop;
+        vm.seek = seek;
 
         playerService.onMediaSelected(mediaSelected);
         playerService.onStatusChanged(statusChanged);
@@ -61,12 +63,20 @@
         function stepBackward() {
         }
 
+        function seek() {
+            var position = vm.timeSlider;
+            dataService.seek(position).then(function(data) {
+                $log.info('Response', data);
+            });
+        }
+
         function mediaSelected(media) {
             vm.selectedMedia = media;
         }
 
         function statusChanged(playerStatus) {
             vm.playerStatus = playerStatus;
+            vm.timeSlider = vm.playerStatus.position ? vm.playerStatus.position : 0;
         }
     }
 })();

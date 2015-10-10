@@ -15,7 +15,7 @@
         </div>
         <div class="col-xs-10">
             <div class="range">
-                <input id="time-slider" type="range" value="{{ player.playerStatus.position }}" max="{{ player.playerStatus.media.duration }}" min="0" step="1" name="range"></input>
+                <input id="time-slider" type="range" max="{{ player.playerStatus.media.duration }}" min="0" step="1" name="range" ng-model="player.timeSlider" ng-change="player.seek()"></input>
             </div>
         </div>
     </div> <!-- .row -->

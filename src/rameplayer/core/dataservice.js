@@ -29,7 +29,8 @@
             getPlayerStatus: getPlayerStatus,
             play: play,
             pause: pause,
-            stop: stop
+            stop: stop,
+            seek: seek
         };
 
         return service;
@@ -54,6 +55,10 @@
 
         function stop() {
             return $http.get(settings.urls.player + '/stop');
+        }
+
+        function seek(position) {
+            return $http.get(settings.urls.player + '/seek/' + position);
         }
     }
 })();
