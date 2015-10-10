@@ -4,9 +4,9 @@
     var core = angular.module('rameplayer.core');
     core.config(translation);
 
-    translation.$inject = ['$translateProvider'];
+    translation.$inject = ['$translateProvider', 'settings'];
 
-    function translation($translateProvider) {
+    function translation($translateProvider, settings) {
         $translateProvider.translations('en', {
             Settings: 'Settings',
             Title: 'Title',
@@ -21,7 +21,7 @@
             'Date': 'Pvm',
             'Selected': 'Valittu'
         });
-        $translateProvider.preferredLanguage('en');
+        $translateProvider.preferredLanguage(settings.language);
         // http://angular-translate.github.io/docs/#/guide/19_security
         $translateProvider.useSanitizeValueStrategy('sanitize');
     }

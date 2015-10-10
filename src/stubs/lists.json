@@ -1,6 +1,6 @@
 [
     {
-        "id": "file://foo",
+        "uri": "rameplayer://usb",
         "title": "USB",
         "medias": [
             {

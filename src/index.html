@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="rameplayer">
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -99,6 +99,10 @@
 
     <!-- core module -->
     <script src="rameplayer/core/core.module.js"></script>
+    <script>
+        angular.module('rameplayer.core').value('settingsUrl', 'stubs/settings.json');
+    </script>
+    <script src="rameplayer/core/bootstrap.js"></script>
     <script src="rameplayer/core/config.js"></script>
     <script src="rameplayer/core/dataservice.js"></script>
     <script src="rameplayer/core/playerservice.js"></script>

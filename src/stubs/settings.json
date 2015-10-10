@@ -1,0 +1,7 @@
+{
+    "language": "en",
+    "urls": {
+        "lists": "stubs/lists.json",
+        "player": "player"
+    }
+}
