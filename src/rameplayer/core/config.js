@@ -9,6 +9,7 @@
     function translation($translateProvider, settings) {
         $translateProvider.translations('en', {
             Settings: 'Settings',
+            Filename: 'Filename',
             Title: 'Title',
             Length: 'Length',
             'Date': 'Date',
@@ -16,6 +17,7 @@
         });
         $translateProvider.translations('fi', {
             Settings: 'Asetukset',
+            Filename: 'Tiedosto',
             Title: 'Otsikko',
             Length: 'Pituus',
             'Date': 'Pvm',

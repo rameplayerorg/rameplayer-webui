@@ -5,31 +5,36 @@
         "medias": [
             {
                 "uri": "rameplayer://usb/ab_E_010_r720P.mp4",
-                "title": "ab_E_010_r720P.mp4",
+                "filename": "ab_E_010_r720P.mp4",
+                "title": "Media video #1",
                 "duration": 5.0,
                 "created": 1441060041000
             },
             {
                 "uri": "rameplayer://usb/ac_E_011_r720P.mp4",
-                "title": "ac_E_011_r720P.mp4",
+                "filename": "ac_E_011_r720P.mp4",
+                "title": "Media video #2",
                 "duration": 3890.51,
                 "created": 1442161046000
             },
             {
                 "uri": "rameplayer://usb/gg_E_012_r720P.mp4",
-                "title": "gg_E_012_r720P.mp4",
+                "filename": "gg_E_012_r720P.mp4",
+                "title": "Media video #3",
                 "duration": 167,
                 "created": 1443161046000
             },
             {
                 "uri": "rameplayer://usb/fy_E_013_r720P.mp4",
-                "title": "fy_E_013_r720P.mp4",
+                "filename": "fy_E_013_r720P.mp4",
+                "title": "Media video #4",
                 "duration": 180,
                 "created": 1444061046013
             },
             {
                 "uri": "rameplayer://usb/ww_E_014_r720P.mp4",
-                "title": "ww_E_014_r720P.mp4",
+                "filename": "ww_E_014_r720P.mp4",
+                "title": "Media video #5",
                 "duration": 602,
                 "created": 1444161046000
             }
