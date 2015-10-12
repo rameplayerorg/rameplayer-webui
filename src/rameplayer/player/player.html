@@ -1,7 +1,7 @@
 <div class="container" ng-controller="PlayerController as player">
     <div class="row" id="player-row-selection">
         <div class="col-xs-12 text-right">
-            {{ 'Selected' | translate }}: {{ player.selectedMedia.title }}
+            {{ 'Selected' | translate }}: {{ player.selectedMedia.filename }}
             <button id="add-to-playlist" type="button" class="btn btn-default btn-xs disabled" title="{{ 'Add to playlist' | translate }}">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
@@ -21,22 +21,26 @@
     </div> <!-- .row -->
     <div class="row" id="player-playlist-controls">
         <div class="col-xs-3">
+            <!--
             <button id="previous" type="button" class="btn btn-default btn-xs" title="{{ 'Previous' | translate }}" ng-click="player.toggleStop()">
                 <span class="glyphicon" ng-class="{ 'glyphicon-step-backward': player.playerStatus.state !== 'playing', 'glyphicon-stop': player.playerStatus.state === 'playing' }"></span>
             </button>
+            -->
         </div>
         <div class="col-xs-6 text-center">
             <div ng-show="player.playerStatus.media">
                 {{ player.playerStatus.position | playerTime:player.playerStatus.media.duration }} /
                 {{ player.playerStatus.media.duration | playerTime }}
                 &ndash;
-                {{ player.playerStatus.media.title }}
+                {{ player.playerStatus.media.filename }}
             </div>
         </div>
         <div class="col-xs-3 text-right">
+            <!--
             <button id="next" type="button" class="btn btn-default btn-xs disabled" title="Next">
                 <span class="glyphicon glyphicon-step-forward"></span>
             </button>
+            -->
         </div>
     </div> <!-- .row -->
 </div> <!-- .container -->

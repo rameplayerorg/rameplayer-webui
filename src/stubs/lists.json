@@ -5,15 +5,15 @@
         "medias": [
             {
                 "uri": "rameplayer://usb/ab_E_010_r720P.mp4",
-                "filename": "ab_E_010_r720P.mp4",
-                "title": "Media video #1",
+                "filename": "1234567890_FI_cnt_1_r720P.mp4",
+                "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed",
                 "duration": 5.0,
                 "created": 1441060041000
             },
             {
                 "uri": "rameplayer://usb/ac_E_011_r720P.mp4",
-                "filename": "ac_E_011_r720P.mp4",
-                "title": "Media video #2",
+                "filename": "123456789_12345678_ac_E_011_r720P.mp4",
+                "title": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
                 "duration": 3890.51,
                 "created": 1442161046000
             },
