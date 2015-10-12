@@ -9,13 +9,13 @@
     </div> <!-- .row -->
     <div class="row">
         <div class="col-xs-2">
-            <button type="button" class="btn btn-default" ng-class="{ 'btn-primary': player.playerStatus.state !== 'playing', 'btn-warning': player.playerStatus.state === 'playing', disabled: player.selectedMedia === null }" id="play" title="{{ 'Play' | translate }}" ng-click="player.togglePlay()">
+            <button type="button" class="btn btn-default" ng-class="{ 'btn-primary': player.playerStatus.state !== 'playing', 'btn-warning': player.playerStatus.state === 'playing', disabled: player.selectedMedia === null }" id="play" title="{{ 'Play' | translate }}" ng-click="player.togglePlay()" ng-disabled="player.selectedMedia === null">
                 <span class="glyphicon" ng-class="{ 'glyphicon-play': player.playerStatus.state !== 'playing', 'glyphicon-pause': player.playerStatus.state === 'playing' }"></span>
             </button>
         </div>
         <div class="col-xs-10">
-            <div class="range">
-                <input id="time-slider" type="range" max="{{ player.playerStatus.media.duration }}" min="0" step="1" name="range" ng-model="player.timeSlider" ng-change="player.seek()"></input>
+            <div class="time-slider">
+                <input id="time-slider" type="range" max="{{ player.playerStatus.media.duration }}" min="0" step="1" name="range" ng-model="player.timeSlider" ng-change="player.seek()" class="timeSlider"></input>
             </div>
         </div>
     </div> <!-- .row -->

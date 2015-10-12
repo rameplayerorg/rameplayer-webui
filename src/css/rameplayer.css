@@ -171,7 +171,7 @@ input[type=range]::-ms-track {
 
     /*leave room for the larger thumb to overflow with a transparent border */
     border-color: transparent;
-    border-width: 6px 0;
+    border-width: 8px 0;
 
     /*remove default tick marks*/
     color: transparent;
@@ -185,7 +185,6 @@ input[type=range]::-ms-fill-upper {
     border-radius: 10px;
 }
 input[type=range]::-ms-thumb {
-    border: none;
     height: 16px;
     width: 16px;
     border: 1px solid #aaa;
@@ -199,10 +198,11 @@ input[type=range]:focus::-ms-fill-upper {
     background: #ccc;
 }
 
-.range {
-    position: relative;
-    height: 25px;
-    margin-top: 20px;
+.time-slider {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 54px;
 }
 
 /* Settings */
