@@ -16,7 +16,7 @@
         .module('rameplayer.core')
         .factory('playerService', playerService);
 
-    playerService.$inject = ['$log', '$timeout', 'dataService', 'settings'];
+    playerService.$inject = ['$log', '$interval', 'dataService', 'settings'];
 
     /**
      * @namespace PlayerService
@@ -24,10 +24,11 @@
      *       PlayerController
      * @memberof Factories
      */
-    function playerService($log, $timeout, dataService, settings) {
+    function playerService($log, $interval, dataService, settings) {
         var playerStatus = {};
         var statusChangedCallbacks = [];
         var mediaSelectedCallbacks = [];
+        var pollerErrorCallbacks = [];
         var service = {
             states: {
                 stopped: 'stopped',
@@ -38,11 +39,13 @@
             getStatus:       getStatus,
             onStatusChanged: onStatusChanged,
             onMediaSelected: onMediaSelected,
+            onPollerError:   onPollerError,
             selectMedia:     selectMedia,
             changeStatus:    changeStatus
         };
+        var pollerPromise;
 
-        pollStatus();
+        startStatusPoller();
         return service;
 
         function getStatus() {
@@ -57,6 +60,10 @@
             mediaSelectedCallbacks.push(func);
         }
 
+        function onPollerError(func) {
+            pollerErrorCallbacks.push(func);
+        }
+
         /**
          * @name selectMedia
          * @desc Call this when a media item is selected.
@@ -65,9 +72,9 @@
          * @memberof Factories.PlayerService
          */
         function selectMedia(media) {
-            for (var i = 0; i < mediaSelectedCallbacks.length; i++) {
-                mediaSelectedCallbacks[i](media);
-            }
+            angular.forEach(mediaSelectedCallbacks, function(callback) {
+                callback(media);
+            });
         }
 
         function changeStatus(newState, media) {
@@ -77,16 +84,21 @@
         }
 
         function notifyChangedStatus() {
-            for (var i = 0; i < statusChangedCallbacks.length; i++) {
-                statusChangedCallbacks[i](playerStatus);
+            angular.forEach(statusChangedCallbacks, function(callback) {
+                callback(playerStatus);
+            });
+        }
+
+        function startStatusPoller() {
+            if (settings.development.enabled && settings.development.simulateStatus) {
+                return simulatePollStatus();
+            }
+            else {
+                return $interval(pollStatus, settings.statusPollingInterval);
             }
         }
 
         function pollStatus() {
-            if (settings.development.enabled && settings.development.simulateStatus) {
-                return simulatePollStatus();
-            }
-
             dataService.getPlayerStatus().then(function(response) {
                 var newStatus = response.data;
                 // notify only when status changes
@@ -94,9 +106,10 @@
                     playerStatus = newStatus;
                     notifyChangedStatus();
                 }
-                $timeout(pollStatus, settings.statusPollingInterval);
             }, function(errorResponse) {
-                $log.error('Status polling failed', errorResponse);
+                angular.forEach(pollerErrorCallbacks, function(callback) {
+                    callback(errorResponse);
+                });
             });
         }
 
@@ -117,7 +130,7 @@
                 }
             });
 
-            poller();
+            return $interval(poller, settings.statusPollingInterval);
 
             function poller() {
                 if (playerStatus.state === service.states.playing) {
@@ -129,8 +142,6 @@
                     }
                 }
                 notifyChangedStatus();
-
-                $timeout(poller, settings.statusPollingInterval);
             }
         }
     }

@@ -34,6 +34,12 @@
                 &ndash;
                 {{ player.playerStatus.media.filename }}
             </div>
+            <div ng-show="player.statusError">
+                <img src="images/spinner1_16_bkg248.gif" alt="">
+                <span class="label label-danger" translate>
+                    Connection error {{ player.statusError }}. Connecting...
+                </span>
+            </div>
         </div>
         <div class="col-xs-3 text-right">
             <!--
