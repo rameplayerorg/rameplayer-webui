@@ -1,4 +1,5 @@
-[
+{
+    "lists": [
     {
         "uri": "rameplayer://usb",
         "title": "USB",
@@ -41,3 +42,4 @@
         ]
     }
 ]
+}
