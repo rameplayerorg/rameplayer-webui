@@ -1,0 +1,151 @@
+<div class="container" ng-controller="AdminController as settings">
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            <div class="form-group">
+                <label for="videoresout">Video output resolution</label>
+                <select id="videoresout">
+                    <option
+                        ng-repeat="vor in settings.videoOutputResolutions"
+                        ng-model="settings.videoOutputResolution">{{
+                        vor }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="audioport">Audio port</label>
+                <div class="input-group" id="audioport">
+                    <span class="input-group-addon"
+                        ng-repeat="port in settings.audioPorts">
+                        <input type="radio"
+                            ng-model="settings.audioPort"
+                            ng-value="port">
+                        {{ port }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="devicename">Device name</label>
+                <input type="text" name="deviceName" id="devicename"
+                    class="form-control" ng-model="settings.deviceName"
+                    ng-minlength="3" ng-maxlength="16" />
+            </div>
+
+            <div class="form-group">
+                <label for="dhcpclient">IP Configurations</label>
+                <tt>current = {{ settings.isDhcpClient }} ip
+                    {{settings.ipAddress}} gateway
+                    {{settings.gatewayIp}} dns 
+                    {{settings.dnsServerIp}}</tt>
+                <div class="list-group">
+                    <div class="list-group-item">
+
+
+                        <div class="input-group" id="dhcpclient">
+                            <span class="input-group-addon">
+                                <input type="checkbox"
+                                    ng-model="settings.isDhcpClient"
+                                    ng-value="true">
+                                Obtain IP automatically as DHCP client
+                            </span>
+                            <!-- 
+                        <span class="input-group-addon">
+                            <input type="radio" ng-model="settings.isDhcpClient" 
+                                ng-value="false">
+                            Off
+                        </span> -->
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="input-group">
+                            <span class="input-group-addon">Device
+                                IP</span>
+                            <input type="text" class="form-control"
+                                maxlength="3" aria-label="deviceIP"
+                                ng-model="settings.deviceIPocts[0]"
+                                ng-disabled="!settings.isDhcpClient">
+                            <span class="input-group-addon">.</span>
+                            <input type="text" class="form-control"
+                                maxlength="3" aria-label="IP"
+                                ng-model="settings.deviceIPocts[1]"
+                                ng-disabled="!settings.isDhcpClient">
+                            <span class="input-group-addon">.</span>
+                            <input type="text" class="form-control"
+                                maxlength="3" aria-label="IP"
+                                ng-model="settings.deviceIPocts[2]"
+                                ng-disabled="!settings.isDhcpClient">
+                            <span class="input-group-addon">.</span>
+                            <input type="text" class="form-control"
+                                maxlength="3" aria-label="IP"
+                                ng-model="settings.deviceIPocts[3]"
+                                ng-disabled="!settings.isDhcpClient">
+                        </div>
+                    </div>
+                    <div class="list-group-item"
+                        ng-disabled="!settings.isDhcpClient">
+                        <div class="input-group">
+                            <span class="input-group-addon">Gateway
+                                IP</span>
+                            <input type="text" class="form-control"
+                                maxlength="3" aria-label="IP"
+                                ng-model="settings.gatewayIPocts[0]"
+                                ng-disabled="!settings.isDhcpClient">
+                            <span class="input-group-addon">.</span>
+                            <input type="text" class="form-control"
+                                maxlength="3" aria-label="IP"
+                                ng-model="settings.gatewayIPocts[1]"
+                                ng-disabled="!settings.isDhcpClient">
+                            <span class="input-group-addon">.</span>
+                            <input type="text" class="form-control"
+                                maxlength="3" aria-label="IP"
+                                ng-model="settings.gatewayIPocts[2]"
+                                ng-disabled="!settings.isDhcpClient">
+                            <span class="input-group-addon">.</span>
+                            <input type="text" class="form-control"
+                                maxlength="3" aria-label="IP"
+                                ng-model="settings.gatewayIPocts[3]"
+                                ng-disabled="!settings.isDhcpClient">
+                        </div>
+                    </div>
+                    <div class="list-group-item"
+                        ng-disabled="!settings.isDhcpClient">
+                        <div class="input-group">
+                            <span class="input-group-addon">DNS
+                                IP</span>
+                            <input type="text" class="form-control"
+                                maxlength="3" aria-label="IP"
+                                ng-model="settings.dnsServerIPocts[0]"
+                                ng-disabled="!settings.isDhcpClient">
+                            <span class="input-group-addon">.</span>
+                            <input type="text" class="form-control"
+                                maxlength="3" aria-label="IP"
+                                ng-model="settings.dnsServerIPocts[1]"
+                                ng-disabled="!settings.isDhcpClient">
+                            <span class="input-group-addon">.</span>
+                            <input type="text" class="form-control"
+                                maxlength="3" aria-label="IP"
+                                ng-model="settings.dnsServerIPocts[2]"
+                                ng-disabled="!settings.isDhcpClient">
+                            <span class="input-group-addon">.</span>
+                            <input type="text" class="form-control"
+                                maxlength="3" aria-label="IP"
+                                ng-model="settings.dnsServerIPocts[3]"
+                                ng-disabled="!settings.isDhcpClient">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-default btn-lg"
+                ng-click="settings.saveSettings()">
+                <span class="glyphicon"
+                    ng-class="{ 'glyphicon-floppy-disk': settings.savingStatus !== 'saved', 'glyphicon-floppy-saved': settings.savingStatus === 'saved' }"
+                    aria-hidden="true"></span>
+                Save settings
+            </button>
+        </div>
+    </div>
+
+</div>

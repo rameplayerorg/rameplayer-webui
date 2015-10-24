@@ -1,0 +1,89 @@
+<div class="container" ng-controller="SettingsController as settings">
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Internal powercycle of HDMI-splitter</h3>
+			<span class="text-info">Workaround for failed HDMI handshake.</span>
+			<tt>current = {{ settings.hdmishaked }}</tt>
+		</div>
+		<div class="panel-body ng-cloak">
+			<button type="button" class="btn btn-default btn-lg"
+				ng-click="settings.resetHdmiInterface()">
+				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+				Reset HDMI interface
+			</button>
+		</div>
+	</div>
+	
+	<div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">User settings</h3>
+        </div>
+        <div class="panel-body ng-cloak">
+            <label for="slavedelay">Slave delay</label>
+	        <input type="number" name="slavedelay" id="slavedelay" ng-model="settings.slaveDelay"
+	                min="0" max="999">
+            <br>
+            <label for="language">Language of the user interface</label>
+            <select name="language" ng-model="settings.languageId"
+                id="language" class="form-control">
+                <option value="en">English</option>
+                <option>Latviešu (Latvian)</option>
+                <option>Lietuvių kalba (Lithuanian)</option>
+                <option value="fi">suomi (Finnish)</option>
+                <option>eesti (Estonian)</option>
+                <option>汉语 (Chinese)</option>
+            </select>
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-default btn-lg"
+                ng-click="settings.saveSettings()">
+                <span class="glyphicon" 
+                    ng-class="{ 'glyphicon-floppy-disk': settings.savingStatus !== 'saved', 'glyphicon-floppy-saved': settings.savingStatus === 'saved' }" 
+                    aria-hidden="true"></span>
+                Save settings
+            </button>
+            <tt>current = {{ settings.savingStatus }}</tt>
+        </div>
+    </div>
+
+	<!-- <div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Slave delay</h3>
+			<span class="text-info">Slave delay in seconds.</span>
+		</div>
+		<div class="panel-body">
+			<input type="number" name="slavedelay" ng-model="settings.slaveDelay"
+				min="0" max="999">
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Language</h3>
+            <span class="text-info">Language used for user interface.</span>
+            <tt>current = {{ settings.languageId }}</tt>
+        </div>
+        <div class="panel-body">
+			<select name="language" ng-model="settings.languageId"
+				id="language" class="form-control">
+				<option ng-repeat="settings.languages">{{ settings.languages.[0] }}</option>
+				<option value="en">English</option>
+				<option>Latviešu (Latvian)</option>
+				<option>Lietuvių kalba (Lithuanian)</option>
+				<option value="fi">suomi (Finnish)</option>
+				<option>eesti (Estonian)</option>
+				<option>汉语 (Chinese)</option>
+			</select>
+			<button type="button" class="btn btn-default btn-lg"
+                ng-click="settings.saveSettings()">
+                <span class="glyphicon" 
+                    ng-class="{ 'glyphicon-floppy-disk': settings.savingStatus !== 'saved', 'glyphicon-floppy-saved': settings.savingStatus === 'saved' }" 
+                    aria-hidden="true"></span>
+                Save settings
+            </button>
+            <tt>current = {{ settings.savingStatus }}</tt>
+		</div>
+	</div> -->
+	
+</div>
