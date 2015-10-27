@@ -15,39 +15,52 @@
         vm.audioPorts = [
                 "XLR", "HDMI", "Both"
         ];
-        
+
         vm.deviceName = "munRame";
-
-        vm.deviceIPocts = [
-                "10", "0", "0", "1"
-        ];
-        vm.gatewayIPocts = [
-                "172", "16", "0", "1"
-        ];
-        vm.dnsServerIPocts = [
-                "192", "168", "0", "1"
-        ];
-
         vm.ipAddress = "";
+        vm.subnetMask = "";
         vm.gatewayIp = "";
         vm.dnsServerIp = "";
+        vm.dnsAlternativeServerIp = "";
+        vm.deviceIpOcts = [
+                "10", "0", "0", "1"
+        ];
+        vm.subnetMaskOcts = [
+                "255", "255", "255", "255"
+        ];
+        vm.gatewayIpOcts = [
+                "172", "16", "0", "1"
+        ];
+        vm.dnsServerIpOcts = [
+                "192", "168", "0", "1"
+        ];
+        vm.dnsAlternativeServerIpOcts = [
+                "192", "168", "0", "254"
+        ];
 
-        vm.isClusterMaster = false;
         vm.isDhcpClient = true;
         vm.isDhcpServer = false;
+
         vm.saveSettings = saveSettings;
         vm.savingStatus = "loaded";
+
+        vm.isClusterMaster = false;
         vm.slaveIps = [];
-        vm.videoOutputResolution = "720p50";
+
+        vm.videoOutputResolution = "720p50 (50 Hz)";
         vm.videoOutputResolutions = [
-                "720p50", "720p60", "1080p50", "1080p60",
+                "720p50 (50 Hz)", "720p60 (60 Hz)", "1080p25 (50 Hz)",
+                "1080p30 (60 Hz)",
         ];
+
 
 
         function saveSettings() {
-            vm.ipAddress = validateIP(vm.deviceIPocts);
-            vm.gatewayIp = validateIP(vm.gatewayIPocts);
-            vm.dnsServerIp = validateIP(vm.dnsServerIPocts);
+            vm.ipAddress = validateIP(vm.deviceIpOcts);
+            vm.gatewayIp = validateIP(vm.gatewayIpOcts);
+            vm.dnsServerIp = validateIP(vm.dnsServerIpOcts);
+            vm.dnsAlternativeServerIp = validateIP(vm.dnsAlternativeServerIpOcts);
+            vm.subnetMask = validateIP(vm.subnetMaskOcts);
             vm.savingStatus = "saved";
         }
 
