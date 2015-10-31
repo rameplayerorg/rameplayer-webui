@@ -59,6 +59,9 @@ body {
     margin: 10px;
 }
 
+/* Angular Bootstrap requires this */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
 /* Media list view */
 
 .col-playing {
