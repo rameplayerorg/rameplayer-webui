@@ -7,10 +7,16 @@
         .controller('SettingsController', SettingsController);
 
     SettingsController.$inject = [
-            '$log', 'dataService', 'settings'
+            '$log', '$http', 'dataService', 'settings', 'settingsUrl'
     ];
-        
-    function SettingsController($log, dataService, settings) {
+//            '$log', '$http', '$resource', 'dataService', 'settings'
+
+    //function SettingsController($log, $http, $resource, dataService, settings) {
+
+    function SettingsController($log, $http, dataService, settings, settingsUrl) {
+        //var core = angular.module('rameplayer.core');
+        var $injector = angular.injector();
+
         var vm = this;
         vm.resetHdmiInterface = resetHdmiInterface;
         vm.slaveDelay = 0;
@@ -19,6 +25,12 @@
         vm.saveSettings = saveSettings;
         
         vm.hdmishaked = "shaky";
+        //$log.info('test');
+        
+//        var settingsResource = $resource(vm.settingsUrl);
+//        settingsResource.stripTrailingSlashes = false;
+
+        //$log.info('test:' + settingsUrl);
         
         function resetHdmiInterface() {
             vm.hdmishaked = "painettu";
@@ -32,6 +44,20 @@
         function saveSettings(){
             settings.language = vm.languageId;
             vm.savingStatus = "saved";
+
+            //settings.$save();   // might have worked this way if it would be a $resource ...?
+            
+            var data = angular.toJson(settings);
+            //$log.info("Saving with post to " + settingsUrl + " : " + data);
+
+            $http.post(settingsUrl, data, { headers: { 'Content-Type': 'application/json'}})
+                .then(function(response) {
+                    $log.info('Saved settings', response);
+                },
+                function(errorResponse) {
+                    $log.error('Error when saving settings', errorResponse);
+                });
+
         }
     }
 

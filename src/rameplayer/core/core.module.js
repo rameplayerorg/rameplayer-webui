@@ -5,5 +5,7 @@
         // angular translate
         'pascalprecht.translate',
         'ngSanitize'
+
+        //'ngResource'
     ]);
 })();

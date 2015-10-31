@@ -25,7 +25,7 @@
 
         function linkFunc(scpe, elem, attrs, vm) {
             vm.labelAddressUsage = attrs.labelAddressUsage;
-                   
+
         }
     }
 
