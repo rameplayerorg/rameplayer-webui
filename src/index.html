@@ -68,18 +68,20 @@
                                         <div class="col-sm-1">Length</div>
                                         <div class="col-sm-3">Date</div>
                                     </div>
-                                    <div class="row media-list-item" ng-repeat="mediaItem in media.lists[0].medias" ng-class="{ selected: mediaItem === media.selectedMedia }" ng-click="media.selectMedia(mediaItem)">
-                                        <div class="col-sm-4 media-list-item-field ellipsis">
-                                            {{ mediaItem.filename }}
-                                        </div>
-                                        <div class="col-sm-4 media-list-item-field ellipsis">
-                                            {{ mediaItem.title }}
-                                        </div>
-                                        <div class="col-sm-1 media-list-item-field">
-                                            {{ mediaItem.duration | playerTime }}
-                                        </div>
-                                        <div class="col-sm-3 media-list-item-field">
-                                            {{ mediaItem.created | date:'yyyy-MM-dd HH:mm:ss' }}
+                                    <div class="media-list-sortable">
+                                        <div class="row media-list-item" ng-repeat="mediaItem in media.lists[0].medias" ng-class="{ selected: mediaItem === media.selectedMedia }" ng-click="media.selectMedia(mediaItem)">
+                                            <div class="col-sm-4 media-list-item-field ellipsis">
+                                                <i class="glyphicon glyphicon-th-large sorting-handle"></i> {{ mediaItem.filename }}
+                                            </div>
+                                            <div class="col-sm-4 media-list-item-field ellipsis">
+                                                {{ mediaItem.title }}
+                                            </div>
+                                            <div class="col-sm-1 media-list-item-field">
+                                                {{ mediaItem.duration | playerTime }}
+                                            </div>
+                                            <div class="col-sm-3 media-list-item-field">
+                                                {{ mediaItem.created | date:'yyyy-MM-dd HH:mm:ss' }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -280,6 +282,7 @@
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
     <script src="//gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-translate/2.8.1/angular-translate.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Sortable/1.4.2/Sortable.min.js"></script>
 
     <!-- application -->
     <script src="rameplayer/rameplayer.module.js"></script>

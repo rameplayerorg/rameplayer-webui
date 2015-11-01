@@ -95,6 +95,12 @@ body {
   text-overflow: ellipsis;
 }
 
+.sorting-handle {
+  cursor: move;
+  cursor: -webkit-grabbing;
+  color: #CCC;
+}
+
 #play {
     margin: 10px 0px 10px 0px;
 }
