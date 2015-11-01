@@ -23,12 +23,14 @@
         function loadLists() {
             return getMedias().then(function() {
                 $log.info('Lists loaded', vm.lists);
-                var sortable = new Sortable($('.media-list-sortable')[0], {
-                    handle: '.sorting-handle',
-                    animation: 150,
-                    onUpdate: function() {
-                        $log.info('Playlist changed');
-                    }
+                $('.media-list-sortable').each(function() {
+                    var sortable = new Sortable($(this)[0], {
+                        handle: '.sorting-handle',
+                        animation: 150,
+                        onUpdate: function() {
+                            $log.info('Playlist changed');
+                        }
+                    });
                 });
             });
         }

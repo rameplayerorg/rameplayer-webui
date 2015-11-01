@@ -71,7 +71,7 @@
                                     <div class="media-list-sortable">
                                         <div class="row media-list-item" ng-repeat="mediaItem in media.lists[0].medias" ng-class="{ selected: mediaItem === media.selectedMedia }" ng-click="media.selectMedia(mediaItem)">
                                             <div class="col-sm-4 media-list-item-field ellipsis">
-                                                <i class="glyphicon glyphicon-th-large sorting-handle"></i> {{ mediaItem.filename }}
+                                                {{ mediaItem.filename }}
                                             </div>
                                             <div class="col-sm-4 media-list-item-field ellipsis">
                                                 {{ mediaItem.title }}
@@ -83,7 +83,7 @@
                                                 {{ mediaItem.created | date:'yyyy-MM-dd HH:mm:ss' }}
                                                 <span class="pull-right">
                                                     <span uib-dropdown on-toggle="toggled(open)">
-                                                        <a href id="simple-dropdown" uib-dropdown-toggle ng-click="$event.stopPropagation();"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                                        <a href id="" uib-dropdown-toggle ng-click="$event.stopPropagation();"><span class="glyphicon glyphicon-menu-hamburger sorting-handle"></span></a>
                                                         <ul class="uib-dropdown-menu dropdown-menu-right">
                                                             <li><a href><i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;</a></li>
                                                             <li><a href><i class="glyphicon glyphicon-remove"></i> Remove</a></li>
@@ -231,27 +231,29 @@
                                                 <div class="col-sm-1">Length</div>
                                                 <div class="col-sm-3">Date</div>
                                             </div>
-                                            <div class="row media-list-item" ng-repeat="mediaItem in media.lists[0].medias" ng-class="{ selected: mediaItem === media.selectedMedia }" ng-click="media.selectMedia(mediaItem)">
-                                                <div class="col-sm-4 media-list-item-field ellipsis">
-                                                    {{ mediaItem.filename }}
-                                                </div>
-                                                <div class="col-sm-4 media-list-item-field ellipsis">
-                                                    {{ mediaItem.title }}
-                                                </div>
-                                                <div class="col-sm-1 media-list-item-field">
-                                                    {{ mediaItem.duration | playerTime }}
-                                                </div>
-                                                <div class="col-sm-3 media-list-item-field">
-                                                    {{ mediaItem.created | date:'yyyy-MM-dd HH:mm:ss' }}
-                                                     <span class="pull-right">
-                                                        <span uib-dropdown on-toggle="toggled(open)">
-                                                            <a href id="simple-dropdown" uib-dropdown-toggle ng-click="$event.stopPropagation();"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                                                            <ul class="uib-dropdown-menu dropdown-menu-right">
-                                                                <li><a href><i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;</a></li>
-                                                                <li><a href><i class="glyphicon glyphicon-remove"></i> Remove</a></li>
-                                                            </ul>
+                                            <div class="media-list-sortable">
+                                                <div class="row media-list-item" ng-repeat="mediaItem in media.lists[0].medias" ng-class="{ selected: mediaItem === media.selectedMedia }" ng-click="media.selectMedia(mediaItem)">
+                                                    <div class="col-sm-4 media-list-item-field ellipsis">
+                                                        {{ mediaItem.filename }}
+                                                    </div>
+                                                    <div class="col-sm-4 media-list-item-field ellipsis">
+                                                        {{ mediaItem.title }}
+                                                    </div>
+                                                    <div class="col-sm-1 media-list-item-field">
+                                                        {{ mediaItem.duration | playerTime }}
+                                                    </div>
+                                                    <div class="col-sm-3 media-list-item-field">
+                                                        {{ mediaItem.created | date:'yyyy-MM-dd HH:mm:ss' }}
+                                                         <span class="pull-right">
+                                                            <span uib-dropdown on-toggle="toggled(open)">
+                                                                <a href uib-dropdown-toggle ng-click="$event.stopPropagation();"><span class="glyphicon glyphicon-menu-hamburger sorting-handle"></span></a>
+                                                                <ul class="uib-dropdown-menu dropdown-menu-right">
+                                                                    <li><a href><i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;</a></li>
+                                                                    <li><a href><i class="glyphicon glyphicon-remove"></i> Remove</a></li>
+                                                                </ul>
+                                                            </span>
                                                         </span>
-                                                    </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div> <!-- .media-list -->
