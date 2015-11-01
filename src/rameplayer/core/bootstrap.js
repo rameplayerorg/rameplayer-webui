@@ -25,28 +25,21 @@
         var initInjector = angular.injector(['ng', 'rameplayer.core']);
         var $http = initInjector.get('$http');
         var $log = initInjector.get('$log');
-//        var $resource = initInjector.get('$resource');
+        var $resource = initInjector.get('$resource');
 
         // settingsUrl is defined in HTML
         var settingsUrl = initInjector.get('settingsUrl');
         core.constant('settingsUrl', settingsUrl);
 
-//        var settingsResource = $resource(settingsUrl);
-//        settingsResource.stripTrailingSlashes = false;
-//        
-//        return settingsResource.get().$promise.
-//            then(function(response) {
-//                $log.info('Fetching settings', response);
-//                core.constant('settings', settingsResource);
-//            },
-//            function(errorResponse) {
-//                $log.error('Error when fetching settings', errorResponse);
-//            });
+        var SettingsResource = $resource(settingsUrl);
+        SettingsResource.stripTrailingSlashes = false;
+        var settings = SettingsResource.get();
 
-        return $http.get(settingsUrl)
-            .then(function(response) {
-                $log.info('Fetching settings', response);
-                core.constant('settings', response.data);
+        // global constant settings is a resource reference
+        core.constant('settings', settings);
+        return settings.$promise.
+            then(function(response) {
+                $log.info('Settings fetched', response);
             },
             function(errorResponse) {
                 $log.error('Error when fetching settings', errorResponse);

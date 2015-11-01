@@ -4,8 +4,7 @@
     angular.module('rameplayer.core', [
         // angular translate
         'pascalprecht.translate',
-        'ngSanitize'
-
-        //'ngResource'
+        'ngSanitize',
+        'ngResource'
     ]);
 })();
