@@ -23,7 +23,8 @@
         return directive;
 
         function link(scope, element, attrs) {
-            scope.defaultPlaylist = (attrs.default !== undefined) ? 'true' : 'false';
+            scope.isDefaultPlaylist = (attrs.default !== undefined);
+            scope.defaultPlaylist = scope.isDefaultPlaylist ? 'true' : 'false';
             scope.sortableOptions = {
                 handle: '.sorting-handle',
                 animation: 150,
