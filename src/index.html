@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
     <link href="//gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link href="css/rameplayer.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="images/favicon.png">
     <title>RaMePlayer</title>
     <style>
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
@@ -59,7 +58,10 @@
                     <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
                 </tab-heading>
                 <h1 translate>Settings</h1>
-                <div class="row">
+                <div ng-include="'rameplayer/settings/settings.html'" ng-cloak>
+                
+                </div>
+                <!-- <div class="row">
                     <div class="col-md-6">
                         <form>
                             <div class="form-group">
@@ -92,9 +94,10 @@
                             </div>
                             <button type="submit" class="btn btn-default">Save</button>
                         </form>
-                    </div> <!-- .col -->
-                </div> <!-- .row -->
-            </tab>
+                    </div> .col
+                </div> .row
+             -->
+             </tab>
         </tabset>
     </div> <!-- .container -->
 
@@ -117,11 +120,17 @@
 
     <!-- application -->
     <script src="rameplayer/rameplayer.module.js"></script>
+    
+    <!-- admin settings module -->
+    <script src="rameplayer/admin/admin.module.js"></script>
+    <script src="rameplayer/admin/admin.js"></script>
 
     <!-- core module -->
     <script src="rameplayer/core/core.module.js"></script>
     <script>
         angular.module('rameplayer.core').value('settingsUrl', 'stubs/settings.json');
+        //angular.module('rameplayer.core').value('settingsUrl', '/settings/user');
+        //angular.module('rameplayer.core').value('settingsUrl', 'http://10.0.0.15:8000/settings/user');
     </script>
     <script src="rameplayer/core/bootstrap.js"></script>
     <script src="rameplayer/core/config.js"></script>
@@ -145,6 +154,7 @@
 
     <!-- settings module -->
     <script src="rameplayer/settings/settings.module.js"></script>
+    <script src="rameplayer/settings/settings.js"></script>
 
 </body>
 

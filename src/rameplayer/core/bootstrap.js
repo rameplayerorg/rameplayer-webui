@@ -25,12 +25,27 @@
         var initInjector = angular.injector(['ng', 'rameplayer.core']);
         var $http = initInjector.get('$http');
         var $log = initInjector.get('$log');
+//        var $resource = initInjector.get('$resource');
 
         // settingsUrl is defined in HTML
         var settingsUrl = initInjector.get('settingsUrl');
+        core.constant('settingsUrl', settingsUrl);
+
+//        var settingsResource = $resource(settingsUrl);
+//        settingsResource.stripTrailingSlashes = false;
+//        
+//        return settingsResource.get().$promise.
+//            then(function(response) {
+//                $log.info('Fetching settings', response);
+//                core.constant('settings', settingsResource);
+//            },
+//            function(errorResponse) {
+//                $log.error('Error when fetching settings', errorResponse);
+//            });
 
         return $http.get(settingsUrl)
             .then(function(response) {
+                $log.info('Fetching settings', response);
                 core.constant('settings', response.data);
             },
             function(errorResponse) {

@@ -1,0 +1,98 @@
+<div class="container" ng-controller="AdminController as settings">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="videoResOut">Video output resolution</label>
+                <select id="videoResOut">
+                    <option
+                        ng-repeat="vor in settings.videoOutputResolutions"
+                        ng-model="settings.videoOutputResolution">{{
+                        vor }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="audioPort">
+                Audio port</label>
+                <div class="input-group" id="audioPort">
+                    <span class=""
+                        ng-repeat="port in settings.audioPorts">
+                        <input type="radio" 
+                            ng-model="settings.audioPort"
+                            ng-value="port">
+                        {{ port }}
+                    </span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="deviceName">Device name</label>
+                <input type="text" name="deviceName" id="deviceName"
+                    class="form-control" ng-model="settings.deviceName"
+                    ng-minlength="3" ng-maxlength="16" />
+            </div>
+
+            <div class="form-group">
+                <label for="ipConfigurations">IP Configurations</label>
+                <tt>current = {{ settings.isDhcpClient }} ip
+                    {{settings.ipAddress}} gateway
+                    {{settings.gatewayIp}} dns {{settings.dnsServerIp}}</tt>
+                <div class="list-group" id="ipConfigurations">
+                    <div class="list-group-item">
+                        <div class="row form-group center-block">
+                            <input type="checkbox"
+                                ng-model="settings.isDhcpClient"
+                                ng-value="true">
+                            Obtain IP automatically as DHCP client
+                        </div>
+                        <div class="row form-group center-block">
+                            <rame-ip-address-block
+                                label-address-usage="Device IP"
+                                aria-label="DeviceIP"
+                                disabilify="settings.isDhcpClient"
+                                octets="settings.deviceIpOcts"></rame-ip-address-block>
+                        </div>
+                        <div class="row form-group center-block">
+                            <rame-ip-address-block
+                                label-address-usage="Gateway IP"
+                                aria-label="GatewayIP"
+                                disabilify="settings.isDhcpClient"
+                                octets="settings.gatewayIpOcts"></rame-ip-address-block>
+                        </div>
+                        <div class="row form-group center-block">
+                            <rame-ip-address-block
+                                label-address-usage="DNS, preferred"
+                                aria-label="DNSIPpreferred"
+                                disabilify="settings.isDhcpClient"
+                                octets="settings.dnsServerIpOcts"></rame-ip-address-block>
+                        </div>
+                        <div class="row form-group center-block">
+                            <rame-ip-address-block
+                                label-address-usage="DNS, alternative"
+                                aria-label="DNSIPalternative"
+                                disabilify="settings.isDhcpClient"
+                                octets="settings.dnsAlternativeServerIpOcts"></rame-ip-address-block>
+                        </div>
+                        <div class="row form-group center-block">
+                            <rame-ip-address-block
+                                label-address-usage="Subnet mask"
+                                aria-label="subnetMask"
+                                disabilify="settings.isDhcpClient"
+                                octets="settings.subnetMaskOcts"></rame-ip-address-block>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-default btn-lg"
+                ng-click="settings.saveSettings()">
+                <span class="glyphicon"
+                    ng-class="{ 'glyphicon-floppy-disk': settings.savingStatus !== 'saved', 'glyphicon-floppy-saved': settings.savingStatus === 'saved' }"
+                    aria-hidden="true"></span>
+                Save settings
+            </button>
+        </div>
+    </div>
+</div>
