@@ -2,7 +2,7 @@
     <div class="row" id="player-row-selection">
         <div class="col-xs-12 text-right">
             {{ 'Selected' | translate }}: {{ player.selectedMedia.filename }}
-            <button id="add-to-playlist" type="button" class="btn btn-default btn-xs disabled" title="{{ 'Add to playlist' | translate }}">
+            <button id="add-to-playlist" type="button" class="btn btn-default btn-xs" title="{{ 'Add to Default Playlist' | translate }}" ng-click="player.addToPlaylist()" ng-disabled="player.selectedMedia == null">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
         </div>

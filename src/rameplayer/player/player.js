@@ -15,6 +15,7 @@
         vm.playerStatus = playerService.getStatus();
         vm.statusErrorPromise = null;
         vm.statusError = null;
+        vm.addToPlaylist = addToPlaylist;
         vm.togglePlay = togglePlay;
         vm.toggleStop = toggleStop;
         vm.seek = seek;
@@ -22,6 +23,12 @@
         playerService.onMediaSelected(mediaSelected);
         playerService.onStatusChanged(statusChanged);
         playerService.onPollerError(pollerError);
+
+        function addToPlaylist() {
+            if (vm.selectedMedia) {
+                playerService.addToPlaylist(vm.selectedMedia);
+            }
+        }
 
         function togglePlay() {
             if (vm.playerStatus.state === playerService.states.playing) {

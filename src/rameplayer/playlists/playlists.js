@@ -20,13 +20,14 @@
                 $log.info('Playlist changed');
             }
         };
-
         vm.selectedMedia = undefined;
         vm.selectMedia = selectMedia;
         vm.playerStatus = playerService.getStatus();
+        vm.removeMedia = removeMedia;
 
         playerService.onMediaSelected(mediaSelected);
         playerService.onStatusChanged(statusChanged);
+        playerService.onAddToPlaylist(addToPlaylist);
 
         loadDefaultPlaylist();
         loadPlaylists();
@@ -38,23 +39,6 @@
 
         function loadPlaylists() {
             return getPlaylists();
-        }
-
-        function findWorkPlaylist() {
-            angular.forEach(vm.lists, function(list, i) {
-                if (list.title === workPlaylistTitle) {
-                    vm.workPlaylist = list;
-                    vm.lists.splice(i, 1);
-                    return;
-                }
-            });
-            // create work playlist
-            vm.workPlaylist = {
-                uri: 'rameplayer://playlist/' + uuid.v4(),
-                title: workPlaylistTitle,
-                medias: [],
-            };
-            $log.info('New work playlist', vm.workPlaylist);
         }
 
         function getPlaylists() {
@@ -72,6 +56,22 @@
 
         function statusChanged(playerStatus) {
             vm.playerStatus = playerStatus;
+        }
+
+        function addToPlaylist(mediaItem) {
+            vm.defaultPlaylist.medias.push(mediaItem);
+            $log.info('Media added to default playlist', mediaItem);
+            vm.defaultPlaylist.$save();
+        }
+
+        function removeMedia(playlist, media) {
+            $log.info('Remove media from playlist', playlist, media);
+            for (var i = 0; i < playlist.medias.length; i++) {
+                if (playlist.medias[i] === media) {
+                    playlist.medias.splice(i, 1);
+                    playlist.$save();
+                }
+            }
         }
     }
 })();

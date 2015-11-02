@@ -15,9 +15,9 @@
             restrict: 'E', // only element
             scope: {
                 // get used playlist from attribute
-                playlist: '='
+                playlist: '=',
+                removeMedia: '&'
             },
-            transclude: true,
             templateUrl: 'rameplayer/playlists/playlist.html'
         };
         return directive;

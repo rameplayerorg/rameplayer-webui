@@ -11,10 +11,11 @@
         // Creates:
         //
         var directive = {
-            //link: link,
             restrict: 'E',
-            //scope: {
-            //},
+            scope: {
+                'media': '=', // take media from attribute
+                'remove': '&'
+            },
             templateUrl: 'rameplayer/media/media-item.html'
         };
         return directive;

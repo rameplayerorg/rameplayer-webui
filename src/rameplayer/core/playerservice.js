@@ -29,6 +29,7 @@
         var statusChangedCallbacks = [];
         var mediaSelectedCallbacks = [];
         var pollerErrorCallbacks = [];
+        var addToPlaylistCallbacks = [];
         var service = {
             states: {
                 stopped: 'stopped',
@@ -36,12 +37,14 @@
                 paused:  'paused',
                 error:   'error'
             },
-            getStatus:       getStatus,
-            onStatusChanged: onStatusChanged,
-            onMediaSelected: onMediaSelected,
-            onPollerError:   onPollerError,
-            selectMedia:     selectMedia,
-            changeStatus:    changeStatus
+            getStatus:         getStatus,
+            onStatusChanged:   onStatusChanged,
+            onMediaSelected:   onMediaSelected,
+            onPollerError:     onPollerError,
+            onAddToPlaylist:   onAddToPlaylist,
+            selectMedia:       selectMedia,
+            changeStatus:      changeStatus,
+            addToPlaylist:     addToPlaylist
         };
         var pollerPromise;
 
@@ -64,6 +67,10 @@
             pollerErrorCallbacks.push(func);
         }
 
+        function onAddToPlaylist(func) {
+            addToPlaylistCallbacks.push(func);
+        }
+
         /**
          * @name selectMedia
          * @desc Call this when a media item is selected.
@@ -81,6 +88,12 @@
             playerStatus.state = newState;
             playerStatus.media = media ? media : null;
             notifyChangedStatus();
+        }
+
+        function addToPlaylist(media) {
+            angular.forEach(addToPlaylistCallbacks, function(callback) {
+                callback(media);
+            });
         }
 
         function notifyChangedStatus() {
