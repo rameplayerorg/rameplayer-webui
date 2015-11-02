@@ -54,6 +54,13 @@
                         </div>
                         <div class="row form-group center-block">
                             <rame-ip-address-block
+                                label-address-usage="Subnet mask"
+                                aria-label="subnetMask"
+                                disabilify="settings.isDhcpClient"
+                                octets="settings.subnetMaskOcts"></rame-ip-address-block>
+                        </div>
+                        <div class="row form-group center-block">
+                            <rame-ip-address-block
                                 label-address-usage="Gateway IP"
                                 aria-label="GatewayIP"
                                 disabilify="settings.isDhcpClient"
@@ -73,13 +80,6 @@
                                 disabilify="settings.isDhcpClient"
                                 octets="settings.dnsAlternativeServerIpOcts"></rame-ip-address-block>
                         </div>
-                        <div class="row form-group center-block">
-                            <rame-ip-address-block
-                                label-address-usage="Subnet mask"
-                                aria-label="subnetMask"
-                                disabilify="settings.isDhcpClient"
-                                octets="settings.subnetMaskOcts"></rame-ip-address-block>
-                        </div>
                     </div>
                 </div>
 
@@ -91,7 +91,7 @@
                 <span class="glyphicon"
                     ng-class="{ 'glyphicon-floppy-disk': settings.savingStatus !== 'saved', 'glyphicon-floppy-saved': settings.savingStatus === 'saved' }"
                     aria-hidden="true"></span>
-                Save settings
+                <span translate>SAVE_SETTINGS</span>
             </button>
         </div>
     </div>
