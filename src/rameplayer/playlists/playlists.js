@@ -13,17 +13,11 @@
         vm.lists = [];
         vm.playlists = [];
         vm.defaultPlaylist = null;
-        vm.sortableMediaOptions = {
-            handle: '.sorting-handle',
-            animation: 150,
-            onUpdate: function() {
-                $log.info('Playlist changed');
-            }
-        };
         vm.selectedMedia = undefined;
         vm.selectMedia = selectMedia;
         vm.playerStatus = playerService.getStatus();
         vm.removeMedia = removeMedia;
+        vm.playlistSorted = playlistSorted;
 
         playerService.onMediaSelected(mediaSelected);
         playerService.onStatusChanged(statusChanged);
@@ -72,6 +66,11 @@
                     playlist.$save();
                 }
             }
+        }
+
+        function playlistSorted(playlist, medias) {
+            playlist.medias = medias;
+            playlist.$save();
         }
     }
 })();

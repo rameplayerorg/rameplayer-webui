@@ -16,7 +16,8 @@
             scope: {
                 // get used playlist from attribute
                 playlist: '=',
-                removeMedia: '&'
+                removeMedia: '&',
+                onSort: '&'
             },
             templateUrl: 'rameplayer/playlists/playlist.html'
         };
@@ -28,8 +29,8 @@
             scope.sortableOptions = {
                 handle: '.sorting-handle',
                 animation: 150,
-                onUpdate: function() {
-                    console.log('Playlist changed');
+                onSort: function(evt) {
+                    scope.onSort({ playlist: scope.playlist, medias: evt.models });
                 }
             };
         }
