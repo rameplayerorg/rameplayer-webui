@@ -44,223 +44,11 @@
             </tab>
 
             <tab heading="PLAYLISTS">
-                <div class="row">
+                <div class="row" ng-controller="PlaylistsController as playlists">
                     <div class="col-sm-12">
                         <uib-accordion close-others="false">
-                            <uib-accordion-group is-open="true">
-                                <uib-accordion-heading>
-                                    User
-                                    <span class="pull-right">
-                                        <span uib-dropdown on-toggle="toggled(open)">
-                                            <a href id="simple-dropdown" uib-dropdown-toggle ng-click="$event.stopPropagation();"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                                            <ul class="uib-dropdown-menu dropdown-menu-right">
-                                                <li><a href><i class="glyphicon glyphicon-play"></i> Play</a></li>
-                                                <li><a href><i class="glyphicon glyphicon-save"></i> Save as&hellip;</a></li>
-                                                <li><a href><i class="glyphicon glyphicon-remove"></i> Clear</a></li>
-                                            </ul>
-                                        </span>
-                                    </span>
-                                </uib-accordion-heading>
-                                <div class="media-list">
-                                    <div class="row hidden-xs media-list-header">
-                                        <div class="col-sm-4">File</div>
-                                        <div class="col-sm-4">Title</div>
-                                        <div class="col-sm-1">Length</div>
-                                        <div class="col-sm-3">Date</div>
-                                    </div>
-                                    <div class="media-list-sortable">
-                                        <div class="row media-list-item" ng-repeat="mediaItem in media.lists[0].medias" ng-class="{ selected: mediaItem === media.selectedMedia }" ng-click="media.selectMedia(mediaItem)">
-                                            <div class="col-sm-4 media-list-item-field ellipsis">
-                                                {{ mediaItem.filename }}
-                                            </div>
-                                            <div class="col-sm-4 media-list-item-field ellipsis">
-                                                {{ mediaItem.title }}
-                                            </div>
-                                            <div class="col-sm-1 media-list-item-field">
-                                                {{ mediaItem.duration | playerTime }}
-                                            </div>
-                                            <div class="col-sm-3 media-list-item-field">
-                                                {{ mediaItem.created | date:'yyyy-MM-dd HH:mm:ss' }}
-                                                <span class="pull-right">
-                                                    <span uib-dropdown on-toggle="toggled(open)">
-                                                        <a href id="" uib-dropdown-toggle ng-click="$event.stopPropagation();"><span class="glyphicon glyphicon-menu-hamburger sorting-handle"></span></a>
-                                                        <ul class="uib-dropdown-menu dropdown-menu-right">
-                                                            <li><a href><i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;</a></li>
-                                                            <li><a href><i class="glyphicon glyphicon-remove"></i> Remove</a></li>
-                                                        </ul>
-                                                    </span>
-                                                 </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </uib-accordion-group>
-                            <uib-accordion-group heading="Weekend Happening 2015">
-                                <uib-accordion-heading>
-                                     Weekend Happening 2015
-                                     <span class="pull-right">
-                                         <span uib-dropdown on-toggle="toggled(open)">
-                                             <a href id="simple-dropdown" uib-dropdown-toggle ng-click="$event.stopPropagation();"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                                             <ul class="uib-dropdown-menu dropdown-menu-right">
-                                                 <li><a href><i class="glyphicon glyphicon-play"></i> Play</a></li>
-                                                 <li><a href><i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;</a></li>
-                                                 <li><a href><i class="glyphicon glyphicon-lock"></i> Lock</a><li>
-                                                 <li><a href><i class="glyphicon glyphicon-remove"></i> Remove</a></li>
-                                             </ul>
-                                         </span>
-                                     </span>
-                                </uib-accordion-heading>
-
-                                <uib-accordion>
-                                    <uib-accordion-group>
-                                        <uib-accordion-heading>
-                                            Friday
-                                            <span class="pull-right">
-                                                <span uib-dropdown on-toggle="toggled(open)">
-                                                    <a href id="simple-dropdown" uib-dropdown-toggle ng-click="$event.stopPropagation();"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                                                    <ul class="uib-dropdown-menu dropdown-menu-right">
-                                                        <li><a href><i class="glyphicon glyphicon-play"></i> Play</a></li>
-                                                        <li><a href><i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;</a></li>
-                                                        <li><a href><i class="glyphicon glyphicon-pencil"></i> Unlock</a><li>
-                                                        <li><a href><i class="glyphicon glyphicon-remove"></i> Remove</a></li>
-                                                    </ul>
-                                                </span>
-                                             </span>
-                                        </uib-accordion-heading>
-                                        <div class="media-list">
-                                            <div class="row hidden-xs media-list-header">
-                                                <div class="col-sm-4">File</div>
-                                                <div class="col-sm-4">Title</div>
-                                                <div class="col-sm-1">Length</div>
-                                                <div class="col-sm-3">Date</div>
-                                            </div>
-                                            <div class="row media-list-item" ng-repeat="mediaItem in media.lists[0].medias" ng-class="{ selected: mediaItem === media.selectedMedia }" ng-click="media.selectMedia(mediaItem)">
-                                                <div class="col-sm-4 media-list-item-field ellipsis">
-                                                    {{ mediaItem.filename }}
-                                                </div>
-                                                <div class="col-sm-4 media-list-item-field ellipsis">
-                                                    {{ mediaItem.title }}
-                                                </div>
-                                                <div class="col-sm-1 media-list-item-field">
-                                                    {{ mediaItem.duration | playerTime }}
-                                                </div>
-                                                <div class="col-sm-3 media-list-item-field">
-                                                    {{ mediaItem.created | date:'yyyy-MM-dd HH:mm:ss' }}
-                                                    <span class="pull-right">
-                                                        <span uib-dropdown on-toggle="toggled(open)">
-                                                            <a href id="simple-dropdown" uib-dropdown-toggle ng-click="$event.stopPropagation();"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                                                            <ul class="uib-dropdown-menu dropdown-menu-right">
-                                                                <li><a href><i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;</a></li>
-                                                                <li><a href><i class="glyphicon glyphicon-remove"></i> Remove</a></li>
-                                                            </ul>
-                                                        </span>
-                                                     </span>
-                                                </div>
-                                            </div>
-                                        </div> <!-- .media-list -->
-                                    </uib-accordion-group>
-
-
-
-
-                                    <uib-accordion-group>
-                                        <uib-accordion-heading>
-                                            Saturday
-                                            <span class="pull-right">
-                                                <span uib-dropdown on-toggle="toggled(open)">
-                                                    <a href id="simple-dropdown" uib-dropdown-toggle ng-click="$event.stopPropagation();"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                                                    <ul class="uib-dropdown-menu dropdown-menu-right">
-                                                        <li><a href><i class="glyphicon glyphicon-play"></i> Play</a></li>
-                                                        <li><a href><i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;</a></li>
-                                                        <li><a href><i class="glyphicon glyphicon-remove"></i> Remove</a></li>
-                                                    </ul>
-                                                </span>
-                                             </span>
-                                        </uib-accordion-heading>
-                                        <div class="media-list">
-                                            <div class="row hidden-xs media-list-header">
-                                                <div class="col-sm-4">File</div>
-                                                <div class="col-sm-4">Title</div>
-                                                <div class="col-sm-1">Length</div>
-                                                <div class="col-sm-3">Date</div>
-                                            </div>
-                                            <div class="row media-list-item" ng-repeat="mediaItem in media.lists[0].medias" ng-class="{ selected: mediaItem === media.selectedMedia }" ng-click="media.selectMedia(mediaItem)">
-                                                <div class="col-sm-4 media-list-item-field ellipsis">
-                                                    {{ mediaItem.filename }}
-                                                </div>
-                                                <div class="col-sm-4 media-list-item-field ellipsis">
-                                                    {{ mediaItem.title }}
-                                                </div>
-                                                <div class="col-sm-1 media-list-item-field">
-                                                    {{ mediaItem.duration | playerTime }}
-                                                </div>
-                                                <div class="col-sm-3 media-list-item-field">
-                                                    {{ mediaItem.created | date:'yyyy-MM-dd HH:mm:ss' }}
-                                                    <span class="pull-right">
-                                                        <span uib-dropdown on-toggle="toggled(open)">
-                                                            <a href id="simple-dropdown" uib-dropdown-toggle ng-click="$event.stopPropagation();"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                                                            <ul class="uib-dropdown-menu dropdown-menu-right">
-                                                                <li><a href><i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;</a></li>
-                                                                <li><a href><i class="glyphicon glyphicon-remove"></i> Remove</a></li>
-                                                            </ul>
-                                                        </span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div> <!-- .media-list -->
-                                    </uib-accordion-group>
-
-                                    <uib-accordion-group>
-                                        <uib-accordion-heading>
-                                            Sunday
-                                            <span class="pull-right">
-                                                <span uib-dropdown on-toggle="toggled(open)">
-                                                    <a href id="simple-dropdown" uib-dropdown-toggle ng-click="$event.stopPropagation();"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                                                    <ul class="uib-dropdown-menu dropdown-menu-right">
-                                                        <li><a href>Play</a></li>
-                                                        <li><a href>Move to&hellip;</a></li>
-                                                        <li><a href>Delete</a></li>
-                                                    </ul>
-                                                </span>
-                                             </span>
-                                        </uib-accordion-heading>
-                                        <div class="media-list">
-                                            <div class="row hidden-xs media-list-header">
-                                                <div class="col-sm-4">File</div>
-                                                <div class="col-sm-4">Title</div>
-                                                <div class="col-sm-1">Length</div>
-                                                <div class="col-sm-3">Date</div>
-                                            </div>
-                                            <div class="media-list-sortable">
-                                                <div class="row media-list-item" ng-repeat="mediaItem in media.lists[0].medias" ng-class="{ selected: mediaItem === media.selectedMedia }" ng-click="media.selectMedia(mediaItem)">
-                                                    <div class="col-sm-4 media-list-item-field ellipsis">
-                                                        {{ mediaItem.filename }}
-                                                    </div>
-                                                    <div class="col-sm-4 media-list-item-field ellipsis">
-                                                        {{ mediaItem.title }}
-                                                    </div>
-                                                    <div class="col-sm-1 media-list-item-field">
-                                                        {{ mediaItem.duration | playerTime }}
-                                                    </div>
-                                                    <div class="col-sm-3 media-list-item-field">
-                                                        {{ mediaItem.created | date:'yyyy-MM-dd HH:mm:ss' }}
-                                                         <span class="pull-right">
-                                                            <span uib-dropdown on-toggle="toggled(open)">
-                                                                <a href uib-dropdown-toggle ng-click="$event.stopPropagation();"><span class="glyphicon glyphicon-menu-hamburger sorting-handle"></span></a>
-                                                                <ul class="uib-dropdown-menu dropdown-menu-right">
-                                                                    <li><a href><i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;</a></li>
-                                                                    <li><a href><i class="glyphicon glyphicon-remove"></i> Remove</a></li>
-                                                                </ul>
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> <!-- .media-list -->
-                                    </uib-accordion-group>
-
-                                </uib-accordion>
-                            </uib-accordion-group>
+                            <rame-playlist default="true" playlist="playlists.defaultPlaylist"></rame-playlist>
+                            <rame-playlist ng-repeat="playlist in playlists.playlists" playlist="playlist"></rame-playlist>
                         </uib-accordion>
                     </div> <!-- .col -->
                 </div> <!-- .row -->
@@ -319,10 +107,13 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-sanitize.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-resource.min.js"></script>
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
     <script src="//gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-translate/2.8.1/angular-translate.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/Sortable/1.4.2/Sortable.min.js"></script>
+    <script src="//rubaxa.github.io/Sortable/ng-sortable.js"></script>
+    <script src="lib/angular-uuid.js"></script>
 
     <!-- application -->
     <script src="rameplayer/rameplayer.module.js"></script>
@@ -345,6 +136,12 @@
     <!-- media module -->
     <script src="rameplayer/media/media.module.js"></script>
     <script src="rameplayer/media/media.js"></script>
+    <script src="rameplayer/media/media-item.directive.js"></script>
+
+    <!-- playlists module -->
+    <script src="rameplayer/playlists/playlists.module.js"></script>
+    <script src="rameplayer/playlists/playlists.js"></script>
+    <script src="rameplayer/playlists/playlist.directive.js"></script>
 
     <!-- settings module -->
     <script src="rameplayer/settings/settings.module.js"></script>

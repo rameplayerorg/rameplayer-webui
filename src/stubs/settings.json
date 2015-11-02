@@ -2,6 +2,8 @@
     "language": "en",
     "urls": {
         "lists": "stubs/lists.json",
+        "defaultPlaylist": "stubs/playlists/default.json",
+        "playlists": "stubs/playlists.json",
         "player": "player"
     },
     "statusPollingInterval": 1000,

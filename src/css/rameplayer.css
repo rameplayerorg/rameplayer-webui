@@ -62,6 +62,11 @@ body {
 /* Angular Bootstrap requires this */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
+/* Playlists */
+.panel-group rame-playlist .panel {
+  margin-bottom: 5px;
+}
+
 /* Media list view */
 
 .col-playing {

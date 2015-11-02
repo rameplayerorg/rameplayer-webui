@@ -9,8 +9,8 @@
 
     function MediaController($log, dataService, playerService) {
         var vm = this;
-        vm.lists = [];
 
+        vm.lists = [];
         vm.selectedMedia = undefined;
         vm.selectMedia = selectMedia;
         vm.playerStatus = playerService.getStatus();
@@ -23,15 +23,6 @@
         function loadLists() {
             return getMedias().then(function() {
                 $log.info('Lists loaded', vm.lists);
-                $('.media-list-sortable').each(function() {
-                    var sortable = new Sortable($(this)[0], {
-                        handle: '.sorting-handle',
-                        animation: 150,
-                        onUpdate: function() {
-                            $log.info('Playlist changed');
-                        }
-                    });
-                });
             });
         }
 

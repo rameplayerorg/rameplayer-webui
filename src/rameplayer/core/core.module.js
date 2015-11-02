@@ -4,6 +4,9 @@
     angular.module('rameplayer.core', [
         // angular translate
         'pascalprecht.translate',
-        'ngSanitize'
+        'ngSanitize',
+        'ngResource',
+        'ng-sortable',
+        'angular-uuid'
     ]);
 })();

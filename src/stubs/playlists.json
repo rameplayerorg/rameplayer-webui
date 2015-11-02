@@ -1,0 +1,38 @@
+[
+    {
+        "index": 1,
+        "title": "Playlist 1",
+        "shortTitle": null,
+        "medias": [
+            {
+                "uri": "rameplayer:\/\/server\/SONGS\/002.mp4",
+                "title": "First Media",
+                "autoPlayNextMedia": false,
+                "shortTitle": null,
+                "duration": 159.3592,
+                "index": 1
+            },
+            {
+                "uri": "rameplayer:\/\/usb\/video.mp4",
+                "title": "Video 1",
+                "autoPlayNextMedia": false,
+                "shortTitle": null,
+                "duration": 359.3592,
+                "index": 2
+            }
+        ],
+        "repeat": -1,
+        "autoPlayNext": false,
+        "modified": 1446131112042.9
+    },
+    {
+        "index": 2,
+        "title": "Playlist 2",
+        "modified": 1446131112042.9
+    },
+    {
+        "index": 3,
+        "title": "3rd Playlist",
+        "modified": 1446131112042.9
+    }
+]
