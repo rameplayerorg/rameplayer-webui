@@ -39,6 +39,11 @@
             seek: seek
         };
 
+        settings.urls.player =
+            location.protocol + '//' + location.hostname +
+            ':' + settings.server.port + '/' +
+            settings.server.path;
+
         return service;
 
         function getLists() {
