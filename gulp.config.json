@@ -1,0 +1,11 @@
+{
+    "app": "./src/",
+    "css": [
+        "./src/css/rameplayer.css"
+    ],
+    "js": [
+        "./src/**/*.module.js",
+        "./src/**/*.js"
+    ],
+    "build": "./build/"
+}
