@@ -1,6 +1,22 @@
 language: node_js
 node_js:
  - "4.1"
-before_script:
+
+branches:
+  only:
+    - master
+
+before_install:
   - npm install -g gulp
-script: gulp
+
+script:
+  - npm install
+  - gulp js
+
+cache:
+  directories:
+    - node_modules
+
+notifications:
+  email:
+    - tuomas.jaakola@iki.fi
