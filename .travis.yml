@@ -8,6 +8,9 @@ branches:
 
 before_install:
   - npm install -g gulp
+  - npm install -g gulp-load-plugins
+  - npm install -g gulp-jshint
+  - npm install -g gulp-uglify
 
 script:
   - npm install
