@@ -20,5 +20,8 @@
         "bootstrap": "~3.3.5",
         "bootstrap-toggle": "~2.2.0",
         "Sortable": "~1.4.2"
+    },
+    "resolutions": {
+        "angular": "1.4.7"
     }
 }
