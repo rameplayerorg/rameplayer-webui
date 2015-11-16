@@ -1,0 +1,24 @@
+{
+    "name": "rameplayer-webui",
+    "version": "0.0.1",
+    "description": "RamePlayer WebUI",
+    "license": "GPL-2.0",
+    "homepage": "https://github.com/rameplayerorg/rameplayer-webui",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components"
+    ],
+    "dependencies": {
+        "angular": "~1.4.7",
+        "angular-animate": "~1.4.7",
+        "angular-bootstrap": "~0.14.3",
+        "angular-resource": "~1.4.7",
+        "angular-sanitize": "~1.4.7",
+        "angular-translate": "~2.8.1",
+        "angular-uuid": "~0.1.0",
+        "bootstrap": "~3.3.5",
+        "bootstrap-toggle": "~2.2.0",
+        "Sortable": "~1.4.2"
+    }
+}

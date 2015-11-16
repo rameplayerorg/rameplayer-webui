@@ -27,8 +27,7 @@
         var $log = initInjector.get('$log');
         var $resource = initInjector.get('$resource');
 
-        // settingsUrl is defined in HTML
-        var settingsUrl = initInjector.get('settingsUrl');
+        var settingsUrl = 'stubs/settings.json';
         core.constant('settingsUrl', settingsUrl);
 
         var SettingsResource = $resource(settingsUrl);

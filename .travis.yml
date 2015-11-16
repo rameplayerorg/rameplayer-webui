@@ -6,18 +6,36 @@ branches:
   only:
     - master
 
-before_install:
+before_script:
+  - npm install -g del
   - npm install -g gulp
-  - npm install -g gulp-load-plugins
+  - npm install -g gulp-angular-templatecache
+  - npm install -g gulp-autoprefixer
+  - npm install -g gulp-bytediff
+  - npm install -g gulp-concat
+  - npm install -g gulp-filter
+  - npm install -g gulp-inject
+  - npm install -g gulp-jscs
   - npm install -g gulp-jshint
+  - npm install -g gulp-minify-css
+  - npm install -g gulp-minify-html
+  - npm install -g gulp-notify
+  - npm install -g gulp-ng-annotate
+  - npm install -g gulp-rev
+  - npm install -g gulp-rev-replace
+  - npm install -g gulp-task-listing
   - npm install -g gulp-uglify
+  - npm install -g jshint-stylish
+  - npm install -g merge-stream
 
 script:
   - npm install
-  - gulp js
+  - bower install
+  - gulp build
 
 cache:
   directories:
+    - bower_components
     - node_modules
 
 notifications:

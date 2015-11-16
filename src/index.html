@@ -3,10 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-    <link href="//gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
-    <link href="css/rameplayer.css" rel="stylesheet">
     <title>RaMePlayer</title>
+
+    <!-- inject-vendor:css -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css">
+    <!-- endinject -->
+
+    <!-- inject:css -->
+    <link href="css/rameplayer.css" rel="stylesheet" />
+    <!-- endinject -->
+
     <style>
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
             display: none !important;
@@ -105,20 +112,24 @@
     <nav class="navbar navbar-default navbar-fixed-bottom" ng-include="'rameplayer/player/player.html'" ng-cloak>
     </nav>
 
-    <!-- libraries -->
-    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-sanitize.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-resource.min.js"></script>
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
-    <script src="//gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-translate/2.8.1/angular-translate.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Sortable/1.4.2/Sortable.min.js"></script>
-    <script src="//rubaxa.github.io/Sortable/ng-sortable.js"></script>
-    <script src="lib/angular-uuid.js"></script>
+    <!-- inject-vendor:js -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="../bower_components/angular-translate/angular-translate.min.js"></script>
+    <script src="../bower_components/angular-uuid/uuid.min.js"></script>
+    <script src="../bower_components/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
+    <script src="../bower_components/Sortable/Sortable.min.js"></script>
+    <script src="../bower_components/Sortable/ng-sortable.js"></script>
+    <!-- endinject -->
 
     <!-- application -->
+
+    <!-- inject:js -->
     <script src="rameplayer/rameplayer.module.js"></script>
     
     <!-- admin settings module -->
@@ -127,11 +138,6 @@
 
     <!-- core module -->
     <script src="rameplayer/core/core.module.js"></script>
-    <script>
-        angular.module('rameplayer.core').value('settingsUrl', 'stubs/settings.json');
-        //angular.module('rameplayer.core').value('settingsUrl', '/settings/user');
-        //angular.module('rameplayer.core').value('settingsUrl', 'http://10.0.0.15:8000/settings/user');
-    </script>
     <script src="rameplayer/core/bootstrap.js"></script>
     <script src="rameplayer/core/config.js"></script>
     <script src="rameplayer/core/dataservice.js"></script>
@@ -155,6 +161,7 @@
     <!-- settings module -->
     <script src="rameplayer/settings/settings.module.js"></script>
     <script src="rameplayer/settings/settings.js"></script>
+    <!-- endinject -->
 
 </body>
 
