@@ -7,8 +7,7 @@ branches:
     - master
 
 before_script:
-  - npm install -g del
-  - npm install -g gulp
+  - npm install -g bower gulp del
   - npm install -g gulp-angular-templatecache
   - npm install -g gulp-autoprefixer
   - npm install -g gulp-bytediff
