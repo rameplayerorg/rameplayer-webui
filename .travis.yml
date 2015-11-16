@@ -1,24 +1,33 @@
 language: node_js
 node_js:
- - "4.1"
-
+- '4.1'
 branches:
   only:
-    - master
-
+  - master
 before_script:
-  - npm install -g bower gulp del gulp-angular-templatecache gulp-autoprefixer gulp-bytediff gulp-concat gulp-filter gulp-inject gulp-jscs gulp-jshint gulp-minify-css gulp-minify-html gulp-notify gulp-ng-annotate gulp-rev gulp-rev-replace gulp-task-listing gulp-uglify jshint-stylish merge-stream
-
+- npm install -g bower gulp del gulp-angular-templatecache gulp-autoprefixer gulp-bytediff
+  gulp-concat gulp-filter gulp-inject gulp-jscs gulp-jshint gulp-minify-css gulp-minify-html
+  gulp-notify gulp-ng-annotate gulp-rev gulp-rev-replace gulp-task-listing gulp-uglify
+  jshint-stylish merge-stream
 script:
-  - npm install
-  - bower install
-  - gulp build
-
+- npm install
+- bower install
+- gulp build
+- cd build
+- tar czf rameplayer-webui.tar.gz *
 cache:
   directories:
-    - bower_components
-    - node_modules
-
+  - bower_components
+  - node_modules
 notifications:
   email:
-    - tuomas.jaakola@iki.fi
+  - tuomas.jaakola@iki.fi
+deploy:
+  provider: releases
+  api_key:
+    secure: BeBy0Om4Md9JinUlV023JygGS4ymQwvhGsE6KCgfhi+UScblcqRLbJulJIshiFwuQRYwhyEoHvF6lAlqyHz5kJaqwl8Gb/CiFYjDwLncwr/Tw0xrSl6WbKfcmqameppEYjCqLozAu7/HuDbc3Dc355qqbRMLAU1S3Q9xTLkUuN4wSf6ePzbj0AQjwaTzvHOtPLT7wuUto7K/fAzwfwSNWQ8ahShW1DZWxdouQ7zuMcg6gdHjlDS2BfvwWIcRcQ2epo8ThQAPFFUl7eQwxbJCZV1kJ2+oJw37AE/t7n2et3OT8JLMWmK88/cKJnJe+n61Wo5bEGFDE/XjfDofrLG1vcl9MpRE5bnnM2aJGeFg/yOH5WWtnTGBRvLNbx6FoJcYi3BTnzJWdGl/1GJJH59R1/XrYcjht7iD7b8sSAk34XdDITcnFzPVdfkEpiPhRNi4eN1xdmGRcKeXFdXczIpbdj3Y5OgKbZgKr4e8bQZCC2Q3EVPkRFjDgLge8Ji2HwAH1NzW57yBOVphJslbuEChuF4OjHvYgyR1euim7947pq7hN8bn4HGSd6/A3A/tg2OgVER3nUgIFkliqWFBAihopeQBjMG6ee2OVcq7Otwy2ocZkQj+aetNOCrAm101abNtQDQ8nwH5Rh+YsaHhGW7rCdJ2G9UeHdu33311+z2vi5M=
+  file: build/rameplayer-webui.tar.gz
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: rameplayerorg/rameplayer-webui
