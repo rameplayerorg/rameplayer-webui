@@ -17,7 +17,8 @@
                 // get used playlist from attribute
                 playlist: '=',
                 removeMedia: '&',
-                onSort: '&'
+                onSort: '&',
+                saveAs: '&'
             },
             templateUrl: 'rameplayer/playlists/playlist.html'
         };

@@ -32,6 +32,7 @@
             getLists: getLists,
             getDefaultPlaylist: getDefaultPlaylist,
             getPlaylists: getPlaylists,
+            createPlaylist: createPlaylist,
             getPlayerStatus: getPlayerStatus,
             play: play,
             pause: pause,
@@ -57,6 +58,13 @@
 
         function getPlaylists() {
             return Playlists.query();
+        }
+
+        function createPlaylist(playlist) {
+            var newPlaylist = new Playlists();
+            newPlaylist.title = playlist.title;
+            Playlists.save(playlist, function() {
+            });
         }
 
         function getPlayerStatus() {

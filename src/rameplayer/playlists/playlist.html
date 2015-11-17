@@ -6,14 +6,18 @@
          </span>
          <span class="pull-right">
              <span uib-dropdown on-toggle="toggled(open)">
-                 <a href id="simple-dropdown" uib-dropdown-toggle ng-click="$event.stopPropagation();">
+                 <a href uib-dropdown-toggle ng-click="$event.stopPropagation();">
                      <span class="glyphicon glyphicon-menu-hamburger"></span>
                  </a>
                  <ul class="uib-dropdown-menu dropdown-menu-right">
                      <li><a href><i class="glyphicon glyphicon-play"></i> Play</a></li>
                      <li ng-switch on="defaultPlaylist">
-                         <a href ng-switch-when="true"><i class="glyphicon glyphicon-save"></i> Save as&hellip;</a>
-                         <a href ng-switch-default><i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;</a>
+                         <a href ng-switch-when="true" ng-click="$event.stopPropagation(); saveAs({ playlist: playlist })">
+                             <i class="glyphicon glyphicon-save"></i> Save as&hellip;
+                         </a>
+                         <a href ng-switch-default ng-click="$event.stopPropagation();">
+                             <i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;
+                         </a>
                      </li>
                      <li ng-if="defaultPlaylist != 'true'">
                          <a href><i class="glyphicon glyphicon-lock"></i> Lock</a>
