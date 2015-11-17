@@ -1,9 +1,6 @@
 language: node_js
 node_js:
 - '4.1'
-branches:
-  only:
-  - master
 before_script:
 - npm install -g bower gulp del gulp-angular-templatecache gulp-autoprefixer gulp-bytediff
   gulp-concat gulp-filter gulp-inject gulp-jscs gulp-jshint gulp-minify-css gulp-minify-html
@@ -30,4 +27,4 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-    repo: rameplayerorg/rameplayer-webui
+    all_branches: true
