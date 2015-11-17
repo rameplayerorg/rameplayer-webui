@@ -11,7 +11,8 @@ script:
 - bower install
 - gulp build
 - cd build
-- tar czf rameplayer-webui.tar.gz *
+- tar cvzf rameplayer-webui-build.tar.gz build
+- ls
 cache:
   directories:
   - bower_components
@@ -23,7 +24,7 @@ deploy:
   provider: releases
   api_key:
     secure: BeBy0Om4Md9JinUlV023JygGS4ymQwvhGsE6KCgfhi+UScblcqRLbJulJIshiFwuQRYwhyEoHvF6lAlqyHz5kJaqwl8Gb/CiFYjDwLncwr/Tw0xrSl6WbKfcmqameppEYjCqLozAu7/HuDbc3Dc355qqbRMLAU1S3Q9xTLkUuN4wSf6ePzbj0AQjwaTzvHOtPLT7wuUto7K/fAzwfwSNWQ8ahShW1DZWxdouQ7zuMcg6gdHjlDS2BfvwWIcRcQ2epo8ThQAPFFUl7eQwxbJCZV1kJ2+oJw37AE/t7n2et3OT8JLMWmK88/cKJnJe+n61Wo5bEGFDE/XjfDofrLG1vcl9MpRE5bnnM2aJGeFg/yOH5WWtnTGBRvLNbx6FoJcYi3BTnzJWdGl/1GJJH59R1/XrYcjht7iD7b8sSAk34XdDITcnFzPVdfkEpiPhRNi4eN1xdmGRcKeXFdXczIpbdj3Y5OgKbZgKr4e8bQZCC2Q3EVPkRFjDgLge8Ji2HwAH1NzW57yBOVphJslbuEChuF4OjHvYgyR1euim7947pq7hN8bn4HGSd6/A3A/tg2OgVER3nUgIFkliqWFBAihopeQBjMG6ee2OVcq7Otwy2ocZkQj+aetNOCrAm101abNtQDQ8nwH5Rh+YsaHhGW7rCdJ2G9UeHdu33311+z2vi5M=
-  file: build/rameplayer-webui.tar.gz
+  file: rameplayer-webui-build.tar.gz
   skip_cleanup: true
   on:
     tags: true
