@@ -10,9 +10,8 @@ script:
 - npm install
 - bower install
 - gulp build
-- tar cvzf rameplayer-webui-build.tar.gz build
-- ls
-- ls build
+- mv build rameplayer-webui
+- tar cvzf rameplayer-webui-build.tar.gz rameplayer-webui
 cache:
   directories:
   - bower_components
