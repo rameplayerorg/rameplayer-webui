@@ -36,7 +36,8 @@
             play: play,
             pause: pause,
             stop: stop,
-            seek: seek
+            seek: seek,
+            getRameVersioning: getRameVersioning
         };
 
         settings.urls.player =
@@ -78,6 +79,10 @@
 
         function seek(position) {
             return $http.get(settings.urls.player + '/seek/' + position);
+        }
+
+        function getRameVersioning() {
+            return $http.get('stubs/rameversion.json');
         }
     }
 })();

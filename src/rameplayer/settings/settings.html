@@ -4,7 +4,7 @@
 		<div class="panel-heading">
 			<h3 class="panel-title" translate>HDMI_POWERCYCLING</h3>
 			<span class="text-info" translate>HDMI_POWERCYCLING_INFO</span>
-			<tt>current = {{ settings.hdmishaked }}</tt>
+			<!-- <tt>current = {{ settings.hdmishaked }}</tt> -->
 		</div>
 		<div class="panel-body ng-cloak">
 			<button type="button" class="btn btn-default btn-lg"
@@ -28,11 +28,11 @@
             <select name="language" ng-model="settings.languageId"
                 id="language" class="form-control">
                 <option value="en">English</option>
-                <option>Latviešu (Latvian)</option>
-                <option>Lietuvių kalba (Lithuanian)</option>
+                <!-- <option>Latviešu (Latvian)</option>
+                <option>Lietuvių kalba (Lithuanian)</option> -->
                 <option value="fi">suomi (Finnish)</option>
-                <option>eesti (Estonian)</option>
-                <option>汉语 (Chinese)</option>
+                <!-- <option>eesti (Estonian)</option> -->
+                <option disabled>汉语 (Chinese)</option>
             </select>
         </div>
         <div class="panel-footer">
@@ -43,47 +43,18 @@
                     aria-hidden="true"></span>
                     <span translate>SAVE_SETTINGS</span>  
             </button>
-            <tt>current = {{ settings.savingStatus }}</tt>
+            <!-- <tt>current = {{ settings.savingStatus }}</tt> -->
         </div>
     </div>
 
-	<!-- <div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title">Slave delay</h3>
-			<span class="text-info">Slave delay in seconds.</span>
-		</div>
-		<div class="panel-body">
-			<input type="number" name="slavedelay" ng-model="settings.slaveDelay"
-				min="0" max="999">
-		</div>
-	</div>
-
-	<div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Language</h3>
-            <span class="text-info">Language used for user interface.</span>
-            <tt>current = {{ settings.languageId }}</tt>
-        </div>
-        <div class="panel-body">
-			<select name="language" ng-model="settings.languageId"
-				id="language" class="form-control">
-				<option ng-repeat="settings.languages">{{ settings.languages.[0] }}</option>
-				<option value="en">English</option>
-				<option>Latviešu (Latvian)</option>
-				<option>Lietuvių kalba (Lithuanian)</option>
-				<option value="fi">suomi (Finnish)</option>
-				<option>eesti (Estonian)</option>
-				<option>汉语 (Chinese)</option>
-			</select>
-			<button type="button" class="btn btn-default btn-lg"
-                ng-click="settings.saveSettings()">
-                <span class="glyphicon" 
-                    ng-class="{ 'glyphicon-floppy-disk': settings.savingStatus !== 'saved', 'glyphicon-floppy-saved': settings.savingStatus === 'saved' }" 
-                    aria-hidden="true"></span>
-                Save settings
-            </button>
-            <tt>current = {{ settings.savingStatus }}</tt>
-		</div>
-	</div> -->
+    <div class="well well-sm">
+        <strong>RamePlayer <span translate>INFORMATION</span></strong>
+        <br>
+        <span translate>SOFTWARE_VERSION</span>: 
+        {{ settings.rameVersionSoftware }}
+        <br>
+        <span translate>HARDWARE_VERSION</span>: 
+        {{ settings.rameVersionHardware }}
+    </div>
 	
 </div>
