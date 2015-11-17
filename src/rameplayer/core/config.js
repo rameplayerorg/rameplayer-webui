@@ -25,6 +25,7 @@
             'Device IP': 'Device IP',
             'Subnet mask': 'Subnet mask',
             'Gateway IP': 'Gateway IP',
+            'Admin Settings': 'Admin Settings',
         });
         $translateProvider.translations('fi', {
             Settings: 'Asetukset',
@@ -44,6 +45,7 @@
             'Device IP': 'Koneen IP-osoite',
             'Subnet mask': 'Aliverkon peite',
             'Gateway IP': 'Gatewayn IP-osoite',
+            'Admin Settings': 'Järjestelmän asetukset',
         });
         $translateProvider.preferredLanguage(settings.language);
         // http://angular-translate.github.io/docs/#/guide/19_security
