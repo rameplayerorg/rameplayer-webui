@@ -5,9 +5,9 @@
         .module('rameplayer.playlists')
         .controller('PlaylistsController', PlaylistsController);
 
-    PlaylistsController.$inject = ['$log', 'dataService', 'playerService', 'uuid'];
+    PlaylistsController.$inject = ['$log', 'dataService', 'playerService', '$uibModal', 'uuid'];
 
-    function PlaylistsController($log, dataService, playerService, uuid) {
+    function PlaylistsController($log, dataService, playerService, $uibModal, uuid) {
         var vm = this;
 
         vm.lists = [];
@@ -18,6 +18,7 @@
         vm.playerStatus = playerService.getStatus();
         vm.removeMedia = removeMedia;
         vm.playlistSorted = playlistSorted;
+        vm.saveAs = saveAs;
 
         playerService.onMediaSelected(mediaSelected);
         playerService.onStatusChanged(statusChanged);
@@ -66,6 +67,24 @@
                     playlist.$save();
                 }
             }
+        }
+
+        function saveAs(playlist) {
+            // open modal dialog
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'rameplayer/playlists/save-as-modal.html',
+                controller: 'SaveAsModalController',
+                controllerAs: 'saveAs'
+            });
+
+            modalInstance.result.then(function(playlistTitle) {
+                $log.info('Save playlist as', playlistTitle);
+                var newPlaylist = angular.copy(playlist);
+                newPlaylist.title = playlistTitle;
+                $log.info('New playlist', newPlaylist);
+                dataService.createPlaylist(newPlaylist);
+            });
         }
 
         function playlistSorted(playlist, medias) {
