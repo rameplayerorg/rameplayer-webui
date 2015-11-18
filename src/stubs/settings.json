@@ -10,7 +10,7 @@
     },
     "statusPollingInterval": 1000,
     "development": {
-        "enabled": false,
+        "enabled": true,
         "simulateStatus": true
     }
 }
