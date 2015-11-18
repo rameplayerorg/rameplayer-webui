@@ -33,18 +33,18 @@
                         <div class="col-sm-1">Length</div>
                         <div class="col-sm-3">Date</div>
                     </div>
-                    <div class="row media-list-item" ng-repeat="mediaItem in media.lists[0].medias" ng-class="{ selected: mediaItem === media.selectedMedia }" ng-click="media.selectMedia(mediaItem)">
+                    <div class="row media-list-item" ng-repeat="item in media.lists[0].items" ng-class="{ selected: item === media.selectedMedia }" ng-click="media.selectMedia(item)">
                         <div class="col-sm-4 media-list-item-field ellipsis">
-                            {{ mediaItem.filename }}
+                            {{ item.filename }}
                         </div>
                         <div class="col-sm-4 media-list-item-field ellipsis">
-                            {{ mediaItem.title }}
+                            {{ item.title }}
                         </div>
                         <div class="col-sm-1 media-list-item-field">
-                            {{ mediaItem.duration | playerTime }}
+                            {{ item.duration | playerTime }}
                         </div>
                         <div class="col-sm-3 media-list-item-field">
-                            {{ mediaItem.created | date:'yyyy-MM-dd HH:mm:ss' }}
+                            {{ item.modified | date:'yyyy-MM-dd HH:mm:ss' }}
                         </div>
                     </div>
                 </div>

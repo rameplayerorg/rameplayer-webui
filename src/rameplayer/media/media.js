@@ -28,7 +28,7 @@
 
         function getMedias() {
             return dataService.getLists().then(function(data) {
-                vm.lists = data.data.lists;
+                vm.lists = data.data;
                 return vm.lists;
             });
         }

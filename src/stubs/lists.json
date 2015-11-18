@@ -1,45 +1,49 @@
-{
-    "lists": [
+[
     {
-        "uri": "rameplayer://usb",
+        "id": "1ac05207-194f-4720-8223-aa348a2f60e8",
+        "uri": "rameplayer://usb/",
         "title": "USB",
-        "medias": [
+        "items": [
             {
+                "id": "af8408b7-7474-4d99-99c8-2bb9fc524f0f",
                 "uri": "rameplayer://usb/ab_E_010_r720P.mp4",
-                "filename": "1234567890_FI_cnt_1_r720P.mp4",
                 "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed",
+                "filename": "1234567890_FI_cnt_1_r720P.mp4",
                 "duration": 5.0,
-                "created": 1441060041000
+                "modified": 1441060041000
             },
             {
+                "id": "80f0b6be-419f-482c-92fe-505cbac42647",
                 "uri": "rameplayer://usb/ac_E_011_r720P.mp4",
-                "filename": "123456789_12345678_ac_E_011_r720P.mp4",
                 "title": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+                "filename": "123456789_12345678_ac_E_011_r720P.mp4",
                 "duration": 3890.51,
-                "created": 1442161046000
+                "modified": 1442161046000
             },
             {
+                "id": "6b665376-9445-47d9-a090-5e31299ef48e",
                 "uri": "rameplayer://usb/gg_E_012_r720P.mp4",
-                "filename": "gg_E_012_r720P.mp4",
                 "title": "Media video #3",
+                "filename": "gg_E_012_r720P.mp4",
                 "duration": 167,
-                "created": 1443161046000
+                "modified": 1443161046000
             },
             {
+                "id": "4549c2f5-6c8f-42de-8965-bf0b05377357",
                 "uri": "rameplayer://usb/fy_E_013_r720P.mp4",
-                "filename": "fy_E_013_r720P.mp4",
                 "title": "Media video #4",
+                "filename": "fy_E_013_r720P.mp4",
                 "duration": 180,
-                "created": 1444061046013
+                "modified": 1444061046013
             },
             {
+                "id": "982f0b7d-c26e-493a-b5b8-048bd9eab367",
                 "uri": "rameplayer://usb/ww_E_014_r720P.mp4",
-                "filename": "ww_E_014_r720P.mp4",
                 "title": "Media video #5",
+                "filename": "ww_E_014_r720P.mp4",
                 "duration": 602,
-                "created": 1444161046000
+                "modified": 1444161046000
             }
         ]
     }
 ]
-}
