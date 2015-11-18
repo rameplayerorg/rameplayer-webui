@@ -4,13 +4,8 @@
         "lists": "stubs/lists.json",
         "defaultPlaylist": "stubs/playlists/default.json",
         "playlists": "stubs/playlists.json",
-        "player": "(overridden)"
+        "player": "player"
     },
-    "server": {
-        "port": 8000,
-        "path": "player"
-    },
-
     "statusPollingInterval": 1000,
     "development": {
         "enabled": true,

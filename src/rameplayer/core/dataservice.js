@@ -41,10 +41,12 @@
             getRameVersioning: getRameVersioning
         };
 
-        settings.urls.player =
-            location.protocol + '//' + location.hostname +
-            ':' + settings.server.port + '/' +
-            settings.server.path;
+        if (settings.serverPort !== undefined && settings.serverPort !== 0) {
+            settings.urls.player = location.protocol + '//' + location.hostname +
+                                   ':' + settings.serverPort + '/player';
+            settings.urls.lists = location.protocol + '//' + location.hostname +
+                                   ':' + settings.serverPort + '/lists';
+	}
 
         return service;
 
