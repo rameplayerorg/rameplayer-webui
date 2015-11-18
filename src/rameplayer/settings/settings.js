@@ -7,10 +7,10 @@
         .controller('SettingsController', SettingsController);
 
     SettingsController.$inject = [
-        '$log', '$http', 'dataService', 'settings'
+        '$log', '$http', 'dataService', 'settings', '$translate'
     ];
 
-    function SettingsController($log, $http, dataService, settings) {
+    function SettingsController($log, $http, dataService, settings, $translate) {
         
         var $injector = angular.injector();
 		        
@@ -19,7 +19,7 @@
 		var rameVersioning = '';
 		dataService.getRameVersioning().then(function(response) {
 			rameVersioning = response.data;
-			vm.rameVersioningoftware = rameVersioning.software;
+			vm.rameVersionSoftware = rameVersioning.software;
 			vm.rameVersionHardware = rameVersioning.hardware;
 			$log.info('Version fetched', response);
 		}, function(errorResponse) {
@@ -51,6 +51,7 @@
         
         function saveSettings(){
             settings.language = vm.languageId;
+            $translate.use(settings.language);
             settings.$save(function() {
                 vm.savingStatus = "saved";
             });
