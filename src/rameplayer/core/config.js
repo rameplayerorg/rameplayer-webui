@@ -21,15 +21,12 @@
             HARDWARE_VERSION: 'Hardware version',
             SAVE_SETTINGS:'Save settings',
             USER_SETTINGS: 'User settings',
-            SLAVE_DELAY: 'Slave delay',
+            SLAVE_DELAY: 'Slave delay in seconds',
             HDMI_POWERCYCLING: 'Internal powercycle of HDMI-splitter',
             HDMI_POWERCYCLING_INFO: 'Workaround for failed HDMI handshake.',
             RESET_HDMI: 'Reset HDMI interface',
             UI_LANGUAGE: 'Language of the user interface',
-            'Device IP': 'Device IP',
-            'Subnet mask': 'Subnet mask',
-            'Gateway IP': 'Gateway IP',
-            'Admin Settings': 'Admin Settings',
+            DHCP_CLIENT_SETTING: 'Obtain IP automatically as DHCP client'
         });
         $translateProvider.translations('fi', {
             Settings: 'Asetukset',
@@ -45,15 +42,22 @@
             HARDWARE_VERSION: 'Laiteversio',
             SAVE_SETTINGS:'Tallenna asetukset',
             USER_SETTINGS: 'Käyttäjäasetukset',
-            SLAVE_DELAY: 'Slave delay',
+            SLAVE_DELAY: 'Slave delay, viive sekunteina',
             HDMI_POWERCYCLING: 'HDMI-jakajan uudelleenkäynnistys',
-            HDMI_POWERCYCLING_INFO: 'Workaround for failed HDMI handshake.',
+            HDMI_POWERCYCLING_INFO: 'Epäonnistuneen HDMI handshaken varalta.',
             RESET_HDMI: 'Uudelleenkäynnistä HDMI',
-            UI_LANGUAGE: 'Käyttöliittymän kieli',            
+            UI_LANGUAGE: 'Käyttöliittymän kieli',
+            'Audio port': 'Audio-porttivalinta',
+            'Video output resolution': 'Videon resoluutio',
+            'Device name': 'Koneen nimi',
             'Device IP': 'Koneen IP-osoite',
             'Subnet mask': 'Aliverkon peite',
             'Gateway IP': 'Gatewayn IP-osoite',
+            'DNS, preferred': 'DNS, ensisijainen',
+            'DNS, alternative': 'DNS, vaihtoehtoinen',
             'Admin Settings': 'Järjestelmän asetukset',
+            'IP Configurations': 'IP-osoitteet',
+            DHCP_CLIENT_SETTING: 'Hae IP-osoitteet automaattisesti DHCP:n kautta'
         });
         $translateProvider.preferredLanguage(settings.language);
         // http://angular-translate.github.io/docs/#/guide/19_security

@@ -49,7 +49,7 @@
 
         vm.videoOutputResolution = "720p50 (50 Hz)";
         vm.videoOutputResolutions = [
-                "720p50 (50 Hz)", "720p60 (60 Hz)", "1080p25 (50 Hz)",
+                "720p50 (50 Hz)", "720p60 (60 Hz)",
                 "1080p30 (60 Hz)",
         ];
 
