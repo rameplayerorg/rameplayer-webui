@@ -1,6 +1,7 @@
 {
-    "language": "en",
+    "language": "fi",
     "urls": {
+        "status": "stubs/status.json",
         "cursor": "cursor",
         "lists": "stubs/lists.json",
         "defaultPlaylist": "stubs/playlists/default.json",
@@ -9,7 +10,7 @@
     },
     "statusPollingInterval": 1000,
     "development": {
-        "enabled": true,
+        "enabled": false,
         "simulateStatus": true
     }
 }

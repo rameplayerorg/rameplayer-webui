@@ -33,7 +33,7 @@
                         <div class="col-sm-1">Length</div>
                         <div class="col-sm-3">Date</div>
                     </div>
-                    <div class="row media-list-item" ng-repeat="item in media.lists[0].items" ng-class="{ selected: item === media.selectedMedia }" ng-click="media.selectMedia(item)">
+                    <div class="row media-list-item" ng-repeat="item in media.lists[0].items" ng-class="{ selected: item.id === media.playerStatus.cursor.id }" ng-click="media.selectMedia(item)">
                         <div class="col-sm-4 media-list-item-field ellipsis">
                             {{ item.filename }}
                         </div>
