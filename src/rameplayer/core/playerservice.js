@@ -79,6 +79,7 @@
          * @memberof Factories.PlayerService
          */
         function selectMedia(media) {
+            dataService.setCursor(media.id);
             angular.forEach(mediaSelectedCallbacks, function(callback) {
                 callback(media);
             });

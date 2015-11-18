@@ -29,6 +29,7 @@
         var DefaultPlaylist = $resource(settings.urls.defaultPlaylist);
 
         var service = {
+            setCursor: setCursor,
             getLists: getLists,
             getDefaultPlaylist: getDefaultPlaylist,
             getPlaylists: getPlaylists,
@@ -49,6 +50,10 @@
 	}
 
         return service;
+
+        function setCursor(itemId) {
+            return $http.put(settings.urls.cursor, { id: itemId });
+        }
 
         function getLists() {
             return $http.get(settings.urls.lists);

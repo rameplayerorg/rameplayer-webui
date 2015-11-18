@@ -1,6 +1,7 @@
 {
     "language": "en",
     "urls": {
+        "cursor": "cursor",
         "lists": "stubs/lists.json",
         "defaultPlaylist": "stubs/playlists/default.json",
         "playlists": "stubs/playlists.json",
