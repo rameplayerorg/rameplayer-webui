@@ -113,7 +113,7 @@
         }
 
         function pollStatus() {
-            dataService.getPlayerStatus().then(function(response) {
+            dataService.getStatus().then(function(response) {
                 var newStatus = response.data;
                 // notify only when status changes
                 if (!angular.equals(newStatus, playerStatus)) {

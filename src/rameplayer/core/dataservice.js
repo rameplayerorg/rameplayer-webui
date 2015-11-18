@@ -34,7 +34,7 @@
             getDefaultPlaylist: getDefaultPlaylist,
             getPlaylists: getPlaylists,
             createPlaylist: createPlaylist,
-            getPlayerStatus: getPlayerStatus,
+            getStatus: getStatus,
             play: play,
             pause: pause,
             stop: stop,
@@ -43,6 +43,8 @@
         };
 
         if (settings.serverPort !== undefined && settings.serverPort !== 0) {
+            settings.urls['status'] = location.protocol + '//' + location.hostname +
+                                   ':' + settings.serverPort + '/status';
             settings.urls.player = location.protocol + '//' + location.hostname +
                                    ':' + settings.serverPort + '/player';
             settings.urls.lists = location.protocol + '//' + location.hostname +
@@ -74,8 +76,8 @@
             });
         }
 
-        function getPlayerStatus() {
-            return $http.get(settings.urls.player + '/status');
+        function getStatus() {
+            return $http.get(settings.urls['status']);
         }
 
         function play() {
