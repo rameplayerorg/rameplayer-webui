@@ -42,7 +42,7 @@
         function play() {
             var media = vm.selectedMedia;
             playerService.changeStatus(playerService.states.playing, media);
-            dataService.play(media).then(function(data) {
+            dataService.play().then(function(data) {
                 $log.info('Response', data);
             });
         }

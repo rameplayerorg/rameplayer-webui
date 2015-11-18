@@ -29,6 +29,7 @@
         var DefaultPlaylist = $resource(settings.urls.defaultPlaylist);
 
         var service = {
+            setCursor: setCursor,
             getLists: getLists,
             getDefaultPlaylist: getDefaultPlaylist,
             getPlaylists: getPlaylists,
@@ -41,12 +42,18 @@
             getRameVersioning: getRameVersioning
         };
 
-        settings.urls.player =
-            location.protocol + '//' + location.hostname +
-            ':' + settings.server.port + '/' +
-            settings.server.path;
+        if (settings.serverPort !== undefined && settings.serverPort !== 0) {
+            settings.urls.player = location.protocol + '//' + location.hostname +
+                                   ':' + settings.serverPort + '/player';
+            settings.urls.lists = location.protocol + '//' + location.hostname +
+                                   ':' + settings.serverPort + '/lists';
+	}
 
         return service;
+
+        function setCursor(itemId) {
+            return $http.put(settings.urls.cursor, { id: itemId });
+        }
 
         function getLists() {
             return $http.get(settings.urls.lists);
@@ -71,10 +78,8 @@
             return $http.get(settings.urls.player + '/status');
         }
 
-        function play(media) {
-            var url = settings.urls.player + '/play/';
-            url += window.encodeURIComponent(media.uri);
-            return $http.get(url);
+        function play() {
+            return $http.get(settings.urls.player + '/play');
         }
 
         function pause() {
