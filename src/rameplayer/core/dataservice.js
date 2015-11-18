@@ -78,10 +78,8 @@
             return $http.get(settings.urls.player + '/status');
         }
 
-        function play(media) {
-            var url = settings.urls.player + '/play/';
-            url += window.encodeURIComponent(media.uri);
-            return $http.get(url);
+        function play() {
+            return $http.get(settings.urls.player + '/play');
         }
 
         function pause() {
