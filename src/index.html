@@ -26,8 +26,8 @@
 
 <body>
     <div class="container" ng-controller="MediaController as media" ng-cloak>
-        <tabset type="pills">
-            <tab heading="USB">
+        <uib-tabset type="pills">
+            <uib-tab heading="USB">
                 <div class="media-list">
                     <div class="row hidden-xs media-list-header">
                         <div class="col-sm-4">File</div>
@@ -50,9 +50,9 @@
                         </div>
                     </div>
                 </div>
-            </tab>
+            </uib-tab>
 
-            <tab heading="PLAYLISTS">
+            <uib-tab heading="PLAYLISTS">
                 <div class="row" ng-controller="PlaylistsController as playlists">
                     <div class="col-sm-12">
                         <uib-accordion close-others="false">
@@ -61,9 +61,9 @@
                         </uib-accordion>
                     </div> <!-- .col -->
                 </div> <!-- .row -->
-            </tab>
+            </uib-tab>
 
-            <tab>
+            <uib-tab>
                 <tab-heading>
                     <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
                 </tab-heading>
@@ -107,8 +107,8 @@
                     </div> .col
                 </div> .row
              -->
-             </tab>
-        </tabset>
+             </uib-tab>
+        </uib-tabset>
     </div> <!-- .container -->
 
     <!-- player controls -->
