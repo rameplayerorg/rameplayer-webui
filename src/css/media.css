@@ -1,0 +1,70 @@
+/* Playlists */
+.panel-group rame-playlist .panel {
+  margin-bottom: 5px;
+}
+
+.num-button {
+    float: left;
+    margin: 10px 0px 10px 0px;
+    width: 75px;
+    text-align: center;
+}
+
+.btn-song, .btn-bible-chapter, .btn-bible-verse {
+    width: 50px;
+}
+
+.book-button {
+    float: left;
+    margin: 10px;
+}
+
+.col-playing {
+    width: 30px;
+}
+
+.media-list-header {
+  font-weight: 700;
+}
+
+.media-list-header, .media-list-item {
+  padding: 8px;
+  line-height: 1.42857;
+}
+
+.media-list-item {
+  border-top: 1px solid #DDD;
+  cursor: pointer;
+}
+
+.media-list-item:hover {
+  background-color: #f5f5f5;
+}
+
+.media-list .selected {
+  background-color: #D9EDF7;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sorting-handle {
+  cursor: move;
+  cursor: -webkit-grabbing;
+  color: #CCC;
+}
+
+#play {
+    margin: 10px 0px 10px 0px;
+}
+
+#player-row-selection {
+    padding: 5px 0px 5px 0px;
+    border-bottom: 1px solid #E7E7E7;
+}
+
+#player-playlist-controls {
+    margin-bottom: 5px;
+}
