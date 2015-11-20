@@ -14,6 +14,7 @@
         vm.selectedMedia = undefined;
         vm.selectMedia = selectMedia;
         vm.playerStatus = playerService.getStatus();
+        vm.addToDefault = addToDefault;
 
         playerService.onMediaSelected(mediaSelected);
         playerService.onStatusChanged(statusChanged);
@@ -43,6 +44,10 @@
 
         function statusChanged(playerStatus) {
             vm.playerStatus = playerStatus;
+        }
+
+        function addToDefault(item) {
+            playerService.addToPlaylist(item);
         }
     }
 })();

@@ -11,16 +11,28 @@
         // Creates:
         //
         var directive = {
+            link: link,
             restrict: 'E',
             scope: {
                 'media': '=', // take media from attribute
-                'remove': '&'
+                'cursor': '=',
+                'onClick': '&',
+                'remove': '&',
+                'addToDefault': '&',
+                'moveTo': '&'
             },
             templateUrl: 'rameplayer/media/media-item.html'
         };
         return directive;
 
-        //function link(scope, element, attrs) {
-        //}
+        function link(scope, element, attrs) {
+            scope.isDropdownOpen = false;
+            scope.isRemovable = (attrs.remove !== undefined);
+            scope.canAddToDefault = (attrs.addToDefault !== undefined);
+            scope.isMovable = (attrs.moveTo !== undefined);
+            scope.toggleDropdown = function($event) {
+                scope.isDropdownOpen = !scope.isDropdownOpen;
+            };
+        }
     }
 })();

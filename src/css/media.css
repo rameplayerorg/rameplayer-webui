@@ -50,7 +50,7 @@
   text-overflow: ellipsis;
 }
 
-.sorting-handle {
+.media-list-sortable .sorting-handle {
   cursor: move;
   cursor: -webkit-grabbing;
   color: #CCC;

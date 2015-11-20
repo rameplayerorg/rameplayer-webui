@@ -32,23 +32,10 @@
                     <div class="row hidden-xs media-list-header">
                         <div class="col-sm-4">File</div>
                         <div class="col-sm-4">Title</div>
-                        <div class="col-sm-1">Length</div>
+                        <div class="col-sm-1 text-right">Length</div>
                         <div class="col-sm-3">Date</div>
                     </div>
-                    <div class="row media-list-item" ng-repeat="item in media.lists[0].items" ng-class="{ selected: item.id === media.playerStatus.cursor.id }" ng-click="media.selectMedia(item)">
-                        <div class="col-sm-4 media-list-item-field ellipsis">
-                            {{ item.filename }}
-                        </div>
-                        <div class="col-sm-4 media-list-item-field ellipsis">
-                            {{ item.title }}
-                        </div>
-                        <div class="col-sm-1 media-list-item-field">
-                            {{ item.duration | playerTime }}
-                        </div>
-                        <div class="col-sm-3 media-list-item-field">
-                            {{ item.modified | date:'yyyy-MM-dd HH:mm:ss' }}
-                        </div>
-                    </div>
+                    <rame-media-item ng-repeat="item in media.lists[0].items" media="item" on-click="media.selectMedia(item)" add-to-default="media.addToDefault(item)" cursor="media.playerStatus.cursor"></rame-media-item>
                 </div>
             </uib-tab>
 

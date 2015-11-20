@@ -54,7 +54,9 @@
         }
 
         function addToPlaylist(mediaItem) {
-            vm.defaultPlaylist.medias.push(mediaItem);
+            vm.defaultPlaylist.medias.push({
+                uri: mediaItem.uri
+            });
             $log.info('Media added to default playlist', mediaItem);
             vm.defaultPlaylist.$save();
         }
