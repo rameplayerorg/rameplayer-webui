@@ -25,7 +25,7 @@
 </head>
 
 <body>
-    <div class="container" ng-controller="MediaController as media" ng-cloak>
+    <div class="container" ng-controller="MediaController as vm" ng-cloak>
         <uib-tabset type="pills">
             <uib-tab heading="USB">
                 <div class="media-list">
@@ -35,16 +35,16 @@
                         <div class="col-sm-1 text-right">Length</div>
                         <div class="col-sm-3">Date</div>
                     </div>
-                    <rame-media-item ng-repeat="item in media.lists[0].items" media="item" on-click="media.selectMedia(item)" add-to-default="media.addToDefault(item)" cursor="media.playerStatus.cursor"></rame-media-item>
+                    <rame-media-item ng-repeat="item in vm.lists[0].items" media="item" on-click="vm.selectMedia(item)" add-to-default="vm.addToDefault(item)"></rame-media-item>
                 </div>
             </uib-tab>
 
             <uib-tab heading="PLAYLISTS">
-                <div class="row" ng-controller="PlaylistsController as playlists">
+                <div class="row" ng-controller="PlaylistsController as vm">
                     <div class="col-sm-12">
                         <uib-accordion close-others="false">
-                            <rame-playlist default="true" playlist="playlists.defaultPlaylist" remove-media="playlists.removeMedia(playlist, media)" on-sort="playlists.playlistSorted(playlist, medias)" save-as="playlists.saveAs(playlist)"></rame-playlist>
-                            <rame-playlist ng-repeat="playlist in playlists.playlists" playlist="playlist"></rame-playlist>
+                            <rame-playlist default="true" playlist="vm.defaultPlaylist" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted(playlist, medias)" save-as="vm.saveAs(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
+                            <rame-playlist ng-repeat="playlist in vm.playlists" playlist="playlist" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted(playlist, medias)" on-media-click="vm.selectMedia(media)"></rame-playlist>
                         </uib-accordion>
                     </div> <!-- .col -->
                 </div> <!-- .row -->
@@ -131,7 +131,9 @@
     <script src="rameplayer/core/bootstrap.js"></script>
     <script src="rameplayer/core/config.js"></script>
     <script src="rameplayer/core/dataservice.js"></script>
-    <script src="rameplayer/core/playerservice.js"></script>
+    <!-- <script src="rameplayer/core/playerservice.js"></script> -->
+    <script src="rameplayer/core/simulation-dataservice.js"></script>
+    <script src="rameplayer/core/statusservice.js"></script>
 
     <!-- playback module -->
     <script src="rameplayer/player/player.module.js"></script>

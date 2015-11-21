@@ -5,21 +5,23 @@
         .module('rameplayer.media')
         .controller('MediaController', MediaController);
 
-    MediaController.$inject = ['$log', 'dataService', 'playerService'];
+    MediaController.$inject = ['$scope', '$log', 'dataService', 'statusService'];
 
-    function MediaController($log, dataService, playerService) {
+    function MediaController($scope, $log, dataService, statusService) {
         var vm = this;
 
         vm.lists = [];
         vm.selectedMedia = undefined;
         vm.selectMedia = selectMedia;
-        vm.playerStatus = playerService.getStatus();
+        vm.playerStatus = statusService.status;
         vm.addToDefault = addToDefault;
 
-        playerService.onMediaSelected(mediaSelected);
-        playerService.onStatusChanged(statusChanged);
-
-        loadLists();
+        $scope.$watchCollection('vm.playerStatus', function(current, original) {
+            // update vm.lists if newer versions available
+            if (!original || !original.lists || current.lists.modified > original.lists.modified) {
+                loadLists();
+            }
+        });
 
         function loadLists() {
             return getMedias().then(function() {
@@ -35,19 +37,11 @@
         }
 
         function selectMedia(mediaItem) {
-            playerService.selectMedia(mediaItem);
-        }
-
-        function mediaSelected(mediaItem) {
-            vm.selectedMedia = mediaItem;
-        }
-
-        function statusChanged(playerStatus) {
-            vm.playerStatus = playerStatus;
+            dataService.setCursor(mediaItem.id);
         }
 
         function addToDefault(item) {
-            playerService.addToPlaylist(item);
+            dataService.addToDefaultPlaylist(item);
         }
     }
 })();

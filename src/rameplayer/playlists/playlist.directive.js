@@ -16,6 +16,7 @@
             scope: {
                 // get used playlist from attribute
                 playlist: '=',
+                onMediaClick: '&',
                 removeMedia: '&',
                 onSort: '&',
                 saveAs: '&'

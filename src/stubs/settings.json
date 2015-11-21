@@ -11,6 +11,7 @@
     "statusPollingInterval": 1000,
     "development": {
         "enabled": true,
-        "simulateStatus": true
+        "simulateServer": true,
+        "simulationDelay": 25
     }
 }

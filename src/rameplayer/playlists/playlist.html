@@ -31,7 +31,9 @@
          </span>
     </uib-accordion-heading>
 
-    <div class="media-list">
+    <div ng-if="!playlist.items.length">Playlist is empty.</div>
+
+    <div class="media-list" ng-if="playlist.items.length">
         <div class="row hidden-xs media-list-header">
             <div class="col-sm-4">File</div>
             <div class="col-sm-4">Title</div>
@@ -39,7 +41,7 @@
             <div class="col-sm-3">Date</div>
         </div>
         <div class="media-list-sortable" ng-sortable="sortableOptions">
-            <rame-media-item ng-repeat="mediaItem in playlist.medias" media="mediaItem" remove="removeMedia({ playlist: playlist, media: mediaItem })"></rame-media-item>
+            <rame-media-item ng-repeat="mediaItem in playlist.items" media="mediaItem" remove="removeMedia({ playlist: playlist, media: mediaItem })" on-click="onMediaClick({ media: mediaItem })"></rame-media-item>
         </div>
     </div>
 

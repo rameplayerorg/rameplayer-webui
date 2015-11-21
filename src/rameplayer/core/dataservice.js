@@ -16,25 +16,34 @@
         .module('rameplayer.core')
         .factory('dataService', dataService);
 
-    dataService.$inject = ['$http', '$resource', 'settings'];
+    dataService.$inject = ['$log', '$http', '$resource', 'settings', 'simulationDataService'];
 
     /**
      * @namespace DataService
      * @desc Application wide service for REST API
      * @memberof Factories
      */
-    function dataService($http, $resource, settings) {
+    function dataService($log, $http, $resource, settings, simulationDataService) {
+
+        if (settings.development && settings.development.enabled &&
+            settings.development.simulateServer) {
+            // replace this with simulationDataService
+            return simulationDataService;
+        }
 
         var Playlists = $resource(settings.urls.playlists);
         var DefaultPlaylist = $resource(settings.urls.defaultPlaylist);
+        var DefaultPlaylistItem = $resource(settings.urls.defaultPlaylist + '/items/:itemId', { itemId: '@id' });
 
         var service = {
+            getStatus: getStatus,
             setCursor: setCursor,
             getLists: getLists,
             getDefaultPlaylist: getDefaultPlaylist,
+            addToDefaultPlaylist: addToDefaultPlaylist,
+            removeFromDefaultPlaylist: removeFromDefaultPlaylist,
             getPlaylists: getPlaylists,
             createPlaylist: createPlaylist,
-            getStatus: getStatus,
             play: play,
             pause: pause,
             stop: stop,
@@ -53,6 +62,10 @@
 
         return service;
 
+        function getStatus() {
+            return $http.get(settings.urls['status']);
+        }
+
         function setCursor(itemId) {
             return $http.put(settings.urls.cursor, { id: itemId });
         }
@@ -65,19 +78,24 @@
             return DefaultPlaylist.get();
         }
 
+        function addToDefaultPlaylist(mediaItem) {
+            var newItem = new DefaultPlaylistItem();
+            newItem.uri = mediaItem.uri;
+            DefaultPlaylistItem.save(newItem, function() {
+            });
+        }
+
+        function removeFromDefaultPlaylist(mediaItem) {
+            DefaultPlaylistItem.delete({ itemId: mediaItem.id });
+        }
+
         function getPlaylists() {
             return Playlists.query();
         }
 
         function createPlaylist(playlist) {
-            var newPlaylist = new Playlists();
-            newPlaylist.title = playlist.title;
             Playlists.save(playlist, function() {
             });
-        }
-
-        function getStatus() {
-            return $http.get(settings.urls['status']);
         }
 
         function play() {
