@@ -16,14 +16,14 @@
         .module('rameplayer.core')
         .factory('simulationDataService', simulationDataService);
 
-    simulationDataService.$inject = ['$log', '$http', '$resource', 'settings', '$timeout', 'uuid'];
+    simulationDataService.$inject = ['$log', '$http', '$resource', 'settings', '$timeout', '$interval', 'uuid'];
 
     /**
      * @namespace DataService
      * @desc Application wide service for REST API
      * @memberof Factories
      */
-    function simulationDataService($log, $http, $resource, settings, $timeout, uuid) {
+    function simulationDataService($log, $http, $resource, settings, $timeout, $interval, uuid) {
 
         // initial internal data
         // corresponds server data in production
@@ -32,7 +32,7 @@
                 state: 'stopped',
                 position: 0,
                 cursor: {
-                    id: 0,
+                    id: 'af8408b7-7474-4d99-99c8-2bb9fc524f0f'
                 },
                 playlists: {
                     modified: 0
@@ -77,12 +77,13 @@
 	}
 
         var delay = settings.development.simulationDelay;
+        var playingPromise;
 
         return service;
 
         function getStatus() {
             return $timeout(function() {
-                $log.info('getStatus', data.status);
+                //$log.info('getStatus', data.status);
                 return { data: data.status };
             }, delay);
         }
@@ -152,19 +153,42 @@
         }
 
         function play() {
-            return $http.get(settings.urls.player + '/play');
+            return $timeout(function() {
+                $log.info('Playing');
+                data.status.state = 'playing';
+                playingPromise = $interval(function() {
+                    data.status.position += 1.0;
+                    if (data.status.position >= data.status.cursor.item.duration) {
+                        $interval.cancel(playingPromise);
+                        data.status.state = 'stopped';
+                        data.status.position = 0;
+                    }
+                }, 1000);
+            }, delay);
         }
 
         function pause() {
-            return $http.get(settings.urls.player + '/pause');
+            return $timeout(function() {
+                $log.info('Paused');
+                data.status.state = 'paused';
+                $interval.cancel(playingPromise);
+            });
         }
 
         function stop() {
-            return $http.get(settings.urls.player + '/stop');
+            return $timeout(function() {
+                $log.info('Stopped');
+                data.status.state = 'stopped';
+                data.status.position = 0;
+                $interval.cancel(playingPromise);
+            });
         }
 
         function seek(position) {
-            return $http.get(settings.urls.player + '/seek/' + position);
+            return $timeout(function() {
+                $log.info('seeked to position', position);
+                data.status.position = position;
+            });
         }
 
         function getRameVersioning() {

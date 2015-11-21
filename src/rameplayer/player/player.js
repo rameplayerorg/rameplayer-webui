@@ -5,9 +5,9 @@
         .module('rameplayer.player')
         .controller('PlayerController', PlayerController);
 
-    PlayerController.$inject = ['$log', '$timeout', 'statusService', 'dataService'];
+    PlayerController.$inject = ['$scope', '$log', '$timeout', 'statusService', 'dataService'];
 
-    function PlayerController($log, $timeout, statusService, dataService) {
+    function PlayerController($scope, $log, $timeout, statusService, dataService) {
         var vm = this;
 
         vm.timeSlider = 0;
@@ -17,6 +17,11 @@
         vm.togglePlay = togglePlay;
         vm.toggleStop = toggleStop;
         vm.seek = seek;
+
+        $scope.$watchCollection('vm.playerStatus', function() {
+            // synchronize time slider with status position
+            vm.timeSlider = vm.playerStatus.position;
+        });
 
         function togglePlay() {
             if (vm.playerStatus.state === statusService.states.playing) {
@@ -30,13 +35,11 @@
         function play() {
             var media = vm.selectedMedia;
             dataService.play().then(function(data) {
-                $log.info('Response', data);
             });
         }
 
         function pause() {
             dataService.pause().then(function(data) {
-                $log.info('Response', data);
             });
         }
 
@@ -51,7 +54,6 @@
 
         function stop() {
             dataService.stop().then(function(data) {
-                $log.info('Response', data);
             });
         }
 

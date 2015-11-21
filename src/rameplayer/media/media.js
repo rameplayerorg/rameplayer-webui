@@ -15,6 +15,7 @@
         vm.selectMedia = selectMedia;
         vm.playerStatus = statusService.status;
         vm.addToDefault = addToDefault;
+        statusService.provideFinder(findItem);
 
         $scope.$watchCollection('vm.playerStatus', function(current, original) {
             // update vm.lists if newer versions available
@@ -42,6 +43,18 @@
 
         function addToDefault(item) {
             dataService.addToDefaultPlaylist(item);
+        }
+
+        function findItem(id) {
+            for (var i = 0; i < vm.lists.length; i++) {
+                for (var j = 0; j < vm.lists[i].items.length; j++) {
+                    if (id === vm.lists[i].items[j].id) {
+                        return vm.lists[i].items[j];
+                    }
+                }
+            }
+            // not found
+            return null;
         }
     }
 })();

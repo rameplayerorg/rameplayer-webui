@@ -28,6 +28,7 @@
             position: 0
         };
         var pollerErrorCallbacks = [];
+        var itemFinders = [];
         var service = {
             states: {
                 stopped:   'stopped',
@@ -37,9 +38,10 @@
                 error:     'error'
             },
             status:            status,
-            onPollerError:     onPollerError
+            onPollerError:     onPollerError,
+            provideFinder:     provideFinder,
+            findItem:          findItem
         };
-        var pollerPromise;
 
         startStatusPoller();
         return service;
@@ -55,6 +57,13 @@
         function pollStatus() {
             dataService.getStatus().then(function(response) {
                 var newStatus = response.data;
+                if (newStatus.cursor && newStatus.cursor.id) {
+                    // find item details from UI lists
+                    var item = findItem(newStatus.cursor.id);
+                    if (item) {
+                        newStatus.cursor.item = item;
+                    }
+                }
                 // notify only when status changes
                 if (!angular.equals(newStatus, status)) {
                     angular.copy(newStatus, status);
@@ -66,30 +75,19 @@
             });
         }
 
-        /**
-         * @name simulatePollStatus
-         * @desc For development purposes only.
-         *       Primitive status polling simulation.
-         * @memberof Factories.PlayerService
-         */
-        function simulatePollStatus() {
-            $log.info('Status simulation enabled, not using status service');
-            status.state = service.states.stopped;
-            status.position = 0;
+        function provideFinder(func) {
+            itemFinders.push(func);
+        }
 
-            return $interval(poller, settings.statusPollingInterval);
-
-            function poller() {
-                if (status.state === service.states.playing) {
-                    status.position += 1.0;
-                    if (status.position >= status.media.duration) {
-                        $log.info('Simulating end of media: stop');
-                        status.state = service.states.stopped;
-                        status.position = 0;
-                        status.media = undefined;
-                    }
+        function findItem(id) {
+            for (var i = 0; i < itemFinders.length; i++) {
+                var item = itemFinders[i](id);
+                if (item) {
+                    return item;
                 }
             }
+            // not found
+            return null;
         }
     }
 })();

@@ -10,7 +10,6 @@
                      <span class="glyphicon glyphicon-menu-hamburger"></span>
                  </a>
                  <ul class="uib-dropdown-menu dropdown-menu-right">
-                     <li><a href><i class="glyphicon glyphicon-play"></i> Play</a></li>
                      <li ng-switch on="defaultPlaylist">
                          <a href ng-switch-when="true" ng-click="$event.stopPropagation(); saveAs({ playlist: playlist })">
                              <i class="glyphicon glyphicon-save"></i> Save as&hellip;
