@@ -48,6 +48,8 @@
             pause: pause,
             stop: stop,
             seek: seek,
+            stepBackward: stepBackward,
+            stepForward: stepForward,
             getRameVersioning: getRameVersioning
         };
 
@@ -112,6 +114,14 @@
 
         function seek(position) {
             return $http.get(settings.urls.player + '/seek/' + position);
+        }
+
+        function stepBackward() {
+            return $http.get(settings.urls.player + '/step-backward');
+        }
+
+        function stepForward() {
+            return $http.get(settings.urls.player + '/step-forward');
         }
 
         function getRameVersioning() {

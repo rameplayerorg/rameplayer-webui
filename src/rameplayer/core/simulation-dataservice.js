@@ -64,6 +64,8 @@
             pause: pause,
             stop: stop,
             seek: seek,
+            stepBackward: stepBackward,
+            stepForward: stepForward,
             getRameVersioning: getRameVersioning
         };
 
@@ -159,6 +161,7 @@
                 playingPromise = $interval(function() {
                     data.status.position += 1.0;
                     if (data.status.position >= data.status.cursor.item.duration) {
+                        $log.info('Playing ended');
                         $interval.cancel(playingPromise);
                         data.status.state = 'stopped';
                         data.status.position = 0;
@@ -189,6 +192,12 @@
                 $log.info('seeked to position', position);
                 data.status.position = position;
             });
+        }
+
+        function stepBackward() {
+        }
+
+        function stepForward() {
         }
 
         function getRameVersioning() {

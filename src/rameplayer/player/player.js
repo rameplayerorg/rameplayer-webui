@@ -16,6 +16,7 @@
         vm.statusError = null;
         vm.togglePlay = togglePlay;
         vm.toggleStop = toggleStop;
+        vm.stepForward = stepForward;
         vm.seek = seek;
 
         $scope.$watchCollection('vm.playerStatus', function() {
@@ -58,10 +59,15 @@
         }
 
         function stepBackward() {
+            dataService.stepBackward();
+        }
+
+        function stepForward() {
+            dataService.stepForward();
         }
 
         function seek() {
-            var position = vm.timeSlider;
+            var position = parseFloat(vm.timeSlider);
             dataService.seek(position).then(function(data) {
             });
         }
