@@ -41,6 +41,7 @@
         //$log.info('test:' + settingsUrl);
         
         function resetHdmiInterface() {
+            throw new Error('tsul');
             vm.hdmishaked = "painettu";
             //vm.hdmishaked = settings;
         }

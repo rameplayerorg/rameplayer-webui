@@ -6,10 +6,10 @@
             'AdminController', AdminController);
 
     AdminController.$inject = [
-            '$log', 'dataService', 'settings'
+            '$log', 'dataService', 'settings', '$exceptionHandler'
     ];
 
-    function AdminController($log, dataService, settings) {
+    function AdminController($log, dataService, settings, $exceptionHandler) {
         var vm = this;
         vm.audioPort = "Both";
         vm.audioPorts = [
@@ -62,6 +62,8 @@
             vm.dnsAlternativeServerIp = validateIP(vm.dnsAlternativeServerIpOcts);
             vm.subnetMask = validateIP(vm.subnetMaskOcts);
             vm.savingStatus = "saved";
+            console.log("fdjissdfafgawtd");
+            throw new Error('flfl');
         }
 
         // IP address string regexp

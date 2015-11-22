@@ -44,10 +44,20 @@
                 $log.error('Error when fetching settings', errorResponse);
             });
     }
-
-    function bootstrapApplication() {
+    
+    //console.log("exceptionHandlingTesting");
+    //angular.module('exceptionOverride', []).factory('$exceptionHandler', function() {
+    /*core.factory('$exceptionHandler', function() {
+        return function(exception, cause) {
+            console.log("fdjisd");
+          exception.message += ' rame (caused by "' + cause + '")';
+          throw exception;
+        };
+      });
+*/
+    function bootstrapApplication() {        
         angular.element(document).ready(function() {
-            angular.bootstrap(document, ['rameplayer']);
+            angular.bootstrap(document, ['rameplayer']);            
         });
     }
 
