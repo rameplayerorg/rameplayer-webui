@@ -87,7 +87,7 @@
 
         function getStatus() {
             return $timeout(function() {
-                //$log.info('getStatus', data.status);
+                //$log.info('getStatus', server.status);
                 return { data: server.status };
             }, delay);
         }
@@ -174,10 +174,8 @@
                 playingPromise = $interval(function() {
                     server.status.position += 1.0;
                     if (server.status.position >= server.status.cursor.item.duration) {
+                        serverStop();
                         $log.info('Playing ended');
-                        $interval.cancel(playingPromise);
-                        server.status.state = 'stopped';
-                        server.status.position = 0;
                     }
                 }, 1000);
             }, delay);
@@ -193,10 +191,8 @@
 
         function stop() {
             return $timeout(function() {
+                serverStop();
                 $log.info('Stopped');
-                server.status.state = 'stopped';
-                server.status.position = 0;
-                $interval.cancel(playingPromise);
             });
         }
 
@@ -208,13 +204,67 @@
         }
 
         function stepBackward() {
+            return $timeout(function() {
+                serverStop();
+                serverCursorBackward();
+                $log.info('Step backward');
+            }, delay);
         }
 
         function stepForward() {
-        }
+            return $timeout(function() {
+                serverStop();
+                serverCursorForward();
+                $log.info('Step forward');
+            }, delay);
+       }
 
         function getRameVersioning() {
             return $http.get('stubs/rameversion.json');
+        }
+
+        function serverStop() {
+            server.status.state = 'stopped';
+            server.status.position = 0;
+            $interval.cancel(playingPromise);
+        }
+
+        function serverCursorForward() {
+            if (server.status.cursor.parents && server.status.cursor.parents.length) {
+                var playlist = server.status.cursor.parents[server.status.cursor.parents.length - 1];
+                for (var i = 0; i < playlist.items.length; i++) {
+                    if (server.status.cursor.id === playlist.items[i].id) {
+                        var nextItem;
+                        if (i === playlist.items.length - 1) {
+                            nextItem = playlist.items[0];
+                        }
+                        else {
+                            nextItem = playlist.items[i + 1];
+                        }
+                        server.status.cursor.id = nextItem.id;
+                        break;
+                    }
+                }
+            }
+        }
+
+        function serverCursorBackward() {
+            if (server.status.cursor.parents && server.status.cursor.parents.length) {
+                var playlist = server.status.cursor.parents[server.status.cursor.parents.length - 1];
+                for (var i = 0; i < playlist.items.length; i++) {
+                    if (server.status.cursor.id === playlist.items[i].id) {
+                        var prevItem;
+                        if (i === 0) {
+                            prevItem = playlist.items[playlist.items.length - 1];
+                        }
+                        else {
+                            prevItem = playlist.items[i - 1];
+                        }
+                        server.status.cursor.id = prevItem.id;
+                        break;
+                    }
+                }
+            }
         }
     }
 })();
