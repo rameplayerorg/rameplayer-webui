@@ -61,7 +61,7 @@
                     // find item details from UI lists
                     var item = findItem(newStatus.cursor.id);
                     if (item) {
-                        newStatus.cursor.item = item;
+                        angular.extend(newStatus.cursor, item);
                     }
                 }
                 // notify only when status changes

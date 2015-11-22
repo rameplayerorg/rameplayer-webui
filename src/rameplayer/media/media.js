@@ -49,7 +49,10 @@
             for (var i = 0; i < vm.lists.length; i++) {
                 for (var j = 0; j < vm.lists[i].items.length; j++) {
                     if (id === vm.lists[i].items[j].id) {
-                        return vm.lists[i].items[j];
+                        return {
+                            parents: [ vm.lists[i] ],
+                            item: vm.lists[i].items[j]
+                        };
                     }
                 }
             }

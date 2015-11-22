@@ -85,14 +85,20 @@
         function findItem(id) {
             for (var i = 0; i < vm.defaultPlaylist.items.length; i++) {
                 if (id === vm.defaultPlaylist.items[i].id) {
-                    return vm.defaultPlaylist.items[i];
+                    return {
+                        parents: [ vm.defaultPlaylist ],
+                        item: vm.defaultPlaylist.items[i]
+                    };
                 }
             }
 
             for (i = 0; i < vm.playlists.length; i++) {
                 for (var j = 0; j < vm.playlists[i].items.length; j++) {
                     if (id === vm.playlists[i].items[j].id) {
-                        return vm.playlists[i].items[j];
+                        return {
+                            parents: [ vm.playlists[i] ],
+                            item: vm.playlists[i].items[j]
+                        };
                     }
                 }
             }
