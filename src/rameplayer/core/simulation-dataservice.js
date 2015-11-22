@@ -16,7 +16,8 @@
         .module('rameplayer.core')
         .factory('simulationDataService', simulationDataService);
 
-    simulationDataService.$inject = ['$log', '$http', '$resource', 'settings', '$timeout', '$interval', 'uuid'];
+    simulationDataService.$inject = ['$log', '$http', '$resource', 'settings',
+        '$timeout', '$interval', 'uuid'];
 
     /**
      * @namespace DataService
@@ -27,7 +28,7 @@
 
         // initial internal data
         // corresponds server data in production
-        var data = {
+        var server = {
             status: {
                 state: 'stopped',
                 position: 0,
@@ -87,14 +88,19 @@
         function getStatus() {
             return $timeout(function() {
                 //$log.info('getStatus', data.status);
-                return { data: data.status };
+                return { data: server.status };
             }, delay);
         }
 
         function setCursor(itemId) {
             return $timeout(function() {
-                data.status.cursor.id = itemId;
-                $log.info('Cursor set to', itemId);
+                if (server.status.state !== 'playing') {
+                    server.status.cursor.id = itemId;
+                    $log.info('Cursor set to', itemId);
+                }
+                else {
+                    $log.info('Playing, not changing cursor');
+                }
             }, delay);
         }
 
@@ -103,7 +109,7 @@
         }
 
         function getDefaultPlaylist() {
-            return data.defaultPlaylist;
+            return server.defaultPlaylist;
         }
 
         function addToDefaultPlaylist(mediaItem) {
@@ -111,29 +117,29 @@
                 var newItem = angular.copy(mediaItem);
                 // generate new UUID
                 newItem.id = uuid.v4();
-                data.defaultPlaylist.items.push(newItem);
+                server.defaultPlaylist.items.push(newItem);
                 var date = new Date();
-                data.defaultPlaylist.modified = date.getTime();
-                data.status.playlists.modified = date.getTime();
+                server.defaultPlaylist.modified = date.getTime();
+                server.status.playlists.modified = date.getTime();
                 return;
             }, delay);
         }
 
         function removeFromDefaultPlaylist(mediaItem) {
             return $timeout(function() {
-                for (var i = 0; i < data.defaultPlaylist.items.length; i++) {
-                    if (data.defaultPlaylist.items[i].id === mediaItem.id) {
-                        data.defaultPlaylist.items.splice(i, 1);
+                for (var i = 0; i < server.defaultPlaylist.items.length; i++) {
+                    if (server.defaultPlaylist.items[i].id === mediaItem.id) {
+                        server.defaultPlaylist.items.splice(i, 1);
                         var date = new Date();
-                        data.defaultPlaylist.modified = date.getTime();
-                        data.status.playlists.modified = date.getTime();
+                        server.defaultPlaylist.modified = date.getTime();
+                        server.status.playlists.modified = date.getTime();
                     }
                 }
             }, delay);
         }
 
         function getPlaylists() {
-            return data.playlists;
+            return server.playlists;
         }
 
         function createPlaylist(playlist) {
@@ -150,8 +156,8 @@
                     newItem.id = uuid.v4();
                     newPlaylist.items.push(newItem);
                 }
-                data.playlists.push(newPlaylist);
-                data.status.playlists.modified = date.getTime();
+                server.playlists.push(newPlaylist);
+                server.status.playlists.modified = date.getTime();
             }, delay);
         }
 
@@ -164,14 +170,14 @@
         function play() {
             return $timeout(function() {
                 $log.info('Playing');
-                data.status.state = 'playing';
+                server.status.state = 'playing';
                 playingPromise = $interval(function() {
-                    data.status.position += 1.0;
-                    if (data.status.position >= data.status.cursor.item.duration) {
+                    server.status.position += 1.0;
+                    if (server.status.position >= server.status.cursor.item.duration) {
                         $log.info('Playing ended');
                         $interval.cancel(playingPromise);
-                        data.status.state = 'stopped';
-                        data.status.position = 0;
+                        server.status.state = 'stopped';
+                        server.status.position = 0;
                     }
                 }, 1000);
             }, delay);
@@ -180,7 +186,7 @@
         function pause() {
             return $timeout(function() {
                 $log.info('Paused');
-                data.status.state = 'paused';
+                server.status.state = 'paused';
                 $interval.cancel(playingPromise);
             });
         }
@@ -188,8 +194,8 @@
         function stop() {
             return $timeout(function() {
                 $log.info('Stopped');
-                data.status.state = 'stopped';
-                data.status.position = 0;
+                server.status.state = 'stopped';
+                server.status.position = 0;
                 $interval.cancel(playingPromise);
             });
         }
@@ -197,7 +203,7 @@
         function seek(position) {
             return $timeout(function() {
                 $log.info('seeked to position', position);
-                data.status.position = position;
+                server.status.position = position;
             });
         }
 

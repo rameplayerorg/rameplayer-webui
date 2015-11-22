@@ -45,6 +45,10 @@
   background-color: #D9EDF7;
 }
 
+.media-list .locked {
+  background-color: #FFF4CC;
+}
+
 .ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
