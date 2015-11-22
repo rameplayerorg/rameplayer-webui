@@ -77,9 +77,8 @@
             });
         }
 
-        function playlistSorted(playlist, medias) {
-            playlist.medias = medias;
-            playlist.$save();
+        function playlistSorted(playlist, item, oldIndex, newIndex) {
+            dataService.movePlaylistItem(playlist, item, oldIndex, newIndex);
         }
 
         function findItem(id) {

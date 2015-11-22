@@ -60,6 +60,7 @@
             removeFromDefaultPlaylist: removeFromDefaultPlaylist,
             getPlaylists: getPlaylists,
             createPlaylist: createPlaylist,
+            movePlaylistItem: movePlaylistItem,
             play: play,
             pause: pause,
             stop: stop,
@@ -151,6 +152,12 @@
                 }
                 data.playlists.push(newPlaylist);
                 data.status.playlists.modified = date.getTime();
+            }, delay);
+        }
+
+        function movePlaylistItem(playlist, item, oldIndex, newIndex) {
+            return $timeout(function() {
+                $log.info('Playlist item moved');
             }, delay);
         }
 

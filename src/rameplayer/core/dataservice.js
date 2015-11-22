@@ -31,7 +31,18 @@
             return simulationDataService;
         }
 
-        var Playlists = $resource(settings.urls.playlists);
+        var playlistUrl = settings.urls.playlists + '/:playlistId';
+        var playlistItemUrl = playlistUrl + '/items/:itemId';
+        var Playlist = $resource(playlistUrl, { playlistId: '@id' });
+        var PlaylistItem = $resource(playlistItemUrl,
+            {
+                playlistId: '@playlistId',
+                itemId: '@id'
+            },
+            {
+                'update': { method: 'PUT' }
+            }
+        );
         var DefaultPlaylist = $resource(settings.urls.defaultPlaylist);
         var DefaultPlaylistItem = $resource(settings.urls.defaultPlaylist + '/items/:itemId', { itemId: '@id' });
 
@@ -44,6 +55,7 @@
             removeFromDefaultPlaylist: removeFromDefaultPlaylist,
             getPlaylists: getPlaylists,
             createPlaylist: createPlaylist,
+            movePlaylistItem: movePlaylistItem,
             play: play,
             pause: pause,
             stop: stop,
@@ -92,11 +104,20 @@
         }
 
         function getPlaylists() {
-            return Playlists.query();
+            return Playlist.query();
         }
 
         function createPlaylist(playlist) {
-            Playlists.save(playlist, function() {
+            Playlist.save(playlist, function() {
+            });
+        }
+
+        function movePlaylistItem(playlist, item, oldIndex, newIndex) {
+            PlaylistItem.update({}, {
+                id: item.id,
+                playlistId: playlist.id,
+                oldIndex: oldIndex,
+                newIndex: newIndex
             });
         }
 
