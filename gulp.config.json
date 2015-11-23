@@ -28,7 +28,8 @@
         "./src/**/*.js"
     ],
     "fonts": [
-        "./bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2"
+        "./bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2",
+        "./bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff"
     ],
     "images": [
         "./src/images/**/*"
