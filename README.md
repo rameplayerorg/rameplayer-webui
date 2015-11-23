@@ -11,8 +11,8 @@ Web UI for Rameplayer
 	- on Windows install [chocolatey](https://chocolatey.org/) and type `choco install nodejs`
 - On OSX you can alleviate the need to run as sudo by [following these instructions](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md)
 - Open terminal
-- Type `npm install -g bower gulp`
-- For building you need: `npm install -g del gulp-angular-templatecache gulp-autoprefixer gulp-bytediff gulp-concat gulp-filter gulp-inject gulp-jscs gulp-jshint gulp-minify-css gulp-minify-html gulp-notify gulp-ng-annotate gulp-rev gulp-rev-replace gulp-task-listing gulp-uglify jshint-stylish merge-stream`
+- Type `npm install bower gulp`
+- For building you need: `npm install del gulp-angular-templatecache gulp-autoprefixer gulp-bytediff gulp-concat gulp-filter gulp-inject gulp-jscs gulp-jshint gulp-minify-css gulp-minify-html gulp-notify gulp-ng-annotate gulp-rev gulp-rev-replace gulp-task-listing gulp-uglify jshint-stylish merge-stream`
 
 ## Installing Node.js and Bower Packages
 - Open terminal
