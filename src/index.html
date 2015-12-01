@@ -51,10 +51,37 @@
                             </ol>
                             <div class="media-list">
                                 <div class="row hidden-xs media-list-header">
-                                    <div class="col-sm-4">File</div>
+                                    <div class="col-sm-4">Name</div>
                                     <div class="col-sm-4">Title</div>
                                     <div class="col-sm-1 text-right">Length</div>
                                     <div class="col-sm-3">Date</div>
+                                </div>
+                                <div class="row media-list-item" ng-class="" ng-click="vm.subi()">
+                                    <div class="col-sm-4 media-list-item-field ellipsis">
+                                        <span class="glyphicon glyphicon-folder-close"></span>
+                                        Subfolder
+                                    </div>
+                                    <div class="col-sm-4 media-list-item-field ellipsis"></div>
+                                    <div class="col-sm-1 media-list-item-field text-right"></div>
+                                    <div class="col-sm-3 media-list-item-field"></div>
+                                </div>
+                                <div class="row media-list-item" ng-class="" ng-click="">
+                                    <div class="col-sm-4 media-list-item-field ellipsis">
+                                        <span class="glyphicon glyphicon-folder-close"></span>
+                                        Second dir
+                                    </div>
+                                    <div class="col-sm-4 media-list-item-field ellipsis"></div>
+                                    <div class="col-sm-1 media-list-item-field text-right"></div>
+                                    <div class="col-sm-3 media-list-item-field"></div>
+                                </div>
+                                <div class="row media-list-item" ng-class="" ng-click="">
+                                    <div class="col-sm-4 media-list-item-field ellipsis">
+                                        <span class="glyphicon glyphicon-folder-close"></span>
+                                        Third dir
+                                    </div>
+                                    <div class="col-sm-4 media-list-item-field ellipsis"></div>
+                                    <div class="col-sm-1 media-list-item-field text-right"></div>
+                                    <div class="col-sm-3 media-list-item-field"></div>
                                 </div>
                                 <rame-media-item ng-repeat="item in vm.lists[0].items" media="item" on-click="vm.selectMedia(item)" add-to-default="vm.addToDefault(item)"></rame-media-item>
                             </div>
