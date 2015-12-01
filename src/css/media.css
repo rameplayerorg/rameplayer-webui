@@ -71,3 +71,20 @@
 #player-playlist-controls {
     margin-bottom: 5px;
 }
+
+.folders {
+  list-style: outside none none;
+}
+
+.folders > li {
+  width: 120px;
+  display: inline-block;
+  padding: 10px;
+  margin-right: 10px;
+  text-align: center;
+  vertical-align: top;
+}
+
+.icon-folder {
+  font-size: 4em;
+}

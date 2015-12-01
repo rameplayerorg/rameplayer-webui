@@ -47,3 +47,6 @@ body {
 
 /* Angular Bootstrap requires this */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+/* Cursor in Bootstrap Carousel */
+.carousel { cursor: auto !important; }

@@ -17,6 +17,32 @@
         vm.addToDefault = addToDefault;
         statusService.provideFinder(findItem);
 
+        vm.interval = 0;
+        vm.noWrap = true;
+        vm.firstSlideActive = true;
+        vm.secondSlideActive = false;
+
+        vm.breadcrumbs = [
+            'USB'
+        ];
+        vm.brSelect = function(index) {
+            if (index === 0 && vm.secondSlideActive) {
+                vm.secondSlideActive = false;
+                vm.firstSlideActive = true;
+                vm.breadcrumbs = [ 'USB '];
+            }
+        };
+        vm.previ = function() {
+            vm.secondSlideActive = false;
+            vm.firstSlideActive = true;
+            vm.breadcrumbs.slice(1, 1);
+        };
+        vm.subi = function() {
+            vm.firstSlideActive = false;
+            vm.secondSlideActive = true;
+            vm.breadcrumbs.push('Subfolder');
+        };
+
         $scope.$watchCollection('vm.playerStatus', function(current, original) {
             // update vm.lists if newer versions available
             if (!original || !original.lists || current.lists.modified > original.lists.modified) {
