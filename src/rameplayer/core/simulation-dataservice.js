@@ -48,9 +48,9 @@
             playlists: []
         };
 
-        var Playlists = $resource(settings.urls.playlists);
-        var DefaultPlaylist = $resource(settings.urls.defaultPlaylist);
-        var DefaultPlaylistItem = $resource(settings.urls.defaultPlaylist + '/items/:itemId', { itemId: '@id' });
+        var Playlists = $resource(settings.development.serverSimulation.urls.playlists);
+        var DefaultPlaylist = $resource(settings.development.serverSimulation.urls.defaultPlaylist);
+        var DefaultPlaylistItem = $resource(settings.development.serverSimulation.urls.defaultPlaylist + '/items/:itemId', { itemId: '@id' });
 
         var service = {
             getStatus: getStatus,
@@ -71,16 +71,7 @@
             getRameVersioning: getRameVersioning
         };
 
-        if (settings.serverPort !== undefined && settings.serverPort !== 0) {
-            settings.urls['status'] = location.protocol + '//' + location.hostname +
-                                   ':' + settings.serverPort + '/status';
-            settings.urls.player = location.protocol + '//' + location.hostname +
-                                   ':' + settings.serverPort + '/player';
-            settings.urls.lists = location.protocol + '//' + location.hostname +
-                                   ':' + settings.serverPort + '/lists';
-	}
-
-        var delay = settings.development.simulationDelay;
+        var delay = settings.development.serverSimulation.delay;
         var playingPromise;
 
         return service;
@@ -105,7 +96,7 @@
         }
 
         function getLists() {
-            return $http.get(settings.urls.lists);
+            return $http.get(settings.development.serverSimulation.urls.lists);
         }
 
         function getDefaultPlaylist() {

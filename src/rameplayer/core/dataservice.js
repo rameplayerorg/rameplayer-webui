@@ -26,12 +26,24 @@
     function dataService($log, $http, $resource, settings, simulationDataService) {
 
         if (settings.development && settings.development.enabled &&
-            settings.development.simulateServer) {
+            settings.development.serverSimulation &&
+            settings.development.serverSimulation.enabled) {
             // replace this with simulationDataService
             return simulationDataService;
         }
 
-        var playlistUrl = settings.urls.playlists + '/:playlistId';
+        // make a copy of URLs so we don't overwrite server URL settings
+        var urls = angular.copy(settings.urls);
+
+        if (settings.serverPort !== undefined && settings.serverPort !== 0) {
+            // apply server port to all URLs
+            for (var prop in urls) {
+                urls[prop] = location.protocol + '//' + location.hostname +
+                    ':' + settings.serverPort + urls[prop];
+            }
+        }
+
+        var playlistUrl = urls.playlists + '/:playlistId';
         var playlistItemUrl = playlistUrl + '/items/:itemId';
         var Playlist = $resource(playlistUrl, { playlistId: '@id' });
         var PlaylistItem = $resource(playlistItemUrl,
@@ -43,8 +55,8 @@
                 'update': { method: 'PUT' }
             }
         );
-        var DefaultPlaylist = $resource(settings.urls.defaultPlaylist);
-        var DefaultPlaylistItem = $resource(settings.urls.defaultPlaylist + '/items/:itemId', { itemId: '@id' });
+        var DefaultPlaylist = $resource(urls.defaultPlaylist);
+        var DefaultPlaylistItem = $resource(urls.defaultPlaylist + '/items/:itemId', { itemId: '@id' });
 
         var service = {
             getStatus: getStatus,
@@ -65,27 +77,18 @@
             getRameVersioning: getRameVersioning
         };
 
-        if (settings.serverPort !== undefined && settings.serverPort !== 0) {
-            settings.urls['status'] = location.protocol + '//' + location.hostname +
-                                   ':' + settings.serverPort + '/status';
-            settings.urls.player = location.protocol + '//' + location.hostname +
-                                   ':' + settings.serverPort + '/player';
-            settings.urls.lists = location.protocol + '//' + location.hostname +
-                                   ':' + settings.serverPort + '/lists';
-	}
-
         return service;
 
         function getStatus() {
-            return $http.get(settings.urls['status']);
+            return $http.get(urls['status']);
         }
 
         function setCursor(itemId) {
-            return $http.put(settings.urls.cursor, { id: itemId });
+            return $http.put(urls.cursor, { id: itemId });
         }
 
         function getLists() {
-            return $http.get(settings.urls.lists);
+            return $http.get(urls.lists);
         }
 
         function getDefaultPlaylist() {
@@ -122,27 +125,27 @@
         }
 
         function play() {
-            return $http.get(settings.urls.player + '/play');
+            return $http.get(urls.player + '/play');
         }
 
         function pause() {
-            return $http.get(settings.urls.player + '/pause');
+            return $http.get(urls.player + '/pause');
         }
 
         function stop() {
-            return $http.get(settings.urls.player + '/stop');
+            return $http.get(urls.player + '/stop');
         }
 
         function seek(position) {
-            return $http.get(settings.urls.player + '/seek/' + position);
+            return $http.get(urls.player + '/seek/' + position);
         }
 
         function stepBackward() {
-            return $http.get(settings.urls.player + '/step-backward');
+            return $http.get(urls.player + '/step-backward');
         }
 
         function stepForward() {
-            return $http.get(settings.urls.player + '/step-forward');
+            return $http.get(urls.player + '/step-forward');
         }
 
         function getRameVersioning() {
