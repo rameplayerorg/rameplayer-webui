@@ -28,15 +28,51 @@
     <div class="container" ng-controller="MediaController as vm" ng-cloak>
         <uib-tabset type="pills">
             <uib-tab heading="USB">
-                <div class="media-list">
-                    <div class="row hidden-xs media-list-header">
-                        <div class="col-sm-4">File</div>
-                        <div class="col-sm-4">Title</div>
-                        <div class="col-sm-1 text-right">Length</div>
-                        <div class="col-sm-3">Date</div>
-                    </div>
-                    <rame-media-item ng-repeat="item in vm.lists[0].items" media="item" on-click="vm.selectMedia(item)" add-to-default="vm.addToDefault(item)"></rame-media-item>
-                </div>
+                <ol class="breadcrumb">
+                    <li ng-repeat="breadcrumb in vm.breadcrumbs">
+                        <a href="#" ng-click="vm.brSelect($index)">{{ breadcrumb }}</a>
+                        </li>
+                    <!--<li><a href="#" ng-click="vm.previ()">USB</a></li>
+                        <li><a href="#">Subfolder</a></li>-->
+                </ol>
+                <div> <!-- carousel -->
+                    <uib-carousel interval="vm.interval" no-wrap="vm.noWrap" template-url="rameplayer/media/carousel/carousel.html">
+                        <uib-slide active="vm.firstSlideActive" template-url="rameplayer/media/carousel/slide.html">
+                            <ol class="folders">
+                                <li>
+                                    <a href="#" ng-click="vm.subi()"><span class="glyphicon glyphicon-folder-close icon-folder"></span><br>Subfolder</a>
+                                </li>
+                                <li>
+                                    <span class="glyphicon glyphicon-folder-close icon-folder"></span><br>Second dir
+                                </li>
+                                <li>
+                                    <span class="glyphicon glyphicon-folder-close icon-folder"></span><br>Third dir
+                                </li>
+                            </ol>
+                            <div class="media-list">
+                                <div class="row hidden-xs media-list-header">
+                                    <div class="col-sm-4">File</div>
+                                    <div class="col-sm-4">Title</div>
+                                    <div class="col-sm-1 text-right">Length</div>
+                                    <div class="col-sm-3">Date</div>
+                                </div>
+                                <rame-media-item ng-repeat="item in vm.lists[0].items" media="item" on-click="vm.selectMedia(item)" add-to-default="vm.addToDefault(item)"></rame-media-item>
+                            </div>
+
+                        </uib-slide>
+                        <uib-slide active="vm.secondSlideActive" template-url="rameplayer/media/carousel/slide.html">
+                            <div class="media-list">
+                                <div class="row hidden-xs media-list-header">
+                                    <div class="col-sm-4">File</div>
+                                    <div class="col-sm-4">Title</div>
+                                    <div class="col-sm-1 text-right">Length</div>
+                                    <div class="col-sm-3">Date</div>
+                                </div>
+                                <rame-media-item ng-repeat="item in vm.lists[0].items" media="item" on-click="vm.selectMedia(item)" add-to-default="vm.addToDefault(item)"></rame-media-item>
+                            </div>
+                        </uib-slide>
+                    </uib-carousel>
+                </div> <!-- carousel -->
             </uib-tab>
 
             <uib-tab heading="PLAYLISTS">
