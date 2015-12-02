@@ -1,4 +1,4 @@
 {
-        "software": "RamePlayer 313",
-        "hardware": "RaspPie 176-761"
+        "backend": "RamePlayer 313",
+        "hw": "RaspPie 176-761"
 }
