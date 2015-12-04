@@ -6,10 +6,10 @@
             'AdminController', AdminController);
 
     AdminController.$inject = [
-            '$log', 'dataService', 'settings', 'toastr'
+            '$log', 'dataService', 'settings', 'toastr', '$rootScope'
     ];
 
-    function AdminController($log, dataService, settings, toastr) {
+    function AdminController($log, dataService, settings, toastr, $rootScope) {
         var vm = this;
         vm.audioPort = "Both";
         vm.audioPorts = [
@@ -63,7 +63,7 @@
             vm.subnetMask = validateIP(vm.subnetMaskOcts);
             vm.savingStatus = "saved";
             //console.log("fdjissdfafgawtd");
-            toastr.error('savesettingserrortest');
+            toastr.error('savesettingserrortest' + $rootScope.rameExceptions, $rootScope.rameException);
             throw new Error('testerror');            
         }
 

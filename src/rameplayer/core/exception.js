@@ -11,19 +11,22 @@
             '$exceptionHandler', rameExceptionHandler);
 
     rameExceptionHandler.$inject = [
-        '$log'
+        '$log', '$injector'
     ];
 
-    function rameExceptionHandler($log) {
+    function rameExceptionHandler($log, $injector) {
 
         var latest = [];
         var exceptionMessage = '';
 
-        return function(exception, cause) {
+        return function(exception, cause) {            
             exceptionMessage = 'RAMEPLAYER .:. ' + exception + ' .:. ' + cause;
             if (latest.unshift(exceptionMessage) > 7) {
                 latest.pop();
             }
+            var root = $injector.get('$rootScope');
+            root.rameException = exceptionMessage;
+            root.rameExceptions = latest;
             exception.message += ' (caused by "' + cause + '")';
             $log.error(exceptionMessage);
         };
