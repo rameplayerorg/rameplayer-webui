@@ -7,10 +7,10 @@
         .controller('SettingsController', SettingsController);
 
     SettingsController.$inject = [
-        '$log', '$http', 'dataService', 'settings', '$translate'
+        '$log', '$http', 'dataService', 'settings', '$translate', 'toastr'
     ];
 
-    function SettingsController($log, $http, dataService, settings, $translate) {
+    function SettingsController($log, $http, dataService, settings, $translate, toastr) {
         
         var $injector = angular.injector();
 		        
@@ -41,7 +41,7 @@
         //$log.info('test:' + settingsUrl);
         
         function resetHdmiInterface() {
-            throw new Error('tsul');
+            toastr.warning('Reseting HDMI');
             vm.hdmishaked = "painettu";
             //vm.hdmishaked = settings;
         }
