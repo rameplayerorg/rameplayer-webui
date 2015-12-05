@@ -17,14 +17,14 @@
         .factory('simulationDataService', simulationDataService);
 
     simulationDataService.$inject = ['$log', '$http', '$resource', 'settings',
-        '$timeout', '$interval', 'uuid'];
+        '$timeout', '$interval', 'uuid', 'List'];
 
     /**
      * @namespace DataService
      * @desc Application wide service for REST API
      * @memberof Factories
      */
-    function simulationDataService($log, $http, $resource, settings, $timeout, $interval, uuid) {
+    function simulationDataService($log, $http, $resource, settings, $timeout, $interval, uuid, List) {
 
         // initial internal data
         // corresponds server data in production
@@ -48,14 +48,15 @@
             playlists: []
         };
 
-        var Playlists = $resource(settings.development.serverSimulation.urls.playlists);
-        var DefaultPlaylist = $resource(settings.development.serverSimulation.urls.defaultPlaylist);
-        var DefaultPlaylistItem = $resource(settings.development.serverSimulation.urls.defaultPlaylist + '/items/:itemId', { itemId: '@id' });
+        var urls = settings.development.serverSimulation.urls;
+        var Playlists = $resource(urls.playlists);
+        var DefaultPlaylist = $resource(urls.defaultPlaylist);
+        var DefaultPlaylistItem = $resource(urls.defaultPlaylist + '/items/:itemId', { itemId: '@id' });
 
         var service = {
             getStatus: getStatus,
             setCursor: setCursor,
-            getLists: getLists,
+            getList: getList,
             getDefaultPlaylist: getDefaultPlaylist,
             addToDefaultPlaylist: addToDefaultPlaylist,
             removeFromDefaultPlaylist: removeFromDefaultPlaylist,
@@ -95,8 +96,8 @@
             }, delay);
         }
 
-        function getLists() {
-            return $http.get(settings.development.serverSimulation.urls.lists);
+        function getList(id) {
+            return List.get({ targetId: id });
         }
 
         function getDefaultPlaylist() {
@@ -256,6 +257,10 @@
                     }
                 }
             }
+        }
+
+        function getListParent() {
+            $log.info('getParent()', this);
         }
     }
 })();

@@ -18,6 +18,7 @@
             scope: {
                 'media': '=', // take media from attribute
                 'onClick': '&',
+                'onOpenList': '&',
                 'remove': '&',
                 'addToDefault': '&',
                 'moveTo': '&'
@@ -35,6 +36,16 @@
                 scope.isDropdownOpen = !scope.isDropdownOpen;
             };
             scope.playerStatus = statusService.status;
+            scope.itemClick = itemClick;
+
+            function itemClick() {
+                if (scope.media.info.type === 'directory') {
+                    scope.onOpenList();
+                }
+                else {
+                    scope.onClick();
+                }
+            }
         }
     }
 })();

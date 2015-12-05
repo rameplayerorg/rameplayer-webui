@@ -43,6 +43,9 @@
             }
         }
 
+        var listUrl = urls.lists + '/:targetId';
+        var List = $resource(listUrl, { targetId: '@id' });
+
         var playlistUrl = urls.playlists + '/:playlistId';
         var playlistItemUrl = playlistUrl + '/items/:itemId';
         var Playlist = $resource(playlistUrl, { playlistId: '@id' });
@@ -61,7 +64,7 @@
         var service = {
             getStatus: getStatus,
             setCursor: setCursor,
-            getLists: getLists,
+            getList: getList,
             getDefaultPlaylist: getDefaultPlaylist,
             addToDefaultPlaylist: addToDefaultPlaylist,
             removeFromDefaultPlaylist: removeFromDefaultPlaylist,
@@ -87,8 +90,8 @@
             return $http.put(urls.cursor, { id: itemId });
         }
 
-        function getLists() {
-            return $http.get(urls.lists);
+        function getList(id) {
+            return List.get({ targetId: id });
         }
 
         function getDefaultPlaylist() {

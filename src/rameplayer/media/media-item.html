@@ -1,16 +1,17 @@
-<div class="row media-list-item" ng-class="{ selected: (media.id === playerStatus.cursor.id) && playerStatus.state !== 'playing', locked: (media.id === playerStatus.cursor.id) && playerStatus.state === 'playing' }" ng-click="onClick()">
+<div class="row media-list-item" ng-class="{ selected: (media.id === playerStatus.cursor.id) && playerStatus.state !== 'playing', locked: (media.id === playerStatus.cursor.id) && playerStatus.state === 'playing' }" ng-click="itemClick()">
     <div class="col-sm-4 media-list-item-field ellipsis">
-        {{ media.filename }}
+        <span class="glyphicon glyphicon-folder-close" ng-if="media.info.type === 'directory'"></span>
+        {{ media.info.filename }}
     </div>
     <div class="col-sm-4 media-list-item-field ellipsis">
-        {{ media.title }}
+        {{ media.info.title }}
     </div>
     <div class="col-sm-1 media-list-item-field text-right">
-        {{ media.duration | playerTime }}
+        {{ media.info.duration | playerTime }}
     </div>
     <div class="col-sm-3 media-list-item-field">
-        {{ media.modified | date:'yyyy-MM-dd HH:mm:ss' }}
-        <span class="pull-right">
+        {{ media.info.modified | date:'yyyy-MM-dd HH:mm:ss' }}
+        <span class="pull-right" ng-if="media.info.type !== 'directory'">
             <span uib-dropdown is-open="isDropdownOpen">
                 <a href uib-dropdown-toggle ng-click="$event.stopPropagation();">
                     <span class="glyphicon glyphicon-menu-hamburger sorting-handle"></span>

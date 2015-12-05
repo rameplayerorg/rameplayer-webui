@@ -39,7 +39,10 @@ body {
 .nav-pills a, .nav-tabs a { border-radius: 0 !important; }
 .form-control { border-radius: 0; }
 
-.nav-pills a { font-weight: 700; }
+.nav-pills > li a {
+  font-weight: 700;
+  text-transform: uppercase;
+}
 
 .tab-content {
     padding: 10px 10px 10px 10px;
