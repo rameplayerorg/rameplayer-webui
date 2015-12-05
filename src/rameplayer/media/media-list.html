@@ -1,0 +1,22 @@
+<ol class="breadcrumb" ng-if="list.hasChildLists()">
+    <li ng-repeat="breadcrumb in breadcrumbs" ng-class="{ 'last': $last }" ng-switch on="$last">
+        <span ng-switch-when="true">{{ breadcrumb }}</span>
+        <a href="#" ng-click="activateSlide($index)" ng-switch-default>{{ breadcrumb }}</a>
+    </li>
+</ol>
+<div> <!-- carousel -->
+    <uib-carousel interval="0" no-wrap="1" template-url="rameplayer/media/carousel/carousel.html">
+        <uib-slide ng-repeat="slide in slides" active="slide.active" template-url="rameplayer/media/carousel/slide.html">
+            <div class="media-list">
+                <div class="row hidden-xs media-list-header">
+                    <div class="col-sm-4" translate>Name</div>
+                    <div class="col-sm-4" translate>Title</div>
+                    <div class="col-sm-1 text-right" translate>Length</div>
+                    <div class="col-sm-3" translate>Date</div>
+                </div>
+                <rame-media-item ng-repeat="item in slide.list.items" media="item" on-click="selectMedia(item)" add-to-default="addToDefault(item)" on-open-list="openList(item)"></rame-media-item>
+            </div>
+        </uib-slide>
+    </uib-carousel>
+</div> <!-- carousel -->
+

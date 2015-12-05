@@ -44,6 +44,7 @@
         };
 
         startStatusPoller();
+
         return service;
 
         function onPollerError(func) {

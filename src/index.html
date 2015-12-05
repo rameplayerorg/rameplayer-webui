@@ -27,82 +27,13 @@
 <body>
     <div class="container" ng-controller="MediaController as vm" ng-cloak>
         <uib-tabset type="pills">
-            <uib-tab heading="USB">
-                <ol class="breadcrumb">
-                    <li ng-repeat="breadcrumb in vm.breadcrumbs">
-                        <a href="#" ng-click="vm.brSelect($index)">{{ breadcrumb }}</a>
-                        </li>
-                    <!--<li><a href="#" ng-click="vm.previ()">USB</a></li>
-                        <li><a href="#">Subfolder</a></li>-->
-                </ol>
-                <div> <!-- carousel -->
-                    <uib-carousel interval="vm.interval" no-wrap="vm.noWrap" template-url="rameplayer/media/carousel/carousel.html">
-                        <uib-slide active="vm.firstSlideActive" template-url="rameplayer/media/carousel/slide.html">
-                            <ol class="folders">
-                                <li>
-                                    <a href="#" ng-click="vm.subi()"><span class="glyphicon glyphicon-folder-close icon-folder"></span><br>Subfolder</a>
-                                </li>
-                                <li>
-                                    <span class="glyphicon glyphicon-folder-close icon-folder"></span><br>Second dir
-                                </li>
-                                <li>
-                                    <span class="glyphicon glyphicon-folder-close icon-folder"></span><br>Third dir
-                                </li>
-                            </ol>
-                            <div class="media-list">
-                                <div class="row hidden-xs media-list-header">
-                                    <div class="col-sm-4">Name</div>
-                                    <div class="col-sm-4">Title</div>
-                                    <div class="col-sm-1 text-right">Length</div>
-                                    <div class="col-sm-3">Date</div>
-                                </div>
-                                <div class="row media-list-item" ng-class="" ng-click="vm.subi()">
-                                    <div class="col-sm-4 media-list-item-field ellipsis">
-                                        <span class="glyphicon glyphicon-folder-close"></span>
-                                        Subfolder
-                                    </div>
-                                    <div class="col-sm-4 media-list-item-field ellipsis"></div>
-                                    <div class="col-sm-1 media-list-item-field text-right"></div>
-                                    <div class="col-sm-3 media-list-item-field"></div>
-                                </div>
-                                <div class="row media-list-item" ng-class="" ng-click="">
-                                    <div class="col-sm-4 media-list-item-field ellipsis">
-                                        <span class="glyphicon glyphicon-folder-close"></span>
-                                        Second dir
-                                    </div>
-                                    <div class="col-sm-4 media-list-item-field ellipsis"></div>
-                                    <div class="col-sm-1 media-list-item-field text-right"></div>
-                                    <div class="col-sm-3 media-list-item-field"></div>
-                                </div>
-                                <div class="row media-list-item" ng-class="" ng-click="">
-                                    <div class="col-sm-4 media-list-item-field ellipsis">
-                                        <span class="glyphicon glyphicon-folder-close"></span>
-                                        Third dir
-                                    </div>
-                                    <div class="col-sm-4 media-list-item-field ellipsis"></div>
-                                    <div class="col-sm-1 media-list-item-field text-right"></div>
-                                    <div class="col-sm-3 media-list-item-field"></div>
-                                </div>
-                                <rame-media-item ng-repeat="item in vm.lists[0].items" media="item" on-click="vm.selectMedia(item)" add-to-default="vm.addToDefault(item)"></rame-media-item>
-                            </div>
-
-                        </uib-slide>
-                        <uib-slide active="vm.secondSlideActive" template-url="rameplayer/media/carousel/slide.html">
-                            <div class="media-list">
-                                <div class="row hidden-xs media-list-header">
-                                    <div class="col-sm-4">File</div>
-                                    <div class="col-sm-4">Title</div>
-                                    <div class="col-sm-1 text-right">Length</div>
-                                    <div class="col-sm-3">Date</div>
-                                </div>
-                                <rame-media-item ng-repeat="item in vm.lists[0].items" media="item" on-click="vm.selectMedia(item)" add-to-default="vm.addToDefault(item)"></rame-media-item>
-                            </div>
-                        </uib-slide>
-                    </uib-carousel>
-                </div> <!-- carousel -->
+            <uib-tab ng-repeat="rootChild in vm.rootChildren">
+                <tab-heading translate>{{ rootChild.info.title }}</tab-heading>
+                <rame-media-list list="rootChild"></rame-media-list>
             </uib-tab>
 
-            <uib-tab heading="PLAYLISTS">
+            <uib-tab ng-if="0">
+                <tab-heading translate>Playlists</tab-heading>
                 <div class="row" ng-controller="PlaylistsController as vm">
                     <div class="col-sm-12">
                         <uib-accordion close-others="false">
@@ -121,43 +52,7 @@
                 <div ng-include="'rameplayer/settings/settings.html'" ng-cloak>
                 
                 </div>
-                <!-- <div class="row">
-                    <div class="col-md-6">
-                        <form>
-                            <div class="form-group">
-                                <label for="language">Language</label>
-                                <select name="language" id="language" class="form-control">
-                                    <option>English</option>
-                                    <option>Latviešu</option>
-                                    <option>Lietuvių kalba</option>
-                                    <option>suomi</option>
-                                    <option>eesti</option>
-                                    <option>汉语</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="hostname">Hostname</label>
-                                <input type="text" name="hostname" id="hostname" class="form-control" />
-                            </div>
-                            <div class="form-group">
-                                <label>DHCP Server</label>
-                                <br>
-                                <input checked data-toggle="toggle" type="checkbox" name="dhcp" id="dhcp-server">
-                            </div>
-                            <div class="form-group">
-                                <label>IP</label>
-                                <input type="text" name="ip" id="ip" class="form-control"/>
-                            </div>
-                            <div class="form-group">
-                                <label>Volume</label>
-                                <input type="range" name="volumne" id="volume" class="form-control"/>
-                            </div>
-                            <button type="submit" class="btn btn-default">Save</button>
-                        </form>
-                    </div> .col
-                </div> .row
-             -->
-             </uib-tab>
+            </uib-tab>
         </uib-tabset>
     </div> <!-- .container -->
 
@@ -191,12 +86,14 @@
 
     <!-- core module -->
     <script src="rameplayer/core/core.module.js"></script>
+    <script src="rameplayer/core/constants.js"></script>
     <script src="rameplayer/core/bootstrap.js"></script>
     <script src="rameplayer/core/config.js"></script>
     <script src="rameplayer/core/dataservice.js"></script>
-    <!-- <script src="rameplayer/core/playerservice.js"></script> -->
     <script src="rameplayer/core/simulation-dataservice.js"></script>
     <script src="rameplayer/core/statusservice.js"></script>
+    <script src="rameplayer/core/list-service.js"></script>
+    <script src="rameplayer/core/list-resource.js"></script>
 
     <!-- playback module -->
     <script src="rameplayer/player/player.module.js"></script>
@@ -206,6 +103,7 @@
     <!-- media module -->
     <script src="rameplayer/media/media.module.js"></script>
     <script src="rameplayer/media/media.js"></script>
+    <script src="rameplayer/media/media-list.directive.js"></script>
     <script src="rameplayer/media/media-item.directive.js"></script>
 
     <!-- playlists module -->

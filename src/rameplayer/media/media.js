@@ -5,50 +5,39 @@
         .module('rameplayer.media')
         .controller('MediaController', MediaController);
 
-    MediaController.$inject = ['$scope', '$log', 'dataService', 'statusService'];
+    MediaController.$inject = ['$rootScope', '$scope', '$log', 'dataService', 'statusService', 'listService', 'ItemTypes', 'ListIds'];
 
-    function MediaController($scope, $log, dataService, statusService) {
+    function MediaController($rootScope, $scope, $log, dataService, statusService, listService, ItemTypes, ListIds) {
         var vm = this;
 
+        vm.rootChildren = [];
+        vm.debugLists = $rootScope.lists;
         vm.lists = [];
         vm.selectedMedia = undefined;
-        vm.selectMedia = selectMedia;
         vm.playerStatus = statusService.status;
-        vm.addToDefault = addToDefault;
         statusService.provideFinder(findItem);
 
-        vm.interval = 0;
-        vm.noWrap = true;
-        vm.firstSlideActive = true;
-        vm.secondSlideActive = false;
-
-        vm.breadcrumbs = [
-            'USB'
-        ];
-        vm.brSelect = function(index) {
-            if (index === 0 && vm.secondSlideActive) {
-                vm.secondSlideActive = false;
-                vm.firstSlideActive = true;
-                vm.breadcrumbs = [ 'USB '];
-            }
-        };
-        vm.previ = function() {
-            vm.secondSlideActive = false;
-            vm.firstSlideActive = true;
-            vm.breadcrumbs.slice(1, 1);
-        };
-        vm.subi = function() {
-            vm.firstSlideActive = false;
-            vm.secondSlideActive = true;
-            vm.breadcrumbs.push('Subfolder');
-        };
-
-        $scope.$watchCollection('vm.playerStatus', function(current, original) {
-            // update vm.lists if newer versions available
-            if (!original || !original.lists || current.lists.modified > original.lists.modified) {
-                loadLists();
+        $rootScope.$watchCollection('lists', function(lists) {
+            $log.info('$rootScope.lists changed', lists);
+            if (lists['root']) {
+                lists['root'].$promise.then(function(rootList) {
+                    updateRootChildren();
+                });
             }
         });
+
+        function updateRootChildren() {
+            var rootList = $rootScope.lists['root'];
+            var rootChildren = [];
+            for (var i = 0; i < rootList.items.length; i++) {
+                if (rootList.items[i].info.type === ItemTypes.LIST) {
+                    var targetId = rootList.items[i].targetId;
+                    var rootChild = $rootScope.lists[targetId] || listService.add(targetId);
+                    rootChildren.push(rootChild);
+                }
+            }
+            vm.rootChildren = rootChildren;
+        }
 
         function loadLists() {
             return getMedias().then(function() {
@@ -61,14 +50,6 @@
                 vm.lists = data.data;
                 return vm.lists;
             });
-        }
-
-        function selectMedia(mediaItem) {
-            dataService.setCursor(mediaItem.id);
-        }
-
-        function addToDefault(item) {
-            dataService.addToDefaultPlaylist(item);
         }
 
         function findItem(id) {
