@@ -16,20 +16,19 @@
         .module('rameplayer.core')
         .factory('listService', listService);
 
-    listService.$inject = ['$rootScope', '$log', 'dataService', 'statusService', 'ItemTypes'];
+    listService.$inject = ['$rootScope', '$log', 'dataService', 'ItemTypes', 'ListIds'];
 
     /**
      * @namespace ListService
      * @desc Application wide service for lists
      * @memberof Factories
      */
-    function listService($rootScope, $log, dataService, statusService, ItemTypes) {
+    function listService($rootScope, $log, dataService, ItemTypes, ListIds) {
 
         // data holder for flattened list of all List resource objects
         // key is list targetId and value is List instance
         $rootScope.lists = {};
 
-        var rootListId = 'root';
         var service = {
             add: add,
             refresh: refresh,
@@ -37,7 +36,7 @@
         }
 
         // begin by fetching root list
-        var rootList = add(rootListId);
+        var rootList = add(ListIds.ROOT);
 
         // then fetch all children for root
         rootList.$promise.then(function() {
@@ -52,6 +51,7 @@
 
         function add(targetId) {
             if ($rootScope.lists[targetId] !== undefined) {
+                // already added
                 return $rootScope.lists[targetId];
             }
             var list = dataService.getList(targetId);
@@ -59,8 +59,12 @@
             return list;
         }
 
-        function refresh(id) {
-            return add(id);
+        function refresh(targetId) {
+            var list = dataService.getList(targetId);
+            list.$promise.then(function() {
+                $rootScope.lists[targetId] = list;
+            });
+            return list;
         }
 
         function remove(id) {

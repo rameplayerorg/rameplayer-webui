@@ -11,8 +11,7 @@
         var vm = this;
 
         vm.rootChildren = [];
-        vm.debugLists = $rootScope.lists;
-        vm.lists = [];
+        vm.lists = $rootScope.lists;
         vm.selectedMedia = undefined;
         vm.playerStatus = statusService.status;
         statusService.provideFinder(findItem);
@@ -33,7 +32,7 @@
                 if (rootList.items[i].info.type === ItemTypes.LIST) {
                     var targetId = rootList.items[i].targetId;
                     var rootChild = $rootScope.lists[targetId] || listService.add(targetId);
-                    rootChildren.push(rootChild);
+                    rootChildren.push(targetId);
                 }
             }
             vm.rootChildren = rootChildren;

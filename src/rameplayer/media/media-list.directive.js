@@ -19,7 +19,7 @@
             link: link,
             restrict: 'E',
             scope: {
-                'list': '=' // take media from attribute
+                'targetId': '='
             },
             templateUrl: 'rameplayer/media/media-list.html'
         };
@@ -27,7 +27,7 @@
 
         function link(scope, element, attrs) {
             scope.lists = $rootScope.lists;
-            scope.slides = [ { active: true, list: scope.list } ];
+            scope.slides = [ { active: true, targetId: scope.targetId } ];
 
             // Add empty placeholder slides, it's faster when
             // they are ready. More slides will be created in
@@ -35,8 +35,9 @@
             addEmptySlides(4);
 
             scope.breadcrumbs = [];
-            scope.list.$promise.then(function() {
-                scope.breadcrumbs.push(scope.list.info.title);
+            $rootScope.lists[scope.targetId].$promise.then(function(list) {
+                scope.breadCrumbsEnabled = $rootScope.lists[scope.targetId].hasChildLists();
+                scope.breadcrumbs.push(list.info.title);
             });
 
             scope.selectMedia = selectMedia;
@@ -53,7 +54,7 @@
                 dataService.addToDefaultPlaylist(item);
             }
 
-            function addSlide(list) {
+            function addSlide(targetId) {
                 var index = 0;
                 for (var i = 0; i < scope.slides.length; i++) {
                     if (scope.slides[i].active) {
@@ -62,7 +63,7 @@
                     }
                 }
                 scope.slides[index].active = true;
-                scope.slides[index].list = list;
+                scope.slides[index].targetId = targetId;
 
                 // add more placeholders
                 if (index + 1 == scope.slides.length) {
@@ -72,13 +73,13 @@
 
             function addEmptySlides(amount) {
                 for (var i = 0; i < amount; i++) {
-                    scope.slides.push({ active: false, list: null });
+                    scope.slides.push({ active: false, targetId: null });
                 }
             }
 
             function openList(item) {
                 var list = $rootScope[item.targetId] || listService.add(item.targetId);
-                addSlide(list);
+                addSlide(item.targetId);
                 scope.breadcrumbs.push(item.info.title);
             }
 

@@ -16,14 +16,14 @@
         .module('rameplayer.core')
         .factory('statusService', statusService);
 
-    statusService.$inject = ['$log', '$interval', 'dataService', 'settings'];
+    statusService.$inject = ['$rootScope', '$log', '$interval', 'dataService', 'settings', 'listService'];
 
     /**
      * @namespace StatusService
      * @desc Application wide service for player status
      * @memberof Factories
      */
-    function statusService($log, $interval, dataService, settings) {
+    function statusService($rootScope, $log, $interval, dataService, settings, listService) {
         var status = {
             position: 0
         };
@@ -56,7 +56,8 @@
         }
 
         function pollStatus() {
-            dataService.getStatus().then(function(response) {
+            dataService.getStatus({ lists: Object.keys($rootScope.lists) })
+                .then(function(response) {
                 var newStatus = response.data;
                 if (newStatus.cursor && newStatus.cursor.id) {
                     // find item details from UI lists
@@ -68,12 +69,36 @@
                 // notify only when status changes
                 if (!angular.equals(newStatus, status)) {
                     angular.copy(newStatus, status);
+                    syncLists();
                 }
             }, function(errorResponse) {
                 angular.forEach(pollerErrorCallbacks, function(callback) {
                     callback(errorResponse);
                 });
             });
+        }
+
+        function syncLists() {
+            var i;
+            var oldIds = Object.keys($rootScope.lists);
+            var newIds = Object.keys(status.listsRefreshed);
+            for (i = 0; i < newIds.length; i++) {
+                var targetId = newIds[i];
+                if (oldIds.indexOf(targetId) == -1) {
+                    // new list
+                    listService.add(targetId);
+                }
+                else if (status.listsRefreshed[targetId] !== $rootScope.lists[targetId].refreshed) {
+                    // refresh
+                    listService.refresh(targetId);
+                }
+            }
+            // remove lists from $rootScope
+            for (i = 0; i < oldIds.length; i++) {
+                if (newIds.indexOf(oldIds[i]) == -1) {
+                    listService.remove(oldIds[i]);
+                }
+            }
         }
 
         function provideFinder(func) {

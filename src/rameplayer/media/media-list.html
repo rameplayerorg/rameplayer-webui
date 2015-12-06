@@ -1,4 +1,4 @@
-<ol class="breadcrumb" ng-if="list.hasChildLists()">
+<ol class="breadcrumb" ng-if="breadCrumbsEnabled">
     <li ng-repeat="breadcrumb in breadcrumbs" ng-class="{ 'last': $last }" ng-switch on="$last">
         <span ng-switch-when="true">{{ breadcrumb }}</span>
         <a href="#" ng-click="activateSlide($index)" ng-switch-default>{{ breadcrumb }}</a>
@@ -14,9 +14,8 @@
                     <div class="col-sm-1 text-right" translate>Length</div>
                     <div class="col-sm-3" translate>Date</div>
                 </div>
-                <rame-media-item ng-repeat="item in slide.list.items" media="item" on-click="selectMedia(item)" add-to-default="addToDefault(item)" on-open-list="openList(item)"></rame-media-item>
+                <rame-media-item ng-repeat="item in lists[slide.targetId].items" media="item" on-click="selectMedia(item)" add-to-default="addToDefault(item)" on-open-list="openList(item)"></rame-media-item>
             </div>
         </uib-slide>
     </uib-carousel>
 </div> <!-- carousel -->
-

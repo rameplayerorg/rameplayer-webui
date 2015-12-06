@@ -16,14 +16,14 @@
         .module('rameplayer.core')
         .factory('dataService', dataService);
 
-    dataService.$inject = ['$log', '$http', '$resource', 'settings', 'simulationDataService'];
+    dataService.$inject = ['$log', '$http', '$resource', 'settings', 'simulationDataService', 'List'];
 
     /**
      * @namespace DataService
      * @desc Application wide service for REST API
      * @memberof Factories
      */
-    function dataService($log, $http, $resource, settings, simulationDataService) {
+    function dataService($log, $http, $resource, settings, simulationDataService, List) {
 
         if (settings.development && settings.development.enabled &&
             settings.development.serverSimulation &&
@@ -44,7 +44,6 @@
         }
 
         var listUrl = urls.lists + '/:targetId';
-        var List = $resource(listUrl, { targetId: '@id' });
 
         var playlistUrl = urls.playlists + '/:playlistId';
         var playlistItemUrl = playlistUrl + '/items/:itemId';
@@ -82,8 +81,8 @@
 
         return service;
 
-        function getStatus() {
-            return $http.get(urls['status']);
+        function getStatus(payload) {
+            return $http.get(urls['status'], payload);
         }
 
         function setCursor(itemId) {

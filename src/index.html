@@ -27,9 +27,9 @@
 <body>
     <div class="container" ng-controller="MediaController as vm" ng-cloak>
         <uib-tabset type="pills">
-            <uib-tab ng-repeat="rootChild in vm.rootChildren">
-                <tab-heading translate>{{ rootChild.info.title }}</tab-heading>
-                <rame-media-list list="rootChild"></rame-media-list>
+            <uib-tab ng-repeat="targetId in vm.rootChildren">
+                <tab-heading translate>{{ vm.lists[targetId].info.title }}</tab-heading>
+                <rame-media-list target-id="targetId"></rame-media-list>
             </uib-tab>
 
             <uib-tab ng-if="0">

@@ -16,7 +16,7 @@
         .module('rameplayer.core')
         .factory('simulationDataService', simulationDataService);
 
-    simulationDataService.$inject = ['$log', '$http', '$resource', 'settings',
+    simulationDataService.$inject = ['$rootScope', '$log', '$http', '$resource', 'settings',
         '$timeout', '$interval', 'uuid', 'List'];
 
     /**
@@ -24,7 +24,7 @@
      * @desc Application wide service for REST API
      * @memberof Factories
      */
-    function simulationDataService($log, $http, $resource, settings, $timeout, $interval, uuid, List) {
+    function simulationDataService($rootScope, $log, $http, $resource, settings, $timeout, $interval, uuid, List) {
 
         // initial internal data
         // corresponds server data in production
@@ -35,11 +35,7 @@
                 cursor: {
                     id: 'af8408b7-7474-4d99-99c8-2bb9fc524f0f'
                 },
-                playlists: {
-                    modified: 0
-                },
-                lists: {
-                    modified: 0
+                listsRefreshed: {
                 }
             },
             defaultPlaylist: {
@@ -77,9 +73,9 @@
 
         return service;
 
-        function getStatus() {
+        function getStatus(payload) {
             return $timeout(function() {
-                //$log.info('getStatus', server.status);
+                //$log.info('getStatus', server.status, payload);
                 return { data: server.status };
             }, delay);
         }
@@ -97,7 +93,11 @@
         }
 
         function getList(id) {
-            return List.get({ targetId: id });
+            var list = List.get({ targetId: id });
+            list.$promise.then(function(list) {
+                server.status.listsRefreshed[id] = list.refreshed || '';
+            });
+            return list;
         }
 
         function getDefaultPlaylist() {
