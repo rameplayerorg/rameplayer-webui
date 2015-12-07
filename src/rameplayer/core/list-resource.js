@@ -25,7 +25,8 @@
      */
     function List($log, $resource, $rootScope, settings, ItemTypes) {
 
-        var url = settings.urls.lists + '/:targetId';
+        var url = location.protocol + '//' + location.hostname +
+                    ':' + settings.serverPort + settings.urls.lists + '/:targetId';
         if (settings.development && settings.development.enabled &&
             settings.development.serverSimulation &&
             settings.development.serverSimulation.enabled) {
