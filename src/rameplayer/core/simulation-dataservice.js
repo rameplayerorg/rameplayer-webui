@@ -30,10 +30,10 @@
         // corresponds server data in production
         var server = {
             status: {
-                state: 'stopped',
-                position: 0,
+                state: 'buffering',
+                position: 5,
                 cursor: {
-                    id: 'af8408b7-7474-4d99-99c8-2bb9fc524f0f'
+                    id: 'sda1:%2f02_pk_FI_002_r720P%2emp4'
                 },
                 listsRefreshed: {
                 }
@@ -82,7 +82,7 @@
 
         function setCursor(itemId) {
             return $timeout(function() {
-                if (server.status.state !== 'playing') {
+                if (server.status.state !== 'playing' && server.status.state !== 'buffering') {
                     server.status.cursor.id = itemId;
                     $log.info('Cursor set to', itemId);
                 }
@@ -258,10 +258,6 @@
                     }
                 }
             }
-        }
-
-        function getListParent() {
-            $log.info('getParent()', this);
         }
     }
 })();

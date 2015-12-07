@@ -1,5 +1,5 @@
 # RamePlayer WebUI
-Web UI for Rameplayer
+Angular Web UI for RamePlayer
 
 [![Build Status](https://travis-ci.org/rameplayerorg/rameplayer-webui.svg?branch=master)](https://travis-ci.org/rameplayerorg/rameplayer-webui)
 
