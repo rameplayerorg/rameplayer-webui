@@ -165,7 +165,7 @@
                 server.status.state = 'playing';
                 playingPromise = $interval(function() {
                     server.status.position += 1.0;
-                    if (server.status.position >= server.status.cursor.item.duration) {
+                    if (server.status.position >= server.status.cursor.item.info.duration) {
                         serverStop();
                         $log.info('Playing ended');
                     }

@@ -14,7 +14,6 @@
         vm.lists = $rootScope.lists;
         vm.selectedMedia = undefined;
         vm.playerStatus = statusService.status;
-        statusService.provideFinder(findItem);
 
         $rootScope.$watchCollection('lists', function(lists) {
             $log.info('$rootScope.lists changed', lists);
@@ -49,21 +48,6 @@
                 vm.lists = data.data;
                 return vm.lists;
             });
-        }
-
-        function findItem(id) {
-            for (var i = 0; i < vm.lists.length; i++) {
-                for (var j = 0; j < vm.lists[i].items.length; j++) {
-                    if (id === vm.lists[i].items[j].id) {
-                        return {
-                            parents: [ vm.lists[i] ],
-                            item: vm.lists[i].items[j]
-                        };
-                    }
-                }
-            }
-            // not found
-            return null;
         }
     }
 })();

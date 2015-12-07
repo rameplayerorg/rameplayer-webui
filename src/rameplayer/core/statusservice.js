@@ -38,9 +38,7 @@
                 error:     'error'
             },
             status:            status,
-            onPollerError:     onPollerError,
-            provideFinder:     provideFinder,
-            findItem:          findItem
+            onPollerError:     onPollerError
         };
 
         startStatusPoller();
@@ -63,7 +61,9 @@
                     // find item details from UI lists
                     var item = findItem(newStatus.cursor.id);
                     if (item) {
-                        angular.extend(newStatus.cursor, item);
+                        newStatus.cursor.item = item;
+                        //angular.extend(newStatus.cursor, item);
+                        $log.info(newStatus);
                     }
                 }
                 // notify only when status changes
@@ -101,18 +101,18 @@
             }
         }
 
-        function provideFinder(func) {
-            itemFinders.push(func);
-        }
-
         function findItem(id) {
-            for (var i = 0; i < itemFinders.length; i++) {
-                var item = itemFinders[i](id);
-                if (item) {
-                    return item;
+            $log.info('FIND ITEM', id);
+            for (var targetId in $rootScope.lists) {
+                for (var i = 0; i < $rootScope.lists[targetId].items.length; i++) {
+                    if (id === $rootScope.lists[targetId].items[i].id) {
+                        $log.info('FOUND');
+                        return $rootScope.lists[targetId].items[i];
+                    }
                 }
             }
             // not found
+            $log.info('NOT FOUND');
             return null;
         }
     }

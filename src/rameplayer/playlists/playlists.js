@@ -18,7 +18,6 @@
         vm.removeMedia = removeMedia;
         vm.playlistSorted = playlistSorted;
         vm.saveAs = saveAs;
-        statusService.provideFinder(findItem);
 
         $scope.$watchCollection('vm.playerStatus', function(current, original) {
             // update playlists if newer versions available
@@ -79,30 +78,6 @@
 
         function playlistSorted(playlist, item, oldIndex, newIndex) {
             dataService.movePlaylistItem(playlist, item, oldIndex, newIndex);
-        }
-
-        function findItem(id) {
-            for (var i = 0; i < vm.defaultPlaylist.items.length; i++) {
-                if (id === vm.defaultPlaylist.items[i].id) {
-                    return {
-                        parents: [ vm.defaultPlaylist ],
-                        item: vm.defaultPlaylist.items[i]
-                    };
-                }
-            }
-
-            for (i = 0; i < vm.playlists.length; i++) {
-                for (var j = 0; j < vm.playlists[i].items.length; j++) {
-                    if (id === vm.playlists[i].items[j].id) {
-                        return {
-                            parents: [ vm.playlists[i] ],
-                            item: vm.playlists[i].items[j]
-                        };
-                    }
-                }
-            }
-            // not found
-            return null;
         }
     }
 })();
