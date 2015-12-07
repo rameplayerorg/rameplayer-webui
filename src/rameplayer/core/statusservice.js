@@ -88,7 +88,7 @@
                     // new list
                     listService.add(targetId);
                 }
-                else if (status.listsRefreshed[targetId] !== $rootScope.lists[targetId].refreshed) {
+                else if (status.listsRefreshed[targetId] !== $rootScope.lists[targetId].info.refreshed) {
                     // refresh
                     listService.refresh(targetId);
                 }

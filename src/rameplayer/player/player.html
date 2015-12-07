@@ -7,7 +7,7 @@
         </div>
         <div class="col-xs-10">
             <div class="time-slider">
-                <input id="time-slider" type="range" max="{{ vm.playerStatus.cursor.item.duration }}" min="0" step="1" name="range" ng-model="vm.timeSlider" ng-change="vm.seek()" class="timeSlider"></input>
+                <input id="time-slider" type="range" max="{{ vm.playerStatus.duration }}" min="0" step="1" name="range" ng-model="vm.timeSlider" ng-change="vm.seek()" class="timeSlider"></input>
             </div>
         </div>
     </div> <!-- .row -->
@@ -21,8 +21,8 @@
         </div>
         <div class="col-xs-6 text-center">
             <div ng-show="vm.playerStatus.cursor.item">
-                {{ vm.playerStatus.position | playerTime:vm.playerStatus.cursor.item.duration }} /
-                {{ vm.playerStatus.cursor.item.info.duration | playerTime }}
+                {{ vm.playerStatus.position | playerTime:vm.playerStatus.duration }} /
+                {{ vm.playerStatus.duration | playerTime }}
                 &ndash;
                 {{ vm.playerStatus.cursor.item.info.filename }}
             </div>

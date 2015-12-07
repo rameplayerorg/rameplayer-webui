@@ -163,9 +163,10 @@
             return $timeout(function() {
                 $log.info('Playing');
                 server.status.state = 'playing';
+                server.status.duration = server.status.cursor.item.info.duration;
                 playingPromise = $interval(function() {
                     server.status.position += 1.0;
-                    if (server.status.position >= server.status.cursor.item.info.duration) {
+                    if (server.status.position >= server.status.duration) {
                         serverStop();
                         $log.info('Playing ended');
                     }
