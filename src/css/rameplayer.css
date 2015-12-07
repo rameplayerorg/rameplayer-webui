@@ -38,6 +38,7 @@ body {
 .btn { border-radius: 0; }
 .nav-pills a, .nav-tabs a { border-radius: 0 !important; }
 .form-control { border-radius: 0; }
+.breadcrumb { border-radius: 0; }
 
 .nav-pills > li a {
   font-weight: 700;
@@ -53,3 +54,9 @@ body {
 
 /* Cursor in Bootstrap Carousel */
 .carousel { cursor: auto !important; }
+
+/* Bug when using Bootstrap breadcrumbs with Angular ng-repeat, needs
+ * a white space between <li> elements. */
+.breadcrumb > li+li:before {
+  content: "\00a0/\00a0";
+}
