@@ -7,6 +7,7 @@ var del = require('del');
 var merge = require('merge-stream');
 var paths = require('./gulp.config.json');
 var plugins = require('gulp-load-plugins')();
+var exec = require('child_process').exec;
 
 /**
  * List the available gulp tasks
@@ -182,11 +183,24 @@ gulp.task('rev-and-inject', ['js', 'vendorjs', 'css', 'vendorcss'], function() {
         .pipe(gulp.dest(paths.build)); // write rev-manifest.json
 });
 
+gulp.task('inject-version', ['rev-and-inject'], function(cb) {
+    exec('git describe --tags', function(err, stdout, stderr) {
+        stdout = stdout.replace(/^\s+|\s+$/g, '');
+        var indexHtml = paths.build + 'index.html';
+        return gulp
+            .src(indexHtml)
+            .pipe(plugins.replace('development', stdout))
+            .pipe(gulp.dest(paths.build));
+    });
+    return gulp
+        .src('');
+});
+
 /**
  * Build the optimized application
  * @return {Stream}
  */
-gulp.task('build', ['rev-and-inject', 'images', 'fonts', 'stubs'], function() {
+gulp.task('build', ['inject-version', 'images', 'fonts', 'stubs'], function() {
     return gulp
         .src('')
         .pipe(plugins.notify({

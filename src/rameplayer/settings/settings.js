@@ -7,10 +7,10 @@
         .controller('SettingsController', SettingsController);
 
     SettingsController.$inject = [
-        '$log', '$http', 'dataService', 'settings', '$translate'
+        '$log', '$http', 'dataService', 'settings', '$translate', 'uiVersion'
     ];
 
-    function SettingsController($log, $http, dataService, settings, $translate) {
+    function SettingsController($log, $http, dataService, settings, $translate, uiVersion) {
         
         var $injector = angular.injector();
 		        
@@ -33,6 +33,7 @@
 		vm.saveSettings = saveSettings;
 
 		vm.hdmishaked = "shaky";
+                vm.uiVersion = uiVersion;
 		//$log.info('test');
         
 //        var settingsResource = $resource(vm.settingsUrl);
