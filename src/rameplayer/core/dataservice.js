@@ -82,7 +82,7 @@
         return service;
 
         function getStatus(payload) {
-            return $http.get(urls['status'], payload);
+            return $http.post(urls['status'], payload);
         }
 
         function setCursor(itemId) {
