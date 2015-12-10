@@ -10,7 +10,7 @@
         '$log', '$http', 'dataService', 'settings', '$translate', 'toastr', 'uiVersion'
     ];
 
-    function SettingsController($log, $http, dataService, settings, $translate, 'toastr', uiVersion) {
+    function SettingsController($log, $http, dataService, settings, $translate, toastr, uiVersion) {
 
         var $injector = angular.injector();
 
