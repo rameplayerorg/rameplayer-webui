@@ -50,6 +50,7 @@
             $translate.use(settings.language);
             settings.$save(function() {
                 vm.savingStatus = "saved";
+                toastr.success('Settings saved.');
             });
         }
     }
