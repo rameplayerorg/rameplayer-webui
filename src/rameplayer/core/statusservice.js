@@ -16,14 +16,14 @@
         .module('rameplayer.core')
         .factory('statusService', statusService);
 
-    statusService.$inject = ['$rootScope', '$log', '$interval', 'dataService', 'settings', 'listService'];
+    statusService.$inject = ['$rootScope', '$log', '$interval', '$q', 'dataService', 'settings', 'listService'];
 
     /**
      * @namespace StatusService
      * @desc Application wide service for player status
      * @memberof Factories
      */
-    function statusService($rootScope, $log, $interval, dataService, settings, listService) {
+    function statusService($rootScope, $log, $interval, $q, dataService, settings, listService) {
         var status = {
             position: 0
         };
@@ -77,30 +77,32 @@
         }
 
         function syncLists() {
-            var i;
             var oldIds = Object.keys($rootScope.lists);
             var newIds = Object.keys(status.listsRefreshed);
-            for (i = 0; i < newIds.length; i++) {
+            var promises = [];
+            for (var i = 0; i < newIds.length; i++) {
                 var targetId = newIds[i];
                 if (oldIds.indexOf(targetId) == -1) {
                     // new list
-                    listService.add(targetId);
+                    var list = listService.add(targetId);
+                    promises.push(list.$promise);
                 }
                 else if ($rootScope.lists[targetId].info && status.listsRefreshed[targetId] !== $rootScope.lists[targetId].info.refreshed) {
                     // refresh
-                    listService.refresh(targetId);
+                    var list = listService.refresh(targetId);
+                    promises.push(list.$promise);
                 }
             }
 
-            // TODO: now we keep all lists in memory. Change this so
-            // that only lists are removed which are not referenced in
-            // other $rootScope.lists[list].items.
-
-            //for (i = 0; i < oldIds.length; i++) {
-            //    if (newIds.indexOf(oldIds[i]) == -1) {
-            //        listService.remove(oldIds[i]);
-            //    }
-            //}
+            // remove lists from $rootScope only after all lists are
+            // updated so no old items are referring to them
+            $q.all(promises).then(function() {
+                for (var i = 0; i < oldIds.length; i++) {
+                    if (newIds.indexOf(oldIds[i]) == -1) {
+                        listService.remove(oldIds[i]);
+                    }
+                }
+            });
         }
 
         function findCursorItem(cursor) {
