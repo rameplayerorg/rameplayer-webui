@@ -9,6 +9,7 @@
     function translation($translateProvider, settings) {
         $translateProvider.translations('en', {
             Settings: 'Settings',
+            Name: 'Name',
             Filename: 'Filename',
             Title: 'Title',
             Length: 'Length',
@@ -31,9 +32,10 @@
         });
         $translateProvider.translations('fi', {
             Settings: 'Asetukset',
+            Name: 'Nimi',
             Filename: 'Tiedosto',
             Title: 'Otsikko',
-            Length: 'Pituus',
+            Length: 'Kesto',
             'Date': 'Pvm',
             'Selected': 'Valittu',
             Save: 'Tallenna',
