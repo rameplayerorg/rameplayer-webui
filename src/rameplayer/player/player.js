@@ -46,7 +46,8 @@
         }
 
         function toggleStop() {
-            if (vm.playerStatus.state === statusService.states.playing) {
+            if (vm.playerStatus.state === statusService.states.playing ||
+                vm.playerStatus.state === statusService.states.buffering) {
                 stop();
             }
             else {
