@@ -57,13 +57,6 @@
             dataService.getStatus({ lists: Object.keys($rootScope.lists) })
                 .then(function(response) {
                 var newStatus = response.data;
-                if (newStatus.cursor && newStatus.cursor.id) {
-                    // find item details from UI lists
-                    var item = findCursorItem(newStatus.cursor);
-                    if (item) {
-                        newStatus.cursor.item = item;
-                    }
-                }
                 // notify only when status changes
                 if (!angular.equals(newStatus, status)) {
                     angular.copy(newStatus, status);
@@ -103,20 +96,6 @@
                     }
                 }
             });
-        }
-
-        function findCursorItem(cursor) {
-            for (var targetId in $rootScope.lists) {
-                if ($rootScope.lists[targetId].items) {
-                    for (var i = 0; i < $rootScope.lists[targetId].items.length; i++) {
-                        if (cursor.id === $rootScope.lists[targetId].items[i].id) {
-                            return $rootScope.lists[targetId].items[i];
-                        }
-                    }
-                }
-            }
-            // not found
-            return null;
         }
     }
 })();

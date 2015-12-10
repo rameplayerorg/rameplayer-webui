@@ -20,13 +20,13 @@
 
         </div>
         <div class="col-xs-6 text-center">
-            <div ng-show="vm.playerStatus.cursor.item">
+            <div ng-show="vm.cursorItem">
                 {{ vm.playerStatus.position | playerTime:vm.playerStatus.duration }}
                 <span ng-if="vm.playerStatus.duration">
                     / {{ vm.playerStatus.duration | playerTime }}
                 </span>
                 &ndash;
-                {{ vm.playerStatus.cursor.item.info.filename }}
+                {{ vm.cursorItem.info.filename }}
             </div>
             <div ng-show="vm.statusError">
                 <img src="images/spinner1_16_bkg248.gif" alt="">
