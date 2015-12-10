@@ -38,7 +38,9 @@
          * @memberOf Filters.PlayerTime
          */
         function playerTimeFilter(seconds, measure) {
-            seconds = seconds ? seconds : 0;
+            if (seconds === undefined) {
+                return '';
+            }
             measure = measure ? measure : seconds;
             seconds = Math.floor(seconds);
             if (measure >= 3600) {

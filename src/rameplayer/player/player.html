@@ -21,8 +21,10 @@
         </div>
         <div class="col-xs-6 text-center">
             <div ng-show="vm.playerStatus.cursor.item">
-                {{ vm.playerStatus.position | playerTime:vm.playerStatus.duration }} /
-                {{ vm.playerStatus.duration | playerTime }}
+                {{ vm.playerStatus.position | playerTime:vm.playerStatus.duration }}
+                <span ng-if="vm.playerStatus.duration">
+                    / {{ vm.playerStatus.duration | playerTime }}
+                </span>
                 &ndash;
                 {{ vm.playerStatus.cursor.item.info.filename }}
             </div>
