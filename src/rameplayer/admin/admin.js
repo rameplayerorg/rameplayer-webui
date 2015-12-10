@@ -61,10 +61,12 @@
             vm.dnsServerIp = validateIP(vm.dnsServerIpOcts);
             vm.dnsAlternativeServerIp = validateIP(vm.dnsAlternativeServerIpOcts);
             vm.subnetMask = validateIP(vm.subnetMaskOcts);
-            vm.savingStatus = "saved";
-            //console.log("fdjissdfafgawtd");
-            toastr.error('savesettingserrortest' + $rootScope.rameExceptions, $rootScope.rameException);
-            throw new Error('testerror');            
+            //vm.savingStatus = "saved";
+            //console.log("saveSettings");
+            // TODO: move toastr info/error to save result 
+            toastr.success('Settings saved.', '(TEST notification)');
+            //toastr.error('saveSettings: ' + $rootScope.rameExceptions, $rootScope.rameException);
+            throw new Error('testerror');
         }
 
         // IP address string regexp

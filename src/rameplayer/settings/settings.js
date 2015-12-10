@@ -32,18 +32,13 @@
 		vm.savingStatus = "loaded";
 		vm.saveSettings = saveSettings;
 
-		vm.hdmishaked = "shaky";
-		//$log.info('test');
-        
-//        var settingsResource = $resource(vm.settingsUrl);
-//        settingsResource.stripTrailingSlashes = false;
-
+		//vm.hdmishaked = "-";
         //$log.info('test:' + settingsUrl);
         
         function resetHdmiInterface() {
-            toastr.warning('Reseting HDMI');
-            vm.hdmishaked = "painettu";
-            //vm.hdmishaked = settings;
+            // TODO: send reset request to backend
+            toastr.warning('Resetting HDMI', '(TEST notification)');
+            //vm.hdmishaked = "shaked";
         }
         
         function slaveDelay() {

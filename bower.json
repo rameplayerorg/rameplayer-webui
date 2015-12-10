@@ -15,10 +15,11 @@
         "angular-bootstrap": "~0.14.3",
         "angular-resource": "~1.4.7",
         "angular-sanitize": "~1.4.7",
-        "angular-translate": "~2.8.1",
+        "angular-toastr": "~1.6.0",
+        "angular-translate": "~2.8.1",        
         "angular-uuid-generator": "1.0.1",
         "bootstrap": "~3.3.5",
-        "bootstrap-toggle": "~2.2.0",
+        "bootstrap-toggle": "~2.2.0",        
         "Sortable": "~1.4.2"
     },
     "resolutions": {
