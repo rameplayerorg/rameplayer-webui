@@ -59,7 +59,7 @@
                 var newStatus = response.data;
                 if (newStatus.cursor && newStatus.cursor.id) {
                     // find item details from UI lists
-                    var item = findItem(newStatus.cursor.id);
+                    var item = findCursorItem(newStatus.cursor);
                     if (item) {
                         newStatus.cursor.item = item;
                     }
@@ -86,24 +86,30 @@
                     // new list
                     listService.add(targetId);
                 }
-                else if (status.listsRefreshed[targetId] !== $rootScope.lists[targetId].info.refreshed) {
+                else if ($rootScope.lists[targetId].info && status.listsRefreshed[targetId] !== $rootScope.lists[targetId].info.refreshed) {
                     // refresh
                     listService.refresh(targetId);
                 }
             }
-            // remove lists from $rootScope
-            for (i = 0; i < oldIds.length; i++) {
-                if (newIds.indexOf(oldIds[i]) == -1) {
-                    listService.remove(oldIds[i]);
-                }
-            }
+
+            // TODO: now we keep all lists in memory. Change this so
+            // that only lists are removed which are not referenced in
+            // other $rootScope.lists[list].items.
+
+            //for (i = 0; i < oldIds.length; i++) {
+            //    if (newIds.indexOf(oldIds[i]) == -1) {
+            //        listService.remove(oldIds[i]);
+            //    }
+            //}
         }
 
-        function findItem(id) {
+        function findCursorItem(cursor) {
             for (var targetId in $rootScope.lists) {
-                for (var i = 0; i < $rootScope.lists[targetId].items.length; i++) {
-                    if (id === $rootScope.lists[targetId].items[i].id) {
-                        return $rootScope.lists[targetId].items[i];
+                if ($rootScope.lists[targetId].items) {
+                    for (var i = 0; i < $rootScope.lists[targetId].items.length; i++) {
+                        if (cursor.id === $rootScope.lists[targetId].items[i].id) {
+                            return $rootScope.lists[targetId].items[i];
+                        }
                     }
                 }
             }
