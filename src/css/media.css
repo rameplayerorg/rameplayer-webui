@@ -45,6 +45,10 @@
   background-color: #D9EDF7;
 }
 
+.media-list .locked {
+  background-color: #FFF4CC;
+}
+
 .ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -53,7 +57,6 @@
 .media-list-sortable .sorting-handle {
   cursor: move;
   cursor: -webkit-grabbing;
-  color: #CCC;
 }
 
 #play {
@@ -67,4 +70,21 @@
 
 #player-playlist-controls {
     margin-bottom: 5px;
+}
+
+.folders {
+  list-style: outside none none;
+}
+
+.folders > li {
+  width: 120px;
+  display: inline-block;
+  padding: 10px;
+  margin-right: 10px;
+  text-align: center;
+  vertical-align: top;
+}
+
+.icon-folder {
+  font-size: 4em;
 }

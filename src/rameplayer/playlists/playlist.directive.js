@@ -16,6 +16,7 @@
             scope: {
                 // get used playlist from attribute
                 playlist: '=',
+                onMediaClick: '&',
                 removeMedia: '&',
                 onSort: '&',
                 saveAs: '&'
@@ -31,7 +32,12 @@
                 handle: '.sorting-handle',
                 animation: 150,
                 onSort: function(evt) {
-                    scope.onSort({ playlist: scope.playlist, medias: evt.models });
+                    scope.onSort({
+                        playlist: scope.playlist,
+                        item: evt.model,
+                        oldIndex: evt.oldIndex,
+                        newIndex: evt.newIndex
+                    });
                 }
             };
         }

@@ -5,7 +5,9 @@
         .module('rameplayer.media')
         .directive('rameMediaItem', rameMediaItem);
 
-    function rameMediaItem() {
+    rameMediaItem.$inject = ['statusService'];
+
+    function rameMediaItem(statusService) {
         // Usage:
         //
         // Creates:
@@ -15,8 +17,8 @@
             restrict: 'E',
             scope: {
                 'media': '=', // take media from attribute
-                'cursor': '=',
                 'onClick': '&',
+                'onOpenList': '&',
                 'remove': '&',
                 'addToDefault': '&',
                 'moveTo': '&'
@@ -33,6 +35,17 @@
             scope.toggleDropdown = function($event) {
                 scope.isDropdownOpen = !scope.isDropdownOpen;
             };
+            scope.playerStatus = statusService.status;
+            scope.itemClick = itemClick;
+
+            function itemClick() {
+                if (scope.media.info.type === 'directory') {
+                    scope.onOpenList();
+                }
+                else {
+                    scope.onClick();
+                }
+            }
         }
     }
 })();

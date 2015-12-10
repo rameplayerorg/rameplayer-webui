@@ -1,0 +1,21 @@
+{
+    "id": "root",
+    "items": [
+        {
+            "id": "sda1:",
+            "info": {
+                "refreshed": 1449220031300,
+                "size": 8192,
+                "type": "directory",
+                "modified": 0
+            },
+            "targetId": "sda1:"
+        }
+    ],
+    "info": {
+        "id": "root",
+        "title": "Root",
+        "refreshed": 1449220031200,
+        "editable":false
+    }
+}

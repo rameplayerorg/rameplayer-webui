@@ -5,21 +5,37 @@
         .module('rameplayer.media')
         .controller('MediaController', MediaController);
 
-    MediaController.$inject = ['$log', 'dataService', 'playerService'];
+    MediaController.$inject = ['$rootScope', '$scope', '$log', 'dataService', 'statusService', 'listService', 'ItemTypes', 'ListIds'];
 
-    function MediaController($log, dataService, playerService) {
+    function MediaController($rootScope, $scope, $log, dataService, statusService, listService, ItemTypes, ListIds) {
         var vm = this;
 
-        vm.lists = [];
+        vm.rootChildren = [];
+        vm.lists = $rootScope.lists;
         vm.selectedMedia = undefined;
-        vm.selectMedia = selectMedia;
-        vm.playerStatus = playerService.getStatus();
-        vm.addToDefault = addToDefault;
+        vm.playerStatus = statusService.status;
 
-        playerService.onMediaSelected(mediaSelected);
-        playerService.onStatusChanged(statusChanged);
+        $rootScope.$watchCollection('lists', function(lists) {
+            $log.info('$rootScope.lists changed', lists);
+            if (lists['root']) {
+                lists['root'].$promise.then(function(rootList) {
+                    updateRootChildren();
+                });
+            }
+        });
 
-        loadLists();
+        function updateRootChildren() {
+            var rootList = $rootScope.lists['root'];
+            var rootChildren = [];
+            for (var i = 0; i < rootList.items.length; i++) {
+                if (rootList.items[i].info.type === ItemTypes.LIST) {
+                    var targetId = rootList.items[i].targetId;
+                    var rootChild = $rootScope.lists[targetId] || listService.add(targetId);
+                    rootChildren.push(targetId);
+                }
+            }
+            vm.rootChildren = rootChildren;
+        }
 
         function loadLists() {
             return getMedias().then(function() {
@@ -32,22 +48,6 @@
                 vm.lists = data.data;
                 return vm.lists;
             });
-        }
-
-        function selectMedia(mediaItem) {
-            playerService.selectMedia(mediaItem);
-        }
-
-        function mediaSelected(mediaItem) {
-            vm.selectedMedia = mediaItem;
-        }
-
-        function statusChanged(playerStatus) {
-            vm.playerStatus = playerStatus;
-        }
-
-        function addToDefault(item) {
-            playerService.addToPlaylist(item);
         }
     }
 })();

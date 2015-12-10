@@ -1,16 +1,27 @@
 {
     "language": "fi",
+    "serverPort": 8000,
     "urls": {
-        "status": "stubs/status.json",
-        "cursor": "cursor",
-        "lists": "stubs/lists.json",
-        "defaultPlaylist": "stubs/playlists/default.json",
-        "playlists": "stubs/playlists.json",
-        "player": "player"
+        "status": "/status",
+        "cursor": "/cursor",
+        "lists": "/lists",
+        "defaultPlaylist": "/playlists/default",
+        "playlists": "/playlists",
+        "player": "/player"
     },
     "statusPollingInterval": 1000,
     "development": {
         "enabled": true,
-        "simulateStatus": true
+        "serverSimulation": {
+            "enabled": true,
+            "delay": 25,
+            "urls": {
+                "status": "stubs/status.json",
+                "rootList": "stubs/lists/root.json",
+                "lists": "stubs/lists",
+                "defaultPlaylist": "stubs/playlists/default.json",
+                "playlists": "stubs/playlists.json"
+            }
+        }
     }
 }

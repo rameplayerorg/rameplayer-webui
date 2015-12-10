@@ -5,27 +5,27 @@
         .module('rameplayer.playlists')
         .controller('PlaylistsController', PlaylistsController);
 
-    PlaylistsController.$inject = ['$log', 'dataService', 'playerService', '$uibModal', 'uuid'];
+    PlaylistsController.$inject = ['$scope', '$log', 'dataService', 'statusService', '$uibModal', 'uuid'];
 
-    function PlaylistsController($log, dataService, playerService, $uibModal, uuid) {
+    function PlaylistsController($scope, $log, dataService, statusService, $uibModal, uuid) {
         var vm = this;
 
         vm.lists = [];
         vm.playlists = [];
         vm.defaultPlaylist = null;
-        vm.selectedMedia = undefined;
+        vm.playerStatus = statusService.status;
         vm.selectMedia = selectMedia;
-        vm.playerStatus = playerService.getStatus();
         vm.removeMedia = removeMedia;
         vm.playlistSorted = playlistSorted;
         vm.saveAs = saveAs;
 
-        playerService.onMediaSelected(mediaSelected);
-        playerService.onStatusChanged(statusChanged);
-        playerService.onAddToPlaylist(addToPlaylist);
-
-        loadDefaultPlaylist();
-        loadPlaylists();
+        $scope.$watchCollection('vm.playerStatus', function(current, original) {
+            // update playlists if newer versions available
+            if (!original || !original.lists || current.playlists.modified > original.playlists.modified) {
+                loadDefaultPlaylist();
+                loadPlaylists();
+            }
+        });
 
         function loadDefaultPlaylist() {
             vm.defaultPlaylist = dataService.getDefaultPlaylist();
@@ -41,10 +41,6 @@
             $log.info('Playlists loaded', vm.playlists);
         }
 
-        function selectMedia(mediaItem) {
-            playerService.selectMedia(mediaItem);
-        }
-
         function mediaSelected(mediaItem) {
             vm.selectedMedia = mediaItem;
         }
@@ -53,22 +49,13 @@
             vm.playerStatus = playerStatus;
         }
 
-        function addToPlaylist(mediaItem) {
-            vm.defaultPlaylist.medias.push({
-                uri: mediaItem.uri
-            });
-            $log.info('Media added to default playlist', mediaItem);
-            vm.defaultPlaylist.$save();
+        function selectMedia(mediaItem) {
+            dataService.setCursor(mediaItem.id);
         }
 
         function removeMedia(playlist, media) {
             $log.info('Remove media from playlist', playlist, media);
-            for (var i = 0; i < playlist.medias.length; i++) {
-                if (playlist.medias[i] === media) {
-                    playlist.medias.splice(i, 1);
-                    playlist.$save();
-                }
-            }
+            dataService.removeFromDefaultPlaylist(media);
         }
 
         function saveAs(playlist) {
@@ -89,9 +76,8 @@
             });
         }
 
-        function playlistSorted(playlist, medias) {
-            playlist.medias = medias;
-            playlist.$save();
+        function playlistSorted(playlist, item, oldIndex, newIndex) {
+            dataService.movePlaylistItem(playlist, item, oldIndex, newIndex);
         }
     }
 })();

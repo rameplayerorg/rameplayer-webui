@@ -9,6 +9,7 @@
     function translation($translateProvider, settings) {
         $translateProvider.translations('en', {
             Settings: 'Settings',
+            Name: 'Name',
             Filename: 'Filename',
             Title: 'Title',
             Length: 'Length',
@@ -19,6 +20,7 @@
             INFORMATION: 'Information',
             SOFTWARE_VERSION: 'Software version',
             HARDWARE_VERSION: 'Hardware version',
+            UI_VERSION: 'UI version',
             SAVE_SETTINGS:'Save settings',
             USER_SETTINGS: 'User settings',
             SLAVE_DELAY: 'Slave delay in seconds',
@@ -30,9 +32,10 @@
         });
         $translateProvider.translations('fi', {
             Settings: 'Asetukset',
+            Name: 'Nimi',
             Filename: 'Tiedosto',
             Title: 'Otsikko',
-            Length: 'Pituus',
+            Length: 'Kesto',
             'Date': 'Pvm',
             'Selected': 'Valittu',
             Save: 'Tallenna',
@@ -40,6 +43,7 @@
             INFORMATION:'-tietoja',
             SOFTWARE_VERSION: 'Ohjelmistoversio',
             HARDWARE_VERSION: 'Laiteversio',
+            UI_VERSION: 'UI-versio',
             SAVE_SETTINGS:'Tallenna asetukset',
             USER_SETTINGS: 'Käyttäjäasetukset',
             SLAVE_DELAY: 'Slave delay, viive sekunteina',

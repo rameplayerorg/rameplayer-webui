@@ -5,33 +5,28 @@
         .module('rameplayer.player')
         .controller('PlayerController', PlayerController);
 
-    PlayerController.$inject = ['$log', '$timeout', 'playerService', 'dataService'];
+    PlayerController.$inject = ['$scope', '$log', '$timeout', 'statusService', 'dataService'];
 
-    function PlayerController($log, $timeout, playerService, dataService) {
+    function PlayerController($scope, $log, $timeout, statusService, dataService) {
         var vm = this;
 
         vm.timeSlider = 0;
-        vm.selectedMedia = null;
-        vm.playerStatus = playerService.getStatus();
+        vm.playerStatus = statusService.status;
         vm.statusErrorPromise = null;
         vm.statusError = null;
-        vm.addToPlaylist = addToPlaylist;
         vm.togglePlay = togglePlay;
         vm.toggleStop = toggleStop;
+        vm.stepForward = stepForward;
         vm.seek = seek;
 
-        playerService.onMediaSelected(mediaSelected);
-        playerService.onStatusChanged(statusChanged);
-        playerService.onPollerError(pollerError);
-
-        function addToPlaylist() {
-            if (vm.selectedMedia) {
-                playerService.addToPlaylist(vm.selectedMedia);
-            }
-        }
+        $scope.$watchCollection('vm.playerStatus', function() {
+            // synchronize time slider with status position
+            vm.timeSlider = vm.playerStatus.position;
+        });
 
         function togglePlay() {
-            if (vm.playerStatus.state === playerService.states.playing) {
+            if (vm.playerStatus.state === statusService.states.playing ||
+                vm.playerStatus.state === statusService.states.buffering) {
                 pause();
             }
             else {
@@ -41,21 +36,17 @@
 
         function play() {
             var media = vm.selectedMedia;
-            playerService.changeStatus(playerService.states.playing, media);
             dataService.play().then(function(data) {
-                $log.info('Response', data);
             });
         }
 
         function pause() {
-            playerService.changeStatus(playerService.states.paused, vm.playerStatus.media);
             dataService.pause().then(function(data) {
-                $log.info('Response', data);
             });
         }
 
         function toggleStop() {
-            if (vm.playerStatus.state === playerService.states.playing) {
+            if (vm.playerStatus.state === statusService.states.playing) {
                 stop();
             }
             else {
@@ -64,19 +55,21 @@
         }
 
         function stop() {
-            playerService.changeStatus(playerService.states.stopped);
             dataService.stop().then(function(data) {
-                $log.info('Response', data);
             });
         }
 
         function stepBackward() {
+            dataService.stepBackward();
+        }
+
+        function stepForward() {
+            dataService.stepForward();
         }
 
         function seek() {
-            var position = vm.timeSlider;
+            var position = parseFloat(vm.timeSlider);
             dataService.seek(position).then(function(data) {
-                $log.info('Response', data);
             });
         }
 

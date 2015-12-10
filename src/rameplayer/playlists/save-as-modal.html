@@ -2,11 +2,13 @@
     <h3>Save Playlist As&hellip;</h3>
 </div>
 
-<div class="modal-body">
-    <input type="text" class="form-control" placeholder="Playlist name" ng-model="saveAs.playlistTitle">
-</div>
+<form>
+    <div class="modal-body">
+        <input type="text" id="newPlaylistTitle" class="form-control" placeholder="Playlist name" ng-model="saveAs.playlistTitle">
+    </div>
 
-<div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="saveAs.save()">Save</button>
-    <button class="btn btn-warning" type="button" ng-click="saveAs.cancel()">Cancel</button>
-</div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit" ng-click="saveAs.save()">Save</button>
+        <button class="btn btn-warning" type="button" ng-click="saveAs.cancel()">Cancel</button>
+    </div>
+</form>
