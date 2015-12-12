@@ -19,8 +19,8 @@
         var rameVersioning = '';
         dataService.getRameVersioning().then(function(response) {
             rameVersioning = response.data;
-            vm.rameVersionSoftware = rameVersioning.software;
-            vm.rameVersionHardware = rameVersioning.hardware;
+            vm.rameVersionSoftware = rameVersioning.backend;
+            vm.rameVersionHardware = rameVersioning.hw;
             $log.info('Version fetched', response);
         }, function(errorResponse) {
             $log.error('Version fetching failed', errorResponse);
@@ -33,7 +33,7 @@
         vm.saveSettings = saveSettings;
 
         //vm.hdmishaked = "-";
-	vm.uiVersion = uiVersion;
+        vm.uiVersion = uiVersion;
         //$log.info('test:' + settingsUrl);
 
         function resetHdmiInterface() {
