@@ -5,9 +5,9 @@
         .module('rameplayer.media')
         .directive('rameMediaItem', rameMediaItem);
 
-    rameMediaItem.$inject = ['statusService'];
+    rameMediaItem.$inject = ['$animate', 'statusService'];
 
-    function rameMediaItem(statusService) {
+    function rameMediaItem($animate, statusService) {
         // Usage:
         //
         // Creates:
@@ -28,6 +28,10 @@
         return directive;
 
         function link(scope, element, attrs) {
+            // disable animations, seems that there is a bug in ngAnimate,
+            // which causes that CSS classes are not removed correctly
+            // sometimes
+            $animate.enabled(element, false);
             scope.isDropdownOpen = false;
             scope.isRemovable = (attrs.remove !== undefined);
             scope.canAddToDefault = (attrs.addToDefault !== undefined);
