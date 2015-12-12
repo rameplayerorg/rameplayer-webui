@@ -37,7 +37,7 @@
             scope.breadcrumbs = [];
             $rootScope.lists[scope.targetId].$promise.then(function(list) {
                 scope.breadCrumbsEnabled = $rootScope.lists[scope.targetId].hasChildLists();
-                scope.breadcrumbs.push(list.info.title);
+                scope.breadcrumbs.push(scope.targetId);
             });
 
             scope.selectMedia = selectMedia;
@@ -80,7 +80,7 @@
             function openList(item) {
                 var list = $rootScope[item.targetId] || listService.add(item.targetId);
                 addSlide(item.targetId);
-                scope.breadcrumbs.push(item.info.title);
+                scope.breadcrumbs.push(item.targetId);
             }
 
             function activateSlide(index) {
