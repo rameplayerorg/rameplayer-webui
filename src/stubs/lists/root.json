@@ -2,14 +2,14 @@
     "id": "root",
     "items": [
         {
-            "id": "sda1:",
+            "id": "sda1",
             "info": {
                 "refreshed": 1449220031300,
                 "size": 8192,
                 "type": "directory",
                 "modified": 0
             },
-            "targetId": "sda1:"
+            "targetId": "sda1"
         }
     ],
     "info": {
