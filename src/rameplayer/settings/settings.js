@@ -31,6 +31,8 @@
         vm.languageId = settings.language; // TODO: fetch from saved settings, now from coremodule-settingsjson-indexhtmlurl
         vm.savingStatus = "loaded";
         vm.saveSettings = saveSettings;
+        
+        vm.autoplayUsb = true;
 
         //vm.hdmishaked = "-";
         vm.uiVersion = uiVersion;

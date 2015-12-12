@@ -27,6 +27,7 @@
             HDMI_POWERCYCLING: 'Internal powercycle of HDMI-splitter',
             HDMI_POWERCYCLING_INFO: 'Workaround for failed HDMI handshake.',
             RESET_HDMI: 'Reset HDMI interface',
+            AUTOPLAY_USB: 'Automatically play files from USB',
             UI_LANGUAGE: 'Language of the user interface',
             DHCP_CLIENT_SETTING: 'Obtain IP automatically as DHCP client'
         });
@@ -50,6 +51,7 @@
             HDMI_POWERCYCLING: 'HDMI-jakajan uudelleenkäynnistys',
             HDMI_POWERCYCLING_INFO: 'Epäonnistuneen HDMI handshaken varalta.',
             RESET_HDMI: 'Uudelleenkäynnistä HDMI',
+            AUTOPLAY_USB: 'Aloita soitto automaattisesti USB-tikulta',
             UI_LANGUAGE: 'Käyttöliittymän kieli',
             'Audio port': 'Audio-porttivalinta',
             'Video output resolution': 'Videon resoluutio',

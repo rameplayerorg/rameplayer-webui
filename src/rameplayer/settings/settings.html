@@ -20,6 +20,10 @@
             <h3 class="panel-title" translate>USER_SETTINGS</h3>
         </div>
         <div class="panel-body ng-cloak">
+            <label for="autoplayUsb" translate>AUTOPLAY_USB</label>
+            <input type="checkbox" name="autoplayUsb" id="autoplayUsb" ng-model="settings.autoplayUsb" data-toggle="toggle">
+            <!-- <script type="text/javascript">$(function() {$('#autoplayUsb').bootstrapToggle()})</script> -->
+            <br>
             <label for="slavedelay" translate>SLAVE_DELAY</label>
 	        <input type="number" name="slavedelay" id="slavedelay" ng-model="settings.slaveDelay"
 	                min="0" max="999">
