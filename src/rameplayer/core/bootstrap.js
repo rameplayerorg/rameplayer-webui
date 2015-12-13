@@ -27,7 +27,9 @@
         var $log = initInjector.get('$log');
         var $resource = initInjector.get('$resource');
 
+        core.constant('getBaseUrl', getBaseUrl);
         var settingsUrl = 'stubs/settings.json';
+        //var settingsUrl = getBaseUrl() + 'settings';
         core.constant('settingsUrl', settingsUrl);
 
         var SettingsResource = $resource(settingsUrl);
@@ -43,6 +45,29 @@
             function(errorResponse) {
                 $log.error('Error when fetching settings', errorResponse);
             });
+
+
+        /**
+         * @name getBaseUrl
+         * @desc Returns base URL for REST API calls
+         * @returns string
+         */
+        function getBaseUrl(hostname, port, basePath) {
+            hostname = hostname || rameServerConfig.host;
+            port = port || rameServerConfig.port;
+            basePath = basePath || rameServerConfig.basePath || '/';
+            var url = '';
+            if (hostname || port) {
+                // $location is not yet available here
+                url = location.protocol + '//';
+                url += hostname || location.host;
+                if (port) {
+                    url += ':' + port;
+                }
+            }
+            url += basePath;
+            return url;
+        }
     }
 
     function bootstrapApplication() {
@@ -50,5 +75,4 @@
             angular.bootstrap(document, ['rameplayer']);
         });
     }
-
 })();

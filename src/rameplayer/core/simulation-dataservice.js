@@ -17,15 +17,14 @@
         .factory('simulationDataService', simulationDataService);
 
     simulationDataService.$inject = ['$rootScope', '$log', '$http', '$resource', 'settings',
-        '$timeout', '$interval', 'uuid', 'List'];
+        '$timeout', '$interval', 'uuid', 'listProvider', 'getBaseUrl'];
 
     /**
      * @namespace DataService
      * @desc Application wide service for REST API
      * @memberof Factories
      */
-    function simulationDataService($rootScope, $log, $http, $resource, settings, $timeout, $interval, uuid, List) {
-
+    function simulationDataService($rootScope, $log, $http, $resource, settings, $timeout, $interval, uuid, listProvider, getBaseUrl) {
         // initial internal data
         // corresponds server data in production
         var server = {
@@ -44,10 +43,11 @@
             playlists: []
         };
 
-        var urls = settings.development.serverSimulation.urls;
-        var Playlists = $resource(urls.playlists);
-        var DefaultPlaylist = $resource(urls.defaultPlaylist);
-        var DefaultPlaylistItem = $resource(urls.defaultPlaylist + '/items/:itemId', { itemId: '@id' });
+        var baseUrl = getBaseUrl();
+        var List = listProvider.getResource(baseUrl + 'lists/:targetId.json');
+        var Playlists = $resource(baseUrl + 'playlists');
+        var DefaultPlaylist = $resource(baseUrl + 'playlists/default');
+        var DefaultPlaylistItem = $resource('playlists/default/items/:itemId', { itemId: '@id' });
 
         var service = {
             getStatus: getStatus,
@@ -213,7 +213,7 @@
        }
 
         function getRameVersioning() {
-            return $http.get('stubs/rameversion.json');
+            return $http.get(baseUrl + 'rameversion.json');
         }
 
         function serverStop() {

@@ -190,6 +190,7 @@ gulp.task('inject-version', ['rev-and-inject'], function(cb) {
         return gulp
             .src(indexHtml)
             .pipe(plugins.replace('development', stdout))
+            .pipe(plugins.replace("{ basePath: 'stubs/' }", "{ port: 8000, basePath: '/' }"))
             .pipe(gulp.dest(paths.build));
     });
     return gulp

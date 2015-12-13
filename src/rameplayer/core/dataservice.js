@@ -16,14 +16,14 @@
         .module('rameplayer.core')
         .factory('dataService', dataService);
 
-    dataService.$inject = ['$log', '$http', '$resource', 'settings', 'simulationDataService', 'List'];
+    dataService.$inject = ['$log', '$http', '$resource', '$location', 'settings', 'simulationDataService', 'listProvider', 'getBaseUrl'];
 
     /**
      * @namespace DataService
      * @desc Application wide service for REST API
      * @memberof Factories
      */
-    function dataService($log, $http, $resource, settings, simulationDataService, List) {
+    function dataService($log, $http, $resource, $location, settings, simulationDataService, listProvider, getBaseUrl) {
 
         if (settings.development && settings.development.enabled &&
             settings.development.serverSimulation &&
@@ -32,22 +32,11 @@
             return simulationDataService;
         }
 
-        // make a copy of URLs so we don't overwrite server URL settings
-        var urls = angular.copy(settings.urls);
-
-        if (settings.serverPort !== undefined && settings.serverPort !== 0) {
-            // apply server port to all URLs
-            for (var prop in urls) {
-                urls[prop] = location.protocol + '//' + location.hostname +
-                    ':' + settings.serverPort + urls[prop];
-            }
-        }
-
-        var listUrl = urls.lists + '/:targetId';
-
-        var playlistUrl = urls.playlists + '/:playlistId';
-        var playlistItemUrl = playlistUrl + '/items/:itemId';
+        var baseUrl = getBaseUrl();
+        var List = listProvider.getResource(baseUrl + 'lists/:targetId');
+        var playlistUrl = baseUrl + 'playlists/:playlistId';
         var Playlist = $resource(playlistUrl, { playlistId: '@id' });
+        var playlistItemUrl = baseUrl + 'playlists/:playlistId/items/:itemId';
         var PlaylistItem = $resource(playlistItemUrl,
             {
                 playlistId: '@playlistId',
@@ -57,8 +46,8 @@
                 'update': { method: 'PUT' }
             }
         );
-        var DefaultPlaylist = $resource(urls.defaultPlaylist);
-        var DefaultPlaylistItem = $resource(urls.defaultPlaylist + '/items/:itemId', { itemId: '@id' });
+        var DefaultPlaylist = $resource(baseUrl + 'playlists/default');
+        var DefaultPlaylistItem = $resource(baseUrl + 'playlists/default/items/:itemId', { itemId: '@id' });
 
         var service = {
             getStatus: getStatus,
@@ -82,11 +71,11 @@
         return service;
 
         function getStatus(payload) {
-            return $http.post(urls['status'], payload);
+            return $http.post(baseUrl + 'status', payload);
         }
 
         function setCursor(itemId) {
-            return $http.put(urls.cursor, { id: itemId });
+            return $http.put(baseUrl + 'cursor', { id: itemId });
         }
 
         function getList(id) {
@@ -127,31 +116,31 @@
         }
 
         function play() {
-            return $http.get(urls.player + '/play');
+            return $http.get(baseUrl + 'player/play');
         }
 
         function pause() {
-            return $http.get(urls.player + '/pause');
+            return $http.get(baseUrl + 'player/pause');
         }
 
         function stop() {
-            return $http.get(urls.player + '/stop');
+            return $http.get(baseUrl + 'player/stop');
         }
 
         function seek(position) {
-            return $http.get(urls.player + '/seek/' + position);
+            return $http.get(baseUrl + 'player/seek/' + position);
         }
 
         function stepBackward() {
-            return $http.get(urls.player + '/step-backward');
+            return $http.get(baseUrl + 'player/step-backward');
         }
 
         function stepForward() {
-            return $http.get(urls.player + '/step-forward');
+            return $http.get(baseUrl + 'player/step-forward');
         }
 
         function getRameVersioning() {
-            return $http.get('stubs/rameversion.json');
+            return $http.get(baseUrl + 'rameversion');
         }
     }
 })();
