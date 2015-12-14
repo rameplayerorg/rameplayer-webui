@@ -66,7 +66,7 @@
             // TODO: move toastr info/error to save result 
             toastr.success('Settings saved.', '(TEST notification)');
             //toastr.error('saveSettings: ' + $rootScope.rameExceptions, $rootScope.rameException);
-            throw new Error('testerror');
+            //throw new Error('testerror');
         }
 
         // IP address string regexp

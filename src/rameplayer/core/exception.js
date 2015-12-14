@@ -20,15 +20,20 @@
         var exceptionMessage = '';
 
         return function(exception, cause) {            
-            exceptionMessage = 'RAMEPLAYER .:. ' + exception + ' .:. ' + cause;
+            exceptionMessage = 'RAMEPLAYER .:. ' + exception + ' .:. (caused by ' + cause + ')';
             if (latest.unshift(exceptionMessage) > 7) {
                 latest.pop();
             }
             var root = $injector.get('$rootScope');
             root.rameException = exceptionMessage;
             root.rameExceptions = latest;
-            exception.message += ' (caused by "' + cause + '")';
-            $log.error(exceptionMessage);
+            
+            //exception.message += ' (caused by "' + cause + '")';
+            $log.error(exceptionMessage);            
+            
+            //$injector.get('toastr').error(exceptionMessage);
+            $injector.get('toastr').error('' + exception, "Exception (" + cause + ")");
+            
         };
     }
 
