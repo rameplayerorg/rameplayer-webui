@@ -130,16 +130,6 @@ gulp.task('fonts', function() {
 });
 
 /**
- * Copy stubs for development
- * @return {Stream}
- */
-gulp.task('stubs', function() {
-    return gulp
-        .src(paths.stubs)
-        .pipe(gulp.dest(paths.build + 'stubs'));
-});
-
-/**
  * Inject all the files into the new index.html
  * @return {Stream}
  */
@@ -190,7 +180,9 @@ gulp.task('inject-version', ['rev-and-inject'], function(cb) {
         return gulp
             .src(indexHtml)
             .pipe(plugins.replace('development', stdout))
-            .pipe(plugins.replace("{ basePath: 'stubs/' }", "{ port: 8000, basePath: '/' }"))
+            // change settings for production environment
+            .pipe(plugins.replace("{ basePath: 'stubs/', simulation: true }",
+                                  "{ port: 8000, basePath: '/' }"))
             .pipe(gulp.dest(paths.build));
     });
     return gulp
@@ -201,7 +193,7 @@ gulp.task('inject-version', ['rev-and-inject'], function(cb) {
  * Build the optimized application
  * @return {Stream}
  */
-gulp.task('build', ['inject-version', 'images', 'fonts', 'stubs'], function() {
+gulp.task('build', ['inject-version', 'images', 'fonts'], function() {
     return gulp
         .src('')
         .pipe(plugins.notify({

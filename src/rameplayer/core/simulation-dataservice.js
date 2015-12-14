@@ -16,15 +16,15 @@
         .module('rameplayer.core')
         .factory('simulationDataService', simulationDataService);
 
-    simulationDataService.$inject = ['$rootScope', '$log', '$http', '$resource', 'settings',
-        '$timeout', '$interval', 'uuid', 'listProvider', 'getBaseUrl'];
+    simulationDataService.$inject = ['$rootScope', '$log', '$http', '$resource',
+        '$timeout', '$interval', 'uuid', 'listProvider'];
 
     /**
      * @namespace DataService
      * @desc Application wide service for REST API
      * @memberof Factories
      */
-    function simulationDataService($rootScope, $log, $http, $resource, settings, $timeout, $interval, uuid, listProvider, getBaseUrl) {
+    function simulationDataService($rootScope, $log, $http, $resource, $timeout, $interval, uuid, listProvider) {
         // initial internal data
         // corresponds server data in production
         var server = {
@@ -44,12 +44,14 @@
         };
 
         var baseUrl = getBaseUrl();
+        var Settings = $resource(baseUrl + 'settings.json');
         var List = listProvider.getResource(baseUrl + 'lists/:targetId.json');
         var Playlists = $resource(baseUrl + 'playlists');
         var DefaultPlaylist = $resource(baseUrl + 'playlists/default');
         var DefaultPlaylistItem = $resource('playlists/default/items/:itemId', { itemId: '@id' });
 
         var service = {
+            getSettings: getSettings,
             getStatus: getStatus,
             setCursor: setCursor,
             getList: getList,
@@ -68,10 +70,43 @@
             getRameVersioning: getRameVersioning
         };
 
-        var delay = settings.development.serverSimulation.delay;
+        var delay = 50;
         var playingPromise;
 
         return service;
+
+        /**
+         * @name getBaseUrl
+         * @desc Returns base URL for REST API calls. Optionally you can pass
+         * hostname, port and basePath as parameters.
+         * @returns string
+         */
+        function getBaseUrl(hostname, port, basePath) {
+            hostname = hostname || rameServerConfig.host;
+            port = port || rameServerConfig.port;
+            basePath = basePath || rameServerConfig.basePath || '/';
+            var url = '';
+            if (hostname || port) {
+                // $location is not yet available here
+                url = location.protocol + '//';
+                url += hostname || location.host;
+                if (port) {
+                    url += ':' + port;
+                }
+            }
+            url += basePath;
+            return url;
+        }
+
+        /**
+         * @name getSettings
+         * @desc Returns instance object of Settings $resource. You can save
+         * settings by calling returned object.$save();
+         * @returns object
+         */
+        function getSettings() {
+            return Settings.get();
+        }
 
         function getStatus(payload) {
             return $timeout(function() {

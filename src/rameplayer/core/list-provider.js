@@ -16,14 +16,14 @@
         .module('rameplayer.core')
         .factory('listProvider', listProvider);
 
-    listProvider.$inject = ['$log', '$resource', '$rootScope', 'settings', 'ItemTypes'];
+    listProvider.$inject = ['$log', '$resource', '$rootScope', 'ItemTypes'];
 
     /**
      * @namespace List
      * @desc Resource for List
      * @memberof Factories
      */
-    function listProvider($log, $resource, $rootScope, settings, ItemTypes) {
+    function listProvider($log, $resource, $rootScope, ItemTypes) {
 
         var service = {
             getResource: getResource

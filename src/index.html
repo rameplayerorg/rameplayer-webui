@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="rameplayer">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -61,7 +61,7 @@
     </nav>
 
     <script>
-        var rameServerConfig = { basePath: 'stubs/' };
+        var rameServerConfig = { basePath: 'stubs/', simulation: true };
     </script>
 
     <!-- inject-vendor:js -->
@@ -91,13 +91,12 @@
     <!-- core module -->
     <script src="rameplayer/core/core.module.js"></script>
     <script src="rameplayer/core/constants.js"></script>
-    <script src="rameplayer/core/bootstrap.js"></script>
     <script src="rameplayer/core/config.js"></script>
     <script src="rameplayer/core/dataservice.js"></script>
     <script src="rameplayer/core/simulation-dataservice.js"></script>
     <script src="rameplayer/core/statusservice.js"></script>
     <script src="rameplayer/core/list-service.js"></script>
-    <script src="rameplayer/core/list-resource.js"></script>
+    <script src="rameplayer/core/list-provider.js"></script>
 
     <!-- playback module -->
     <script src="rameplayer/player/player.module.js"></script>

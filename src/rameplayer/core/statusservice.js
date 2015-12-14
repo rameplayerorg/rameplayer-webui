@@ -16,14 +16,15 @@
         .module('rameplayer.core')
         .factory('statusService', statusService);
 
-    statusService.$inject = ['$rootScope', '$log', '$interval', '$q', 'dataService', 'settings', 'listService'];
+    statusService.$inject = ['$rootScope', '$log', '$interval', '$q', 'dataService', 'listService'];
 
     /**
      * @namespace StatusService
      * @desc Application wide service for player status
      * @memberof Factories
      */
-    function statusService($rootScope, $log, $interval, $q, dataService, settings, listService) {
+    function statusService($rootScope, $log, $interval, $q, dataService, listService) {
+        var statusInterval = rameServerConfig.statusInterval || 1000;
         var status = {
             position: 0
         };
@@ -40,7 +41,6 @@
             status:            status,
             onPollerError:     onPollerError
         };
-
         startStatusPoller();
 
         return service;
@@ -50,7 +50,7 @@
         }
 
         function startStatusPoller() {
-            return $interval(pollStatus, settings.statusPollingInterval);
+            return $interval(pollStatus, statusInterval);
         }
 
         function pollStatus() {

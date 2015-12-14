@@ -6,10 +6,10 @@
             'AdminController', AdminController);
 
     AdminController.$inject = [
-            '$log', 'dataService', 'settings'
+            '$log', 'dataService'
     ];
 
-    function AdminController($log, dataService, settings) {
+    function AdminController($log, dataService) {
         var vm = this;
         vm.audioPort = "Both";
         vm.audioPorts = [

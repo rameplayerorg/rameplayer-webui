@@ -34,8 +34,5 @@
     "images": [
         "./src/images/**/*"
     ],
-    "stubs": [
-        "./src/stubs/**/*.json"
-    ],
     "build": "./build/"
 }
