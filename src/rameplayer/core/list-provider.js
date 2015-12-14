@@ -14,42 +14,33 @@
 
     angular
         .module('rameplayer.core')
-        .factory('List', List);
+        .factory('listProvider', listProvider);
 
-    List.$inject = ['$log', '$resource', '$rootScope', 'settings', 'ItemTypes'];
+    listProvider.$inject = ['$log', '$resource', '$rootScope', 'ItemTypes'];
 
     /**
      * @namespace List
      * @desc Resource for List
      * @memberof Factories
      */
-    function List($log, $resource, $rootScope, settings, ItemTypes) {
+    function listProvider($log, $resource, $rootScope, ItemTypes) {
 
-        var url = location.protocol + '//' + location.hostname +
-                    ':' + settings.serverPort + settings.urls.lists + '/:targetId';
-        if (settings.development && settings.development.enabled &&
-            settings.development.serverSimulation &&
-            settings.development.serverSimulation.enabled) {
-            url = settings.development.serverSimulation.urls.lists + '/:targetId.json';
-        }
+        var service = {
+            getResource: getResource
+        };
+        return service;
 
-        var ListResource = $resource(url, { targetId: '@targetId' });
+        function getResource(url) {
+            //var url = baseUrl + 'lists/:targetId';
+            var ListResource = $resource(url, { targetId: '@targetId' });
 
-        // add custom functions for list traversing
-        ListResource.prototype.hasChildLists = hasChildLists;
-        ListResource.prototype.getChildLists = getChildLists;
-        ListResource.prototype.getParent = getParent;
+            // add custom functions for list traversing
+            ListResource.prototype.hasChildLists = hasChildLists;
+            ListResource.prototype.getChildLists = getChildLists;
+            ListResource.prototype.getParent = getParent;
 
-        return ListResource;
-
-        function resolveChildLists() {
-            if (this.$resolved) {
-                for (var i = 0; i < this.items.length; i++) {
-                    var item = this.items[i];
-                    listService.add(item.targetId);
-                }
-            }
-        }
+            return ListResource;
+        };
 
         /**
          * @name hasChildLists

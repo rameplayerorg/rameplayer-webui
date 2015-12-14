@@ -1,5 +1,5 @@
 {
-    "id": "sda1:",
+    "id": "sda1",
     "info": {
         "filename": "sda1",
         "modified": 0,
@@ -10,7 +10,7 @@
     },
     "items": [
         {
-            "id": "sda1:%2fSubdirectory%201",
+            "id": "sda1Subdirectory1",
             "info": {
                 "filename": "Subdirectory 1",
                 "modified": 1447798454000,
@@ -19,7 +19,7 @@
                 "title": "Subdirectory 1",
                 "type": "directory"
             },
-            "targetId": "sda1:%2fSubdirectory%201"
+            "targetId": "sda1Subdirectory1"
         },
         {
             "id": "sda1:%2f00_pk_FI_000_r720P%2emp4",

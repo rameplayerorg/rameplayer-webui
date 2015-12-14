@@ -7,30 +7,38 @@
         .controller('SettingsController', SettingsController);
 
     SettingsController.$inject = [
-        '$log', '$http', 'dataService', 'settings', '$translate', 'toastr', 'uiVersion'
+        '$log', '$http', 'dataService', '$translate', 'uiVersion'
+        //'$log', '$http', 'dataService', 'settings', '$translate', 'toastr', 'uiVersion'
     ];
 
-    function SettingsController($log, $http, dataService, settings, $translate, toastr, uiVersion) {
+    function SettingsController($log, $http, dataService, $translate, uiVersion) {
+        
+    //function SettingsController($log, $http, dataService, settings, $translate, toastr, uiVersion) {
 
         var $injector = angular.injector();
 
         var vm = this;
 
-        var rameVersioning = '';
-        dataService.getRameVersioning().then(function(response) {
-            rameVersioning = response.data;
-            vm.rameVersionSoftware = rameVersioning.backend;
-            vm.rameVersionHardware = rameVersioning.hw;
-            $log.info('Version fetched', response);
-        }, function(errorResponse) {
-            $log.error('Version fetching failed', errorResponse);
-        });
+        vm.settings = dataService.getSettings();
+		var rameVersioning = '';
+		dataService.getRameVersioning().then(function(response) {
+			rameVersioning = response.data;
+			vm.rameVersionSoftware = rameVersioning.backend;
+			vm.rameVersionHardware = rameVersioning.hw;
+			$log.info('Version fetched', response);
+		}, function(errorResponse) {
+			$log.error('Version fetching failed', errorResponse);
+		});
 
-        vm.resetHdmiInterface = resetHdmiInterface;
-        vm.slaveDelay = 0;
-        vm.languageId = settings.language; // TODO: fetch from saved settings, now from coremodule-settingsjson-indexhtmlurl
-        vm.savingStatus = "loaded";
-        vm.saveSettings = saveSettings;
+		vm.resetHdmiInterface = resetHdmiInterface;
+		vm.slaveDelay = 0;
+		vm.languageId = 'en'; // TODO: fetch from saved settings, now from coremodule-settingsjson-indexhtmlurl
+		vm.savingStatus = "loaded";
+		vm.saveSettings = saveSettings;
+
+		vm.hdmishaked = "shaky";
+                vm.uiVersion = uiVersion;
+		//$log.info('test');
         
         vm.autoplayUsb = true;
 
@@ -48,9 +56,9 @@
         }
 
         function saveSettings(){
-            settings.language = vm.languageId;
-            $translate.use(settings.language);
-            settings.$save(function() {
+            language = vm.languageId;
+            $translate.use(language);
+            vm.settings.$save(function() {
                 vm.savingStatus = "saved";
                 toastr.success('Settings saved.');
             });

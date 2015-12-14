@@ -5,13 +5,14 @@
         .module('rameplayer.player')
         .controller('PlayerController', PlayerController);
 
-    PlayerController.$inject = ['$scope', '$log', '$timeout', 'statusService', 'dataService'];
+    PlayerController.$inject = ['$rootScope', '$scope', '$log', '$timeout', 'statusService', 'dataService'];
 
-    function PlayerController($scope, $log, $timeout, statusService, dataService) {
+    function PlayerController($rootScope, $scope, $log, $timeout, statusService, dataService) {
         var vm = this;
 
         vm.timeSlider = 0;
         vm.playerStatus = statusService.status;
+        vm.cursorItem = null;
         vm.statusErrorPromise = null;
         vm.statusError = null;
         vm.togglePlay = togglePlay;
@@ -22,6 +23,16 @@
         $scope.$watchCollection('vm.playerStatus', function() {
             // synchronize time slider with status position
             vm.timeSlider = vm.playerStatus.position;
+
+            // update vm.cursorItem only when it's changed
+            if (vm.playerStatus.cursor && vm.playerStatus.cursor.id) {
+                if (!vm.cursorItem || vm.playerStatus.cursor.id != vm.cursorItem.id) {
+                    vm.cursorItem = findCursorItem(statusService.status.cursor);
+                }
+            }
+            else {
+                vm.cursorItem = null;
+            }
         });
 
         function togglePlay() {
@@ -46,7 +57,8 @@
         }
 
         function toggleStop() {
-            if (vm.playerStatus.state === statusService.states.playing) {
+            if (vm.playerStatus.state === statusService.states.playing ||
+                vm.playerStatus.state === statusService.states.buffering) {
                 stop();
             }
             else {
@@ -90,6 +102,19 @@
             vm.statusErrorTimeout = $timeout(function() {
                 vm.statusError = null;
             }, 3000);
+        }
+
+        function findCursorItem(cursor) {
+            var targetId = cursor.parentId;
+            if ($rootScope.lists[targetId] && $rootScope.lists[targetId].items) {
+                for (var i = 0; i < $rootScope.lists[targetId].items.length; i++) {
+                    if (cursor.id === $rootScope.lists[targetId].items[i].id) {
+                        return $rootScope.lists[targetId].items[i];
+                    }
+                }
+            }
+            // not found
+            return null;
         }
     }
 })();

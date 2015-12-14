@@ -4,9 +4,9 @@
     var core = angular.module('rameplayer.core');
     core.config(translation);
 
-    translation.$inject = ['$translateProvider', 'settings'];
+    translation.$inject = ['$translateProvider'];
 
-    function translation($translateProvider, settings) {
+    function translation($translateProvider) {
         $translateProvider.translations('en', {
             Settings: 'Settings',
             Name: 'Name',
@@ -65,7 +65,7 @@
             'IP Configurations': 'IP-osoitteet',
             DHCP_CLIENT_SETTING: 'Hae IP-osoitteet automaattisesti DHCP:n kautta'
         });
-        $translateProvider.preferredLanguage(settings.language);
+        $translateProvider.preferredLanguage('en');
         // http://angular-translate.github.io/docs/#/guide/19_security
         $translateProvider.useSanitizeValueStrategy('sanitize');
     }
