@@ -7,13 +7,10 @@
         .controller('SettingsController', SettingsController);
 
     SettingsController.$inject = [
-        '$log', '$http', 'dataService', '$translate', 'uiVersion'
-        //'$log', '$http', 'dataService', 'settings', '$translate', 'toastr', 'uiVersion'
+        '$log', '$http', 'dataService', '$translate', 'uiVersion', 'toastr'
     ];
 
-    function SettingsController($log, $http, dataService, $translate, uiVersion) {
-        
-    //function SettingsController($log, $http, dataService, settings, $translate, toastr, uiVersion) {
+    function SettingsController($log, $http, dataService, $translate, uiVersion, toastr) {
 
         var $injector = angular.injector();
 
@@ -29,34 +26,20 @@
 		}, function(errorResponse) {
 			$log.error('Version fetching failed', errorResponse);
 		});
-
-		vm.resetHdmiInterface = resetHdmiInterface;
+		
+		vm.autoplayUsb = true;
 		vm.slaveDelay = 0;
-		vm.languageId = 'en'; // TODO: fetch from saved settings, now from coremodule-settingsjson-indexhtmlurl
+		vm.languageId = 'en'; // TODO: fetch from saved settings
 		vm.savingStatus = "loaded";
 		vm.saveSettings = saveSettings;
-
-		vm.hdmishaked = "shaky";
-                vm.uiVersion = uiVersion;
-		//$log.info('test');
-        
-        vm.autoplayUsb = true;
-
-        //vm.hdmishaked = "-";
-        vm.uiVersion = uiVersion;
+		vm.uiVersion = uiVersion;
         //$log.info('test:' + settingsUrl);
-
-        function resetHdmiInterface() {
-            // TODO: send reset request to backend
-            toastr.warning('Resetting HDMI', '(TEST notification)');
-            //vm.hdmishaked = "shaked";
-        }
 
         function slaveDelay() {
         }
 
         function saveSettings(){
-            language = vm.languageId;
+            var language = vm.languageId;
             $translate.use(language);
             vm.settings.$save(function() {
                 vm.savingStatus = "saved";

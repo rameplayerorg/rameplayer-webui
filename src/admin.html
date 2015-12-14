@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="rameplayer">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,6 +30,10 @@
 		<div ng-include="'rameplayer/admin/adminsettings.html'" ng-cloak>                
 		</div>
     </div> <!-- .container -->
+    
+    <script>
+        var rameServerConfig = { basePath: 'stubs/', simulation: true };
+    </script>
 
     <!-- inject-vendor:js -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -50,19 +54,23 @@
     <!-- application -->
 
     <!-- inject:js -->
-    <script src="rameplayer/rameplayer.module.js"></script>
+    <script src="rameplayer/rameplayer.module.js"></script>    
 
     <!-- admin settings module -->
     <script src="rameplayer/admin/admin.module.js"></script>
     <script src="rameplayer/admin/admin.js"></script>
     <script src="rameplayer/admin/ip-address-block.directive.js"></script>
-
+    
     <!-- core module -->
     <script src="rameplayer/core/core.module.js"></script>
-    <script src="rameplayer/core/bootstrap.js"></script>
+    <script src="rameplayer/core/constants.js"></script>
     <script src="rameplayer/core/config.js"></script>
     <script src="rameplayer/core/dataservice.js"></script>
     <script src="rameplayer/core/exception.js"></script>
+    <script src="rameplayer/core/simulation-dataservice.js"></script>
+    <script src="rameplayer/core/statusservice.js"></script>
+    <script src="rameplayer/core/list-service.js"></script>
+    <script src="rameplayer/core/list-provider.js"></script>
 
     <!-- playback module -->
     <script src="rameplayer/player/player.module.js"></script>
@@ -72,12 +80,14 @@
     <!-- media module -->
     <script src="rameplayer/media/media.module.js"></script>
     <script src="rameplayer/media/media.js"></script>
+    <script src="rameplayer/media/media-list.directive.js"></script>
     <script src="rameplayer/media/media-item.directive.js"></script>
 
     <!-- playlists module -->
     <script src="rameplayer/playlists/playlists.module.js"></script>
     <script src="rameplayer/playlists/playlists.js"></script>
     <script src="rameplayer/playlists/playlist.directive.js"></script>
+    <script src="rameplayer/playlists/save-as-modal.js"></script>
 
     <!-- settings module -->
     <script src="rameplayer/settings/settings.module.js"></script>
@@ -91,7 +101,8 @@
     -->
     
     <!-- endinject -->
-
+    
+    <script>angular.module('rameplayer.core').constant('uiVersion', 'development');</script>
 </body>
 
 </html>
