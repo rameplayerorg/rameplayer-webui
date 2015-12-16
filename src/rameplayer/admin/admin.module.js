@@ -1,7 +1,6 @@
 (function() {
     'use strict';
 
-    angular.module('rameplayer.admin', [
-                                        'toastr'
-    ]);
+    angular.module('rameplayer.admin', [ 'toastr' ]);
+    
 })();
