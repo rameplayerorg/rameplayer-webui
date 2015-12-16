@@ -2,8 +2,10 @@
     'use strict';
 
     var core = angular.module('rameplayer.core');
+    
     core.config(translation);
-
+    core.config(toasters);
+    
     translation.$inject = ['$translateProvider'];
 
     function translation($translateProvider) {
@@ -69,4 +71,18 @@
         // http://angular-translate.github.io/docs/#/guide/19_security
         $translateProvider.useSanitizeValueStrategy('sanitize');
     }
+    
+    function toasters(toastrConfig) {
+        angular.extend(toastrConfig, {
+            autoDismiss : false,
+            containerId : 'toast-container',
+            maxOpened : 0,
+            newestOnTop : true,
+            positionClass : 'toast-top-right', // toast-bottom-center toast-top-right toast-bottom-full-width
+            preventDuplicates : false,
+            preventOpenDuplicates : false,
+            target : 'body',
+        });
+     }
+    
 })();

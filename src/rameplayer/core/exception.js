@@ -30,11 +30,39 @@
             
             //exception.message += ' (caused by "' + cause + '")';
             $log.error(exceptionMessage);            
-            
-            //$injector.get('toastr').error(exceptionMessage);
-            $injector.get('toastr').error('' + exception, "Exception (" + cause + ")");
+                        
+            // $injector.get('toastr').error(exceptionMessage);
+            $injector.get('toastr').error(
+                    '' + exception, 
+                    "Exception (" + cause + ")", 
+                    {
+                        allowHtml : false,
+                        closeButton : true,
+                        closeHtml : '<button>&times;</button>',
+                        extendedTimeOut : 0,
+                        iconClasses : {
+                            error : 'toast-error',
+                        //    info : 'toast-info',
+                        //    success : 'toast-success',
+                        //    warning : 'toast-warning'
+                        },
+                        messageClass : 'toast-message',
+                        onHidden : null,
+                        onShown : null,
+                        onTap : null,
+                        progressBar : false,
+                        tapToDismiss : true,
+                        //templates: {
+                        //    toast: 'directives/toast/toast.html',
+                        //    progressbar: 'directives/progressbar/progressbar.html'
+                        //},
+                        timeOut : 0,
+                        titleClass : 'toast-title',
+                        toastClass : 'toast'
+                    }
+            );
             
         };
     }
-
+    
 })();
