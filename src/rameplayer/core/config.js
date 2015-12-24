@@ -2,10 +2,10 @@
     'use strict';
 
     var core = angular.module('rameplayer.core');
-    
+
     core.config(translation);
     core.config(toasters);
-    
+
     translation.$inject = ['$translateProvider'];
 
     function translation($translateProvider) {
@@ -31,7 +31,17 @@
             RESET_HDMI: 'Reset HDMI interface',
             AUTOPLAY_USB: 'Automatically play files from USB',
             UI_LANGUAGE: 'Language of the user interface',
-            DHCP_CLIENT_SETTING: 'Obtain IP automatically as DHCP client'
+            DHCP_CLIENT_SETTING: 'Obtain IP automatically as DHCP client',
+            rameAnalogOnly: 'Analog',
+            rameHdmiOnly: 'HDMI',
+            rameHdmiAndAnalog: 'Both',
+            rameAutodetect: "Auto",
+            rame720p50: "720p 50 Hz",
+            rame720p60: "720p 60 Hz",
+            rame1080i50: "1080i 50 Hz",
+            rame1080i60: "1080i 60 Hz",
+            rame1080p50: "1080p 50 Hz",
+            rame1080p60: "1080p 60 Hz"
         });
         $translateProvider.translations('fi', {
             Settings: 'Asetukset',
@@ -65,13 +75,16 @@
             'DNS, alternative': 'DNS, vaihtoehtoinen',
             'Admin Settings': 'Järjestelmän asetukset',
             'IP Configurations': 'IP-osoitteet',
-            DHCP_CLIENT_SETTING: 'Hae IP-osoitteet automaattisesti DHCP:n kautta'
+            DHCP_CLIENT_SETTING: 'Hae IP-osoitteet automaattisesti DHCP:n kautta',
+            rameAnalogOnly: 'Analoginen',
+            rameHdmiOnly: 'HDMI',
+            rameHdmiAndAnalog: 'Molemmat'
         });
         $translateProvider.preferredLanguage('en');
         // http://angular-translate.github.io/docs/#/guide/19_security
         $translateProvider.useSanitizeValueStrategy('sanitize');
     }
-    
+
     function toasters(toastrConfig) {
         // Global settings and configurations
         // Toasts thrown from arbitrary exception overrides more settings to make them sticky
@@ -86,5 +99,5 @@
             target : 'body',
         });
      }
-    
+
 })();

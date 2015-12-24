@@ -11,35 +11,17 @@
 
     function AdminController($log, dataService, toastr, $rootScope) {
         var vm = this;
-        vm.audioPort = "Both";
+        vm.systemSettings = dataService.getSystemSettings();
         vm.audioPorts = [
-                "XLR", "HDMI", "Both"
+            "rameAnalogOnly", "rameHdmiOnly", "rameHdmiAndAnalog"
         ];
 
         vm.deviceName = "munRame";
-        vm.ipAddress = "";
-        vm.subnetMask = "";
-        vm.gatewayIp = "";
-        vm.dnsServerIp = "";
-        vm.dnsAlternativeServerIp = "";
-        vm.deviceIpOcts = [
-                "10", "0", "0", "1"
-        ];
-        vm.subnetMaskOcts = [
-                "255", "255", "255", "0"
-        ];
-        vm.gatewayIpOcts = [
-                "172", "16", "0", "1"
-        ];
-        vm.dnsServerIpOcts = [
-                "192", "168", "0", "1"
-        ];
-        vm.dnsAlternativeServerIpOcts = [
-                "192", "168", "0", "254"
-        ];
-
-        vm.isDhcpClient = true;
-        vm.isDhcpServer = false;
+        vm.deviceIpOcts = initOctets('ipAddress');
+        vm.subnetMaskOcts = initOctets('ipSubnetMask');
+        vm.gatewayIpOcts = initOctets('ipGateway');
+        vm.dnsServerIpOcts = initOctets('ipDnsPrimary');
+        vm.dnsAlternativeServerIpOcts = initOctets('ipDnsSecondary');
 
         vm.saveSettings = saveSettings;
         vm.savingStatus = "loaded";
@@ -47,26 +29,69 @@
         vm.isClusterMaster = false;
         vm.slaveIps = [];
 
-        vm.videoOutputResolution = "720p50 (50 Hz)";
         vm.videoOutputResolutions = [
-                "720p50 (50 Hz)", "720p60 (60 Hz)",
-                "1080p30 (60 Hz)",
+            "rameAutodetect",
+            "rame720p50",
+            "rame720p60",
+            "rame1080i50",
+            "rame1080i60",
+            "rame1080p50",
+            "rame1080p60"
         ];
 
-
+        function initOctets(field, def = ['', '', '', '']) {
+            if (vm.systemSettings[field]) {
+                return vm.systemSettings[field].split('.');
+            }
+            return def;
+        }
 
         function saveSettings() {
-            vm.ipAddress = validateIP(vm.deviceIpOcts);
-            vm.gatewayIp = validateIP(vm.gatewayIpOcts);
-            vm.dnsServerIp = validateIP(vm.dnsServerIpOcts);
-            vm.dnsAlternativeServerIp = validateIP(vm.dnsAlternativeServerIpOcts);
-            vm.subnetMask = validateIP(vm.subnetMaskOcts);
-            //vm.savingStatus = "saved";
-            //console.log("saveSettings");
-            // TODO: move toastr info/error to save result 
-            toastr.success('Settings saved.', '(TEST notification)');
-            //toastr.error('saveSettings: ' + $rootScope.rameExceptions, $rootScope.rameException);
-            //throw new Error('testerror');
+            var valid = true;
+            if (!vm.systemSettings.isDhcpClient) {
+                var ipAddress = validateIP(vm.deviceIpOcts);
+                var gatewayIp = validateIP(vm.gatewayIpOcts);
+                var dnsServerIp = validateIP(vm.dnsServerIpOcts);
+                var dnsAlternativeServerIp = validateIP(vm.dnsAlternativeServerIpOcts);
+                var subnetMask = validateIP(vm.subnetMaskOcts);
+
+                var invalidFields = [];
+                if (!ipAddress) {
+                    invalidFields.push('IP address');
+                }
+                if (!subnetMask) {
+                    invalidFields.push('Subnet mask');
+                }
+                if (!gatewayIp) {
+                    invalidFields.push('Gateway');
+                }
+                if (!dnsServerIp) {
+                    invalidFields.push('Primary DNS server');
+                }
+                if (!dnsAlternativeServerIp) {
+                    invalidFields.push('Secondary DNS server');
+                }
+                if (invalidFields.length) {
+                    toastr.error(invalidFields.join(', '), 'Invalid settings');
+                    valid = false;
+                }
+            }
+            if (valid) {
+                if (!vm.systemSettings.isDhcpClient) {
+                    vm.systemSettings.ipAddress = ipAddress;
+                    vm.systemSettings.ipSubnetMask = subnetMask;
+                    vm.systemSettings.ipGateway = gatewayIp;
+                    vm.systemSettings.ipDnsPrimary = dnsServerIp;
+                    vm.systemSettings.ipDnsSecondary = dnsAlternativeServerIp;
+                }
+                vm.systemSettings.$save(function() {
+                    vm.savingStatus = 'saved';
+                    toastr.success('Admin settings saved.', 'Saved');
+                });
+                // TODO: move toastr info/error to save result
+                //toastr.error('saveSettings: ' + $rootScope.rameExceptions, $rootScope.rameException);
+                //throw new Error('testerror');
+            }
         }
 
         // IP address string regexp
@@ -87,7 +112,7 @@
                 return addr;
             }
 
-            return "Invalid IP address";
+            return null;
         }
 
     }

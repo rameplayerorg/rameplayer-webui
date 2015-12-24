@@ -32,6 +32,7 @@
 
         var baseUrl = getBaseUrl();
         var Settings = $resource(baseUrl + 'settings');
+        var SystemSettings = $resource(baseUrl+ 'settings/system/')
         var List = listProvider.getResource(baseUrl + 'lists/:targetId');
         var playlistUrl = baseUrl + 'playlists/:playlistId';
         var Playlist = $resource(playlistUrl, { playlistId: '@id' });
@@ -65,7 +66,8 @@
             seek: seek,
             stepBackward: stepBackward,
             stepForward: stepForward,
-            getRameVersioning: getRameVersioning
+            getRameVersioning: getRameVersioning,
+            getSystemSettings: getSystemSettings
         };
 
         return service;
@@ -101,6 +103,16 @@
          */
         function getSettings() {
             return Settings.get();
+        }
+
+        /**
+         * @name getSystemSettings
+         * @desc Returns instance object of SystemSettings $resource. You can save
+         * settings by calling returned object.$save();
+         * @returns object
+         */
+        function getSystemSettings() {
+            return SystemSettings.get();
         }
 
         function getStatus(payload) {

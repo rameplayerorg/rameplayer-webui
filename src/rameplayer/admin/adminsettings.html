@@ -1,14 +1,13 @@
-<div class="container" ng-controller="AdminController as settings">
+<div class="container" ng-controller="AdminController as vm">
 
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="form-group">
                 <label for="videoResOut" translate>Video output resolution</label>
-                <select id="videoResOut">
+                <select id="videoResOut" ng-model="vm.systemSettings.resolution">
                     <option
-                        ng-repeat="vor in settings.videoOutputResolutions"
-                        ng-model="settings.videoOutputResolution">{{
-                        vor }}</option>
+                        ng-repeat="vor in vm.videoOutputResolutions"
+                        ng-value="vor" translate>{{ vor }}</option>
                 </select>
             </div>
 
@@ -17,11 +16,11 @@
                 Audio port</label>
                 <div class="input-group" id="audioPort">
                     <span class=""
-                        ng-repeat="port in settings.audioPorts">
+                        ng-repeat="port in vm.audioPorts">
                         <input type="radio" 
-                            ng-model="settings.audioPort"
+                            ng-model="vm.systemSettings.audioPort"
                             ng-value="port">
-                        {{ port }}
+                        {{ port | translate }}
                     </span>
                 </div>
             </div>
@@ -29,7 +28,7 @@
             <div class="form-group">
                 <label for="deviceName" translate>Device name</label>
                 <input type="text" name="deviceName" id="deviceName"
-                    class="form-control" ng-model="settings.deviceName"
+                    class="form-control" ng-model="vm.deviceName"
                     ng-minlength="3" ng-maxlength="16" />
             </div>
 
@@ -42,46 +41,51 @@
                     <div class="list-group-item">
                         <div class="row form-group center-block">
                             <input type="checkbox"
-                                ng-model="settings.isDhcpClient"
-                                ng-value="true">
+                                ng-model="vm.systemSettings.isDhcpClient">
                                 <span translate>
                                 DHCP_CLIENT_SETTING
                                 </span>
                         </div>
                         <div class="row form-group center-block">
                             <rame-ip-address-block
-                                label-address-usage="Device IP"
                                 aria-label="DeviceIP"
-                                disabilify="settings.isDhcpClient"
-                                octets="settings.deviceIpOcts"></rame-ip-address-block>
+                                disabilify="vm.systemSettings.isDhcpClient"
+                                octets="vm.deviceIpOcts">
+                                {{ 'Device IP' | translate }}
+                            </rame-ip-address-block>
                         </div>
                         <div class="row form-group center-block">
                             <rame-ip-address-block
-                                label-address-usage="Subnet mask"
                                 aria-label="subnetMask"
-                                disabilify="settings.isDhcpClient"
-                                octets="settings.subnetMaskOcts"></rame-ip-address-block>
+                                disabilify="vm.systemSettings.isDhcpClient"
+                                octets="vm.subnetMaskOcts">
+                                {{ 'Subnet mask' | translate }}
+                            </rame-ip-address-block>
                         </div>
                         <div class="row form-group center-block">
                             <rame-ip-address-block
-                                label-address-usage="Gateway IP"
                                 aria-label="GatewayIP"
-                                disabilify="settings.isDhcpClient"
-                                octets="settings.gatewayIpOcts"></rame-ip-address-block>
+                                disabilify="vm.systemSettings.isDhcpClient"
+                                octets="vm.gatewayIpOcts">
+                                {{ 'Gateway IP' | translate }}
+                            </rame-ip-address-block>
                         </div>
                         <div class="row form-group center-block">
                             <rame-ip-address-block
-                                label-address-usage="DNS, preferred"
                                 aria-label="DNSIPpreferred"
-                                disabilify="settings.isDhcpClient"
-                                octets="settings.dnsServerIpOcts"></rame-ip-address-block>
+                                disabilify="vm.systemSettings.isDhcpClient"
+                                octets="vm.dnsServerIpOcts">
+                                {{ 'DNS, preferred' | translate }}
+                            </rame-ip-address-block>
                         </div>
                         <div class="row form-group center-block">
                             <rame-ip-address-block
                                 label-address-usage="DNS, alternative"
                                 aria-label="DNSIPalternative"
-                                disabilify="settings.isDhcpClient"
-                                octets="settings.dnsAlternativeServerIpOcts"></rame-ip-address-block>
+                                disabilify="vm.systemSettings.isDhcpClient"
+                                octets="vm.dnsAlternativeServerIpOcts">
+                                {{ 'DNS, alternative' | translate }}
+                            </rame-ip-address-block>
                         </div>
                     </div>
                 </div>
@@ -90,9 +94,9 @@
         </div>
         <div class="panel-footer">
             <button type="button" class="btn btn-default btn-lg"
-                ng-click="settings.saveSettings()">
+                ng-click="vm.saveSettings()">
                 <span class="glyphicon"
-                    ng-class="{ 'glyphicon-floppy-disk': settings.savingStatus !== 'saved', 'glyphicon-floppy-saved': settings.savingStatus === 'saved' }"
+                    ng-class="{ 'glyphicon-floppy-disk': vm.savingStatus !== 'saved', 'glyphicon-floppy-saved': vm.savingStatus === 'saved' }"
                     aria-hidden="true"></span>
                 <span translate>SAVE_SETTINGS</span>
             </button>

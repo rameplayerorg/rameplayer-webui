@@ -7,26 +7,15 @@
     function rameIpAddressBlock() {
         var directive = {
             restrict : 'E',
-            link : linkFunc,
+            transclude: true,
             templateUrl : 'rameplayer/admin/ip-address-block.html',
-
-            controller : 'AdminController',
-            controllerAs : 'vm',
-            bindToController : true,
-
             scope : {
                 isDisabled : '=disabilify',
-                octets : '=octets',
+                octets : '=octets'
             },
 
         };
-
         return directive;
-
-        function linkFunc(scpe, elem, attrs, vm) {
-            vm.labelAddressUsage = attrs.labelAddressUsage;
-
-        }
     }
 
 })();

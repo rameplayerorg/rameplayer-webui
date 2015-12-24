@@ -49,6 +49,15 @@
         var Playlists = $resource(baseUrl + 'playlists');
         var DefaultPlaylist = $resource(baseUrl + 'playlists/default');
         var DefaultPlaylistItem = $resource('playlists/default/items/:itemId', { itemId: '@id' });
+        var SystemSettings = {
+            "audioPort": "rameAnalogOnly",
+            "isDhcpClient": true,
+            "resolution": "rameAutodetect",
+            '$save': function(func) {
+                $log.info('Saving system settings');
+                func();
+            }
+        };
 
         var service = {
             getSettings: getSettings,
@@ -67,7 +76,8 @@
             seek: seek,
             stepBackward: stepBackward,
             stepForward: stepForward,
-            getRameVersioning: getRameVersioning
+            getRameVersioning: getRameVersioning,
+            getSystemSettings: getSystemSettings
         };
 
         var delay = 50;
@@ -293,6 +303,10 @@
                     }
                 }
             }
+        }
+
+        function getSystemSettings() {
+            return SystemSettings;
         }
     }
 })();
