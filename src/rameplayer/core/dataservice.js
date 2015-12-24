@@ -32,7 +32,7 @@
 
         var baseUrl = getBaseUrl();
         var Settings = $resource(baseUrl + 'settings');
-        var SystemSettings = $resource(baseUrl+ 'settings/system/')
+        var SystemSettings = $resource(baseUrl+ 'settings/system/');
         var List = listProvider.getResource(baseUrl + 'lists/:targetId');
         var playlistUrl = baseUrl + 'playlists/:playlistId';
         var Playlist = $resource(playlistUrl, { playlistId: '@id' });

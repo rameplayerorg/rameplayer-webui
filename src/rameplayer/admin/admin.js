@@ -39,21 +39,22 @@
             "rame1080p60"
         ];
 
-        function initOctets(field, def = ['', '', '', '']) {
+        function initOctets(field, def) {
             if (vm.systemSettings[field]) {
                 return vm.systemSettings[field].split('.');
             }
-            return def;
+            return def || ['', '', '', ''];
         }
 
         function saveSettings() {
             var valid = true;
+            var ipAddress, gatewayIp, dnsServerIp, dnsAlternativeServerIp, subnetMask;
             if (!vm.systemSettings.isDhcpClient) {
-                var ipAddress = validateIP(vm.deviceIpOcts);
-                var gatewayIp = validateIP(vm.gatewayIpOcts);
-                var dnsServerIp = validateIP(vm.dnsServerIpOcts);
-                var dnsAlternativeServerIp = validateIP(vm.dnsAlternativeServerIpOcts);
-                var subnetMask = validateIP(vm.subnetMaskOcts);
+                ipAddress = validateIP(vm.deviceIpOcts);
+                gatewayIp = validateIP(vm.gatewayIpOcts);
+                dnsServerIp = validateIP(vm.dnsServerIpOcts);
+                dnsAlternativeServerIp = validateIP(vm.dnsAlternativeServerIpOcts);
+                subnetMask = validateIP(vm.subnetMaskOcts);
 
                 var invalidFields = [];
                 if (!ipAddress) {

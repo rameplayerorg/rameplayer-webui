@@ -27,7 +27,7 @@ gulp.task('analyze', function() {
 /**
  * Create $templateCache from the html templates
  * Output is written to build/templates.js
- * @return {Steram}
+ * @return {Stream}
  */
 gulp.task('templatecache', function() {
     return gulp
