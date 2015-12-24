@@ -177,8 +177,20 @@ gulp.task('inject-version', ['rev-and-inject'], function(cb) {
     exec('git describe --tags', function(err, stdout, stderr) {
         stdout = stdout.replace(/^\s+|\s+$/g, '');
         var indexHtml = paths.build + 'index.html';
+        var adminHtml = paths.build + 'admin.html';
+        var indexHtmlFilter = plugins.filter(['index.html']);
+        var adminHtmlFilter = plugins.filter(['admin.html']);
         return gulp
-            .src(indexHtml)
+            .src([].concat(indexHtml, adminHtml))
+            .pipe(indexHtmlFilter)
+            .pipe(plugins.replace('development', stdout))
+            // change settings for production environment
+            .pipe(plugins.replace("{ basePath: 'stubs/', simulation: true }",
+                                  "{ port: 8000, basePath: '/' }"))
+            .pipe(gulp.dest(paths.build))
+            .pipe(indexHtmlFilter.restore())
+
+            .pipe(adminHtmlFilter)
             .pipe(plugins.replace('development', stdout))
             // change settings for production environment
             .pipe(plugins.replace("{ basePath: 'stubs/', simulation: true }",
