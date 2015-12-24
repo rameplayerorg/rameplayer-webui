@@ -49,7 +49,7 @@
         function saveSettings() {
             var valid = true;
             var ipAddress, gatewayIp, dnsServerIp, dnsAlternativeServerIp, subnetMask;
-            if (!vm.systemSettings.isDhcpClient) {
+            if (!vm.systemSettings.ipDhcpClient) {
                 ipAddress = validateIP(vm.deviceIpOcts);
                 gatewayIp = validateIP(vm.gatewayIpOcts);
                 dnsServerIp = validateIP(vm.dnsServerIpOcts);
@@ -78,7 +78,7 @@
                 }
             }
             if (valid) {
-                if (!vm.systemSettings.isDhcpClient) {
+                if (!vm.systemSettings.ipDhcpClient) {
                     vm.systemSettings.ipAddress = ipAddress;
                     vm.systemSettings.ipSubnetMask = subnetMask;
                     vm.systemSettings.ipGateway = gatewayIp;

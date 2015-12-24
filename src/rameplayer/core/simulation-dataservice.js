@@ -51,7 +51,7 @@
         var DefaultPlaylistItem = $resource('playlists/default/items/:itemId', { itemId: '@id' });
         var SystemSettings = {
             "audioPort": "rameAnalogOnly",
-            "isDhcpClient": true,
+            "ipDhcpClient": true,
             "resolution": "rameAutodetect",
             '$save': function(func) {
                 $log.info('Saving system settings');
