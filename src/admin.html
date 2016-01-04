@@ -24,10 +24,8 @@
 </head>
 
 <body>
-    <div class="container">        
-        <h1 translate>Admin Settings</h1>
-		<!-- <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> -->
-		<div ng-include="'rameplayer/admin/adminsettings.html'" ng-cloak>                
+    <div class="container">
+		<div class="row" ng-include="'rameplayer/admin/adminsettings.html'" ng-cloak>
 		</div>
     </div> <!-- .container -->
     
@@ -92,13 +90,6 @@
     <!-- settings module -->
     <script src="rameplayer/settings/settings.module.js"></script>
     <script src="rameplayer/settings/settings.js"></script>
-    
-    <!-- exception module -->
-    <!--
-    <script src="rameplayer/rim/exception/exception.module.js"></script>    
-    <script src="rameplayer/rim/exception/exception.controller.js"></script>
-    <script src="rameplayer/rim/exception/exception-gallery.directive.js"></script>
-    -->
     
     <!-- endinject -->
     
