@@ -1,19 +1,20 @@
-<div class="input-group">
-    <span class="input-group-addon text-right" style="width: auto" ng-transclude></span>
-    <!-- {{ vm.deviceName }} <span style="width: 50%"> -->
-    <input type="text" class="form-control" maxlength="3"
-        style="width: 4em" ng-model="octets[0]"
-        ng-disabled="isDisabled">
-    <span class="input-group-addon" style="width: 2em">.</span>
-    <input type="text" class="form-control" maxlength="3"
-        style="width: 4em" ng-model="octets[1]"
-        ng-disabled="isDisabled">
-    <span class="input-group-addon" style="width: 2em">.</span>
-    <input type="text" class="form-control" maxlength="3"
-        style="width: 4em" ng-model="octets[2]"
-        ng-disabled="isDisabled">
-    <span class="input-group-addon" style="width: 2em">.</span>
-    <input type="text" class="form-control" maxlength="3"
-        style="width: 4em" ng-model="octets[3]"
-        ng-disabled="isDisabled">
-</div>
+<div class="row">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" ng-transclude></label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control ip-input"
+                    ng-model="octets[0]" maxlength="3" ng-disabled="isDisabled">
+                .
+                <input type="text" class="form-control ip-input"
+                    ng-model="octets[1]" maxlength="3" ng-disabled="isDisabled">
+                .
+                <input type="text" class="form-control ip-input"
+                    ng-model="octets[2]" maxlength="3" ng-disabled="isDisabled">
+                .
+                <input type="text" class="form-control ip-input"
+                    ng-model="octets[3]" maxlength="3" ng-disabled="isDisabled">
+            </div>
+        </div>
+    </div> <!-- .form-horizontal -->
+</div> <!-- .row -->
