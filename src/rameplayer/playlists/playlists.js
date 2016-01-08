@@ -18,6 +18,7 @@
         vm.removeMedia = removeMedia;
         vm.playlistSorted = playlistSorted;
         vm.saveAs = saveAs;
+        vm.addStream = addStream;
 
         $scope.$watchCollection('vm.playerStatus', function(current, original) {
             // update playlists if newer versions available
@@ -55,7 +56,7 @@
 
         function removeMedia(playlist, media) {
             $log.info('Remove media from playlist', playlist, media);
-            dataService.removeFromDefaultPlaylist(media);
+            dataService.removeFromPlaylist(media, playlist);
         }
 
         function saveAs(playlist) {
@@ -73,6 +74,24 @@
                 newPlaylist.title = playlistTitle;
                 $log.info('New playlist', newPlaylist);
                 dataService.createPlaylist(newPlaylist);
+            });
+        }
+
+        function addStream(playlist) {
+            // open modal dialog
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'rameplayer/playlists/add-stream-modal.html',
+                controller: 'AddStreamModalController',
+                controllerAs: 'saveAs'
+            });
+
+            modalInstance.result.then(function(params) {
+                var newItem = {
+                    title: params.title,
+                    uri: params.url
+                };
+                dataService.addToPlaylist(newItem, playlist);
             });
         }
 

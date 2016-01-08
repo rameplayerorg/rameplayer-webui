@@ -19,7 +19,8 @@
                 onMediaClick: '&',
                 removeMedia: '&',
                 onSort: '&',
-                saveAs: '&'
+                saveAs: '&',
+                addStream: '&'
             },
             templateUrl: 'rameplayer/playlists/playlist.html'
         };
