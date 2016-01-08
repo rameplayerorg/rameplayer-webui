@@ -32,13 +32,10 @@
             // which causes that CSS classes are not removed correctly
             // sometimes
             $animate.enabled(element, false);
-            scope.isDropdownOpen = false;
+            scope.isDropdownOpen = true;
             scope.isRemovable = (attrs.remove !== undefined);
             scope.canAddToDefault = (attrs.addToDefault !== undefined);
             scope.isMovable = (attrs.moveTo !== undefined);
-            scope.toggleDropdown = function($event) {
-                scope.isDropdownOpen = !scope.isDropdownOpen;
-            };
             scope.playerStatus = statusService.status;
             scope.itemClick = itemClick;
 

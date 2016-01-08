@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h3 translate>Add Network Stream</h3>
+</div>
+
+<form>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="url">URL</label>
+            <input type="text" id="url" class="form-control" placeholder="http://www.example.com/stream.mp4" ng-model="saveAs.url" required>
+        </div>
+        <div class="form-group">
+            <label for="url" translate>Title</label>
+            <input type="text" id="title" class="form-control" placeholder="Title" ng-model="saveAs.title">
+        </div>
+   </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit" ng-click="saveAs.save()">Add</button>
+        <button class="btn btn-warning" type="button" ng-click="saveAs.cancel()">Cancel</button>
+    </div>
+</form>

@@ -10,11 +10,16 @@
                      <span class="glyphicon glyphicon-menu-hamburger"></span>
                  </a>
                  <ul class="uib-dropdown-menu dropdown-menu-right">
+                     <li>
+                         <a href ng-click="$event.stopPropagation(); addStream({ playlist: playlist })">
+                             <i class="glyphicon glyphicon-cloud"></i> Add Stream&hellip;
+                         </a>
+                     </li>
                      <li ng-switch on="defaultPlaylist">
                          <a href ng-switch-when="true" ng-click="$event.stopPropagation(); saveAs({ playlist: playlist })">
                              <i class="glyphicon glyphicon-save"></i> Save as&hellip;
                          </a>
-                         <a href ng-switch-default ng-click="$event.stopPropagation();">
+                         <a href ng-switch-default ng-click="$event.stopPropagation();" ng-if="false">
                              <i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;
                          </a>
                      </li>
@@ -34,19 +39,15 @@
 
     <div class="media-list" ng-if="playlist.items.length">
         <div class="row hidden-xs media-list-header">
-            <div class="col-sm-4">File</div>
-            <div class="col-sm-4">Title</div>
-            <div class="col-sm-1 text-right">Length</div>
-            <div class="col-sm-3">Date</div>
+            <div class="col-sm-4" translate>Name</div>
+            <div class="col-sm-4" translate>Title</div>
+            <div class="col-sm-1 text-right" translate>Length</div>
+            <div class="col-sm-3" translate>Date</div>
         </div>
         <div class="media-list-sortable" ng-sortable="sortableOptions">
             <rame-media-item ng-repeat="mediaItem in playlist.items" media="mediaItem" remove="removeMedia({ playlist: playlist, media: mediaItem })" on-click="onMediaClick({ media: mediaItem })"></rame-media-item>
         </div>
     </div>
 
-    <uib-accordion close-others="false" ng-if="playlist.lists">
-        TODO: Recursive playlist
-        <rame-playlist-fix ng-repeat="playlis in playlist.lists"></rame-playlist-fix>
-    </uib-accordion>
 </uib-accordion-group>
 

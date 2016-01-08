@@ -11,8 +11,8 @@
     </div>
     <div class="col-sm-3 media-list-item-field">
         {{ media.info.modified | date:'yyyy-MM-dd HH:mm:ss' }}
-        <span class="pull-right" ng-if="false && media.info.type !== 'directory'">
-            <span uib-dropdown is-open="isDropdownOpen">
+        <span class="pull-right" ng-if="media.info.type !== 'directory'">
+            <span uib-dropdown is-open="1">
                 <a href uib-dropdown-toggle ng-click="$event.stopPropagation();">
                     <span class="glyphicon glyphicon-menu-hamburger sorting-handle"></span>
                 </a>
@@ -24,7 +24,7 @@
                         <a href ng-click="remove()"><i class="glyphicon glyphicon-remove"></i> Remove</a>
                     </li>
                     <li ng-if="canAddToDefault">
-                        <a href ng-click="$event.stopPropagation(); addToDefault(); toggleDropdown()"><i class="glyphicon glyphicon-plus"></i> Add to Default Playlist</a>
+                        <a href ng-click="$event.stopPropagation(); addToDefault()"><i class="glyphicon glyphicon-plus"></i> Add to Default Playlist</a>
                     </li>
                 </ul>
             </span>
