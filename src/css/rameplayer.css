@@ -60,3 +60,11 @@ body {
 .breadcrumb > li+li:before {
   content: "\00a0/\00a0";
 }
+
+/* Admin Settings */
+
+/* IP address input */
+.form-control.ip-input {
+  display: inline;
+  width: 60px;
+}

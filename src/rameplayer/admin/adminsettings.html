@@ -1,5 +1,4 @@
 <div class="container" ng-controller="AdminController as vm">
-    
     <div class="panel panel-default">
         <div class="panel-heading ">            
             <h3 class="panel-title" translate>Admin Settings</h3>
@@ -92,6 +91,33 @@
                                 disabilify="vm.systemSettings.ipDhcpClient"
                                 octets="vm.dnsAlternativeServerIpOcts">
                                 {{ 'DNS, alternative' | translate }}
+                            </rame-ip-address-block>
+                        </div>
+                        <div class="row form-group center-block">
+                            <input type="checkbox"
+                                ng-model="vm.systemSettings.ipDhcpServer"
+                                ng-disabled="vm.systemSettings.ipDhcpClient"
+                                ng-click="vm.prefillDhcpOcts()">
+                                <span translate>
+                                DHCP_SERVER_SETTING
+                                </span>
+                        </div>
+                        <div class="row form-group center-block">
+                            <rame-ip-address-block
+                                label-address-usage="DHCP range start"
+                                aria-label="DHCPRangeStart"
+                                disabilify="vm.systemSettings.ipDhcpClient || !vm.systemSettings.ipDhcpServer"
+                                octets="vm.dhcpServerRangeStartIpOcts">
+                                {{ 'DHCP range start' | translate }}
+                            </rame-ip-address-block>
+                        </div>
+                        <div class="row form-group center-block">
+                            <rame-ip-address-block
+                                label-address-usage="DHCP range end"
+                                aria-label="DHCPRangeEnd"
+                                disabilify="vm.systemSettings.ipDhcpClient || !vm.systemSettings.ipDhcpServer"
+                                octets="vm.dhcpServerRangeEndIpOcts">
+                                {{ 'DHCP range end' | translate }}
                             </rame-ip-address-block>
                         </div>
                     </div>

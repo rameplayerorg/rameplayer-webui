@@ -32,6 +32,7 @@
             AUTOPLAY_USB: 'Automatically play files from USB',
             UI_LANGUAGE: 'Language of the user interface',
             DHCP_CLIENT_SETTING: 'Obtain IP automatically as DHCP client',
+            DHCP_SERVER_SETTING: 'Use as DHCP server',
             rameAnalogOnly: 'Analog',
             rameHdmiOnly: 'HDMI',
             rameHdmiAndAnalog: 'Both',
@@ -76,6 +77,7 @@
             'Admin Settings': 'Järjestelmän asetukset',
             'IP Configurations': 'IP-osoitteet',
             DHCP_CLIENT_SETTING: 'Hae IP-osoitteet automaattisesti DHCP:n kautta',
+            DHCP_SERVER_SETTING: 'Käytä tätä DHCP serverinä',
             rameAnalogOnly: 'Analoginen',
             rameHdmiOnly: 'HDMI',
             rameHdmiAndAnalog: 'Molemmat'
