@@ -41,7 +41,11 @@
             status:            status,
             onPollerError:     onPollerError
         };
-        var restartWarningDisplayed = false;
+
+        var displayedNotifications = {
+            restartRequired: false,
+            updateAvailable: false
+        };
 
         startStatusPoller();
 
@@ -63,22 +67,7 @@
                 if (!angular.equals(newStatus, status)) {
                     angular.copy(newStatus, status);
                     syncLists();
-
-                    // notify about restart required
-                    if (newStatus.player &&
-                        newStatus.player.rebootRequired &&
-                        !restartWarningDisplayed) {
-                        $translate(['RESTART_REQUIRED', 'RESTART_REQUIRED_HELP']).then(function(translations) {
-                            toastr.warning(translations.RESTART_REQUIRED_HELP,
-                                           translations.RESTART_REQUIRED, {
-                                               timeOut: 0,
-                                               extendedTimeOut: 0,
-                                               tapToDismiss: false,
-                                               closeButton: true
-                                           });
-                            restartWarningDisplayed = true;
-                        });
-                    }
+                    checkServerNotifications();
                 }
             }, function(errorResponse) {
                 angular.forEach(pollerErrorCallbacks, function(callback) {
@@ -114,6 +103,38 @@
                     }
                 }
             });
+        }
+
+        function checkServerNotifications() {
+            // restart required notification
+            if (status.player &&
+                status.player.rebootRequired &&
+                !displayedNotifications.restartRequired) {
+                $translate(['RESTART_REQUIRED', 'RESTART_REQUIRED_DESC']).then(function(translations) {
+                    toastr.warning(translations.RESTART_REQUIRED_DESC,
+                                   translations.RESTART_REQUIRED, {
+                                       timeOut: 0,
+                                       extendedTimeOut: 0,
+                                       tapToDismiss: false,
+                                       closeButton: true
+                                   });
+                    displayedNotifications.restartRequired = true;
+                });
+            }
+
+            // update available notification
+            if (status.player &&
+                status.player.updateAvailable &&
+                !displayedNotifications.updateAvailable) {
+                $translate(['UPDATE_AVAILABLE', 'UPDATE_AVAILABLE_DESC']).then(function(translations) {
+                    toastr.info(translations.UPDATE_AVAILABLE_DESC,
+                                translations.UPDATE_AVAILABLE, {
+                                    timeOut: 30000,
+                                    closeButton: true
+                                });
+                    displayedNotifications.updateAvailable = true;
+                });
+            }
         }
     }
 })();

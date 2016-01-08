@@ -44,7 +44,9 @@
             rame1080p50: "1080p 50 Hz",
             rame1080p60: "1080p 60 Hz",
             RESTART_REQUIRED: "Restart required",
-            RESTART_REQUIRED_HELP: "Some changes need device to be restarted."
+            RESTART_REQUIRED_DESC: "Some changes need device to be restarted.",
+            UPDATE_AVAILABLE: "Update available",
+            UPDATE_AVAILABLE_DESC: "Newer version of software is available."
         });
         $translateProvider.translations('fi', {
             Settings: 'Asetukset',

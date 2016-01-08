@@ -37,6 +37,8 @@
                 listsRefreshed: {
                 },
                 player: {
+                    //rebootRequired: true,
+                    //updateAvailable: true
                 }
             },
             defaultPlaylist: {
