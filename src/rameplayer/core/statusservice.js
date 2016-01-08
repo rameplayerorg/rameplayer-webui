@@ -16,14 +16,14 @@
         .module('rameplayer.core')
         .factory('statusService', statusService);
 
-    statusService.$inject = ['$rootScope', '$log', '$interval', '$q', 'dataService', 'listService'];
+    statusService.$inject = ['$rootScope', '$log', '$interval', '$q', '$translate', 'dataService', 'listService', 'toastr'];
 
     /**
      * @namespace StatusService
      * @desc Application wide service for player status
      * @memberof Factories
      */
-    function statusService($rootScope, $log, $interval, $q, dataService, listService) {
+    function statusService($rootScope, $log, $interval, $q, $translate, dataService, listService, toastr) {
         var statusInterval = rameServerConfig.statusInterval || 1000;
         var status = {
             position: 0
@@ -41,6 +41,8 @@
             status:            status,
             onPollerError:     onPollerError
         };
+        var restartWarningDisplayed = false;
+
         startStatusPoller();
 
         return service;
@@ -61,6 +63,22 @@
                 if (!angular.equals(newStatus, status)) {
                     angular.copy(newStatus, status);
                     syncLists();
+
+                    // notify about restart required
+                    if (newStatus.player &&
+                        newStatus.player.rebootRequired &&
+                        !restartWarningDisplayed) {
+                        $translate(['RESTART_REQUIRED', 'RESTART_REQUIRED_HELP']).then(function(translations) {
+                            toastr.warning(translations.RESTART_REQUIRED_HELP,
+                                           translations.RESTART_REQUIRED, {
+                                               timeOut: 0,
+                                               extendedTimeOut: 0,
+                                               tapToDismiss: false,
+                                               closeButton: true
+                                           });
+                            restartWarningDisplayed = true;
+                        });
+                    }
                 }
             }, function(errorResponse) {
                 angular.forEach(pollerErrorCallbacks, function(callback) {

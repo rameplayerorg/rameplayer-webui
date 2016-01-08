@@ -42,7 +42,9 @@
             rame1080i50: "1080i 50 Hz",
             rame1080i60: "1080i 60 Hz",
             rame1080p50: "1080p 50 Hz",
-            rame1080p60: "1080p 60 Hz"
+            rame1080p60: "1080p 60 Hz",
+            RESTART_REQUIRED: "Restart required",
+            RESTART_REQUIRED_HELP: "Some changes need device to be restarted."
         });
         $translateProvider.translations('fi', {
             Settings: 'Asetukset',

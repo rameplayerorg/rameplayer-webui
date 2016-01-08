@@ -35,6 +35,8 @@
                     id: 'sda1:%2f02_pk_FI_002_r720P%2emp4'
                 },
                 listsRefreshed: {
+                },
+                player: {
                 }
             },
             defaultPlaylist: {
