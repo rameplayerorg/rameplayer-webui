@@ -16,7 +16,7 @@
             "rameAnalogOnly", "rameHdmiOnly", "rameHdmiAndAnalog"
         ];
 
-        vm.deviceName = "munRame";
+        vm.deviceName = vm.systemSettings.hostname;
         vm.deviceIpOcts = initOctets('ipAddress');
         vm.subnetMaskOcts = initOctets('ipSubnetMask');
         vm.gatewayIpOcts = initOctets('ipGateway');
@@ -52,6 +52,15 @@
 
         function saveSettings() {
             var valid = true;
+            var invalidFields = [];
+            
+            if(!vm.deviceName){
+                // Match against regexp already done using ng-pattern
+                //.match(/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?(\.[a-z\d]([a-z\d\-]{0,61}[a-z\d])?)*$/i)){
+                invalidFields.push('Device hostname');
+                valid = false;
+            }  
+            
             var ipAddress, gatewayIp, dnsServerIp, dnsAlternativeServerIp, subnetMask, 
                     dhcpRangeStart, dhcpRangeEnd, dhcpRangeValid;
             if (!vm.systemSettings.ipDhcpClient) {
@@ -64,7 +73,7 @@
                 dhcpRangeEnd = validateIP(vm.dhcpServerRangeEndIpOcts);                
                 dhcpRangeValid = validateIpOrdering(vm.dhcpServerRangeStartIpOcts, vm.dhcpServerRangeEndIpOcts);
 
-                var invalidFields = [];
+                
                 if (!ipAddress) {
                     invalidFields.push('IP address');
                 }
@@ -90,25 +99,29 @@
                     if (!dhcpRangeEnd) {
                         invalidFields.push('DHCP Range End');
                     }
-                    if (vm.dhcpServerRangeStartIpOcts[3] == 0) {
-                        // TODO: ?? Is this really illegal range value, always broadcast or always first server ?? 
+                    if (vm.dhcpServerRangeStartIpOcts[3] == 0) { 
                         invalidFields.push('DHCP Range Start Not Allowed');
                     }
-                    if (vm.dhcpServerRangeEndIpOcts[3] == 255) {
-                        // TODO: ?? Is this really illegal range value, always broadcast or always first server ?? 
+                    if (vm.dhcpServerRangeEndIpOcts[3] == 255) { 
                         invalidFields.push('DHCP Range End Not Allowed');
                     }
                     if(!dhcpRangeValid){
                         invalidFields.push('DHCP Range Definition');
                     }                    
                 }
-                
-                if (invalidFields.length) {
-                    toastr.error(invalidFields.join(', '), 'Invalid settings');
-                    valid = false;
-                }
             }
+            
+            if (invalidFields.length) {
+                valid = false;
+                // Sticky toast
+                toastr.error(invalidFields.join(', '), 'Invalid settings', {
+                    timeOut : 0,
+                    closeButton: true
+                });
+            }
+            
             if (valid) {
+                vm.systemSettings.hostname = vm.deviceName;
                 if (!vm.systemSettings.ipDhcpClient) {
                     vm.systemSettings.ipAddress = ipAddress;
                     vm.systemSettings.ipSubnetMask = subnetMask;
@@ -122,14 +135,17 @@
                 }
                 vm.systemSettings.$save(function() {
                     vm.savingStatus = 'saved';
+                    toastr.clear();
                     toastr.success('Admin settings saved.', 'Saved');
                 });
+            }else{
+                toastr.error('Admin settings not saved.', "Check inserted values");                          
             }
             //toastr.error('saveSettings: ' + $rootScope.rameExceptions, $rootScope.rameException);
             //throw new Error('testerror');
         }
 
-        // IP address string regexp
+        // IPv4 address string regexp
         // val.match(/\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/))
         function validateIP(octs) {
             var addr = "";
