@@ -5,10 +5,11 @@
         .module('rameplayer.core')
         .constant('ItemTypes', {
             LIST: 'directory',
-            SINGLE: 'regular'
+            SINGLE: 'regular',
+            PLAYLIST: 'playlist'
         })
         .constant('ListIds', {
             ROOT: 'root',
-            DEFAULT_PLAYLIST: 'defaultPlaylist'
+            DEFAULT_PLAYLIST: 'default'
         });
 })();

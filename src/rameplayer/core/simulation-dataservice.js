@@ -17,24 +17,26 @@
         .factory('simulationDataService', simulationDataService);
 
     simulationDataService.$inject = ['$rootScope', '$log', '$http', '$resource',
-        '$timeout', '$interval', 'uuid', 'listProvider'];
+        '$timeout', '$interval', '$q', 'uuid', 'listProvider', 'ListIds'];
 
     /**
      * @namespace DataService
      * @desc Application wide service for REST API
      * @memberof Factories
      */
-    function simulationDataService($rootScope, $log, $http, $resource, $timeout, $interval, uuid, listProvider) {
+    function simulationDataService($rootScope, $log, $http, $resource, $timeout, $interval, $q, uuid, listProvider, ListIds) {
         // initial internal data
         // corresponds server data in production
         var server = {
             status: {
-                state: 'buffering',
-                position: 5,
+                state: 'stopped',
+                position: 0,
                 cursor: {
-                    id: 'sda1:%2f02_pk_FI_002_r720P%2emp4'
+                    parentId: 'sda1',
+                    id: 'sda1:%2f00_pk_FI_000_r720P%2emp4'
                 },
                 listsRefreshed: {
+                    'default': 1403136766000
                 },
                 player: {
                     //rebootRequired: true,
@@ -42,7 +44,10 @@
                 }
             },
             defaultPlaylist: {
-                items: []
+                targetId: 'default',
+                items: [],
+                '$save': function() {
+                }
             },
             playlists: []
         };
@@ -50,9 +55,6 @@
         var baseUrl = getBaseUrl();
         var Settings = $resource(baseUrl + 'settings.json');
         var List = listProvider.getResource(baseUrl + 'lists/:targetId.json');
-        var Playlists = $resource(baseUrl + 'playlists');
-        var DefaultPlaylist = $resource(baseUrl + 'playlists/default');
-        var DefaultPlaylistItem = $resource('playlists/default/items/:itemId', { itemId: '@id' });
         var SystemSettings = {
             "audioPort": "rameAnalogOnly",
             "ipDhcpClient": true,
@@ -68,12 +70,13 @@
             getStatus: getStatus,
             setCursor: setCursor,
             getList: getList,
-            getDefaultPlaylist: getDefaultPlaylist,
-            addToDefaultPlaylist: addToDefaultPlaylist,
-            removeFromDefaultPlaylist: removeFromDefaultPlaylist,
-            getPlaylists: getPlaylists,
-            createPlaylist: createPlaylist,
+            addToPlaylist: addToPlaylist,
+            addStreamToPlaylist: addStreamToPlaylist,
+            removeFromPlaylist: removeFromPlaylist,
             movePlaylistItem: movePlaylistItem,
+            createPlaylist: createPlaylist,
+            removePlaylist: removePlaylist,
+            clearPlaylist: clearPlaylist,
             play: play,
             pause: pause,
             stop: stop,
@@ -132,8 +135,15 @@
         function setCursor(itemId) {
             return $timeout(function() {
                 if (server.status.state !== 'playing' && server.status.state !== 'buffering') {
-                    server.status.cursor.id = itemId;
-                    $log.info('Cursor set to', itemId);
+                    var result = findItem(itemId);
+                    if (result) {
+                        server.status.cursor.id = result.item.id;
+                        server.status.cursor.parentId = result.parentId;
+                        $log.info('Cursor set to', result);
+                    }
+                    else {
+                        $log.info('Item not found for cursor item', itemId);
+                    }
                 }
                 else {
                     $log.info('Playing, not changing cursor');
@@ -141,39 +151,68 @@
             }, delay);
         }
 
-        function getList(id) {
-            var list = List.get({ targetId: id });
-            list.$promise.then(function(list) {
-                server.status.listsRefreshed[id] = list.refreshed || '';
-            });
-            return list;
+        function getList(targetId) {
+            if (targetId == ListIds.ROOT || targetId.indexOf('sda1') == 0 || targetId.indexOf('my-playlist') == 0) {
+                // if id starts with 'sda1' or 'my-playlist', fetch it with ajax
+                var list = List.get({ targetId: targetId });
+                list.$promise.then(function(list) {
+                    server.status.listsRefreshed[targetId] = list.info.refreshed || '';
+                });
+                return list;
+            }
+            else if (targetId == ListIds.DEFAULT_PLAYLIST) {
+                return server.defaultPlaylist;
+            }
+            else {
+                if ($rootScope.lists[targetId] === undefined) {
+                    $log.error('List ' + targetId + ' not found from $rootScope.lists');
+                }
+                return $rootScope.lists[targetId];
+            }
         }
 
-        function getDefaultPlaylist() {
-            return server.defaultPlaylist;
-        }
-
-        function addToDefaultPlaylist(mediaItem) {
+        function addToPlaylist(targetId, mediaItem) {
             return $timeout(function() {
                 var newItem = angular.copy(mediaItem);
                 // generate new UUID
                 newItem.id = uuid.v4();
-                server.defaultPlaylist.items.push(newItem);
+                $rootScope.lists['default'].items.push(newItem);
                 var date = new Date();
-                server.defaultPlaylist.modified = date.getTime();
-                server.status.playlists.modified = date.getTime();
-                return;
+                $rootScope.lists['default'].refreshed = date.getTime();
+                server.status.listsRefreshed['default'] = date.getTime();
             }, delay);
         }
 
-        function removeFromDefaultPlaylist(mediaItem) {
+        function addStreamToPlaylist(targetId, mediaItem) {
             return $timeout(function() {
-                for (var i = 0; i < server.defaultPlaylist.items.length; i++) {
-                    if (server.defaultPlaylist.items[i].id === mediaItem.id) {
-                        server.defaultPlaylist.items.splice(i, 1);
+                var playlist = $rootScope.lists[targetId];
+                var date = new Date();
+                var now = date.getTime();
+                var newItem = {
+                    info: {
+                        filename: mediaItem.uri,
+                        title: mediaItem.title,
+                        uri: mediaItem.uri,
+                        modified: now
+                    }
+                };
+                // generate new UUID
+                newItem.id = uuid.v4();
+                playlist.items.push(newItem);
+                playlist.modified = now;
+                server.status.listsRefreshed[targetId] = now;
+            }, delay);
+        }
+
+        function removeFromPlaylist(targetId, mediaItem) {
+            return $timeout(function() {
+                $log.info('remove', targetId, mediaItem);
+                var playlist = $rootScope.lists[targetId];
+                for (var i = 0; i < playlist.items.length; i++) {
+                    if (playlist.items[i].id === mediaItem.id) {
+                        playlist.items.splice(i, 1);
                         var date = new Date();
-                        server.defaultPlaylist.modified = date.getTime();
-                        server.status.playlists.modified = date.getTime();
+                        server.status.listsRefreshed[targetId] = date.getTime();
                     }
                 }
             }, delay);
@@ -183,36 +222,67 @@
             return server.playlists;
         }
 
-        function createPlaylist(playlist) {
-            return $timeout(function() {
-                var date = new Date();
-                var newPlaylist = {
-                    title: playlist.title,
-                    items: [],
-                    modified: date.getTime()
-                };
-                for (var i = 0; i < playlist.items.length; i++) {
-                    var newItem = angular.copy(playlist.items[i]);
-                    // generate new UUID
-                    newItem.id = uuid.v4();
-                    newPlaylist.items.push(newItem);
-                }
-                server.playlists.push(newPlaylist);
-                server.status.playlists.modified = date.getTime();
-            }, delay);
-        }
-
         function movePlaylistItem(playlist, item, oldIndex, newIndex) {
             return $timeout(function() {
                 $log.info('Playlist item moved');
             }, delay);
         }
 
+        function createPlaylist(playlist) {
+            return $timeout(function() {
+                var date = new Date();
+                var newId = uuid.v4();
+                var newPlaylist = {
+                    id: newId,
+                    info: {
+                        title: playlist.info.title,
+                        refreshed: date.getTime(),
+                        type: 'playlist'
+                    },
+                    targetId: newId,
+                    items: []
+                };
+                for (var i = 0; i < playlist.items.length; i++) {
+                    var result = findItem(playlist.items[i].id);
+                    if (result) {
+                        var newItem = angular.copy(result.item);
+                        // generate new UUID for item
+                        newItem.id = uuid.v4();
+                        newPlaylist.items.push(newItem);
+                    }
+                }
+                // simulate empty $promise
+                newPlaylist.$promise = $q.when(newPlaylist);
+                server.playlists.push(newPlaylist);
+                $rootScope.lists[newPlaylist.targetId] = newPlaylist;
+                $log.info('new playlist', newPlaylist);
+                server.status.listsRefreshed[newPlaylist.targetId] = newPlaylist.refreshed;
+
+                // add to root playlist
+                $rootScope.lists[ListIds.ROOT].items.push(newPlaylist);
+            }, delay);
+        }
+
+        function removePlaylist(targetId) {
+            return $timeout(function() {
+                delete $rootScope.lists[targetId];
+            });
+        }
+
+        function clearPlaylist(targetId) {
+            return $timeout(function() {
+                var date = new Date();
+                $rootScope.lists[targetId].items = [];
+                server.status.listsRefreshed[targetId] = date.getTime();
+            });
+        }
+
         function play() {
             return $timeout(function() {
                 $log.info('Playing');
                 server.status.state = 'playing';
-                server.status.duration = server.status.cursor.item.info.duration;
+                var result = findItem(server.status.cursor.id);
+                server.status.duration = result.item.info.duration;
                 playingPromise = $interval(function() {
                     server.status.position += 1.0;
                     if (server.status.position >= server.status.duration) {
@@ -311,6 +381,35 @@
 
         function getSystemSettings() {
             return SystemSettings;
+        }
+
+        // Returns item and parent list
+        function findItem(itemId) {
+            for (var targetId in $rootScope.lists) {
+                for (var i = 0; i < $rootScope.lists[targetId].items.length; i++) {
+                    if (itemId === $rootScope.lists[targetId].items[i].id) {
+                        return {
+                            parentId: targetId,
+                            item: $rootScope.lists[targetId].items[i]
+                        };
+                    }
+                }
+            }
+            // not found
+            return null;
+        }
+
+        function findCursorItem(cursor) {
+            var targetId = cursor.parentId;
+            if ($rootScope.lists[targetId] && $rootScope.lists[targetId].items) {
+                for (var i = 0; i < $rootScope.lists[targetId].items.length; i++) {
+                    if (cursor.id === $rootScope.lists[targetId].items[i].id) {
+                        return $rootScope.lists[targetId].items[i];
+                    }
+                }
+            }
+            // not found
+            return null;
         }
     }
 })();

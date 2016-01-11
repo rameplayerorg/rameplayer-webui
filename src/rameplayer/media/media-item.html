@@ -1,30 +1,30 @@
-<div class="row media-list-item" ng-class="{ selected: media.id === playerStatus.cursor.id && playerStatus.state !== 'playing' && playerStatus.state !== 'buffering', locked: media.id === playerStatus.cursor.id && (playerStatus.state === 'playing' || playerStatus.state === 'buffering') }" ng-click="itemClick()">
+<div class="row media-list-item" ng-class="{ selected: vm.media.id === vm.playerStatus.cursor.id && vm.playerStatus.state !== 'playing' && vm.playerStatus.state !== 'buffering', locked: vm.media.id === vm.playerStatus.cursor.id && (vm.playerStatus.state === 'playing' || vm.playerStatus.state === 'buffering') }" ng-click="vm.itemClick($event)">
     <div class="col-sm-4 media-list-item-field ellipsis">
-        <span class="glyphicon glyphicon-folder-close" ng-if="media.info.type === 'directory'"></span>
-        {{ media.info.filename }}
+        <span class="glyphicon glyphicon-folder-close" ng-if="vm.media.info.type === 'directory'"></span>
+        {{ vm.media.info.filename }}
     </div>
     <div class="col-sm-4 media-list-item-field ellipsis">
-        {{ media.info.title }}
+        {{ vm.media.info.title }}
     </div>
     <div class="col-sm-1 media-list-item-field text-right">
-        {{ media.info.duration | playerTime }}
+        {{ vm.media.info.duration | playerTime }}
     </div>
     <div class="col-sm-3 media-list-item-field">
-        {{ media.info.modified | date:'yyyy-MM-dd HH:mm:ss' }}
-        <span class="pull-right" ng-if="false && media.info.type !== 'directory'">
-            <span uib-dropdown is-open="isDropdownOpen">
-                <a href uib-dropdown-toggle ng-click="$event.stopPropagation();">
+        {{ vm.media.info.modified | date:'yyyy-MM-dd HH:mm:ss' }}
+        <span class="pull-right" ng-if="vm.media.info.type !== 'directory'">
+            <span uib-dropdown is-open="vm.isDropdownOpen" ng-click="$event.stopPropagation()">
+                <a href uib-dropdown-toggle>
                     <span class="glyphicon glyphicon-menu-hamburger sorting-handle"></span>
                 </a>
-                <ul class="uib-dropdown-menu dropdown-menu-right">
-                    <li ng-if="isMovable">
-                        <a href ng-click="moveTo()"><i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;</a>
+                <ul uib-dropdown-menu class="dropdown-menu-right">
+                    <li ng-if="vm.isMovable">
+                        <a href ng-click="vm.moveTo()"><i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;</a>
                     </li>
-                    <li ng-if="isRemovable">
-                        <a href ng-click="remove()"><i class="glyphicon glyphicon-remove"></i> Remove</a>
+                    <li ng-if="vm.isRemovable">
+                        <a href ng-click="vm.remove(); vm.isDropdownOpen=false;"><i class="glyphicon glyphicon-remove"></i> Remove</a>
                     </li>
-                    <li ng-if="canAddToDefault">
-                        <a href ng-click="$event.stopPropagation(); addToDefault(); toggleDropdown()"><i class="glyphicon glyphicon-plus"></i> Add to Default Playlist</a>
+                    <li ng-if="vm.canAddToDefault">
+                        <a href ng-click="vm.addToDefault(); vm.isDropdownOpen=false;"><i class="glyphicon glyphicon-plus"></i> Add to Default Playlist</a>
                     </li>
                 </ul>
             </span>

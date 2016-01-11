@@ -47,6 +47,9 @@
             }
         });
 
+        // fetch default playlist
+        add(ListIds.DEFAULT_PLAYLIST);
+
         return service;
 
         function add(targetId) {
@@ -56,6 +59,7 @@
             }
             var list = dataService.getList(targetId);
             $rootScope.lists[targetId] = list;
+            $log.info('ListService: list "' + targetId + '" added to $rootScope.lists');
             return list;
         }
 
@@ -69,6 +73,7 @@
 
         function remove(id) {
             delete $rootScope.lists[id];
+            $log.info('ListService: list "' + id + '" removed from $rootScope.lists');
         }
     }
 })();

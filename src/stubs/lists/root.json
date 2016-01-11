@@ -10,6 +10,16 @@
                 "modified": 0
             },
             "targetId": "sda1"
+        },
+        {
+            "id": "my-playlist",
+            "info": {
+                "modified": 0,
+                "title": "My Playlist",
+                "refreshed": 1449220031.3,
+                "type": "playlist"
+            },
+            "targetId": "my-playlist"
         }
     ],
     "info": {

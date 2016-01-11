@@ -16,14 +16,14 @@
         .module('rameplayer.core')
         .factory('dataService', dataService);
 
-    dataService.$inject = ['$log', '$http', '$resource', '$location', 'simulationDataService', 'listProvider'];
+    dataService.$inject = ['$log', '$http', '$resource', '$location', 'simulationDataService', 'listProvider', 'ListIds'];
 
     /**
      * @namespace DataService
      * @desc Application wide service for REST API
      * @memberof Factories
      */
-    function dataService($log, $http, $resource, $location, simulationDataService, listProvider) {
+    function dataService($log, $http, $resource, $location, simulationDataService, listProvider, ListIds) {
 
         if (rameServerConfig.simulation) {
             // replace this with simulationDataService
@@ -34,32 +34,26 @@
         var Settings = $resource(baseUrl + 'settings');
         var SystemSettings = $resource(baseUrl+ 'settings/system/');
         var List = listProvider.getResource(baseUrl + 'lists/:targetId');
-        var playlistUrl = baseUrl + 'playlists/:playlistId';
-        var Playlist = $resource(playlistUrl, { playlistId: '@id' });
-        var playlistItemUrl = baseUrl + 'playlists/:playlistId/items/:itemId';
-        var PlaylistItem = $resource(playlistItemUrl,
-            {
-                playlistId: '@playlistId',
-                itemId: '@id'
-            },
-            {
-                'update': { method: 'PUT' }
-            }
-        );
-        var DefaultPlaylist = $resource(baseUrl + 'playlists/default');
-        var DefaultPlaylistItem = $resource(baseUrl + 'playlists/default/items/:itemId', { itemId: '@id' });
+        var listItemUrl = baseUrl + 'lists/:targetId/items/:itemId';
+        var ListItem = $resource(listItemUrl, {
+            targetId: '',
+            itemId: ''
+        }, {
+            update: { method: 'PUT' }
+        });
 
         var service = {
             getSettings: getSettings,
             getStatus: getStatus,
             setCursor: setCursor,
             getList: getList,
-            getDefaultPlaylist: getDefaultPlaylist,
-            addToDefaultPlaylist: addToDefaultPlaylist,
-            removeFromDefaultPlaylist: removeFromDefaultPlaylist,
-            getPlaylists: getPlaylists,
-            createPlaylist: createPlaylist,
+            addToPlaylist: addToPlaylist,
+            addStreamToPlaylist: addStreamToPlaylist,
+            removeFromPlaylist: removeFromPlaylist,
             movePlaylistItem: movePlaylistItem,
+            createPlaylist: createPlaylist,
+            removePlaylist: removePlaylist,
+            clearPlaylist: clearPlaylist,
             play: play,
             pause: pause,
             stop: stop,
@@ -127,37 +121,58 @@
             return List.get({ targetId: id });
         }
 
-        function getDefaultPlaylist() {
-            return DefaultPlaylist.get();
-        }
-
-        function addToDefaultPlaylist(mediaItem) {
-            var newItem = new DefaultPlaylistItem();
-            newItem.uri = mediaItem.uri;
-            DefaultPlaylistItem.save(newItem, function() {
+        function addToPlaylist(targetId, item) {
+            var newItem = new ListItem({
+                id: item.id
+            });
+            return newItem.$save({
+                targetId: targetId,
+                itemId: ''
             });
         }
 
-        function removeFromDefaultPlaylist(mediaItem) {
-            DefaultPlaylistItem.delete({ itemId: mediaItem.id });
-        }
-
-        function getPlaylists() {
-            return Playlist.query();
-        }
-
-        function createPlaylist(playlist) {
-            Playlist.save(playlist, function() {
+        function addStreamToPlaylist(targetId, item) {
+            var newItem = new ListItem({
+                info: {
+                    title: item.title,
+                    uri: item.uri
+                }
+            });
+            return newItem.$save({
+                targetId: targetId,
+                itemId: ''
             });
         }
 
-        function movePlaylistItem(playlist, item, oldIndex, newIndex) {
-            PlaylistItem.update({}, {
-                id: item.id,
-                playlistId: playlist.id,
+        function removeFromPlaylist(targetId, mediaItem) {
+            return ListItem.delete({ targetId: targetId, itemId: mediaItem.id });
+        }
+
+        function movePlaylistItem(targetId, item, oldIndex, newIndex) {
+            return ListItem.update({
+                // url variables
+                targetId: targetId,
+                itemId: item.id,
+            }, {
+                // payload
                 oldIndex: oldIndex,
                 newIndex: newIndex
             });
+        }
+
+        function createPlaylist(playlist) {
+            var newPlaylist = new List(playlist);
+            return newPlaylist.$save({
+                targetId: ''
+            });
+        }
+
+        function removePlaylist(targetId) {
+            return List.delete({ targetId: targetId });
+        }
+
+        function clearPlaylist(targetId) {
+            return ListItem.delete({ targetId: targetId, itemId: '' });
         }
 
         function play() {

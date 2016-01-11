@@ -5,9 +5,9 @@
         .module('rameplayer.playlists')
         .controller('PlaylistsController', PlaylistsController);
 
-    PlaylistsController.$inject = ['$scope', '$log', 'dataService', 'statusService', '$uibModal', 'uuid'];
+    PlaylistsController.$inject = ['$rootScope', '$scope', '$log', 'dataService', 'statusService', 'listService', '$uibModal', 'uuid', 'ItemTypes'];
 
-    function PlaylistsController($scope, $log, dataService, statusService, $uibModal, uuid) {
+    function PlaylistsController($rootScope, $scope, $log, dataService, statusService, listService, $uibModal, uuid, ItemTypes) {
         var vm = this;
 
         vm.lists = [];
@@ -17,28 +17,30 @@
         vm.selectMedia = selectMedia;
         vm.removeMedia = removeMedia;
         vm.playlistSorted = playlistSorted;
-        vm.saveAs = saveAs;
+        vm.addStream = addStream;
 
-        $scope.$watchCollection('vm.playerStatus', function(current, original) {
-            // update playlists if newer versions available
-            if (!original || !original.lists || current.playlists.modified > original.playlists.modified) {
-                loadDefaultPlaylist();
-                loadPlaylists();
+        $rootScope.$watchCollection('lists', function(lists) {
+            $log.info('Playlists: $rootScope.lists changed', lists);
+            if (lists['root']) {
+                lists['root'].$promise.then(function(rootList) {
+                    updatePlaylists();
+                });
             }
         });
 
-        function loadDefaultPlaylist() {
-            vm.defaultPlaylist = dataService.getDefaultPlaylist();
-            $log.info('Loading default playlist');
-        }
-
-        function loadPlaylists() {
-            return getPlaylists();
-        }
-
-        function getPlaylists() {
-            vm.playlists = dataService.getPlaylists();
-            $log.info('Playlists loaded', vm.playlists);
+        function updatePlaylists() {
+            var rootList = $rootScope.lists['root'];
+            var playlists = [];
+            for (var i = 0; i < rootList.items.length; i++) {
+                if (rootList.items[i].info.type === ItemTypes.PLAYLIST) {
+                    var targetId = rootList.items[i].targetId;
+                    // make sure playlist is loaded
+                    var playlist = $rootScope.lists[targetId] || listService.add(targetId);
+                    playlists.push(targetId);
+                }
+            }
+            $log.info('Playlists refreshed: ', playlists);
+            vm.playlists = playlists;
         }
 
         function mediaSelected(mediaItem) {
@@ -53,26 +55,26 @@
             dataService.setCursor(mediaItem.id);
         }
 
-        function removeMedia(playlist, media) {
-            $log.info('Remove media from playlist', playlist, media);
-            dataService.removeFromDefaultPlaylist(media);
+        function removeMedia(targetId, media) {
+            $log.info('Remove media from playlist', targetId, media);
+            dataService.removeFromPlaylist(targetId, media);
         }
 
-        function saveAs(playlist) {
+        function addStream(playlist) {
             // open modal dialog
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'rameplayer/playlists/save-as-modal.html',
-                controller: 'SaveAsModalController',
+                templateUrl: 'rameplayer/playlists/add-stream-modal.html',
+                controller: 'AddStreamModalController',
                 controllerAs: 'saveAs'
             });
 
-            modalInstance.result.then(function(playlistTitle) {
-                $log.info('Save playlist as', playlistTitle);
-                var newPlaylist = angular.copy(playlist);
-                newPlaylist.title = playlistTitle;
-                $log.info('New playlist', newPlaylist);
-                dataService.createPlaylist(newPlaylist);
+            modalInstance.result.then(function(params) {
+                var newItem = {
+                    title: params.title,
+                    uri: params.url
+                };
+                dataService.addStreamToPlaylist(playlist, newItem);
             });
         }
 

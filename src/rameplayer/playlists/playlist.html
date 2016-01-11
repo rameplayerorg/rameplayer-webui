@@ -1,52 +1,53 @@
-<uib-accordion-group is-open="isDefaultPlaylist">
+<uib-accordion-group is-open="vm.isDefaultPlaylist">
     <uib-accordion-heading>
-         <span ng-switch on="defaultPlaylist">
+         <span ng-switch on="vm.defaultPlaylist">
              <span ng-switch-when="true">Default</span>
-             <span ng-switch-default>{{ playlist.title }}</span>
+             <span ng-switch-default>{{ vm.lists[vm.targetId].info.title }}</span>
          </span>
          <span class="pull-right">
-             <span uib-dropdown on-toggle="toggled(open)">
-                 <a href uib-dropdown-toggle ng-click="$event.stopPropagation();">
+             <span uib-dropdown is-open="vm.isDropdownOpen" ng-click="$event.stopPropagation()">
+                 <a href uib-dropdown-toggle>
                      <span class="glyphicon glyphicon-menu-hamburger"></span>
                  </a>
                  <ul class="uib-dropdown-menu dropdown-menu-right">
-                     <li ng-switch on="defaultPlaylist">
-                         <a href ng-switch-when="true" ng-click="$event.stopPropagation(); saveAs({ playlist: playlist })">
+                     <li>
+                         <a href ng-click="vm.addStream({ playlist: vm.targetId }); vm.isDropdownOpen=false;">
+                             <i class="glyphicon glyphicon-cloud"></i> Add Stream&hellip;
+                         </a>
+                     </li>
+                     <li ng-switch on="vm.defaultPlaylist">
+                         <a href ng-switch-when="true" ng-click="vm.saveAs(); vm.isDropdownOpen=false;">
                              <i class="glyphicon glyphicon-save"></i> Save as&hellip;
                          </a>
-                         <a href ng-switch-default ng-click="$event.stopPropagation();">
+                         <a href ng-switch-default ng-click="$event.stopPropagation();" ng-if="false">
                              <i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;
                          </a>
                      </li>
-                     <li ng-if="defaultPlaylist != 'true'">
+                     <li ng-if="false && vm.defaultPlaylist != 'true'">
                          <a href><i class="glyphicon glyphicon-lock"></i> Lock</a>
                      <li>
-                     <li ng-switch on="defaultPlaylist">
-                         <a href ng-switch-when="true"><i class="glyphicon glyphicon-remove"></i> Clear</a>
-                         <a href ng-switch-default><i class="glyphicon glyphicon-remove"></i> Remove</a>
+                     <li ng-switch on="vm.defaultPlaylist">
+                         <a href ng-switch-when="true" ng-click="vm.clear(); vm.isDropdownOpen=false"><i class="glyphicon glyphicon-remove"></i> Clear</a>
+                         <a href ng-switch-default ng-click="vm.remove(); vm.isDropdownOpen=false"><i class="glyphicon glyphicon-remove"></i> Remove</a>
                      </li>
                  </ul>
              </span>
          </span>
     </uib-accordion-heading>
 
-    <div ng-if="!playlist.items.length">Playlist is empty.</div>
+    <div ng-if="!vm.lists[vm.targetId].items.length">Playlist is empty.</div>
 
-    <div class="media-list" ng-if="playlist.items.length">
+    <div class="media-list" ng-if="vm.lists[vm.targetId].items.length">
         <div class="row hidden-xs media-list-header">
-            <div class="col-sm-4">File</div>
-            <div class="col-sm-4">Title</div>
-            <div class="col-sm-1 text-right">Length</div>
-            <div class="col-sm-3">Date</div>
+            <div class="col-sm-4" translate>Name</div>
+            <div class="col-sm-4" translate>Title</div>
+            <div class="col-sm-1 text-right" translate>Length</div>
+            <div class="col-sm-3" translate>Date</div>
         </div>
         <div class="media-list-sortable" ng-sortable="sortableOptions">
-            <rame-media-item ng-repeat="mediaItem in playlist.items" media="mediaItem" remove="removeMedia({ playlist: playlist, media: mediaItem })" on-click="onMediaClick({ media: mediaItem })"></rame-media-item>
+            <rame-media-item ng-repeat="mediaItem in vm.lists[vm.targetId].items" media="mediaItem" remove="vm.removeMedia(mediaItem)" on-click="vm.onMediaClick({ media: mediaItem })"></rame-media-item>
         </div>
     </div>
 
-    <uib-accordion close-others="false" ng-if="playlist.lists">
-        TODO: Recursive playlist
-        <rame-playlist-fix ng-repeat="playlis in playlist.lists"></rame-playlist-fix>
-    </uib-accordion>
 </uib-accordion-group>
 
