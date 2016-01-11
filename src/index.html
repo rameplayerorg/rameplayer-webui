@@ -40,8 +40,8 @@
                 <div class="row" ng-controller="PlaylistsController as vm">
                     <div class="col-sm-12">
                         <uib-accordion close-others="false">
-                            <rame-playlist default="true" playlist="vm.defaultPlaylist" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted(playlist, item, oldIndex, newIndex)" save-as="vm.saveAs(playlist)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
-                            <rame-playlist ng-repeat="playlist in vm.playlists" playlist="playlist" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted(playlist, item, oldIndex, newIndex)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
+                            <rame-playlist default="true" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted(targetId, item, oldIndex, newIndex)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
+                            <rame-playlist ng-repeat="targetId in vm.playlists" target-id="targetId" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted(targetId, item, oldIndex, newIndex)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
                         </uib-accordion>
                     </div> <!-- .col -->
                 </div> <!-- .row -->

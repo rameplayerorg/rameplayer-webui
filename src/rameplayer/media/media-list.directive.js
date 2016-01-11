@@ -5,9 +5,9 @@
         .module('rameplayer.media')
         .directive('rameMediaList', rameMediaList);
 
-    rameMediaList.$inject = ['$rootScope', 'statusService', 'dataService', 'listService'];
+    rameMediaList.$inject = ['$rootScope', 'statusService', 'dataService', 'listService', 'ListIds'];
 
-    function rameMediaList($rootScope, statusService, dataService, listService) {
+    function rameMediaList($rootScope, statusService, dataService, listService, ListIds) {
         // Usage:
         //
         // Creates:
@@ -51,7 +51,7 @@
             }
 
             function addToDefault(item) {
-                dataService.addToDefaultPlaylist(item);
+                dataService.addToPlaylist(ListIds.DEFAULT_PLAYLIST, item);
             }
 
             function addSlide(targetId) {

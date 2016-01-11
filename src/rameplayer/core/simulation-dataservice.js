@@ -17,14 +17,14 @@
         .factory('simulationDataService', simulationDataService);
 
     simulationDataService.$inject = ['$rootScope', '$log', '$http', '$resource',
-        '$timeout', '$interval', 'uuid', 'listProvider'];
+        '$timeout', '$interval', '$q', 'uuid', 'listProvider', 'ListIds'];
 
     /**
      * @namespace DataService
      * @desc Application wide service for REST API
      * @memberof Factories
      */
-    function simulationDataService($rootScope, $log, $http, $resource, $timeout, $interval, uuid, listProvider) {
+    function simulationDataService($rootScope, $log, $http, $resource, $timeout, $interval, $q, uuid, listProvider, ListIds) {
         // initial internal data
         // corresponds server data in production
         var server = {
@@ -36,6 +36,7 @@
                     id: 'sda1:%2f00_pk_FI_000_r720P%2emp4'
                 },
                 listsRefreshed: {
+                    'default': 1403136766000
                 },
                 player: {
                     //rebootRequired: true,
@@ -44,7 +45,9 @@
             },
             defaultPlaylist: {
                 targetId: 'default',
-                items: []
+                items: [],
+                '$save': function() {
+                }
             },
             playlists: []
         };
@@ -67,12 +70,9 @@
             getStatus: getStatus,
             setCursor: setCursor,
             getList: getList,
-            getDefaultPlaylist: getDefaultPlaylist,
-            addToDefaultPlaylist: addToDefaultPlaylist,
             addToPlaylist: addToPlaylist,
+            addStreamToPlaylist: addStreamToPlaylist,
             removeFromPlaylist: removeFromPlaylist,
-            removeFromDefaultPlaylist: removeFromDefaultPlaylist,
-            getPlaylists: getPlaylists,
             createPlaylist: createPlaylist,
             movePlaylistItem: movePlaylistItem,
             play: play,
@@ -150,13 +150,16 @@
         }
 
         function getList(targetId) {
-            if (targetId == 'root' || targetId.indexOf('sda1') == 0) {
-                // if id stars with 'sda1', fetch it with ajax
+            if (targetId == ListIds.ROOT || targetId.indexOf('sda1') == 0 || targetId.indexOf('my-playlist') == 0) {
+                // if id starts with 'sda1' or 'my-playlist', fetch it with ajax
                 var list = List.get({ targetId: targetId });
                 list.$promise.then(function(list) {
                     server.status.listsRefreshed[targetId] = list.info.refreshed || '';
                 });
                 return list;
+            }
+            else if (targetId == ListIds.DEFAULT_PLAYLIST) {
+                return server.defaultPlaylist;
             }
             else {
                 if ($rootScope.lists[targetId] === undefined) {
@@ -166,12 +169,7 @@
             }
         }
 
-        function getDefaultPlaylist() {
-            $rootScope.lists['default'] = server.defaultPlaylist;
-            return $rootScope.lists['default'];
-        }
-
-        function addToDefaultPlaylist(mediaItem) {
+        function addToPlaylist(targetId, mediaItem) {
             return $timeout(function() {
                 var newItem = angular.copy(mediaItem);
                 // generate new UUID
@@ -183,8 +181,9 @@
             }, delay);
         }
 
-        function addToPlaylist(mediaItem, playlist) {
+        function addStreamToPlaylist(targetId, mediaItem) {
             return $timeout(function() {
+                var playlist = $rootScope.lists[targetId];
                 var date = new Date();
                 var now = date.getTime();
                 var newItem = {
@@ -199,31 +198,18 @@
                 newItem.id = uuid.v4();
                 playlist.items.push(newItem);
                 playlist.modified = now;
-                server.status.listsRefreshed[playlist.targetId] = now;
+                server.status.listsRefreshed[targetId] = now;
             }, delay);
         }
 
-        function removeFromPlaylist(mediaItem, playlist) {
+        function removeFromPlaylist(targetId, mediaItem) {
             return $timeout(function() {
+                var playlist = $rootScope.lists[targetId];
                 for (var i = 0; i < playlist.items.length; i++) {
                     if (playlist.items[i].id === mediaItem.id) {
                         playlist.items.splice(i, 1);
                         var date = new Date();
-                        server.status.listsRefreshed[playlist.targetId] = date.getTime();
-                    }
-                }
-            }, delay);
-        }
-
-
-        function removeFromDefaultPlaylist(mediaItem) {
-            return $timeout(function() {
-                for (var i = 0; i < server.defaultPlaylist.items.length; i++) {
-                    if (server.defaultPlaylist.items[i].id === mediaItem.id) {
-                        server.defaultPlaylist.items.splice(i, 1);
-                        var date = new Date();
-                        server.defaultPlaylist.modified = date.getTime();
-                        server.status.listsRefreshed['default'] = date.getTime();
+                        server.status.listsRefreshed[targetId] = date.getTime();
                     }
                 }
             }, delay);
@@ -236,22 +222,35 @@
         function createPlaylist(playlist) {
             return $timeout(function() {
                 var date = new Date();
+                var newId = uuid.v4();
                 var newPlaylist = {
-                    targetId: uuid.v4(),
-                    title: playlist.title,
-                    items: [],
-                    refreshed: date.getTime()
+                    id: newId,
+                    info: {
+                        title: playlist.info.title,
+                        refreshed: date.getTime(),
+                        type: 'playlist'
+                    },
+                    targetId: newId,
+                    items: []
                 };
                 for (var i = 0; i < playlist.items.length; i++) {
-                    var newItem = angular.copy(playlist.items[i]);
-                    // generate new UUID for item
-                    newItem.id = uuid.v4();
-                    newPlaylist.items.push(newItem);
+                    var result = findItem(playlist.items[i].id);
+                    if (result) {
+                        var newItem = angular.copy(result.item);
+                        // generate new UUID for item
+                        newItem.id = uuid.v4();
+                        newPlaylist.items.push(newItem);
+                    }
                 }
+                // simulate empty $promise
+                newPlaylist.$promise = $q.when(newPlaylist);
                 server.playlists.push(newPlaylist);
                 $rootScope.lists[newPlaylist.targetId] = newPlaylist;
                 $log.info('new playlist', newPlaylist);
                 server.status.listsRefreshed[newPlaylist.targetId] = newPlaylist.refreshed;
+
+                // add to root playlist
+                $rootScope.lists[ListIds.ROOT].items.push(newPlaylist);
             }, delay);
         }
 
