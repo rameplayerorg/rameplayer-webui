@@ -12,11 +12,11 @@
     <div class="col-sm-3 media-list-item-field">
         {{ vm.media.info.modified | date:'yyyy-MM-dd HH:mm:ss' }}
         <span class="pull-right" ng-if="vm.media.info.type !== 'directory'">
-            <span uib-dropdown is-open="vm.isDropdownOpen">
-                <a href uib-dropdown-toggle ng-click="$event.stopPropagation()">
+            <span uib-dropdown is-open="vm.isDropdownOpen" ng-click="$event.stopPropagation()">
+                <a href uib-dropdown-toggle>
                     <span class="glyphicon glyphicon-menu-hamburger sorting-handle"></span>
                 </a>
-                <ul uib-dropdown-menu class="dropdown-menu-right" ng-click="$event.stopPropagation()">
+                <ul uib-dropdown-menu class="dropdown-menu-right">
                     <li ng-if="vm.isMovable">
                         <a href ng-click="vm.moveTo()"><i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;</a>
                     </li>

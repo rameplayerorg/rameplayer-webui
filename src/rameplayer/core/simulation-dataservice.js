@@ -73,8 +73,10 @@
             addToPlaylist: addToPlaylist,
             addStreamToPlaylist: addStreamToPlaylist,
             removeFromPlaylist: removeFromPlaylist,
-            createPlaylist: createPlaylist,
             movePlaylistItem: movePlaylistItem,
+            createPlaylist: createPlaylist,
+            removePlaylist: removePlaylist,
+            clearPlaylist: clearPlaylist,
             play: play,
             pause: pause,
             stop: stop,
@@ -204,6 +206,7 @@
 
         function removeFromPlaylist(targetId, mediaItem) {
             return $timeout(function() {
+                $log.info('remove', targetId, mediaItem);
                 var playlist = $rootScope.lists[targetId];
                 for (var i = 0; i < playlist.items.length; i++) {
                     if (playlist.items[i].id === mediaItem.id) {
@@ -217,6 +220,12 @@
 
         function getPlaylists() {
             return server.playlists;
+        }
+
+        function movePlaylistItem(playlist, item, oldIndex, newIndex) {
+            return $timeout(function() {
+                $log.info('Playlist item moved');
+            }, delay);
         }
 
         function createPlaylist(playlist) {
@@ -254,10 +263,18 @@
             }, delay);
         }
 
-        function movePlaylistItem(playlist, item, oldIndex, newIndex) {
+        function removePlaylist(targetId) {
             return $timeout(function() {
-                $log.info('Playlist item moved');
-            }, delay);
+                delete $rootScope.lists[targetId];
+            });
+        }
+
+        function clearPlaylist(targetId) {
+            return $timeout(function() {
+                var date = new Date();
+                $rootScope.lists[targetId].items = [];
+                server.status.listsRefreshed[targetId] = date.getTime();
+            });
         }
 
         function play() {

@@ -19,35 +19,38 @@
                 // get used playlist from attribute
                 targetId: '=',
                 onMediaClick: '&',
-                removeMedia: '&',
+                //removeMedia: '&',
                 onSort: '&',
                 addStream: '&'
             },
-            templateUrl: 'rameplayer/playlists/playlist.html'
+            templateUrl: 'rameplayer/playlists/playlist.html',
+            controller: PlaylistController,
+            controllerAs: 'vm',
+            bindToController: true
         };
         return directive;
 
-        function link(scope, element, attrs) {
-            scope.lists = $rootScope.lists;
-            scope.isDefaultPlaylist = (attrs.default !== undefined);
-            if (scope.isDefaultPlaylist) {
-                scope.targetId = ListIds.DEFAULT_PLAYLIST;
+        function link(scope, element, attrs, vm) {
+            vm.lists = $rootScope.lists;
+            vm.isDefaultPlaylist = (attrs.default !== undefined);
+            if (vm.isDefaultPlaylist) {
+                vm.targetId = ListIds.DEFAULT_PLAYLIST;
             }
-            scope.defaultPlaylist = scope.isDefaultPlaylist ? 'true' : 'false';
-            scope.sortableOptions = {
+            vm.defaultPlaylist = vm.isDefaultPlaylist ? 'true' : 'false';
+            vm.sortableOptions = {
                 handle: '.sorting-handle',
                 animation: 150,
                 onSort: function(evt) {
-                    scope.onSort({
-                        targetId: scope.targetId,
+                    // triggered after sorting
+                    vm.onSort({
+                        targetId: vm.targetId,
                         item: evt.model,
                         oldIndex: evt.oldIndex,
                         newIndex: evt.newIndex
                     });
                 }
             };
-            scope.saveAs = saveAs;
-            scope.remove = remove;
+            vm.saveAs = saveAs;
 
             function saveAs() {
                 // open modal dialog
@@ -67,19 +70,38 @@
                         },
                         items: []
                     };
-                    for (var i = 0; i < $rootScope.lists[scope.targetId].items.length; i++) {
+                    for (var i = 0; i < $rootScope.lists[vm.targetId].items.length; i++) {
                         newPlaylist.items.push({
-                            id: $rootScope.lists[scope.targetId].items[i].id
+                            id: $rootScope.lists[vm.targetId].items[i].id
                         });
                     }
                     $log.info('New playlist', newPlaylist);
                     dataService.createPlaylist(newPlaylist);
                 });
             }
-
-            function remove() {
-                dataService.removePlaylist(scope.targetId);
-            }
         }
     }
+
+    PlaylistController.$inject = ['dataService'];
+
+    function PlaylistController(dataService) {
+        var vm = this;
+        vm.isDropdownOpen = false;
+        vm.remove = remove;
+        vm.clear = clear;
+        vm.removeMedia = removeMedia;
+
+        function remove() {
+            dataService.removePlaylist(vm.targetId);
+        }
+
+        function clear() {
+            dataService.clearPlaylist(vm.targetId);
+        }
+
+        function removeMedia(media) {
+            dataService.removeFromPlaylist(vm.targetId, media);
+        }
+    }
+
 })();

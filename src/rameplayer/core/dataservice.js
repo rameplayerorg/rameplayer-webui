@@ -53,6 +53,7 @@
             movePlaylistItem: movePlaylistItem,
             createPlaylist: createPlaylist,
             removePlaylist: removePlaylist,
+            clearPlaylist: clearPlaylist,
             play: play,
             pause: pause,
             stop: stop,
@@ -168,6 +169,10 @@
 
         function removePlaylist(targetId) {
             return List.delete({ targetId: targetId });
+        }
+
+        function clearPlaylist(targetId) {
+            return ListItem.delete({ targetId: targetId, itemId: '' });
         }
 
         function play() {
