@@ -83,14 +83,15 @@
         }
     }
 
-    PlaylistController.$inject = ['dataService'];
+    PlaylistController.$inject = ['$rootScope', '$log', '$uibModal', 'dataService'];
 
-    function PlaylistController(dataService) {
+    function PlaylistController($rootScope, $log, $uibModal, dataService) {
         var vm = this;
         vm.isDropdownOpen = false;
         vm.remove = remove;
         vm.clear = clear;
         vm.removeMedia = removeMedia;
+        vm.edit = edit;
 
         function remove() {
             dataService.removePlaylist(vm.targetId);
@@ -103,6 +104,28 @@
         function removeMedia(media) {
             dataService.removeFromPlaylist(vm.targetId, media);
         }
-    }
 
+        function edit() {
+            // open modal dialog
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'rameplayer/playlists/edit-modal.html',
+                controller: 'EditModalController',
+                controllerAs: 'vm',
+                resolve: {
+                    targetId: function() {
+                        return vm.targetId;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(result) {
+                var playlist = $rootScope.lists[vm.targetId];
+                playlist.info.title = result.title;
+                playlist.info.storage = result.storage;
+                $log.debug('Edit playlist', playlist);
+                playlist.$save({ targetId: vm.targetId });
+            });
+        }
+    }
 })();

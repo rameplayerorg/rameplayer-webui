@@ -26,6 +26,9 @@
                      <li ng-if="false && vm.defaultPlaylist != 'true'">
                          <a href><i class="glyphicon glyphicon-lock"></i> Lock</a>
                      <li>
+                     <li ng-if="vm.defaultPlaylist != 'true'">
+                         <a href ng-click="vm.edit(); vm.isDropdownOpen=false"><i class="glyphicon glyphicon-pencil"></i> Edit&hellip;</a>
+                     <li>
                      <li ng-switch on="vm.defaultPlaylist">
                          <a href ng-switch-when="true" ng-click="vm.clear(); vm.isDropdownOpen=false"><i class="glyphicon glyphicon-remove"></i> Clear</a>
                          <a href ng-switch-default ng-click="vm.remove(); vm.isDropdownOpen=false"><i class="glyphicon glyphicon-remove"></i> Remove</a>
