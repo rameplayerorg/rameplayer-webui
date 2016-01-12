@@ -152,6 +152,7 @@
         }
 
         function getList(targetId) {
+            $log.debug('getList', targetId);
             if (targetId == ListIds.ROOT || targetId.indexOf('sda1') == 0 || targetId.indexOf('my-playlist') == 0) {
                 // if id starts with 'sda1' or 'my-playlist', fetch it with ajax
                 var list = List.get({ targetId: targetId });
@@ -265,6 +266,13 @@
 
         function removePlaylist(targetId) {
             return $timeout(function() {
+                // remove from root playlist
+                var rootList = $rootScope.lists[ListIds.ROOT];
+                for (var i = 0; i < rootList.items.length; i++) {
+                    if (rootList.items[i].targetId === targetId) {
+                        rootList.items.splice(i, 1);
+                    }
+                }
                 delete $rootScope.lists[targetId];
             });
         }
