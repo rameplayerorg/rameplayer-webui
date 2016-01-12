@@ -61,12 +61,13 @@
                     controllerAs: 'saveAs'
                 });
 
-                modalInstance.result.then(function(playlistTitle) {
-                    $log.info('Save playlist as', playlistTitle);
+                modalInstance.result.then(function(result) {
+                    $log.debug('Save playlist as', result.title);
                     // server needs only some fields for playlist saving
                     var newPlaylist = {
                         info: {
-                            title: playlistTitle
+                            title: result.title,
+                            storage: result.storage
                         },
                         items: []
                     };
@@ -75,7 +76,7 @@
                             id: $rootScope.lists[vm.targetId].items[i].id
                         });
                     }
-                    $log.info('New playlist', newPlaylist);
+                    $log.debug('New playlist', newPlaylist);
                     dataService.createPlaylist(newPlaylist);
                 });
             }

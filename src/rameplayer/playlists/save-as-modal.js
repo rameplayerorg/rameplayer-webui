@@ -11,6 +11,14 @@
         var vm = this;
 
         vm.playlistTitle = '';
+
+        // TODO: Storage options should come from server
+        vm.storageOptions = [
+            { value: 'usb', name: 'USB 1' },
+            { value: 'usb2', name: 'USB 2' },
+            { value: 'browser', name: 'Browser' }
+        ];
+        vm.storage = vm.storageOptions[0].value;
         vm.save = save;
         vm.cancel = cancel;
 
@@ -25,7 +33,20 @@
         });
 
         function save() {
-            $uibModalInstance.close(vm.playlistTitle);
+            // validate form
+            var valid = true;
+            var $title = $('#newPlaylistTitle');
+            // use browser's native html5 validation
+            if (typeof $title[0].willValidate !== 'undefined') {
+                valid = $title[0].checkValidity();
+            }
+
+            if (valid) {
+                $uibModalInstance.close({
+                    title: vm.playlistTitle,
+                    storage: vm.storage
+                });
+            }
         }
 
         function cancel() {

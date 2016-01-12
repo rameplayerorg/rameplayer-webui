@@ -1,14 +1,22 @@
-<div class="modal-header">
-    <h3>Save Playlist As&hellip;</h3>
-</div>
-
 <form>
+    <div class="modal-header">
+        <h3>Save Playlist As&hellip;</h3>
+    </div>
+
     <div class="modal-body">
-        <input type="text" id="newPlaylistTitle" class="form-control" placeholder="Playlist name" ng-model="saveAs.playlistTitle" required>
+        <div class="form-group">
+            <label for="newPlaylistTitle" translate>Name</label>
+            <input type="text" id="newPlaylistTitle" class="form-control" placeholder="Playlist name" ng-model="saveAs.playlistTitle" required>
+        </div>
+        <div class="form-group">
+            <label for="newPlaylistStorage" translate>Storage</label>
+            <select id="newPlaylistStorage" class="form-control" name="storage" ng-model="saveAs.storage" ng-options="storage.value as storage.name for storage in saveAs.storageOptions">
+            </select>
+        </div>
     </div>
 
     <div class="modal-footer">
-        <button class="btn btn-primary" type="submit" ng-click="saveAs.save()">Save</button>
-        <button class="btn btn-warning" type="button" ng-click="saveAs.cancel()">Cancel</button>
+        <button class="btn btn-primary" type="submit" ng-click="saveAs.save()" translate>Save</button>
+        <button class="btn btn-warning" type="button" ng-click="saveAs.cancel()" translate>Cancel</button>
     </div>
 </form>
