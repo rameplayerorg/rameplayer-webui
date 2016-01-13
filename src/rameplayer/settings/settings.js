@@ -30,20 +30,20 @@
             $log.error('Settings fetching failed', errorResponse);
         });
         
-		var rameVersioning = '';
-		dataService.getRameVersioning().then(function(response) {
-			rameVersioning = response.data;
-			vm.rameVersionSoftware = rameVersioning.backend;
-			vm.rameVersionHardware = rameVersioning.hw;
-			$log.info('Version fetched', response);
-		}, function(errorResponse) {
-			$log.error('Version fetching failed', errorResponse);
-		});
-		
-		
-		vm.savingStatus = "loaded";
-		vm.saveSettings = saveSettings;
-		vm.uiVersion = uiVersion;
+        var rameVersioning = '';
+        dataService.getRameVersioning().then(function(response) {
+            rameVersioning = response.data;
+            vm.rameVersionSoftware = rameVersioning.backend;
+            vm.rameVersionHardware = rameVersioning.hw;
+            $log.info('Version fetched', response);
+        }, function(errorResponse) {
+            $log.error('Version fetching failed', errorResponse);
+        });
+        
+        
+        vm.savingStatus = "loaded";
+        vm.saveSettings = saveSettings;
+        vm.uiVersion = uiVersion;
         //$log.info('test:' + uiVersion);
 
         function slaveDelay() {

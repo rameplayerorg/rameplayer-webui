@@ -1,6 +1,6 @@
 <div class="container" ng-controller="SettingsController as settings">
 
-	<div class="panel panel-default">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title" translate>USER_SETTINGS</h3>
         </div>
@@ -10,8 +10,8 @@
             <!-- <script type="text/javascript">$(function() {$('#autoplayUsb').bootstrapToggle()})</script> -->
             <br>
             <label for="slavedelay" translate>SLAVE_DELAY</label>
-	        <input type="number" name="slavedelay" id="slavedelay" ng-model="settings.slaveDelay"
-	                min="0" max="999">
+            <input type="number" name="slavedelay" id="slavedelay" ng-model="settings.slaveDelay"
+                    min="0" max="999">
             <br>
             <label for="language" translate>UI_LANGUAGE</label>
             <select name="language" ng-model="settings.languageId"
@@ -48,5 +48,11 @@
         <span translate>UI_VERSION</span>:
         {{ settings.uiVersion }}
     </div>
-	
+    
+    <div>
+    <a class="btn btn-default" href="admin.html" role="button">
+       <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+       <span translate>ADMIN_SETTINGS_LINK</span>
+    </a>
+    </div>
 </div>
