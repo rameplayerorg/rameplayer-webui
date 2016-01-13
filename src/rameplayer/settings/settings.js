@@ -23,7 +23,7 @@
             vm.languageId = setts.language;
             vm.autoplayUsb = setts.autoplayUsb;
             //if(vm.autoplayUsb == undefined){vm.autoplayUsb = true;}
-            vm.slaveDelay = setts.slaveDelay;
+            //vm.slaveDelay = setts.slaveDelay;
             //if(vm.slaveDelay == undefined){vm.slaveDelay = 0;}
             $log.info('Settings fetched', setts);
         }, function(errorResponse) {
@@ -46,12 +46,12 @@
         vm.uiVersion = uiVersion;
         //$log.info('test:' + uiVersion);
 
-        function slaveDelay() {
-            if(vm.slaveDelay != undefined){
-                return vm.slaveDelay.toFixed();
-            }
-            return 0;
-        }
+//        function slaveDelay() {
+//            if(vm.slaveDelay != undefined){
+//                return vm.slaveDelay.toFixed();
+//            }
+//            return 0;
+//        }
         
         function autoplayUsb(){
             if(vm.autoplayUsb != undefined){ 
@@ -66,7 +66,7 @@
             
             vm.settings.language = language;
             vm.settings.autoplayUsb = autoplayUsb();
-            vm.settings.slaveDelay = slaveDelay();
+            //vm.settings.slaveDelay = slaveDelay();
             
             vm.settings.$save(function() {
                 vm.savingStatus = "saved";

@@ -5,27 +5,26 @@
             <h3 class="panel-title" translate>USER_SETTINGS</h3>
         </div>
         <div class="panel-body ng-cloak">
-            <label for="autoplayUsb" translate>AUTOPLAY_USB</label>
-            <input type="checkbox" name="autoplayUsb" id="autoplayUsb" ng-model="settings.autoplayUsb" data-toggle="toggle">
-            <!-- <script type="text/javascript">$(function() {$('#autoplayUsb').bootstrapToggle()})</script> -->
-            <br>
-            <label for="slavedelay" translate>SLAVE_DELAY</label>
-            <input type="number" name="slavedelay" id="slavedelay" ng-model="settings.slaveDelay"
-                    min="0" max="999">
-            <br>
-            <label for="language" translate>UI_LANGUAGE</label>
-            <select name="language" ng-model="settings.languageId"
-                id="language" class="form-control">
-                <option value="en">English</option>
-                <!-- <option>Latviešu (Latvian)</option>
-                <option>Lietuvių kalba (Lithuanian)</option> -->
-                <option value="fi">suomi (Finnish)</option>
-                <!-- <option>eesti (Estonian)</option> -->
-                <option disabled>汉语 (Chinese)</option>
-            </select>
+            <div class="form-group">
+                <label for="autoplayUsb" translate>AUTOPLAY_USB</label>
+                <input type="checkbox" name="autoplayUsb" id="autoplayUsb" ng-model="settings.autoplayUsb" data-toggle="toggle">
+                <!-- <script type="text/javascript">$(function() {$('#autoplayUsb').bootstrapToggle()})</script> -->
+            </div>
+            <div class="form-group">
+                <label for="language" translate>UI_LANGUAGE</label>
+                <select name="language" ng-model="settings.languageId"
+                    id="language" class="form-control">
+                    <option value="en">English</option>
+                    <!-- <option>Latviešu (Latvian)</option>
+                    <option>Lietuvių kalba (Lithuanian)</option> -->
+                    <option value="fi">suomi (Finnish)</option>
+                    <!-- <option>eesti (Estonian)</option> -->
+                    <option disabled>汉语 (Chinese)</option>
+                </select>
+            </div>
         </div>
         <div class="panel-footer">
-            <button type="button" class="btn btn-default btn-lg"
+            <button type="button" class="btn btn-default"
                 ng-click="settings.saveSettings()">
                 <span class="glyphicon" 
                     ng-class="{ 'glyphicon-floppy-disk': settings.savingStatus !== 'saved', 'glyphicon-floppy-saved': settings.savingStatus === 'saved' }" 
