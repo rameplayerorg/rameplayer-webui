@@ -15,7 +15,8 @@
         vm.audioPorts = [
             "rameAnalogOnly", "rameHdmiOnly", "rameHdmiAndAnalog"
         ];
-
+        
+        vm.manualIpConfig = !vm.systemSettings.ipDhcpClient;
         vm.deviceName = vm.systemSettings.hostname;
         vm.deviceIpOcts = initOctets('ipAddress');
         vm.subnetMaskOcts = initOctets('ipSubnetMask');
@@ -55,6 +56,7 @@
             var invalidFields = [];
             
             if(!vm.deviceName){
+                // Compliance to Internet standard specification RFC 1123
                 // Match against regexp already done using ng-pattern
                 //.match(/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?(\.[a-z\d]([a-z\d\-]{0,61}[a-z\d])?)*$/i)){
                 invalidFields.push('Device hostname');
@@ -63,7 +65,8 @@
             
             var ipAddress, gatewayIp, dnsServerIp, dnsAlternativeServerIp, subnetMask, 
                     dhcpRangeStart, dhcpRangeEnd, dhcpRangeValid;
-            if (!vm.systemSettings.ipDhcpClient) {
+            if (vm.manualIpConfig) {
+                vm.systemSettings.ipDhcpClient = false;
                 ipAddress = validateIP(vm.deviceIpOcts);
                 gatewayIp = validateIP(vm.gatewayIpOcts);
                 dnsServerIp = validateIP(vm.dnsServerIpOcts);
@@ -122,7 +125,8 @@
             
             if (valid) {
                 vm.systemSettings.hostname = vm.deviceName;
-                if (!vm.systemSettings.ipDhcpClient) {
+                vm.systemSettings.ipDhcpClient = !vm.manualIpConfig;
+                if (vm.manualIpConfig){
                     vm.systemSettings.ipAddress = ipAddress;
                     vm.systemSettings.ipSubnetMask = subnetMask;
                     vm.systemSettings.ipGateway = gatewayIp;
@@ -167,6 +171,10 @@
         }
         
         function validateIpOrdering(smallerOcts, biggerOcts) {
+            // JS API: JavaScript Numbers are Always 64-bit Floating Point.
+            // Bit operators work on 32-bit signed numbers.
+            // Any numeric operand in the operation is converted into a 32-bit number.
+            // Hence multiplication hack instead of bitwise operation.
             var small = smallerOcts[0] * 16777216 
                     + smallerOcts[1] * 65536 
                     + smallerOcts[2] * 256 
@@ -177,14 +185,14 @@
                     + biggerOcts[3];
             
             return small <= big; 
-		}
+        }
         
         function prefillDhcpOcts() {
             vm.dhcpServerRangeStartIpOcts[0] = vm.dhcpServerRangeEndIpOcts[0] = vm.deviceIpOcts[0];
             vm.dhcpServerRangeStartIpOcts[1] = vm.dhcpServerRangeEndIpOcts[1] = vm.deviceIpOcts[1];
             vm.dhcpServerRangeStartIpOcts[2] = vm.dhcpServerRangeEndIpOcts[2] = vm.deviceIpOcts[2];
             vm.dhcpServerRangeStartIpOcts[3] = vm.dhcpServerRangeEndIpOcts[3] = null;
-		}
+        }
 
     }
 

@@ -20,15 +20,11 @@
             <div class="form-group">
                 <label for="audioPort" translate>
                 Audio port</label>
-                <div class="input-group" id="audioPort">
-                    <span class=""
-                        ng-repeat="port in vm.audioPorts">
-                        <input type="radio" 
-                            ng-model="vm.systemSettings.audioPort"
-                            ng-value="port">
-                        {{ port | translate }}
-                    </span>
-                </div>
+                <select id="audioPort" ng-model="vm.systemSettings.audioPort">
+                    <option
+                        ng-repeat="port in vm.audioPorts"
+                        ng-value="port" translate>{{ port }}</option>
+                </select>
             </div>
             
             <div class="form-group">
@@ -41,14 +37,11 @@
 
             <div class="form-group">
                 <label for="ipConfigurations" translate>IP Configurations</label>
-                <!-- <tt>current = {{ settings.ipDhcpClient }} ip
-                    {{settings.ipAddress}} gateway
-                    {{settings.gatewayIp}} dns {{settings.dnsServerIp}}</tt> -->
                 <div class="list-group" id="ipConfigurations">
                     <div class="list-group-item">
                         <div class="row form-group center-block">
                             <input type="checkbox"
-                                ng-model="vm.systemSettings.ipDhcpClient">
+                                ng-model="vm.manualIpConfig">
                                 <span translate>
                                 DHCP_CLIENT_SETTING
                                 </span>
@@ -56,7 +49,7 @@
                         <div class="row form-group center-block">
                             <rame-ip-address-block
                                 aria-label="DeviceIP"
-                                disabilify="vm.systemSettings.ipDhcpClient"
+                                disabilify="!vm.manualIpConfig"
                                 octets="vm.deviceIpOcts">
                                 {{ 'Device IP' | translate }}
                             </rame-ip-address-block>
@@ -64,7 +57,7 @@
                         <div class="row form-group center-block">
                             <rame-ip-address-block
                                 aria-label="subnetMask"
-                                disabilify="vm.systemSettings.ipDhcpClient"
+                                disabilify="!vm.manualIpConfig"
                                 octets="vm.subnetMaskOcts">
                                 {{ 'Subnet mask' | translate }}
                             </rame-ip-address-block>
@@ -72,7 +65,7 @@
                         <div class="row form-group center-block">
                             <rame-ip-address-block
                                 aria-label="GatewayIP"
-                                disabilify="vm.systemSettings.ipDhcpClient"
+                                disabilify="!vm.manualIpConfig"
                                 octets="vm.gatewayIpOcts">
                                 {{ 'Gateway IP' | translate }}
                             </rame-ip-address-block>
@@ -80,7 +73,7 @@
                         <div class="row form-group center-block">
                             <rame-ip-address-block
                                 aria-label="DNSIPpreferred"
-                                disabilify="vm.systemSettings.ipDhcpClient"
+                                disabilify="!vm.manualIpConfig"
                                 octets="vm.dnsServerIpOcts">
                                 {{ 'DNS, preferred' | translate }}
                             </rame-ip-address-block>
@@ -89,7 +82,7 @@
                             <rame-ip-address-block
                                 label-address-usage="DNS, alternative"
                                 aria-label="DNSIPalternative"
-                                disabilify="vm.systemSettings.ipDhcpClient"
+                                disabilify="!vm.manualIpConfig"
                                 octets="vm.dnsAlternativeServerIpOcts">
                                 {{ 'DNS, alternative' | translate }}
                             </rame-ip-address-block>
@@ -97,7 +90,7 @@
                         <div class="row form-group center-block">
                             <input type="checkbox"
                                 ng-model="vm.systemSettings.ipDhcpServer"
-                                ng-disabled="vm.systemSettings.ipDhcpClient"
+                                ng-disabled="!vm.manualIpConfig"
                                 ng-click="vm.prefillDhcpOcts()">
                                 <span translate>
                                 DHCP_SERVER_SETTING
@@ -107,7 +100,7 @@
                             <rame-ip-address-block
                                 label-address-usage="DHCP range start"
                                 aria-label="DHCPRangeStart"
-                                disabilify="vm.systemSettings.ipDhcpClient || !vm.systemSettings.ipDhcpServer"
+                                disabilify="!vm.manualIpConfig || !vm.systemSettings.ipDhcpServer"
                                 octets="vm.dhcpServerRangeStartIpOcts">
                                 {{ 'DHCP range start' | translate }}
                             </rame-ip-address-block>
@@ -116,7 +109,7 @@
                             <rame-ip-address-block
                                 label-address-usage="DHCP range end"
                                 aria-label="DHCPRangeEnd"
-                                disabilify="vm.systemSettings.ipDhcpClient || !vm.systemSettings.ipDhcpServer"
+                                disabilify="!vm.manualIpConfig || !vm.systemSettings.ipDhcpServer"
                                 octets="vm.dhcpServerRangeEndIpOcts">
                                 {{ 'DHCP range end' | translate }}
                             </rame-ip-address-block>
