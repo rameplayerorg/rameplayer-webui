@@ -13,7 +13,8 @@
             <div class="form-group">
                 <label for="language" translate>UI_LANGUAGE</label>
                 <select name="language" ng-model="settings.languageId"
-                    id="language" class="form-control">
+                    id="language" class="form-control"
+                    ng-change="settings.saveLanguageSettings()">
                     <option value="en">English</option>
                     <!-- <option>Latviešu (Latvian)</option>
                     <option>Lietuvių kalba (Lithuanian)</option> -->

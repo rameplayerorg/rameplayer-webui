@@ -7,20 +7,23 @@
         .controller('SettingsController', SettingsController);
 
     SettingsController.$inject = [
-        '$log', '$http', 'dataService', '$translate', 'uiVersion', 'toastr'
+        '$log', '$http', 'dataService', '$translate', 'uiVersion', 'toastr', '$scope', '$localStorage'
     ];
 
-    function SettingsController($log, $http, dataService, $translate, uiVersion, toastr) {
+    function SettingsController($log, $http, dataService, $translate, uiVersion, toastr, $scope, $localStorage) {
 
         var $injector = angular.injector();
 
         var vm = this;
+        $scope.storage = $localStorage;
+        
+        vm.languageId = initLanguage();
+        
         vm.settings = dataService.getSettings();
         
         var setts = '';        
         vm.settings.$promise.then(function(response) {        
             setts = response;
-            vm.languageId = setts.language;
             vm.autoplayUsb = setts.autoplayUsb;
             //if(vm.autoplayUsb == undefined){vm.autoplayUsb = true;}
             //vm.slaveDelay = setts.slaveDelay;
@@ -43,6 +46,7 @@
         
         vm.savingStatus = "loaded";
         vm.saveSettings = saveSettings;
+        vm.saveLanguageSettings = saveLanguageSettings;
         vm.uiVersion = uiVersion;
         //$log.info('test:' + uiVersion);
 
@@ -59,12 +63,32 @@
             }
             return true;
         }
+        
+        function initLanguage() {
+            var langId;
+            if($scope.storage.language){
+                langId = $scope.storage.language;
+                //$log.info('storagelang:' + langId);
+            } else 
+            if(window.navigator.language){
+                langId = window.navigator.language;
+            } else {
+                langId = "en";
+            }
+            $translate.use(langId);
+            return langId;
+            
+        }
+        
+        function saveLanguageSettings() {
+            $scope.storage.language = vm.languageId;
+            $translate.use(vm.languageId);
+            
+            toastr.success('Language saved.');
+        }
 
         function saveSettings(){
-            var language = vm.languageId;
-            $translate.use(language);
             
-            vm.settings.language = language;
             vm.settings.autoplayUsb = autoplayUsb();
             //vm.settings.slaveDelay = slaveDelay();
             
