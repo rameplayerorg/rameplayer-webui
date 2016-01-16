@@ -1,4 +1,4 @@
-<div class="container" ng-controller="SettingsController as settings">
+<div class="container" ng-controller="SettingsController as settingvm">
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -7,14 +7,18 @@
         <div class="panel-body ng-cloak">
             <div class="form-group">
                 <label for="autoplayUsb" translate>AUTOPLAY_USB</label>
-                <input type="checkbox" name="autoplayUsb" id="autoplayUsb" ng-model="settings.autoplayUsb" data-toggle="toggle">
-                <!-- <script type="text/javascript">$(function() {$('#autoplayUsb').bootstrapToggle()})</script> -->
+                <input type="checkbox" name="autoplayUsb" id="autoplayUsb" 
+                    ng-model="settingvm.autoplayUsb" data-toggle="toggle"
+                    ng-change="settingvm.saveUsbSetting()">
+                <!-- <script type="text/javascript">
+                    $(function() {$('#autoplayUsb').bootstrapToggle()})
+                </script> -->
             </div>
             <div class="form-group">
                 <label for="language" translate>UI_LANGUAGE</label>
-                <select name="language" ng-model="settings.languageId"
+                <select name="language" ng-model="settingvm.languageId"
                     id="language" class="form-control"
-                    ng-change="settings.saveLanguageSettings()">
+                    ng-change="settingvm.saveLanguageSettings()">
                     <option value="en">English</option>
                     <!-- <option>Latviešu (Latvian)</option>
                     <option>Lietuvių kalba (Lithuanian)</option> -->
@@ -24,7 +28,7 @@
                 </select>
             </div>
         </div>
-        <div class="panel-footer">
+        <!-- <div class="panel-footer">
             <button type="button" class="btn btn-default"
                 ng-click="settings.saveSettings()">
                 <span class="glyphicon" 
@@ -32,21 +36,21 @@
                     aria-hidden="true"></span>
                     <span translate>SAVE_SETTINGS</span>  
             </button>
-            <!-- <tt>current = {{ settings.savingStatus }}</tt> -->
-        </div>
+            <tt>current = {{ settings.savingStatus }}</tt>
+        </div> -->
     </div>
 
     <div class="well well-sm">
         <strong>RamePlayer <span translate>INFORMATION</span></strong>
         <br>
         <span translate>SOFTWARE_VERSION</span>: 
-        {{ settings.rameVersionSoftware }}
+        {{ settingvm.rameVersionSoftware }}
         <br>
         <span translate>HARDWARE_VERSION</span>: 
-        {{ settings.rameVersionHardware }}
+        {{ settingvm.rameVersionHardware }}
         <br>
         <span translate>UI_VERSION</span>:
-        {{ settings.uiVersion }}
+        {{ settingvm.uiVersion }}
     </div>
     
     <div>

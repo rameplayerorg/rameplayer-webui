@@ -15,23 +15,27 @@
         var $injector = angular.injector();
 
         var vm = this;
+        
         $scope.storage = $localStorage;
         
         vm.languageId = initLanguage();
+        vm.saveLanguageSettings = saveLanguageSettings;
         
-        vm.settings = dataService.getSettings();
+        vm.autoplayUsb = initAutoplayUsb();
+        vm.saveUsbSetting = saveUsbSetting;
         
+        /*vm.settings = dataService.getSettings();
         var setts = '';        
         vm.settings.$promise.then(function(response) {        
             setts = response;
-            vm.autoplayUsb = setts.autoplayUsb;
+            //vm.autoplayUsb = setts.autoplayUsb;
             //if(vm.autoplayUsb == undefined){vm.autoplayUsb = true;}
             //vm.slaveDelay = setts.slaveDelay;
             //if(vm.slaveDelay == undefined){vm.slaveDelay = 0;}
             $log.info('Settings fetched', setts);
         }, function(errorResponse) {
             $log.error('Settings fetching failed', errorResponse);
-        });
+        });*/
         
         var rameVersioning = '';
         dataService.getRameVersioning().then(function(response) {
@@ -43,11 +47,14 @@
             $log.error('Version fetching failed', errorResponse);
         });
         
-        
-        vm.savingStatus = "loaded";
-        vm.saveSettings = saveSettings;
-        vm.saveLanguageSettings = saveLanguageSettings;
         vm.uiVersion = uiVersion;
+        
+        
+        /*vm.savingStatus = "loaded";
+        vm.saveSettings = saveSettings;*/
+        
+        
+        
         //$log.info('test:' + uiVersion);
 
 //        function slaveDelay() {
@@ -57,12 +64,12 @@
 //            return 0;
 //        }
         
-        function autoplayUsb(){
+        /*function autoplayUsb(){
             if(vm.autoplayUsb != undefined){ 
                 return vm.autoplayUsb;
             }
             return true;
-        }
+        }*/
         
         function initLanguage() {
             var langId;
@@ -86,17 +93,41 @@
             
             toastr.success('Language saved.');
         }
+        
+        function initAutoplayUsb() {
+            var autoplay; 
+            if($scope.storage.autoplayUsb != undefined){
+                autoplay = $scope.storage.autoplayUsb;
+            }else{
+                autoplay = true;
+            }
+            //$log.info('autoplay:' + autoplay);
+            return autoplay;
+        }
+        
+        function validateAutoplayUsb(){
+            if(vm.autoplayUsb != undefined){ 
+                return vm.autoplayUsb;
+            }
+            return true;
+        }
+        
+        function saveUsbSetting() {
+            $scope.storage.autoplayUsb = validateAutoplayUsb();
+            //$log.info('storageusb:' + vm.autoplayUsb);
+            toastr.success('Option saved: Autoplay USB');
+        }
 
-        function saveSettings(){
+        /*function saveSettings(){
             
-            vm.settings.autoplayUsb = autoplayUsb();
+            //vm.settings.autoplayUsb = autoplayUsb();
             //vm.settings.slaveDelay = slaveDelay();
             
             vm.settings.$save(function() {
                 vm.savingStatus = "saved";
                 toastr.success('Settings saved.');
             });
-        }
+        }*/
     }
 
 })();
