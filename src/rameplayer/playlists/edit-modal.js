@@ -5,7 +5,7 @@
         .module('rameplayer.playlists')
         .controller('EditModalController', EditModalController);
 
-    EditModalController.$inject = ['$rootScope', '$timeout', '$log', '$uibModalInstance', targetId];
+    EditModalController.$inject = ['$rootScope', '$timeout', '$log', '$uibModalInstance', 'targetId'];
 
     function EditModalController($rootScope, $timeout, $log, $uibModalInstance, targetId) {
         var vm = this;
