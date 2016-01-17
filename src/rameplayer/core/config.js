@@ -9,7 +9,7 @@
     translation.$inject = ['$translateProvider'];
 
     function translation($translateProvider) {
-        $translateProvider.translations('en', {
+        $translateProvider.translations('en-US', {
             Settings: 'Settings',
             Name: 'Name',
             Filename: 'Filename',

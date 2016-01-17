@@ -15,7 +15,7 @@
                 <select name="language" ng-model="settings.languageId"
                     id="language" class="form-control"
                     ng-change="settings.saveLanguageSettings()">
-                    <option value="en">English</option>
+                    <option value="en-US">English</option>
                     <!-- <option>Latviešu (Latvian)</option>
                     <option>Lietuvių kalba (Lithuanian)</option> -->
                     <option value="fi">suomi (Finnish)</option>
@@ -27,10 +27,10 @@
         <div class="panel-footer">
             <button type="button" class="btn btn-default"
                 ng-click="settings.saveSettings()">
-                <span class="glyphicon" 
-                    ng-class="{ 'glyphicon-floppy-disk': settings.savingStatus !== 'saved', 'glyphicon-floppy-saved': settings.savingStatus === 'saved' }" 
+                <span class="glyphicon"
+                    ng-class="{ 'glyphicon-floppy-disk': settings.savingStatus !== 'saved', 'glyphicon-floppy-saved': settings.savingStatus === 'saved' }"
                     aria-hidden="true"></span>
-                    <span translate>SAVE_SETTINGS</span>  
+                    <span translate>SAVE_SETTINGS</span>
             </button>
             <!-- <tt>current = {{ settings.savingStatus }}</tt> -->
         </div>
@@ -39,16 +39,16 @@
     <div class="well well-sm">
         <strong>RamePlayer <span translate>INFORMATION</span></strong>
         <br>
-        <span translate>SOFTWARE_VERSION</span>: 
+        <span translate>SOFTWARE_VERSION</span>:
         {{ settings.rameVersionSoftware }}
         <br>
-        <span translate>HARDWARE_VERSION</span>: 
+        <span translate>HARDWARE_VERSION</span>:
         {{ settings.rameVersionHardware }}
         <br>
         <span translate>UI_VERSION</span>:
         {{ settings.uiVersion }}
     </div>
-    
+
     <div>
     <a class="btn btn-default" href="admin.html" role="button">
        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>

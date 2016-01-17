@@ -7,10 +7,10 @@
         .controller('SettingsController', SettingsController);
 
     SettingsController.$inject = [
-        '$log', '$http', 'dataService', '$translate', 'uiVersion', 'toastr', '$scope', '$localStorage'
+        '$log', '$http', 'dataService', '$translate', 'uiVersion', 'toastr', '$scope', '$localStorage', '$window'
     ];
 
-    function SettingsController($log, $http, dataService, $translate, uiVersion, toastr, $scope, $localStorage) {
+    function SettingsController($log, $http, dataService, $translate, uiVersion, toastr, $scope, $localStorage, $window) {
 
         var $injector = angular.injector();
 
@@ -66,14 +66,22 @@
         
         function initLanguage() {
             var langId;
-            if($scope.storage.language){
+            if ($scope.storage.language) {
                 langId = $scope.storage.language;
-                //$log.info('storagelang:' + langId);
-            } else 
-            if(window.navigator.language){
-                langId = window.navigator.language;
-            } else {
-                langId = "en";
+                $log.debug('Using language from localstorage:', langId);
+            }
+            else if ($window.navigator.language) {
+                langId = $window.navigator.language;
+                $log.debug('Detected browser language', langId);
+            }
+            else if ($window.navigator.browserLanguage) {
+                // IE
+                langId = $window.navigator.browserLanguage;
+                $log.debug('Detected browser language (browserLanguage)', langId);
+            }
+            else {
+                langId = "en-US";
+                $log.debug('Using default language', langId);
             }
             $translate.use(langId);
             return langId;
