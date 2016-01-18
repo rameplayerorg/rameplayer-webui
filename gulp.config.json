@@ -15,7 +15,8 @@
         "./bower_components/angular-uuid-generator/angular-uuid-generator.js",
         "./bower_components/bootstrap-toggle/js/bootstrap-toggle.min.js",
         "./bower_components/Sortable/Sortable.min.js",
-        "./bower_components/Sortable/ng-sortable.js"
+        "./bower_components/Sortable/ng-sortable.js",
+        "./bower_components/ngstorage/ngStorage.min.js"
     ],
     "vendorcss": [
         "./bower_components/angular-toastr/dist/angular-toastr.min.css",
