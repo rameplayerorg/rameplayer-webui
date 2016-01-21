@@ -10,7 +10,8 @@
         '$log', '$http', 'dataService', '$translate', 'uiVersion', 'toastr', '$scope', '$localStorage', '$window'
     ];
 
-    function SettingsController($log, $http, dataService, $translate, uiVersion, toastr, $scope, $localStorage, $window) {
+    function SettingsController($log, $http, dataService, $translate,
+                                uiVersion, toastr, $scope, $localStorage, $window) {
 
         var $injector = angular.injector();
 
@@ -33,9 +34,20 @@
         }, function(errorResponse) {
             $log.error('Version fetching failed', errorResponse);
         });
-        
+
+        vm.savingStatus = 'loaded';
+        vm.saveSettings = saveSettings;
+        vm.saveLanguageSettings = saveLanguageSettings;
         vm.uiVersion = uiVersion;
-        
+        //$log.info('test:' + uiVersion);
+
+        function autoplayUsb() {
+            if (vm.autoplayUsb !== undefined) { 
+                return vm.autoplayUsb;
+            }
+            return true;
+        }
+
         function initLanguage() {
             var langId;
             if ($scope.storage.language) {
@@ -52,7 +64,7 @@
                 $log.debug('Detected browser language (browserLanguage)', langId);
             }
             else {
-                langId = "en-US";
+                langId = 'en-US';
                 $log.debug('Using default language', langId);
             }
             $translate.use(langId);
@@ -66,6 +78,7 @@
             
             toastr.success('Language saved.');
         }
+<<<<<<< HEAD
         
         function initAutoplayUsb() {
             var autoplay; 
@@ -89,6 +102,18 @@
             $scope.storage.autoplayUsb = validateAutoplayUsb();
             //$log.info('storageusb:' + vm.autoplayUsb);
             toastr.success('Option saved: Autoplay USB');
+=======
+
+        function saveSettings() {
+            
+            vm.settings.autoplayUsb = autoplayUsb();
+            //vm.settings.slaveDelay = slaveDelay();
+            
+            vm.settings.$save(function() {
+                vm.savingStatus = 'saved';
+                toastr.success('Settings saved.');
+            });
+>>>>>>> clean
         }
     }
 

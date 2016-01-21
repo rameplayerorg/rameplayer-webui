@@ -26,7 +26,10 @@
         });
 
         function save() {
-            $uibModalInstance.close({ url: vm.url, title: vm.title });
+            $uibModalInstance.close({
+                url: vm.url,
+                title: vm.title
+            });
         }
 
         function cancel() {

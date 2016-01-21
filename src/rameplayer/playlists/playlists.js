@@ -5,9 +5,11 @@
         .module('rameplayer.playlists')
         .controller('PlaylistsController', PlaylistsController);
 
-    PlaylistsController.$inject = ['$rootScope', '$scope', '$log', 'dataService', 'statusService', 'listService', '$uibModal', 'uuid', 'ItemTypes'];
+    PlaylistsController.$inject = ['$rootScope', '$scope', '$log', 'dataService',
+        'statusService', 'listService', '$uibModal', 'uuid', 'ItemTypes'];
 
-    function PlaylistsController($rootScope, $scope, $log, dataService, statusService, listService, $uibModal, uuid, ItemTypes) {
+    function PlaylistsController($rootScope, $scope, $log, dataService,
+                                 statusService, listService, $uibModal, uuid, ItemTypes) {
         var vm = this;
 
         vm.lists = [];

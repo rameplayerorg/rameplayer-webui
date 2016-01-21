@@ -35,7 +35,7 @@
             // $injector.get('toastr').error(exceptionMessage);
             $injector.get('toastr').error(
                     '' + exception, 
-                    "Exception (" + cause + ")", 
+                    'Exception (" + cause + ")',
                     {
                         allowHtml : false,
                         closeButton : true,
@@ -43,9 +43,9 @@
                         extendedTimeOut : 0,
                         iconClasses : {
                             error : 'toast-error',
-                        //    info : 'toast-info',
-                        //    success : 'toast-success',
-                        //    warning : 'toast-warning'
+                            //    info : 'toast-info',
+                            //    success : 'toast-success',
+                            //    warning : 'toast-warning'
                         },
                         messageClass : 'toast-message',
                         onHidden : null,

@@ -5,9 +5,11 @@
         .module('rameplayer.media')
         .controller('MediaController', MediaController);
 
-    MediaController.$inject = ['$rootScope', '$scope', '$log', 'dataService', 'statusService', 'listService', 'ItemTypes', 'ListIds'];
+    MediaController.$inject = ['$rootScope', '$scope', '$log', 'dataService',
+        'statusService', 'listService', 'ItemTypes', 'ListIds'];
 
-    function MediaController($rootScope, $scope, $log, dataService, statusService, listService, ItemTypes, ListIds) {
+    function MediaController($rootScope, $scope, $log, dataService,
+                             statusService, listService, ItemTypes, ListIds) {
         var vm = this;
 
         vm.rootChildren = [];

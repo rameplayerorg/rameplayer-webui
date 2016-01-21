@@ -36,17 +36,17 @@
             rameAnalogOnly: 'Analog',
             rameHdmiOnly: 'HDMI',
             rameHdmiAndAnalog: 'Both',
-            rameAutodetect: "Auto",
-            rame720p50: "720p 50 Hz",
-            rame720p60: "720p 60 Hz",
-            rame1080i50: "1080i 50 Hz",
-            rame1080i60: "1080i 60 Hz",
-            rame1080p50: "1080p 50 Hz",
-            rame1080p60: "1080p 60 Hz",
-            RESTART_REQUIRED: "Restart required",
-            RESTART_REQUIRED_DESC: "Some changes need device to be restarted.",
-            UPDATE_AVAILABLE: "Update available",
-            UPDATE_AVAILABLE_DESC: "Newer version of software is available."
+            rameAutodetect: 'Auto',
+            rame720p50: '720p 50 Hz',
+            rame720p60: '720p 60 Hz',
+            rame1080i50: '1080i 50 Hz',
+            rame1080i60: '1080i 60 Hz',
+            rame1080p50: '1080p 50 Hz',
+            rame1080p60: '1080p 60 Hz',
+            RESTART_REQUIRED: 'Restart required',
+            RESTART_REQUIRED_DESC: 'Some changes need device to be restarted.',
+            UPDATE_AVAILABLE: 'Update available',
+            UPDATE_AVAILABLE_DESC: 'Newer version of software is available.'
         });
         $translateProvider.translations('fi', {
             Settings: 'Asetukset',
@@ -104,6 +104,6 @@
             preventOpenDuplicates : false,
             target : 'body',
         });
-     }
+    }
 
 })();
