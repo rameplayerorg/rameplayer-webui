@@ -81,17 +81,18 @@
         
         function initAutoplayUsb() {
             var autoplay; 
-            if($scope.storage.autoplayUsb != undefined){
+            if ($scope.storage.autoplayUsb !== undefined) {
                 autoplay = $scope.storage.autoplayUsb;
-            }else{
+            }
+            else {
                 autoplay = true;
             }
             //$log.info('autoplay:' + autoplay);
             return autoplay;
         }
         
-        function validateAutoplayUsb(){
-            if(vm.autoplayUsb != undefined){ 
+        function validateAutoplayUsb() {
+            if (vm.autoplayUsb !== undefined) {
                 return vm.autoplayUsb;
             }
             return true;
@@ -101,6 +102,7 @@
             $scope.storage.autoplayUsb = validateAutoplayUsb();
             //$log.info('storageusb:' + vm.autoplayUsb);
             toastr.success('Option saved: Autoplay USB');
+        }
 
         function saveSettings() {
             
@@ -113,5 +115,4 @@
             });
         }
     }
-
 })();

@@ -1,3 +1,5 @@
+/*jshint maxcomplexity:15 */
+/*jshint maxstatements:50 */
 (function() {
 
     'use strict';

@@ -17,7 +17,7 @@
         .factory('statusService', statusService);
 
     statusService.$inject = ['$rootScope', '$log', '$interval', '$q', '$translate',
-        'dataService', 'listService', 'toastr'];
+        'dataService', 'listService', 'toastr', 'serverConfig'];
 
     /**
      * @namespace StatusService
@@ -25,8 +25,8 @@
      * @memberof Factories
      */
     function statusService($rootScope, $log, $interval, $q, $translate,
-                           dataService, listService, toastr) {
-        var statusInterval = rameServerConfig.statusInterval || 1000;
+                           dataService, listService, toastr, serverConfig) {
+        var statusInterval = serverConfig.statusInterval || 1000;
         var status = {
             position: 0
         };

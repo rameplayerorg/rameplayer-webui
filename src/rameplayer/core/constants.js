@@ -11,5 +11,6 @@
         .constant('ListIds', {
             ROOT: 'root',
             DEFAULT_PLAYLIST: 'default'
-        });
+        })
+        .constant('serverConfig', rameServerConfig); // jshint ignore:line
 })();

@@ -1,3 +1,5 @@
+/*jshint maxcomplexity:9 */
+
 /**
  * Rameplayer WebUI
  * Copyright (C) 2015
@@ -17,16 +19,17 @@
         .factory('dataService', dataService);
 
     dataService.$inject = ['$log', '$http', '$resource', '$location',
-        'simulationDataService', 'listProvider', 'ListIds'];
+        'simulationDataService', 'listProvider', 'ListIds', 'serverConfig'];
 
     /**
      * @namespace DataService
      * @desc Application wide service for REST API
      * @memberof Factories
      */
-    function dataService($log, $http, $resource, $location, simulationDataService, listProvider, ListIds) {
+    function dataService($log, $http, $resource, $location, simulationDataService, listProvider,
+                         ListIds, serverConfig) {
 
-        if (rameServerConfig.simulation) {
+        if (serverConfig.simulation) {
             // replace this with simulationDataService
             return simulationDataService;
         }
@@ -76,15 +79,14 @@
          * @returns string
          */
         function getBaseUrl(hostname, port, basePath) {
-            hostname = hostname || rameServerConfig.host;
-            port = port || rameServerConfig.port;
-            basePath = basePath || rameServerConfig.basePath || '/';
+            hostname = hostname || serverConfig.host;
+            port = port || serverConfig.port;
+            basePath = basePath || serverConfig.basePath || '/';
             var url = '';
             if (hostname || port) {
-                // $location is not yet available here
-                url = location.protocol + '//';
+                url = $location.protocol + '//';
                 // from location.host, strip away possible port
-                url += hostname || location.host.split(':')[0];
+                url += hostname || $location.host.split(':')[0];
                 if (port) {
                     url += ':' + port;
                 }

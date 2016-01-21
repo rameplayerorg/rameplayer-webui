@@ -1,3 +1,5 @@
+/*jshint maxparams:12 */
+/*jshint maxcomplexity:9 */
 /**
  * Rameplayer WebUI
  * Copyright (C) 2015
@@ -17,7 +19,9 @@
         .factory('simulationDataService', simulationDataService);
 
     simulationDataService.$inject = ['$rootScope', '$log', '$http', '$resource',
-        '$timeout', '$interval', '$q', 'uuid', 'listProvider', 'ListIds'];
+        '$timeout', '$interval', '$q', 'uuid', 'listProvider', 'ListIds',
+        '$location', 'serverConfig'
+    ];
 
     /**
      * @namespace DataService
@@ -25,7 +29,8 @@
      * @memberof Factories
      */
     function simulationDataService($rootScope, $log, $http, $resource,
-                                   $timeout, $interval, $q, uuid, listProvider, ListIds) {
+                                   $timeout, $interval, $q, uuid, listProvider, ListIds,
+                                   $location, serverConfig) {
         // initial internal data
         // corresponds server data in production
         var server = {
@@ -100,14 +105,13 @@
          * @returns string
          */
         function getBaseUrl(hostname, port, basePath) {
-            hostname = hostname || rameServerConfig.host;
-            port = port || rameServerConfig.port;
-            basePath = basePath || rameServerConfig.basePath || '/';
+            hostname = hostname || serverConfig.host;
+            port = port || serverConfig.port;
+            basePath = basePath || serverConfig.basePath || '/';
             var url = '';
             if (hostname || port) {
-                // $location is not yet available here
-                url = location.protocol + '//';
-                url += hostname || location.host;
+                url = $location.protocol + '//';
+                url += hostname || $location.host;
                 if (port) {
                     url += ':' + port;
                 }
@@ -402,7 +406,9 @@
 
         // Returns item and parent list
         function findItem(itemId) {
-            for (var targetId in $rootScope.lists) {
+            var targetIds = Object.keys($rootScope.lists);
+            for (var j = 0; j < targetIds.length; j++) {
+                var targetId = targetIds[j];
                 for (var i = 0; i < $rootScope.lists[targetId].items.length; i++) {
                     if (itemId === $rootScope.lists[targetId].items[i].id) {
                         return {

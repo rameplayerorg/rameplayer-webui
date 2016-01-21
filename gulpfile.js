@@ -47,7 +47,7 @@ gulp.task('templatecache', function() {
  * Minify and bundle application JavaScript files
  * @return {Stream}
  */
-gulp.task('js', ['templatecache'], function() {
+gulp.task('js', ['analyze', 'templatecache'], function() {
     var source = [].concat(paths.js, paths.build + 'templates.js');
     return gulp
         .src(source)
