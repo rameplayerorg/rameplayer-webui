@@ -110,8 +110,8 @@
             basePath = basePath || serverConfig.basePath || '/';
             var url = '';
             if (hostname || port) {
-                url = $location.protocol + '//';
-                url += hostname || $location.host;
+                url = location.protocol + '//';
+                url += hostname || location.host;
                 if (port) {
                     url += ':' + port;
                 }

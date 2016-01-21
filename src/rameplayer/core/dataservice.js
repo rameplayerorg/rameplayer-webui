@@ -84,9 +84,9 @@
             basePath = basePath || serverConfig.basePath || '/';
             var url = '';
             if (hostname || port) {
-                url = $location.protocol + '//';
+                url = location.protocol + '//';
                 // from location.host, strip away possible port
-                url += hostname || $location.host.split(':')[0];
+                url += hostname || location.host.split(':')[0];
                 if (port) {
                     url += ':' + port;
                 }
