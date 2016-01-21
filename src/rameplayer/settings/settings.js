@@ -78,7 +78,6 @@
             
             toastr.success('Language saved.');
         }
-<<<<<<< HEAD
         
         function initAutoplayUsb() {
             var autoplay; 
@@ -102,7 +101,6 @@
             $scope.storage.autoplayUsb = validateAutoplayUsb();
             //$log.info('storageusb:' + vm.autoplayUsb);
             toastr.success('Option saved: Autoplay USB');
-=======
 
         function saveSettings() {
             
@@ -113,7 +111,6 @@
                 vm.savingStatus = 'saved';
                 toastr.success('Settings saved.');
             });
->>>>>>> clean
         }
     }
 
