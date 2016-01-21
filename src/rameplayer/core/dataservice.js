@@ -80,7 +80,8 @@
             if (hostname || port) {
                 // $location is not yet available here
                 url = location.protocol + '//';
-                url += hostname || location.host;
+                // from location.host, strip away possible port
+                url += hostname || location.host.split(':')[0];
                 if (port) {
                     url += ':' + port;
                 }

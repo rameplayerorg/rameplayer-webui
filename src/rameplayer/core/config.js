@@ -9,7 +9,7 @@
     translation.$inject = ['$translateProvider'];
 
     function translation($translateProvider) {
-        $translateProvider.translations('en', {
+        $translateProvider.translations('en-US', {
             Settings: 'Settings',
             Name: 'Name',
             Filename: 'Filename',
@@ -86,7 +86,7 @@
             rameHdmiOnly: 'HDMI',
             rameHdmiAndAnalog: 'Molemmat'
         });
-        $translateProvider.preferredLanguage('en');
+        $translateProvider.preferredLanguage('en-US');
         // http://angular-translate.github.io/docs/#/guide/19_security
         $translateProvider.useSanitizeValueStrategy('sanitize');
     }
