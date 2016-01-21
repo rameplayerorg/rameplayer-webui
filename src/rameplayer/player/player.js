@@ -26,7 +26,7 @@
 
             // update vm.cursorItem only when it's changed
             if (vm.playerStatus.cursor && vm.playerStatus.cursor.id) {
-                if (!vm.cursorItem || vm.playerStatus.cursor.id != vm.cursorItem.id) {
+                if (!vm.cursorItem || vm.playerStatus.cursor.id !== vm.cursorItem.id) {
                     vm.cursorItem = findCursorItem(statusService.status.cursor);
                 }
             }

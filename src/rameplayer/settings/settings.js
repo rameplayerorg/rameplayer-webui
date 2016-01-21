@@ -10,7 +10,8 @@
         '$log', '$http', 'dataService', '$translate', 'uiVersion', 'toastr', '$scope', '$localStorage', '$window'
     ];
 
-    function SettingsController($log, $http, dataService, $translate, uiVersion, toastr, $scope, $localStorage, $window) {
+    function SettingsController($log, $http, dataService, $translate,
+                                uiVersion, toastr, $scope, $localStorage, $window) {
 
         var $injector = angular.injector();
 
@@ -42,23 +43,15 @@
         }, function(errorResponse) {
             $log.error('Version fetching failed', errorResponse);
         });
-        
-        
-        vm.savingStatus = "loaded";
+
+        vm.savingStatus = 'loaded';
         vm.saveSettings = saveSettings;
         vm.saveLanguageSettings = saveLanguageSettings;
         vm.uiVersion = uiVersion;
         //$log.info('test:' + uiVersion);
 
-//        function slaveDelay() {
-//            if(vm.slaveDelay != undefined){
-//                return vm.slaveDelay.toFixed();
-//            }
-//            return 0;
-//        }
-        
-        function autoplayUsb(){
-            if(vm.autoplayUsb != undefined){ 
+        function autoplayUsb() {
+            if (vm.autoplayUsb !== undefined) { 
                 return vm.autoplayUsb;
             }
             return true;
@@ -80,7 +73,7 @@
                 $log.debug('Detected browser language (browserLanguage)', langId);
             }
             else {
-                langId = "en-US";
+                langId = 'en-US';
                 $log.debug('Using default language', langId);
             }
             $translate.use(langId);
@@ -95,13 +88,13 @@
             toastr.success('Language saved.');
         }
 
-        function saveSettings(){
+        function saveSettings() {
             
             vm.settings.autoplayUsb = autoplayUsb();
             //vm.settings.slaveDelay = slaveDelay();
             
             vm.settings.$save(function() {
-                vm.savingStatus = "saved";
+                vm.savingStatus = 'saved';
                 toastr.success('Settings saved.');
             });
         }

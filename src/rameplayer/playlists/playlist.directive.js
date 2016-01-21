@@ -124,7 +124,9 @@
                 playlist.info.title = result.title;
                 playlist.info.storage = result.storage;
                 $log.debug('Edit playlist', playlist);
-                playlist.$save({ targetId: vm.targetId });
+                playlist.$save({
+                    targetId: vm.targetId
+                });
             });
         }
     }

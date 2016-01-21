@@ -33,7 +33,7 @@
             add: add,
             refresh: refresh,
             remove: remove
-        }
+        };
 
         // begin by fetching root list
         var rootList = add(ListIds.ROOT);

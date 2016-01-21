@@ -24,7 +24,8 @@
      * @desc Application wide service for REST API
      * @memberof Factories
      */
-    function simulationDataService($rootScope, $log, $http, $resource, $timeout, $interval, $q, uuid, listProvider, ListIds) {
+    function simulationDataService($rootScope, $log, $http, $resource,
+                                   $timeout, $interval, $q, uuid, listProvider, ListIds) {
         // initial internal data
         // corresponds server data in production
         var server = {
@@ -56,9 +57,9 @@
         var Settings = $resource(baseUrl + 'settings.json');
         var List = listProvider.getResource(baseUrl + 'lists/:targetId.json');
         var SystemSettings = {
-            "audioPort": "rameAnalogOnly",
-            "ipDhcpClient": true,
-            "resolution": "rameAutodetect",
+            'audioPort': 'rameAnalogOnly',
+            'ipDhcpClient': true,
+            'resolution': 'rameAutodetect',
             '$save': function(func) {
                 $log.info('Saving system settings');
                 func();
@@ -101,7 +102,7 @@
         function getBaseUrl(hostname, port, basePath) {
             hostname = hostname || rameServerConfig.host;
             port = port || rameServerConfig.port;
-            basePath = basePath || rameServerConfig.basePath || '/';
+            basePath = basePath || rameServerConfig.basePath || '/';
             var url = '';
             if (hostname || port) {
                 // $location is not yet available here
@@ -128,7 +129,9 @@
         function getStatus(payload) {
             return $timeout(function() {
                 //$log.info('getStatus', server.status, payload);
-                return { data: server.status };
+                return {
+                    data: server.status
+                };
             }, delay);
         }
 
@@ -153,15 +156,21 @@
 
         function getList(targetId) {
             $log.debug('getList', targetId);
-            if (targetId == ListIds.ROOT || targetId.indexOf('sda1') == 0 || targetId.indexOf('my-playlist') == 0) {
+            if (targetId === ListIds.ROOT ||
+                targetId.indexOf('sda1') === 0 ||
+                targetId.indexOf('my-playlist') === 0) {
                 // if id starts with 'sda1' or 'my-playlist', fetch it with ajax
-                var list = List.get({ targetId: targetId });
+                var list = List.get(
+                    {
+                        targetId: targetId
+                    }
+                );
                 list.$promise.then(function(list) {
                     server.status.listsRefreshed[targetId] = list.info.refreshed || '';
                 });
                 return list;
             }
-            else if (targetId == ListIds.DEFAULT_PLAYLIST) {
+            else if (targetId === ListIds.DEFAULT_PLAYLIST) {
                 return server.defaultPlaylist;
             }
             else {
@@ -337,7 +346,7 @@
                 serverCursorForward();
                 $log.info('Step forward');
             }, delay);
-       }
+        }
 
         function getRameVersioning() {
             return $http.get(baseUrl + 'rameversion.json');

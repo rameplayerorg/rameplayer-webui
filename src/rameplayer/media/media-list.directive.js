@@ -27,7 +27,12 @@
 
         function link(scope, element, attrs) {
             scope.lists = $rootScope.lists;
-            scope.slides = [ { active: true, targetId: scope.targetId } ];
+            scope.slides = [
+                {
+                    active: true,
+                    targetId: scope.targetId
+                }
+            ];
 
             // Add empty placeholder slides, it's faster when
             // they are ready. More slides will be created in
@@ -66,14 +71,17 @@
                 scope.slides[index].targetId = targetId;
 
                 // add more placeholders
-                if (index + 1 == scope.slides.length) {
+                if (index + 1 === scope.slides.length) {
                     addEmptySlides(3);
                 }
             }
 
             function addEmptySlides(amount) {
                 for (var i = 0; i < amount; i++) {
-                    scope.slides.push({ active: false, targetId: null });
+                    scope.slides.push({
+                        active: false,
+                        targetId: null
+                    });
                 }
             }
 

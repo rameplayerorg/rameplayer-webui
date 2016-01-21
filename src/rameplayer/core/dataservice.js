@@ -16,7 +16,8 @@
         .module('rameplayer.core')
         .factory('dataService', dataService);
 
-    dataService.$inject = ['$log', '$http', '$resource', '$location', 'simulationDataService', 'listProvider', 'ListIds'];
+    dataService.$inject = ['$log', '$http', '$resource', '$location',
+        'simulationDataService', 'listProvider', 'ListIds'];
 
     /**
      * @namespace DataService
@@ -32,14 +33,16 @@
 
         var baseUrl = getBaseUrl();
         var Settings = $resource(baseUrl + 'settings');
-        var SystemSettings = $resource(baseUrl+ 'settings/system/');
+        var SystemSettings = $resource(baseUrl + 'settings/system/');
         var List = listProvider.getResource(baseUrl + 'lists/:targetId');
         var listItemUrl = baseUrl + 'lists/:targetId/items/:itemId';
         var ListItem = $resource(listItemUrl, {
             targetId: '',
             itemId: ''
         }, {
-            update: { method: 'PUT' }
+            update: {
+                method: 'PUT'
+            }
         });
 
         var service = {
@@ -75,7 +78,7 @@
         function getBaseUrl(hostname, port, basePath) {
             hostname = hostname || rameServerConfig.host;
             port = port || rameServerConfig.port;
-            basePath = basePath || rameServerConfig.basePath || '/';
+            basePath = basePath || rameServerConfig.basePath || '/';
             var url = '';
             if (hostname || port) {
                 // $location is not yet available here
@@ -115,11 +118,15 @@
         }
 
         function setCursor(itemId) {
-            return $http.put(baseUrl + 'cursor', { id: itemId });
+            return $http.put(baseUrl + 'cursor', {
+                id: itemId
+            });
         }
 
         function getList(id) {
-            return List.get({ targetId: id });
+            return List.get({
+                targetId: id
+            });
         }
 
         function addToPlaylist(targetId, item) {
@@ -146,7 +153,10 @@
         }
 
         function removeFromPlaylist(targetId, mediaItem) {
-            return ListItem.delete({ targetId: targetId, itemId: mediaItem.id });
+            return ListItem.delete({
+                targetId: targetId,
+                itemId: mediaItem.id
+            });
         }
 
         function movePlaylistItem(targetId, item, oldIndex, newIndex) {
@@ -169,11 +179,16 @@
         }
 
         function removePlaylist(targetId) {
-            return List.delete({ targetId: targetId });
+            return List.delete({
+                targetId: targetId
+            });
         }
 
         function clearPlaylist(targetId) {
-            return ListItem.delete({ targetId: targetId, itemId: '' });
+            return ListItem.delete({
+                targetId: targetId,
+                itemId: ''
+            });
         }
 
         function play() {

@@ -16,14 +16,16 @@
         .module('rameplayer.core')
         .factory('statusService', statusService);
 
-    statusService.$inject = ['$rootScope', '$log', '$interval', '$q', '$translate', 'dataService', 'listService', 'toastr'];
+    statusService.$inject = ['$rootScope', '$log', '$interval', '$q', '$translate',
+        'dataService', 'listService', 'toastr'];
 
     /**
      * @namespace StatusService
      * @desc Application wide service for player status
      * @memberof Factories
      */
-    function statusService($rootScope, $log, $interval, $q, $translate, dataService, listService, toastr) {
+    function statusService($rootScope, $log, $interval, $q, $translate,
+                           dataService, listService, toastr) {
         var statusInterval = rameServerConfig.statusInterval || 1000;
         var status = {
             position: 0
@@ -60,7 +62,11 @@
         }
 
         function pollStatus() {
-            dataService.getStatus({ lists: Object.keys($rootScope.lists) })
+            dataService.getStatus(
+                {
+                    lists: Object.keys($rootScope.lists)
+                }
+                )
                 .then(function(response) {
                 var newStatus = response.data;
                 // notify only when status changes
@@ -82,14 +88,16 @@
             var promises = [];
             for (var i = 0; i < newIds.length; i++) {
                 var targetId = newIds[i];
-                if (oldIds.indexOf(targetId) == -1) {
+                var list;
+                if (oldIds.indexOf(targetId) === -1) {
                     // new list
-                    var list = listService.add(targetId);
+                    list = listService.add(targetId);
                     promises.push(list.$promise);
                 }
-                else if ($rootScope.lists[targetId].info && status.listsRefreshed[targetId] !== $rootScope.lists[targetId].info.refreshed) {
+                else if ($rootScope.lists[targetId].info &&
+                         status.listsRefreshed[targetId] !== $rootScope.lists[targetId].info.refreshed) {
                     // refresh
-                    var list = listService.refresh(targetId);
+                    list = listService.refresh(targetId);
                     promises.push(list.$promise);
                 }
             }
@@ -98,7 +106,7 @@
             // updated so no old items are referring to them
             $q.all(promises).then(function() {
                 for (var i = 0; i < oldIds.length; i++) {
-                    if (newIds.indexOf(oldIds[i]) == -1) {
+                    if (newIds.indexOf(oldIds[i]) === -1) {
                         listService.remove(oldIds[i]);
                     }
                 }
