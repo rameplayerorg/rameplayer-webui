@@ -20,7 +20,6 @@
     ],
     "vendorcss": [
         "./bower_components/angular-toastr/dist/angular-toastr.min.css",
-        "./bower_components/bootstrap/dist/css/bootstrap.min.css",
         "./bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css"
     ],
     "css": [
