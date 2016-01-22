@@ -25,6 +25,8 @@
         vm.autoplayUsb = initAutoplayUsb();
         vm.saveUsbSetting = saveUsbSetting;
         
+        vm.uiVersion = uiVersion;
+        //$log.info('test:' + uiVersion);
         var rameVersioning = '';
         dataService.getRameVersioning().then(function(response) {
             rameVersioning = response.data;
@@ -34,18 +36,24 @@
         }, function(errorResponse) {
             $log.error('Version fetching failed', errorResponse);
         });
-
-        vm.savingStatus = 'loaded';
-        vm.saveSettings = saveSettings;
-        vm.saveLanguageSettings = saveLanguageSettings;
-        vm.uiVersion = uiVersion;
-        //$log.info('test:' + uiVersion);
-
-        function autoplayUsb() {
-            if (vm.autoplayUsb !== undefined) { 
-                return vm.autoplayUsb;
+        
+        vm.ipAddress = initIpAddressInfo();
+        vm.hostname = initHostnameInfo();        
+        
+        function initIpAddressInfo() {
+            var adr = dataService.getSystemSettings().ipAddress;
+            if (adr) { 
+                return adr;
             }
-            return true;
+            return 'IP address not available';
+        }
+
+        function initHostnameInfo() {
+            var hn = dataService.getSystemSettings().hostname;
+            if (hn) { 
+                return hn;
+            }
+            return 'Hostname not set';
         }
 
         function initLanguage() {
@@ -104,15 +112,5 @@
             toastr.success('Option saved: Autoplay USB');
         }
 
-        function saveSettings() {
-            
-            vm.settings.autoplayUsb = autoplayUsb();
-            //vm.settings.slaveDelay = slaveDelay();
-            
-            vm.settings.$save(function() {
-                vm.savingStatus = 'saved';
-                toastr.success('Settings saved.');
-            });
-        }
     }
 })();

@@ -33,6 +33,8 @@
             UI_LANGUAGE: 'Language of the user interface',
             DHCP_CLIENT_SETTING: 'Configure IP manually',
             DHCP_SERVER_SETTING: 'Use as DHCP server',
+            IP_ADDRESS: 'IP address',
+            HOSTNAME: 'Hostname',
             rameAnalogOnly: 'Analog',
             rameHdmiOnly: 'HDMI',
             rameHdmiAndAnalog: 'Both',
@@ -82,6 +84,8 @@
             'IP Configurations': 'IP-osoitteet',
             DHCP_CLIENT_SETTING: 'Aseta IP-osoitteet käsin',
             DHCP_SERVER_SETTING: 'Käytä tätä DHCP serverinä',
+            IP_ADDRESS: 'IP-osoite',
+            HOSTNAME: 'Koneen nimi',
             rameAnalogOnly: 'Analoginen',
             rameHdmiOnly: 'HDMI',
             rameHdmiAndAnalog: 'Molemmat'

@@ -27,8 +27,13 @@
 </head>
 
 <body>
-    <img alt="Rame Logo" src="images/logo_fading_black_h40.gif" 
-            style="float:right;padding-right:2px;padding-top:2px;">
+    <span ng-controller="SettingsController as infovm" class="pull-right">
+        <span style="float:left;padding:2px;" ng-cloak> 
+            {{ infovm.hostname }} <br> {{ infovm.ipAddress }} 
+        </span>
+        <img alt="Rame Logo" src="images/logo_fading_black_h40.gif" 
+            style="float:right;padding:2px;">
+    </span>
     <div class="container" ng-controller="MediaController as vmmc" ng-cloak>
         <uib-tabset type="pills">
             <uib-tab ng-repeat="targetId in vmmc.rootChildren">
