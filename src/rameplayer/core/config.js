@@ -31,7 +31,7 @@
             ADMIN_SETTINGS_LINK: 'Admin Settings',
             AUTOPLAY_USB: 'Automatically play files from USB',
             UI_LANGUAGE: 'Language of the user interface',
-            DHCP_CLIENT_SETTING: 'Configure IP manually',
+            DHCP_CLIENT_SETTING: 'Configure networking manually',
             DHCP_SERVER_SETTING: 'Use as DHCP server',
             IP_ADDRESS: 'IP address',
             HOSTNAME: 'Hostname',

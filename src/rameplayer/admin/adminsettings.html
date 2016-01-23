@@ -2,12 +2,16 @@
     <div class="panel panel-default">
         <div class="panel-heading ">            
             <h3 class="panel-title" translate>Admin Settings</h3>
-            <!-- <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> -->
         </div>
         <div class="panel-body ">
-            <img alt="Rame Logo" 
-                    src="images/logo_fading_black_h40.gif"
-                    style="float:right;">
+            <span ng-controller="SettingsController as infovm"
+                class="pull-right">
+                <span style="float:left;padding:2px;" ng-cloak>
+                    {{ ::infovm.hostname }} <br> {{ ::infovm.ipAddress }} 
+                </span>
+                <img alt="Rame Logo" src="images/logo_fading_black_h40.gif" 
+                    style="float:right;padding:2px;">
+            </span>
             <div class="form-group">
                 <label for="videoResOut" translate>Video output resolution</label>
                 <select id="videoResOut" ng-model="vm.systemSettings.resolution">

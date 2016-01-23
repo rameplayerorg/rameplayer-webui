@@ -37,23 +37,35 @@
             $log.error('Version fetching failed', errorResponse);
         });
         
+        vm.windowTitleInfo = 'RamePlayer';
         vm.ipAddress = initIpAddressInfo();
-        vm.hostname = initHostnameInfo();        
+        vm.hostname = initHostnameInfo();
         
         function initIpAddressInfo() {
             var adr = dataService.getSystemSettings().ipAddress;
-            if (adr) { 
-                return adr;
+            vm.windowTitleInfo = ' - ' + vm.windowTitleInfo;
+            //$log.debug(' wintit:' + vm.windowTitleInfo);
+            if (adr) {
+                vm.windowTitleInfo = adr + vm.windowTitleInfo; 
+            }else{
+                adr = 'IP address not available';
+                vm.windowTitleInfo = 'No IP' + vm.windowTitleInfo;
             }
-            return 'IP address not available';
+            document.title = vm.windowTitleInfo;
+            return adr;
         }
 
         function initHostnameInfo() {
             var hn = dataService.getSystemSettings().hostname;
-            if (hn) { 
-                return hn;
+            vm.windowTitleInfo = ' - ' + vm.windowTitleInfo;
+            if (hn) {
+                vm.windowTitleInfo = hn + vm.windowTitleInfo;
+            }else{
+                hn = 'Hostname not set';
+                vm.windowTitleInfo = 'No name' + vm.windowTitleInfo;
             }
-            return 'Hostname not set';
+            document.title = vm.windowTitleInfo;
+            return hn;
         }
 
         function initLanguage() {
