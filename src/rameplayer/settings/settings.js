@@ -47,7 +47,8 @@
             //$log.debug(' wintit:' + vm.windowTitleInfo);
             if (adr) {
                 vm.windowTitleInfo = adr + vm.windowTitleInfo; 
-            }else{
+            }
+            else {
                 adr = 'IP address not available';
                 vm.windowTitleInfo = 'No IP' + vm.windowTitleInfo;
             }
@@ -60,7 +61,8 @@
             vm.windowTitleInfo = ' - ' + vm.windowTitleInfo;
             if (hn) {
                 vm.windowTitleInfo = hn + vm.windowTitleInfo;
-            }else{
+            }
+            else {
                 hn = 'Hostname not set';
                 vm.windowTitleInfo = 'No name' + vm.windowTitleInfo;
             }
