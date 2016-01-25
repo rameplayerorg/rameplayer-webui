@@ -3,9 +3,9 @@ node_js:
 - '4.1'
 before_script:
 - npm install -g bower gulp del gulp-angular-templatecache gulp-autoprefixer gulp-bytediff
-  gulp-concat gulp-filter gulp-inject gulp-jscs gulp-jshint gulp-minify-css gulp-minify-html
+  gulp-concat gulp-filter gulp-inject gulp-jscs gulp-jshint gulp-cssnano gulp-htmlmin
   gulp-notify gulp-ng-annotate gulp-rev gulp-rev-replace gulp-task-listing gulp-uglify
-  jshint-stylish merge-stream
+  jshint jshint-stylish merge-stream
 script:
 - npm install
 - bower install
