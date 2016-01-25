@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('rameplayer.admin').directive(
+    angular.module('rameplayer.directives').directive(
             'rameIpAddressBlock', rameIpAddressBlock);
 
     rameIpAddressBlock.$inject = ['$log'];
@@ -10,7 +10,7 @@
         var directive = {
             link: link,
             restrict : 'E',
-            templateUrl : 'rameplayer/admin/ip-address-block.html',
+            templateUrl : 'rameplayer/directives/ip-address-block.html',
             scope : {
                 isDisabled : '=disabilify',
                 isValid: '=',
