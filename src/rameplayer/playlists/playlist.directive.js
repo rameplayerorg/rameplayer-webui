@@ -17,11 +17,11 @@
             restrict: 'E', // only element
             scope: {
                 // get used playlist from attribute
-                targetId: '=',
+                targetId: '=?',
                 onMediaClick: '&',
                 //removeMedia: '&',
                 onSort: '&',
-                addStream: '&'
+                addStream: '&?'
             },
             templateUrl: 'rameplayer/playlists/playlist.html',
             controller: PlaylistController,
