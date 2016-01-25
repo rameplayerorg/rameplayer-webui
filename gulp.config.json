@@ -23,7 +23,10 @@
         "./bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css"
     ],
     "css": [
-        "./src/css/*.css"
+        "./src/css/theme.css",
+        "./src/css/rameplayer.css",
+        "./src/css/media.css",
+        "./src/css/range.css"
     ],
     "js": [
         "./src/**/*.module.js",
