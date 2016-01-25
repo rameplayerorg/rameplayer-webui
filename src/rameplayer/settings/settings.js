@@ -7,11 +7,12 @@
         .controller('SettingsController', SettingsController);
 
     SettingsController.$inject = [
-        '$log', '$http', 'dataService', '$translate', 'uiVersion', 'toastr', '$scope', '$localStorage', '$window'
+        '$log', '$http', 'dataService', '$translate', 'uiVersion', 'toastr', '$scope',
+        '$localStorage', '$window', '$document'
     ];
 
     function SettingsController($log, $http, dataService, $translate,
-                                uiVersion, toastr, $scope, $localStorage, $window) {
+                                uiVersion, toastr, $scope, $localStorage, $window, $document) {
 
         var $injector = angular.injector();
 
@@ -52,7 +53,7 @@
                 adr = 'IP address not available';
                 vm.windowTitleInfo = 'No IP' + vm.windowTitleInfo;
             }
-            document.title = vm.windowTitleInfo;
+            $document[0].title = vm.windowTitleInfo;
             return adr;
         }
 
@@ -66,7 +67,7 @@
                 hn = 'Hostname not set';
                 vm.windowTitleInfo = 'No name' + vm.windowTitleInfo;
             }
-            document.title = vm.windowTitleInfo;
+            $document[0].title = vm.windowTitleInfo;
             return hn;
         }
 
