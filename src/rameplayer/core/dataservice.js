@@ -35,7 +35,7 @@
         }
 
         var baseUrl = getBaseUrl();
-        var Settings = $resource(baseUrl + 'settings');
+        var Settings = $resource(baseUrl + 'settings/user/');
         var SystemSettings = $resource(baseUrl + 'settings/system/');
         var List = listProvider.getResource(baseUrl + 'lists/:targetId');
         var listItemUrl = baseUrl + 'lists/:targetId/items/:itemId';

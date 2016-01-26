@@ -18,11 +18,11 @@
 
         var vm = this;
         
-        $scope.storage = $localStorage;
-        
+        $scope.storage = $localStorage;        
         vm.languageId = initLanguage();
         vm.saveLanguageSettings = saveLanguageSettings;
-        
+                
+        var userSettings = dataService.getSettings();
         vm.autoplayUsb = initAutoplayUsb();
         vm.saveUsbSetting = saveUsbSetting;
         
@@ -115,14 +115,13 @@
         }
         
         function initAutoplayUsb() {
-            var autoplay; 
-            if ($scope.storage.autoplayUsb !== undefined) {
-                autoplay = $scope.storage.autoplayUsb;
+            var autoplay = userSettings.autoplayUsb;
+            if (autoplay !== undefined) {
+                return autoplay;
             }
             else {
                 autoplay = true;
             }
-            //$log.info('autoplay:' + autoplay);
             return autoplay;
         }
         
@@ -134,9 +133,13 @@
         }
         
         function saveUsbSetting() {
-            $scope.storage.autoplayUsb = validateAutoplayUsb();
-            //$log.info('storageusb:' + vm.autoplayUsb);
-            toastr.success('Option saved: Autoplay USB');
+            userSettings.autoplayUsb = validateAutoplayUsb();
+            userSettings.$save(function() {
+                toastr.clear();
+                //toastr.success('Option saved: Autoplay USB');
+                toastr.error('Option saving to backend: Autoplay USB', 'TODO');
+            });
+            //$log.info('storageusb: ' + vm.autoplayUsb + ", " + userSettings.autoplayUsb);            
         }
 
         function addClusterUnit() {
