@@ -37,9 +37,11 @@
         <div class="panel-body">
             <h4 ng-if="settingvm.clusterService.units.length" translate>Units</h4>
             <rame-cluster-unit unit="unit" ng-repeat="unit in settingvm.clusterService.units"></rame-cluster-unit>
+            <button class="btn btn-default" data-target="#add-unit-form" data-toggle="collapse" aria-expanded="false" aria-controls="add-unit-form">
+                Add Unit <span class="caret"></span>
+            </button>
             <form>
-                <h4>Add Unit</h4>
-                <div class="row">
+                <div class="row collapse" id="add-unit-form">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="control-label" translate>IP address</label>

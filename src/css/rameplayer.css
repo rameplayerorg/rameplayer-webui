@@ -67,6 +67,11 @@ body {
   content: "\00a0/\00a0";
 }
 
+/* Settings */
+#add-unit-form {
+  margin-top: 10px;
+}
+
 /* Admin Settings */
 
 /* IP address input */

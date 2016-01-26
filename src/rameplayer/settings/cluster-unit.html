@@ -55,10 +55,12 @@
                     </button>
                 </div>
                 <div ng-hide="vm.editMode">
-                    <a href ng-click="vm.openEdit()" title="{{ 'Edit' | translate }}" ng-if="!vm.editMode" style="margin-right:10px;">
-                        <span class="glyphicon glyphicon-pencil"></span></a>
-                    <a href ng-click="vm.remove()" title="{{ 'Remove unit' | translate }}" ng-if="!vm.editMode">
-                        <span class="glyphicon glyphicon-trash"></span></a>
+                    <button class="btn btn-sm btn-default" ng-click="vm.openEdit()" title="{{ 'Edit' | translate }}" ng-if="!vm.editMode">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    <button class="btn btn-sm btn-default" ng-click="vm.remove()" title="{{ 'Remove unit' | translate }}" ng-if="!vm.editMode">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
                 </div>
             </div> <!-- .form-group -->
         </div> <!-- .col -->

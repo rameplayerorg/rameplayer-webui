@@ -21,9 +21,9 @@
         return directive;
     }
 
-    ClusterUnitController.$inject = ['$log', 'clusterService', 'toastr'];
+    ClusterUnitController.$inject = ['$log', '$uibModal', 'clusterService', 'toastr'];
 
-    function ClusterUnitController($log, clusterService, toastr) {
+    function ClusterUnitController($log, $uibModal, clusterService, toastr) {
         var vm = this;
         vm.editMode = false;
         vm.editUnit = {
@@ -85,8 +85,24 @@
         }
 
         function remove() {
-            clusterService.removeUnit(vm.unit.id);
-            toastr.success('Unit removed.', 'Cluster');
+            // open modal dialog
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'rameplayer/settings/remove-unit-modal.html',
+                controller: 'RemoveUnitModalController',
+                controllerAs: 'vm',
+                resolve: {
+                    // deliver 'unitHostname' as parameter to controller
+                    unitHostname: function() {
+                        return vm.unit.hostname;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(result) {
+                clusterService.removeUnit(vm.unit.id);
+                toastr.success('Unit removed.', 'Cluster');
+            });
         }
     }
 })();
