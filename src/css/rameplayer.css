@@ -72,6 +72,13 @@ body {
   margin-top: 10px;
 }
 
+/* Cluster Unit Status */
+.cluster-unit-status {
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 /* Admin Settings */
 
 /* IP address input */
