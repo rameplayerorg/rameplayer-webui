@@ -1,6 +1,6 @@
 <form>
     <div class="pull-left" style="margin-right: 10px;">
-        <ng-bootstrap-color-selector color-selected="vm.colorSelected" colors="vm.colors"></ng-bootstrap-color-selector>
+        <ng-bootstrap-color-selector color-selected="vm.unit.color" colors="vm.colors"></ng-bootstrap-color-selector>
     </div>
     <h4>
     {{ vm.unit.hostname }}</h4>
@@ -33,7 +33,7 @@
             <div class="form-group">
                 <label for="new-node-delay" class="control-label">
                     <i class="glyphicon glyphicon-time"></i>
-                    <span translate>Play Delay (s)</span>
+                    <span translate>Play Delay (sec)</span>
                 </label>
                 <div>
                     <span ng-hide="vm.editMode">{{ vm.unit.delay }}</span>

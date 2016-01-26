@@ -48,8 +48,7 @@
                 valid: true
             },
             port: 8000,
-            delay: 0,
-            label: 'blue'
+            delay: 0
         };
         vm.addClusterUnit = addClusterUnit;
         vm.clusterService = clusterService;
@@ -147,8 +146,7 @@
             if (vm.newUnitIp.valid) {
                 clusterService.addUnit(vm.newUnit.ip.value,
                                        vm.newUnit.port,
-                                       vm.newUnit.delay,
-                                       vm.newUnit.label);
+                                       vm.newUnit.delay);
                 toastr.success('New unit added.', 'Cluster');
             }
             else {
