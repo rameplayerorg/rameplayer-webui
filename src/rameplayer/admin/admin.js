@@ -20,14 +20,35 @@
         
         vm.manualIpConfig = !vm.systemSettings.ipDhcpClient;
         vm.deviceName = vm.systemSettings.hostname;
-        vm.deviceIpOcts = initOctets('ipAddress');
-        vm.subnetMaskOcts = initOctets('ipSubnetMask');
-        vm.gatewayIpOcts = initOctets('ipGateway');
-        vm.dnsServerIpOcts = initOctets('ipDnsPrimary');
-        vm.dnsAlternativeServerIpOcts = initOctets('ipDnsSecondary');
-        vm.dhcpServerRangeStartIpOcts = initOctets('ipDhcpRangeStart');
-        vm.dhcpServerRangeEndIpOcts = initOctets('ipDhcpRangeEnd');
-        
+
+        vm.deviceIp = {
+            value: vm.systemSettings['ipAddress'],
+            valid: true
+        };
+        vm.subnetMask = {
+            value: vm.systemSettings['ipSubnetMask'],
+            valid: true
+        };
+        vm.gatewayIp = {
+            value: vm.systemSettings['ipGateway'],
+            valid: true
+        };
+        vm.dnsServerIp = {
+            value: vm.systemSettings['ipDnsPrimary'],
+            valid: true
+        };
+        vm.dnsAlternativeServerIp = {
+            value: vm.systemSettings['ipDnsSecondary'],
+            valid: true
+        };
+        vm.dhcpServerRangeStartIp = {
+            value: vm.systemSettings['ipDhcpRangeStart'],
+            valid: true
+        };
+        vm.dhcpServerRangeEndIp = {
+            value: vm.systemSettings['ipDhcpRangeEnd'],
+            valid: true
+        };
         vm.prefillDhcpOcts = prefillDhcpOcts;
 
         vm.saveSettings = saveSettings;
@@ -46,14 +67,8 @@
             'rame1080p60'
         ];
 
-        function initOctets(field, def) {
-            if (vm.systemSettings[field]) {
-                return vm.systemSettings[field].split('.');
-            }
-            return def || ['', '', '', ''];
-        }
-
         function saveSettings() {
+            $log.debug('deviceIp', vm.deviceIp);
             var valid = true;
             var invalidFields = [];
             
@@ -65,23 +80,12 @@
                 valid = false;
             }  
             
-            var ipAddress, gatewayIp, dnsServerIp, dnsAlternativeServerIp, subnetMask, 
-                    dhcpRangeStart, dhcpRangeEnd, dhcpRangeValid;
             if (vm.manualIpConfig) {
                 vm.systemSettings.ipDhcpClient = false;
-                ipAddress = validateIP(vm.deviceIpOcts);
-                gatewayIp = validateIP(vm.gatewayIpOcts);
-                dnsServerIp = validateIP(vm.dnsServerIpOcts);
-                dnsAlternativeServerIp = validateIP(vm.dnsAlternativeServerIpOcts);
-                subnetMask = validateIP(vm.subnetMaskOcts);
-                dhcpRangeStart = validateIP(vm.dhcpServerRangeStartIpOcts);
-                dhcpRangeEnd = validateIP(vm.dhcpServerRangeEndIpOcts);                
-                dhcpRangeValid = validateIpOrdering(vm.dhcpServerRangeStartIpOcts, vm.dhcpServerRangeEndIpOcts);
-                
-                if (!ipAddress) {
+                if (!vm.deviceIp.valid) {
                     invalidFields.push('IP address');
                 }
-                if (!subnetMask) {
+                if (!vm.subnetMask.valid) {
                     invalidFields.push('Subnet mask');
                 }
                 /* 
@@ -98,19 +102,28 @@
                 }
                 */
                 if (vm.systemSettings.ipDhcpServer) {
-                    if (!dhcpRangeStart) {
+                    var octets;
+                    if (!vm.dhcpRangeStartIp.valid) {
                         invalidFields.push('DHCP Range Start');
                     }
-                    if (!dhcpRangeEnd) {
+                    else {
+                        octets = vm.dhcpRangeStartIp.value.split('.');
+                        if (octets[3] === '0') {
+                            invalidFields.push('DHCP Range Start Not Allowed');
+                        }
+                    }
+
+                    if (!vm.dhcpRangeEndIp.valid) {
                         invalidFields.push('DHCP Range End');
                     }
-                    if (vm.dhcpServerRangeStartIpOcts[3] === 0) { 
-                        invalidFields.push('DHCP Range Start Not Allowed');
+                    else {
+                        octets = vm.dhcpRangeEndIp.value.split('.');
+                        if (octets[3] === '255') {
+                            invalidFields.push('DHCP Range End Not Allowed');
+                        }
                     }
-                    if (vm.dhcpServerRangeEndIpOcts[3] === 255) { 
-                        invalidFields.push('DHCP Range End Not Allowed');
-                    }
-                    if (!dhcpRangeValid) {
+
+                    if (!validateIpOrdering(vm.dhcpServerRangeStartIp.value, vm.dhcpServerRangeEndIp.value)) {
                         invalidFields.push('DHCP Range Definition');
                     }                    
                 }
@@ -129,14 +142,14 @@
                 vm.systemSettings.hostname = vm.deviceName;
                 vm.systemSettings.ipDhcpClient = !vm.manualIpConfig;
                 if (vm.manualIpConfig) {
-                    vm.systemSettings.ipAddress = ipAddress;
-                    vm.systemSettings.ipSubnetMask = subnetMask;
-                    vm.systemSettings.ipGateway = gatewayIp;
-                    vm.systemSettings.ipDnsPrimary = dnsServerIp;
-                    vm.systemSettings.ipDnsSecondary = dnsAlternativeServerIp;
+                    vm.systemSettings.ipAddress = vm.deviceIp.value;
+                    vm.systemSettings.ipSubnetMask = vm.subnetMask.value;
+                    vm.systemSettings.ipGateway = vm.gatewayIp.value;
+                    vm.systemSettings.ipDnsPrimary = vm.dnsServerIp.value;
+                    vm.systemSettings.ipDnsSecondary = vm.dnsAlternativeServerIp.value;
                     if (vm.systemSettings.ipDhcpServer) {
-                        vm.systemSettings.ipDhcpRangeStart = dhcpRangeStart;
-                        vm.systemSettings.ipDhcpRangeEnd = dhcpRangeEnd;
+                        vm.systemSettings.ipDhcpRangeStart = vm.dhcpRangeStartIp.value;
+                        vm.systemSettings.ipDhcpRangeEnd = vm.dhcpRangeEndIp.value;
                     }
                 }
                 vm.systemSettings.$save(function() {
@@ -152,33 +165,13 @@
             //throw new Error('testerror');
         }
 
-        // IPv4 address string regexp
-        // val.match(/\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/))
-        function validateIP(octs) {
-            var addr = '';
-
-            for (var i = 0; i < octs.length; i++) {
-                addr = addr + octs[i];
-                if (i !== octs.length - 1) {
-                    addr = addr + '.';
-                }
-            }
-
-            if (addr
-                    .match(
-                    /\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/))
-            {
-                return addr;
-            }
-
-            return null;
-        }
-        
-        function validateIpOrdering(smallerOcts, biggerOcts) {
+        function validateIpOrdering(smallerIp, biggerIp) {
             // JS API: JavaScript Numbers are Always 64-bit Floating Point.
             // Bit operators work on 32-bit signed numbers.
             // Any numeric operand in the operation is converted into a 32-bit number.
             // Hence multiplication hack instead of bitwise operation.
+            var smallerOcts = smallerIp.split('.');
+            var biggerOcts = biggerIp.split('.');
             var small = smallerOcts[0] * 16777216 +
                 smallerOcts[1] * 65536 + 
                 smallerOcts[2] * 256 +
@@ -192,12 +185,10 @@
         }
         
         function prefillDhcpOcts() {
-            vm.dhcpServerRangeStartIpOcts[0] = vm.dhcpServerRangeEndIpOcts[0] = vm.deviceIpOcts[0];
-            vm.dhcpServerRangeStartIpOcts[1] = vm.dhcpServerRangeEndIpOcts[1] = vm.deviceIpOcts[1];
-            vm.dhcpServerRangeStartIpOcts[2] = vm.dhcpServerRangeEndIpOcts[2] = vm.deviceIpOcts[2];
-            vm.dhcpServerRangeStartIpOcts[3] = vm.dhcpServerRangeEndIpOcts[3] = null;
+            var octets = vm.deviceIp.value ? vm.deviceIp.value.split('.') : ['', '', '', ''];
+            var ip = octets[0] + '.' + octets[1] + '.' + octets[2] + '.';
+            vm.dhcpServerRangeStartIp.value = ip;
+            vm.dhcpServerRangeEndIp.value = ip;
         }
-
     }
-
 })();

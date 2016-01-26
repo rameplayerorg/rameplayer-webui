@@ -32,8 +32,8 @@ gulp.task('analyze', function() {
 gulp.task('templatecache', function() {
     return gulp
         .src(paths.htmltemplates)
-        .pipe(plugins.minifyHtml({
-            empty: true
+        .pipe(plugins.htmlmin({
+            collapseWhitespace: true
         }))
         .pipe(plugins.angularTemplatecache('templates.js', {
             module: 'rameplayer.core',
@@ -88,7 +88,7 @@ gulp.task('css', function() {
         .pipe(plugins.concat('rameplayer.min.css'))
         .pipe(plugins.autoprefixer('last 2 version', '> 5%'))
         .pipe(plugins.bytediff.start())
-        .pipe(plugins.minifyCss({}))
+        .pipe(plugins.cssnano())
         .pipe(plugins.bytediff.stop(bytediffFormatter))
         .pipe(gulp.dest(paths.build + 'css'));
 });
@@ -104,7 +104,7 @@ gulp.task('vendorcss', function() {
         .pipe(vendorFilter)
         .pipe(plugins.concat('vendor.min.css'))
         .pipe(plugins.bytediff.start())
-        .pipe(plugins.minifyCss({}))
+        .pipe(plugins.cssnano())
         .pipe(plugins.bytediff.stop(bytediffFormatter))
         .pipe(gulp.dest(paths.build + 'css'));
 });

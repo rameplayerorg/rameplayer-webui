@@ -43,90 +43,150 @@
                 <label for="ipConfigurations" translate>IP Configurations</label>
                 <div class="list-group" id="ipConfigurations">
                     <div class="list-group-item">
-                        <div class="row form-group center-block">
-                            <input type="checkbox"
-                                ng-model="vm.manualIpConfig">
+                        <div class="row checkbox center-block">
+                            <label>
+                                <input type="checkbox"
+                                    ng-model="vm.manualIpConfig">
                                 <span translate>
-                                DHCP_CLIENT_SETTING
+                                    DHCP_CLIENT_SETTING
                                 </span>
+                            </label>
                         </div>
-                        <div class="row form-group center-block">
-                            <rame-ip-address-block
-                                aria-label="DeviceIP"
-                                disabilify="!vm.manualIpConfig"
-                                octets="vm.deviceIpOcts">
-                                {{ 'Device IP' | translate }}
-                            </rame-ip-address-block>
-                        </div>
-                        <div class="row form-group center-block">
-                            <rame-ip-address-block
-                                aria-label="subnetMask"
-                                disabilify="!vm.manualIpConfig"
-                                octets="vm.subnetMaskOcts">
-                                {{ 'Subnet mask' | translate }}
-                            </rame-ip-address-block>
-                        </div>
-                        <div class="row form-group center-block">
-                            <rame-ip-address-block
-                                aria-label="GatewayIP"
-                                disabilify="!vm.manualIpConfig"
-                                octets="vm.gatewayIpOcts">
-                                {{ 'Gateway IP' | translate }}
-                            </rame-ip-address-block>
-                        </div>
-                        <div class="row form-group center-block">
-                            <rame-ip-address-block
-                                aria-label="DNSIPpreferred"
-                                disabilify="!vm.manualIpConfig"
-                                octets="vm.dnsServerIpOcts">
-                                {{ 'DNS, preferred' | translate }}
-                            </rame-ip-address-block>
-                        </div>
-                        <div class="row form-group center-block">
-                            <rame-ip-address-block
-                                label-address-usage="DNS, alternative"
-                                aria-label="DNSIPalternative"
-                                disabilify="!vm.manualIpConfig"
-                                octets="vm.dnsAlternativeServerIpOcts">
-                                {{ 'DNS, alternative' | translate }}
-                            </rame-ip-address-block>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <div class="row form-group center-block">
-                                    <input type="checkbox"
-                                        ng-model="vm.systemSettings.ipDhcpServer"
-                                        ng-disabled="!vm.manualIpConfig"
-                                        ng-click="vm.prefillDhcpOcts()">
-                                        <span translate>
-                                        DHCP_SERVER_SETTING
-                                        </span>
-                                </div>
-                                <div class="row form-group center-block">
-                                    <rame-ip-address-block
-                                        label-address-usage="DHCP range start"
-                                        aria-label="DHCPRangeStart"
-                                        disabilify="!vm.manualIpConfig || !vm.systemSettings.ipDhcpServer"
-                                        octets="vm.dhcpServerRangeStartIpOcts">
-                                        {{ 'DHCP range start' | translate }}
-                                    </rame-ip-address-block>
-                                </div>
-                                <div class="row form-group center-block">
-                                    <rame-ip-address-block
-                                        label-address-usage="DHCP range end"
-                                        aria-label="DHCPRangeEnd"
-                                        disabilify="!vm.manualIpConfig || !vm.systemSettings.ipDhcpServer"
-                                        octets="vm.dhcpServerRangeEndIpOcts">
-                                        {{ 'DHCP range end' | translate }}
-                                    </rame-ip-address-block>
+                        <div class="row center-block">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" translate>
+                                        Device IP
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <rame-ip-address-block
+                                            aria-label="DeviceIP"
+                                            disabilify="!vm.manualIpConfig"
+                                            value="vm.deviceIp.value"
+                                            is-valid="vm.deviceIp.valid">
+                                        </rame-ip-address-block>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                        <div class="row center-block">
+                             <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" translate>
+                                        Subnet mask
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <rame-ip-address-block
+                                            aria-label="subnetMask"
+                                            disabilify="!vm.manualIpConfig"
+                                            value="vm.subnetMask.value"
+                                            is-valid="vm.subnetMask.valid">
+                                        </rame-ip-address-block>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row center-block">
+                             <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" translate>
+                                        Gateway IP
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <rame-ip-address-block
+                                            aria-label="subnetMask"
+                                            disabilify="!vm.manualIpConfig"
+                                            value="vm.gatewayIp.value"
+                                            is-valid="vm.gatewayIp.valid">
+                                        </rame-ip-address-block>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row center-block">
+                             <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" translate>
+                                        DNS, preferred
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <rame-ip-address-block
+                                            aria-label="DNSIPpreferred"
+                                            disabilify="!vm.manualIpConfig"
+                                            value="vm.dnsServerIp.value"
+                                            is-valid="vm.dnsServerIp.valid">
+                                        </rame-ip-address-block>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row center-block">
+                             <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" translate>
+                                        DNS, alternative
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <rame-ip-address-block
+                                            aria-label="DNSIPalternative"
+                                            disabilify="!vm.manualIpConfig"
+                                            value="vm.dnsAlternativeServerIp.value"
+                                            is-valid="vm.dnsAlternativeServerIp.valid">
+                                        </rame-ip-address-block>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row checkbox center-block">
+                            <label>
+                                <input type="checkbox"
+                                    ng-model="vm.systemSettings.ipDhcpServer"
+                                    ng-disabled="!vm.manualIpConfig"
+                                    ng-click="vm.prefillDhcpOcts()">
+                                <span translate>
+                                    DHCP_SERVER_SETTING
+                                </span>
+                            </label>
+                        </div>
+                        <div class="row center-block">
+                             <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" translate>
+                                        DHCP range start
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <rame-ip-address-block
+                                            aria-label="DHCPRangeStart"
+                                            disabilify="!vm.manualIpConfig || !vm.systemSettings.ipDhcpServer"
+                                            value="vm.dhcpServerRangeStartIp.value"
+                                            is-valid="vm.dhcpServerRangeStartIp.valid">
+                                        </rame-ip-address-block>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row center-block">
+                             <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" translate>
+                                        DHCP range end
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <rame-ip-address-block
+                                            aria-label="DHCPRangeEnd"
+                                            disabilify="!vm.manualIpConfig || !vm.systemSettings.ipDhcpServer"
+                                            value="vm.dhcpServerRangeEndIp.value"
+                                            is-valid="vm.dhcpServerRangeEndIp.valid">
+                                        </rame-ip-address-block>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- .row -->
+                    </div> <!-- .list-group-item -->
+                </div> <!-- .list-group -->
+            </div> <!-- .form-group -->
+        </div> <!-- .panel-body -->
 
-            </div>
-        </div>
         <div class="panel-footer">
             <button type="button" class="btn btn-default"
                 ng-click="vm.saveSettings()">
