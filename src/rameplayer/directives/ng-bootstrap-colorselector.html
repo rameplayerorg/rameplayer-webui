@@ -1,0 +1,8 @@
+<div class="dropdown dropdown-colorselector">
+    <a data-toggle="dropdown" class="dropdown-toggle" href="#"><span class="btn-colorselector" style="background-color: {{colorSelected}};"></span></a>
+    <ul class="dropdown-menu dropdown-caret">
+        <li ng-repeat="color in colors">
+            <a class="color-btn" href="#" data-color="{{color.hex}}" data-value="{{color.rgb}}" title="{{color.name}" style="background-color: {{color.hex}}" ng-click="changeColor(color.hex)"></a>
+        </li>
+    </ul>
+</div>
