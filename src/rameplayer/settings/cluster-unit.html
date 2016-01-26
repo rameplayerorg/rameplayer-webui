@@ -1,0 +1,67 @@
+<form>
+    <div class="pull-left" style="margin-right: 10px;">
+        <ng-bootstrap-color-selector color-selected="vm.colorSelected" colors="vm.colors"></ng-bootstrap-color-selector>
+    </div>
+    <h4>
+    {{ vm.unit.hostname }}</h4>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label" translate>IP address</label>
+                <div>
+                    <span ng-hide="vm.editMode">{{ vm.unit.address }}</span>
+                    <rame-ip-address-block
+                        ng-show="vm.editMode"
+                        aria-label="DeviceIP"
+                        value="vm.editUnit.ip.value"
+                        is-valid="vm.editUnit.ip.valid">
+                    </rame-ip-address-block>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="new-node-port" class="control-label" translate>Port</label>
+                <div>
+                    <span ng-hide="vm.editMode">{{ vm.unit.port }}</span>
+                    <input ng-show="vm.editMode" type="number" id="new-node-port" class="form-control" ng-model="vm.editUnit.port" min="0">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="new-node-delay" class="control-label">
+                    <i class="glyphicon glyphicon-time"></i>
+                    <span translate>Play Delay (s)</span>
+                </label>
+                <div>
+                    <span ng-hide="vm.editMode">{{ vm.unit.delay }}</span>
+                    <input ng-show="vm.editMode" type="number" id="new-node-delay" class="form-control" ng-model="vm.editUnit.delay" min="0">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>
+                    <i class="glyphicon"></i><!-- just empty -->
+                </label>
+                <div ng-show="vm.editMode">
+                    <button class="btn btn-primary" ng-click="vm.save()" ng-if="vm.editMode">
+                        <span translate>Save</span>
+                    </button>
+                    <button class="btn btn-default" ng-click="vm.cancelEdit()" ng-if="vm.editMode">
+                        <span translate>Cancel</span>
+                    </button>
+                </div>
+                <div ng-hide="vm.editMode">
+                    <a href ng-click="vm.openEdit()" title="{{ 'Edit' | translate }}" ng-if="!vm.editMode" style="margin-right:10px;">
+                        <span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href ng-click="vm.remove()" title="{{ 'Remove unit' | translate }}" ng-if="!vm.editMode">
+                        <span class="glyphicon glyphicon-trash"></span></a>
+                </div>
+            </div> <!-- .form-group -->
+        </div> <!-- .col -->
+    </div>
+</form>
+

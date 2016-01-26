@@ -13,6 +13,7 @@
     <!-- endinject -->
 
     <!-- inject:css -->
+    <link href="css/bootstrap-colorselector.css" rel="stylesheet" />
     <link href="css/rameplayer.css" rel="stylesheet" />
     <link href="css/media.css" rel="stylesheet" />
     <link href="css/range.css" rel="stylesheet" />
@@ -98,6 +99,7 @@
     <!-- directives module -->
     <script src="rameplayer/directives/directives.module.js"></script>
     <script src="rameplayer/directives/ip-address-block.directive.js"></script>
+    <script src="rameplayer/directives/ng-bootstrap-colorselector.js"></script>
 
     <!-- admin settings module -->
     <script src="rameplayer/admin/admin.module.js"></script>
@@ -111,6 +113,7 @@
     <script src="rameplayer/core/exception.js"></script>
     <script src="rameplayer/core/simulation-dataservice.js"></script>
     <script src="rameplayer/core/statusservice.js"></script>
+    <script src="rameplayer/core/cluster-service.js"></script>
     <script src="rameplayer/core/list-service.js"></script>
     <script src="rameplayer/core/list-provider.js"></script>
 
@@ -136,7 +139,7 @@
     <!-- settings module -->
     <script src="rameplayer/settings/settings.module.js"></script>
     <script src="rameplayer/settings/settings.js"></script>
-    
+    <script src="rameplayer/settings/cluster-unit.directive.js"></script>
     <!-- endinject -->
 
     <script>angular.module('rameplayer.core').constant('uiVersion', 'development');</script>

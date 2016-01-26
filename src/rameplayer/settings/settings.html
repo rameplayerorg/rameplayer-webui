@@ -30,6 +30,65 @@
         </div>
     </div>
 
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title" translate>Cluster</h3>
+        </div>
+        <div class="panel-body">
+            <h4 ng-if="settingvm.clusterService.units.length" translate>Units</h4>
+            <rame-cluster-unit unit="unit" ng-repeat="unit in settingvm.clusterService.units"></rame-cluster-unit>
+            <form>
+                <h4>Add Unit</h4>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label" translate>IP address</label>
+                            <div class="">
+                                <rame-ip-address-block
+                                    aria-label="DeviceIP"
+                                    value="settingvm.newUnit.ip.value"
+                                    is-valid="settingvm.newUnitIp.valid">
+                                </rame-ip-address-block>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="new-node-port" class="control-label" translate>Port</label>
+                            <div class="">
+                               <input type="number" id="new-node-port" class="form-control" ng-model="settingvm.newUnit.port" min="0">
+                           </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="new-node-delay" class="control-label">
+                                <i class="glyphicon glyphicon-time"></i>
+                                <span translate>Play Delay (s)</span>
+                            </label>
+                            <div class="">
+                                <input type="number" id="new-node-delay" class="form-control" ng-model="settingvm.newUnit.delay" min="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                <i class="glyphicon"></i><!-- just empty -->
+                            </label>
+                            <div>
+                                <button class="btn btn-primary" ng-click="settingvm.addClusterUnit()">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                    <span translate>Add</span>
+                                </button>
+                            </div>
+                        </div> <!-- .form-group -->
+                    </div> <!-- .col -->
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="well well-sm">
         <strong>RamePlayer <span translate>INFORMATION</span></strong>
         <br>
