@@ -37,10 +37,10 @@
         var baseUrl = getBaseUrl();
         var Settings = $resource(baseUrl + 'settings/user/');
         var SystemSettings = $resource(baseUrl + 'settings/system/');
-        var List = listProvider.getResource(baseUrl + 'lists/:targetId');
-        var listItemUrl = baseUrl + 'lists/:targetId/items/:itemId';
+        var List = listProvider.getResource(baseUrl + 'lists/:id');
+        var listItemUrl = baseUrl + 'lists/:listId/items/:itemId';
         var ListItem = $resource(listItemUrl, {
-            targetId: '',
+            listId: '',
             itemId: ''
         }, {
             update: {
@@ -127,42 +127,42 @@
 
         function getList(id) {
             return List.get({
-                targetId: id
+                id: id
             });
         }
 
-        function addToPlaylist(targetId, item) {
+        function addToPlaylist(listId, item) {
             var newItem = new ListItem({
-                id: item.id
+                itemId: item.id
             });
             return newItem.$save({
-                targetId: targetId,
+                listId: listId,
                 itemId: ''
             });
         }
 
-        function addStreamToPlaylist(targetId, item) {
+        function addStreamToPlaylist(listId, item) {
             var newItem = new ListItem({
                 title: item.title,
                 uri: item.uri
             });
             return newItem.$save({
-                targetId: targetId,
+                listId: listId,
                 itemId: ''
             });
         }
 
-        function removeFromPlaylist(targetId, mediaItem) {
+        function removeFromPlaylist(listId, mediaItem) {
             return ListItem.delete({
-                targetId: targetId,
+                listId: listId,
                 itemId: mediaItem.id
             });
         }
 
-        function movePlaylistItem(targetId, item, oldIndex, newIndex) {
+        function movePlaylistItem(listId, item, oldIndex, newIndex) {
             return ListItem.update({
                 // url variables
-                targetId: targetId,
+                listId: listId,
                 itemId: item.id,
             }, {
                 // payload
@@ -174,19 +174,19 @@
         function createPlaylist(playlist) {
             var newPlaylist = new List(playlist);
             return newPlaylist.$save({
-                targetId: ''
+                id: ''
             });
         }
 
-        function removePlaylist(targetId) {
+        function removePlaylist(id) {
             return List.delete({
-                targetId: targetId
+                id: id
             });
         }
 
-        function clearPlaylist(targetId) {
+        function clearPlaylist(id) {
             return ListItem.delete({
-                targetId: targetId,
+                listId: id,
                 itemId: ''
             });
         }

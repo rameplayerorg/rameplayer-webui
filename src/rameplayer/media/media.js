@@ -31,10 +31,10 @@
             var rootChildren = [];
             for (var i = 0; i < rootList.items.length; i++) {
                 if (rootList.items[i].type === ItemTypes.LIST) {
-                    var targetId = rootList.items[i].targetId;
+                    var id = rootList.items[i].id;
                     // make sure list is loaded
-                    var rootChild = $rootScope.lists[targetId] || listService.add(targetId);
-                    rootChildren.push(targetId);
+                    var rootChild = $rootScope.lists[id] || listService.add(id);
+                    rootChildren.push(id);
                 }
             }
             vm.rootChildren = rootChildren;

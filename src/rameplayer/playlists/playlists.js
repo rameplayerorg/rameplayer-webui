@@ -35,10 +35,10 @@
             var playlists = [];
             for (var i = 0; i < rootList.items.length; i++) {
                 if (rootList.items[i].type === ItemTypes.PLAYLIST) {
-                    var targetId = rootList.items[i].targetId;
+                    var id = rootList.items[i].id;
                     // make sure playlist is loaded
-                    var playlist = $rootScope.lists[targetId] || listService.add(targetId);
-                    playlists.push(targetId);
+                    var playlist = $rootScope.lists[id] || listService.add(id);
+                    playlists.push(id);
                 }
             }
             $log.info('Playlists refreshed: ', playlists);
@@ -57,9 +57,9 @@
             dataService.setCursor(mediaItem.id);
         }
 
-        function removeMedia(targetId, media) {
-            $log.info('Remove media from playlist', targetId, media);
-            dataService.removeFromPlaylist(targetId, media);
+        function removeMedia(listId, media) {
+            $log.info('Remove media from playlist', listId, media);
+            dataService.removeFromPlaylist(listId, media);
         }
 
         function addStream(playlist) {

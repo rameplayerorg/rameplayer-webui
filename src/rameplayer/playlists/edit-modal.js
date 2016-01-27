@@ -5,12 +5,12 @@
         .module('rameplayer.playlists')
         .controller('EditModalController', EditModalController);
 
-    EditModalController.$inject = ['$rootScope', '$timeout', '$log', '$uibModalInstance', 'targetId'];
+    EditModalController.$inject = ['$rootScope', '$timeout', '$log', '$uibModalInstance', 'listId'];
 
-    function EditModalController($rootScope, $timeout, $log, $uibModalInstance, targetId) {
+    function EditModalController($rootScope, $timeout, $log, $uibModalInstance, listId) {
         var vm = this;
 
-        var playlist = $rootScope.lists[targetId];
+        var playlist = $rootScope.lists[listId];
         vm.title = playlist.title;
 
         // TODO: Storage options should come from server

@@ -6,16 +6,14 @@
             "refreshed": 1449220031300,
             "size": 8192,
             "type": "directory",
-            "modified": 0,
-            "targetId": "sda1"
+            "modified": 0
         },
         {
             "id": "my-playlist",
             "modified": 0,
             "title": "My Playlist",
             "refreshed": 1449220031.3,
-            "type": "playlist",
-            "targetId": "my-playlist"
+            "type": "playlist"
         }
     ],
     "title": "Root",

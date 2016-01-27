@@ -50,7 +50,7 @@
                 }
             },
             defaultPlaylist: {
-                targetId: 'default',
+                id: 'default',
                 items: [],
                 '$save': function() {
                 }
@@ -60,7 +60,7 @@
 
         var baseUrl = getBaseUrl();
         var Settings = $resource(baseUrl + 'settings.json');
-        var List = listProvider.getResource(baseUrl + 'lists/:targetId.json');
+        var List = listProvider.getResource(baseUrl + 'lists/:id.json');
         var SystemSettings = {
             'audioPort': 'rameAnalogOnly',
             'ipDhcpClient': true,
@@ -158,34 +158,34 @@
             }, delay);
         }
 
-        function getList(targetId) {
-            $log.debug('getList', targetId);
-            if (targetId === ListIds.ROOT ||
-                targetId.indexOf('sda1') === 0 ||
-                targetId.indexOf('my-playlist') === 0) {
+        function getList(id) {
+            $log.debug('getList', id);
+            if (id === ListIds.ROOT ||
+                id.indexOf('sda1') === 0 ||
+                id.indexOf('my-playlist') === 0) {
                 // if id starts with 'sda1' or 'my-playlist', fetch it with ajax
                 var list = List.get(
                     {
-                        targetId: targetId
+                        id: id
                     }
                 );
                 list.$promise.then(function(list) {
-                    server.status.listsRefreshed[targetId] = list.refreshed || '';
+                    server.status.listsRefreshed[id] = list.refreshed || '';
                 });
                 return list;
             }
-            else if (targetId === ListIds.DEFAULT_PLAYLIST) {
+            else if (id === ListIds.DEFAULT_PLAYLIST) {
                 return server.defaultPlaylist;
             }
             else {
-                if ($rootScope.lists[targetId] === undefined) {
-                    $log.error('List ' + targetId + ' not found from $rootScope.lists');
+                if ($rootScope.lists[id] === undefined) {
+                    $log.error('List ' + id + ' not found from $rootScope.lists');
                 }
-                return $rootScope.lists[targetId];
+                return $rootScope.lists[id];
             }
         }
 
-        function addToPlaylist(targetId, mediaItem) {
+        function addToPlaylist(listId, mediaItem) {
             return $timeout(function() {
                 var newItem = angular.copy(mediaItem);
                 // generate new UUID
@@ -197,9 +197,9 @@
             }, delay);
         }
 
-        function addStreamToPlaylist(targetId, mediaItem) {
+        function addStreamToPlaylist(listId, mediaItem) {
             return $timeout(function() {
-                var playlist = $rootScope.lists[targetId];
+                var playlist = $rootScope.lists[listId];
                 var date = new Date();
                 var now = date.getTime();
                 var newItem = {
@@ -212,19 +212,19 @@
                 newItem.id = uuid.v4();
                 playlist.items.push(newItem);
                 playlist.modified = now;
-                server.status.listsRefreshed[targetId] = now;
+                server.status.listsRefreshed[listId] = now;
             }, delay);
         }
 
-        function removeFromPlaylist(targetId, mediaItem) {
+        function removeFromPlaylist(listId, mediaItem) {
             return $timeout(function() {
-                $log.info('remove', targetId, mediaItem);
-                var playlist = $rootScope.lists[targetId];
+                $log.info('remove', listId, mediaItem);
+                var playlist = $rootScope.lists[listId];
                 for (var i = 0; i < playlist.items.length; i++) {
                     if (playlist.items[i].id === mediaItem.id) {
                         playlist.items.splice(i, 1);
                         var date = new Date();
-                        server.status.listsRefreshed[targetId] = date.getTime();
+                        server.status.listsRefreshed[listId] = date.getTime();
                     }
                 }
             }, delay);
@@ -249,7 +249,6 @@
                     title: playlist.title,
                     refreshed: date.getTime(),
                     type: 'playlist',
-                    targetId: newId,
                     items: []
                 };
                 for (var i = 0; i < playlist.items.length; i++) {
@@ -264,33 +263,33 @@
                 // simulate empty $promise
                 newPlaylist.$promise = $q.when(newPlaylist);
                 server.playlists.push(newPlaylist);
-                $rootScope.lists[newPlaylist.targetId] = newPlaylist;
+                $rootScope.lists[newPlaylist.id] = newPlaylist;
                 $log.info('new playlist', newPlaylist);
-                server.status.listsRefreshed[newPlaylist.targetId] = newPlaylist.refreshed;
+                server.status.listsRefreshed[newPlaylist.id] = newPlaylist.refreshed;
 
                 // add to root playlist
                 $rootScope.lists[ListIds.ROOT].items.push(newPlaylist);
             }, delay);
         }
 
-        function removePlaylist(targetId) {
+        function removePlaylist(id) {
             return $timeout(function() {
                 // remove from root playlist
                 var rootList = $rootScope.lists[ListIds.ROOT];
                 for (var i = 0; i < rootList.items.length; i++) {
-                    if (rootList.items[i].targetId === targetId) {
+                    if (rootList.items[i].id === id) {
                         rootList.items.splice(i, 1);
                     }
                 }
-                delete $rootScope.lists[targetId];
+                delete $rootScope.lists[id];
             });
         }
 
-        function clearPlaylist(targetId) {
+        function clearPlaylist(id) {
             return $timeout(function() {
                 var date = new Date();
-                $rootScope.lists[targetId].items = [];
-                server.status.listsRefreshed[targetId] = date.getTime();
+                $rootScope.lists[id].items = [];
+                server.status.listsRefreshed[id] = date.getTime();
             });
         }
 
@@ -402,14 +401,14 @@
 
         // Returns item and parent list
         function findItem(itemId) {
-            var targetIds = Object.keys($rootScope.lists);
-            for (var j = 0; j < targetIds.length; j++) {
-                var targetId = targetIds[j];
-                for (var i = 0; i < $rootScope.lists[targetId].items.length; i++) {
-                    if (itemId === $rootScope.lists[targetId].items[i].id) {
+            var listIds = Object.keys($rootScope.lists);
+            for (var j = 0; j < listIds.length; j++) {
+                var listId = listIds[j];
+                for (var i = 0; i < $rootScope.lists[listId].items.length; i++) {
+                    if (itemId === $rootScope.lists[listId].items[i].id) {
                         return {
-                            parentId: targetId,
-                            item: $rootScope.lists[targetId].items[i]
+                            parentId: listId,
+                            item: $rootScope.lists[listId].items[i]
                         };
                     }
                 }
@@ -419,11 +418,11 @@
         }
 
         function findCursorItem(cursor) {
-            var targetId = cursor.parentId;
-            if ($rootScope.lists[targetId] && $rootScope.lists[targetId].items) {
-                for (var i = 0; i < $rootScope.lists[targetId].items.length; i++) {
-                    if (cursor.id === $rootScope.lists[targetId].items[i].id) {
-                        return $rootScope.lists[targetId].items[i];
+            var listId = cursor.parentId;
+            if ($rootScope.lists[listId] && $rootScope.lists[listId].items) {
+                for (var i = 0; i < $rootScope.lists[listId].items.length; i++) {
+                    if (cursor.id === $rootScope.lists[listId].items[i].id) {
+                        return $rootScope.lists[listId].items[i];
                     }
                 }
             }

@@ -2,7 +2,7 @@
     <uib-accordion-heading>
          <span ng-switch on="vm.defaultPlaylist">
              <span ng-switch-when="true">Default</span>
-             <span ng-switch-default>{{ vm.lists[vm.targetId].title }}</span>
+             <span ng-switch-default>{{ vm.lists[vm.listId].title }}</span>
          </span>
          <span class="pull-right">
              <span uib-dropdown is-open="vm.isDropdownOpen" ng-click="$event.stopPropagation()">
@@ -11,7 +11,7 @@
                  </a>
                  <ul class="uib-dropdown-menu dropdown-menu-right">
                      <li>
-                         <a href ng-click="vm.addStream({ playlist: vm.targetId }); vm.isDropdownOpen=false;">
+                         <a href ng-click="vm.addStream({ playlist: vm.listId }); vm.isDropdownOpen=false;">
                              <i class="glyphicon glyphicon-cloud"></i> Add Stream&hellip;
                          </a>
                      </li>
@@ -38,9 +38,9 @@
          </span>
     </uib-accordion-heading>
 
-    <div ng-if="!vm.lists[vm.targetId].items.length">Playlist is empty.</div>
+    <div ng-if="!vm.lists[vm.listId].items.length">Playlist is empty.</div>
 
-    <div class="media-list" ng-if="vm.lists[vm.targetId].items.length">
+    <div class="media-list" ng-if="vm.lists[vm.listId].items.length">
         <div class="row hidden-xs media-list-header">
             <div class="col-sm-4" translate>Name</div>
             <div class="col-sm-4" translate>Title</div>
@@ -48,7 +48,7 @@
             <div class="col-sm-3" translate>Date</div>
         </div>
         <div class="media-list-sortable" ng-sortable="sortableOptions">
-            <rame-media-item ng-repeat="mediaItem in vm.lists[vm.targetId].items" media="mediaItem" remove="vm.removeMedia(mediaItem)" on-click="vm.onMediaClick({ media: mediaItem })"></rame-media-item>
+            <rame-media-item ng-repeat="mediaItem in vm.lists[vm.listId].items" media="mediaItem" remove="vm.removeMedia(mediaItem)" on-click="vm.onMediaClick({ media: mediaItem })"></rame-media-item>
         </div>
     </div>
 
