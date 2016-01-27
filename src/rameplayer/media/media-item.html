@@ -1,17 +1,17 @@
 <div class="row media-list-item" ng-class="{ selected: vm.media.id === vm.playerStatus.cursor.id && vm.playerStatus.state !== 'playing' && vm.playerStatus.state !== 'buffering', locked: vm.media.id === vm.playerStatus.cursor.id && (vm.playerStatus.state === 'playing' || vm.playerStatus.state === 'buffering') }" ng-click="vm.itemClick($event)">
     <div class="col-sm-4 media-list-item-field ellipsis">
-        <span class="glyphicon glyphicon-folder-close" ng-if="vm.media.info.type === 'directory'"></span>
-        {{ vm.media.info.filename }}
+        <span class="glyphicon glyphicon-folder-close" ng-if="vm.media.type === 'directory'"></span>
+        {{ vm.media.filename }}
     </div>
     <div class="col-sm-4 media-list-item-field ellipsis">
-        {{ vm.media.info.title }}
+        {{ vm.media.title }}
     </div>
     <div class="col-sm-1 media-list-item-field text-right">
-        {{ vm.media.info.duration | playerTime }}
+        {{ vm.media.duration | playerTime }}
     </div>
     <div class="col-sm-3 media-list-item-field">
-        {{ vm.media.info.modified | date:'yyyy-MM-dd HH:mm:ss' }}
-        <span class="pull-right" ng-if="vm.media.info.type !== 'directory'">
+        {{ vm.media.modified | date:'yyyy-MM-dd HH:mm:ss' }}
+        <span class="pull-right" ng-if="vm.media.type !== 'directory'">
             <span uib-dropdown is-open="vm.isDropdownOpen" ng-click="$event.stopPropagation()">
                 <a href uib-dropdown-toggle>
                     <span class="glyphicon glyphicon-menu-hamburger sorting-handle"></span>

@@ -94,8 +94,8 @@
                     list = listService.add(targetId);
                     promises.push(list.$promise);
                 }
-                else if ($rootScope.lists[targetId].info &&
-                         status.listsRefreshed[targetId] !== $rootScope.lists[targetId].info.refreshed) {
+                else if ($rootScope.lists[targetId].refreshed &&
+                         status.listsRefreshed[targetId] !== $rootScope.lists[targetId].refreshed) {
                     // refresh
                     list = listService.refresh(targetId);
                     promises.push(list.$promise);

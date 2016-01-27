@@ -11,7 +11,7 @@
         var vm = this;
 
         var playlist = $rootScope.lists[targetId];
-        vm.title = playlist.info.title;
+        vm.title = playlist.title;
 
         // TODO: Storage options should come from server
         vm.storageOptions = [
@@ -25,7 +25,7 @@
                 value: 'browser', name: 'Browser'
             }
         ];
-        vm.storage = playlist.info.storage;
+        vm.storage = playlist.storage;
         vm.save = save;
         vm.cancel = cancel;
 

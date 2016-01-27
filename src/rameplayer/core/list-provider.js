@@ -43,7 +43,7 @@
             ListResource.prototype.hasChildLists = function() {
                 if (this.$resolved === true) {
                     for (var i = 0; i < this.items.length; i++) {
-                        if (this.items[i].info.type === ItemTypes.LIST) {
+                        if (this.items[i].type === ItemTypes.LIST) {
                             return true;
                         }
                     }
@@ -56,7 +56,7 @@
                 if (this.$resolved === true) {
                     for (var i = 0; i < this.items.length; i++) {
                         var item = this.items[i];
-                        if (item.info.type === ItemTypes.LIST &&
+                        if (item.type === ItemTypes.LIST &&
                             $rootScope.lists[item.targetId]) {
                             childLists.push($rootScope.lists[item.targetId]);
                         }

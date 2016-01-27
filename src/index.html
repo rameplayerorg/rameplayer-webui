@@ -38,7 +38,7 @@
     <div class="container" ng-controller="MediaController as vmmc" ng-cloak>
         <uib-tabset type="pills">
             <uib-tab ng-repeat="targetId in vmmc.rootChildren">
-                <tab-heading translate>{{ vmmc.lists[targetId].info.title }}</tab-heading>
+                <tab-heading translate>{{ vmmc.lists[targetId].title }}</tab-heading>
                 <rame-media-list target-id="targetId"></rame-media-list>
             </uib-tab>
             

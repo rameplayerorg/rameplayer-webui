@@ -2,7 +2,7 @@
     <uib-accordion-heading>
          <span ng-switch on="vm.defaultPlaylist">
              <span ng-switch-when="true">Default</span>
-             <span ng-switch-default>{{ vm.lists[vm.targetId].info.title }}</span>
+             <span ng-switch-default>{{ vm.lists[vm.targetId].title }}</span>
          </span>
          <span class="pull-right">
              <span uib-dropdown is-open="vm.isDropdownOpen" ng-click="$event.stopPropagation()">

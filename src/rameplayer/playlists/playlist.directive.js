@@ -65,10 +65,8 @@
                     $log.debug('Save playlist as', result.title);
                     // server needs only some fields for playlist saving
                     var newPlaylist = {
-                        info: {
-                            title: result.title,
-                            storage: result.storage
-                        },
+                        title: result.title,
+                        storage: result.storage,
                         items: []
                     };
                     for (var i = 0; i < $rootScope.lists[vm.targetId].items.length; i++) {
@@ -121,8 +119,8 @@
 
             modalInstance.result.then(function(result) {
                 var playlist = $rootScope.lists[vm.targetId];
-                playlist.info.title = result.title;
-                playlist.info.storage = result.storage;
+                playlist.title = result.title;
+                playlist.storage = result.storage;
                 $log.debug('Edit playlist', playlist);
                 playlist.$save({
                     targetId: vm.targetId

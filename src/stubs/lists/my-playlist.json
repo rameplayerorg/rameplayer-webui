@@ -1,61 +1,51 @@
 {
     "id": "my-playlist",
-    "info": {
-        "filename": "my-playlist",
-        "modified": 0,
-        "refreshed": 1449220031.3,
-        "size": 8192,
-        "title": "My Playlist",
-        "type": "playlist"
-    },
+    "filename": "my-playlist",
+    "modified": 0,
+    "refreshed": 1449220031.3,
+    "size": 8192,
+    "title": "My Playlist",
+    "type": "playlist",
     "items": [
         {
             "id": "my-pl%2f01_pk_FI_001_r720P%2emp4",
-            "info": {
-                "filename": "01_pk_FI_001_r720P.mp4",
-                "modified": 1403136766000,
-                "refreshed": "1449220031.9",
-                "size": 75094711,
-                "title": "01_pk_FI_001_r720P.mp4",
-                "type": "regular",
-                "duration": 3801
-            }
+            "filename": "01_pk_FI_001_r720P.mp4",
+            "modified": 1403136766000,
+            "refreshed": "1449220031.9",
+            "size": 75094711,
+            "title": "01_pk_FI_001_r720P.mp4",
+            "type": "regular",
+            "duration": 3801
         },
         {
             "id": "my-pl%2f02_pk_FI_002_r720P%2emp4",
-            "info": {
-                "filename": "02_pk_FI_002_r720P.mp4",
-                "modified": 1403136792000,
-                "refreshed": "1449220031.10",
-                "size": 35125495,
-                "title": "02_pk_FI_002_r720P.mp4",
-                "type": "regular",
-                "duration": 36
-            }
+            "filename": "02_pk_FI_002_r720P.mp4",
+            "modified": 1403136792000,
+            "refreshed": "1449220031.10",
+            "size": 35125495,
+            "title": "02_pk_FI_002_r720P.mp4",
+            "type": "regular",
+            "duration": 36
         },
         {
             "id": "my-pl%2f03_pksn_FI_120_r720P%2emp4",
-            "info": {
-                "filename": "03_pksn_FI_120_r720P.mp4",
-                "modified": 1403136920000,
-                "refreshed": "1449220031.11",
-                "size": 50823525,
-                "title": "03_pksn_FI_120_r720P.mp4",
-                "type": "regular",
-                "duration": 560
-            }
+            "filename": "03_pksn_FI_120_r720P.mp4",
+            "modified": 1403136920000,
+            "refreshed": "1449220031.11",
+            "size": 50823525,
+            "title": "03_pksn_FI_120_r720P.mp4",
+            "type": "regular",
+            "duration": 560
         },
         {
             "id": "my-pl%2f04_pk_FI_003_r720P%2emp4",
-            "info": {
-                "filename": "04_pk_FI_003_r720P.mp4",
-                "modified": 1403136796000,
-                "refreshed": "1449220031.12",
-                "size": 16342182,
-                "title": "04_pk_FI_003_r720P.mp4",
-                "type": "regular",
-                "duration": 387
-            }
+            "filename": "04_pk_FI_003_r720P.mp4",
+            "modified": 1403136796000,
+            "refreshed": "1449220031.12",
+            "size": 16342182,
+            "title": "04_pk_FI_003_r720P.mp4",
+            "type": "regular",
+            "duration": 387
         }
     ]
 }

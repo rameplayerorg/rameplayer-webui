@@ -41,7 +41,7 @@
         // then fetch all children for root
         rootList.$promise.then(function() {
             for (var i = 0; i < rootList.items.length; i++) {
-                if (rootList.items[i].info.type === ItemTypes.LIST) {
+                if (rootList.items[i].type === ItemTypes.LIST) {
                     add(rootList.items[i].targetId);
                 }
             }

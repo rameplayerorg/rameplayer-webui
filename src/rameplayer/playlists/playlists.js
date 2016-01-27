@@ -34,7 +34,7 @@
             var rootList = $rootScope.lists['root'];
             var playlists = [];
             for (var i = 0; i < rootList.items.length; i++) {
-                if (rootList.items[i].info.type === ItemTypes.PLAYLIST) {
+                if (rootList.items[i].type === ItemTypes.PLAYLIST) {
                     var targetId = rootList.items[i].targetId;
                     // make sure playlist is loaded
                     var playlist = $rootScope.lists[targetId] || listService.add(targetId);

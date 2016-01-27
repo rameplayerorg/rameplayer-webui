@@ -170,7 +170,7 @@
                     }
                 );
                 list.$promise.then(function(list) {
-                    server.status.listsRefreshed[targetId] = list.info.refreshed || '';
+                    server.status.listsRefreshed[targetId] = list.refreshed || '';
                 });
                 return list;
             }
@@ -203,12 +203,10 @@
                 var date = new Date();
                 var now = date.getTime();
                 var newItem = {
-                    info: {
-                        filename: mediaItem.uri,
-                        title: mediaItem.title,
-                        uri: mediaItem.uri,
-                        modified: now
-                    }
+                    filename: mediaItem.uri,
+                    title: mediaItem.title,
+                    uri: mediaItem.uri,
+                    modified: now
                 };
                 // generate new UUID
                 newItem.id = uuid.v4();
@@ -248,11 +246,9 @@
                 var newId = uuid.v4();
                 var newPlaylist = {
                     id: newId,
-                    info: {
-                        title: playlist.info.title,
-                        refreshed: date.getTime(),
-                        type: 'playlist'
-                    },
+                    title: playlist.title,
+                    refreshed: date.getTime(),
+                    type: 'playlist',
                     targetId: newId,
                     items: []
                 };
@@ -303,7 +299,7 @@
                 $log.info('Playing');
                 server.status.state = 'playing';
                 var result = findItem(server.status.cursor.id);
-                server.status.duration = result.item.info.duration;
+                server.status.duration = result.item.duration;
                 playingPromise = $interval(function() {
                     server.status.position += 1.0;
                     if (server.status.position >= server.status.duration) {

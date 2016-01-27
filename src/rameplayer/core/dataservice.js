@@ -143,10 +143,8 @@
 
         function addStreamToPlaylist(targetId, item) {
             var newItem = new ListItem({
-                info: {
-                    title: item.title,
-                    uri: item.uri
-                }
+                title: item.title,
+                uri: item.uri
             });
             return newItem.$save({
                 targetId: targetId,
