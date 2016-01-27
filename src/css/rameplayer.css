@@ -67,6 +67,18 @@ body {
   content: "\00a0/\00a0";
 }
 
+/* Settings */
+#add-unit-form {
+  margin-top: 10px;
+}
+
+/* Cluster Unit Status */
+.cluster-unit-status {
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 /* Admin Settings */
 
 /* IP address input */

@@ -1,5 +1,5 @@
+/* jshint maxparams:11 */
 (function() {
-
     'use strict';
 
     angular
@@ -7,11 +7,11 @@
         .controller('SettingsController', SettingsController);
 
     SettingsController.$inject = [
-        '$log', '$http', 'dataService', '$translate', 'uiVersion', 'toastr', '$scope',
-        '$localStorage', '$window', '$document'
+        '$log', '$http', 'dataService', 'clusterService', '$translate', 'uiVersion',
+        'toastr', '$scope', '$localStorage', '$window', '$document'
     ];
 
-    function SettingsController($log, $http, dataService, $translate,
+    function SettingsController($log, $http, dataService, clusterService, $translate,
                                 uiVersion, toastr, $scope, $localStorage, $window, $document) {
 
         var $injector = angular.injector();
@@ -41,7 +41,18 @@
         vm.windowTitleInfo = 'RamePlayer';
         vm.ipAddress = initIpAddressInfo();
         vm.hostname = initHostnameInfo();
-        
+
+        vm.newUnit = {
+            ip: {
+                value: '',
+                valid: true
+            },
+            port: 8000,
+            delay: 0
+        };
+        vm.addClusterUnit = addClusterUnit;
+        vm.clusterService = clusterService;
+
         function initIpAddressInfo() {
             var adr = dataService.getSystemSettings().ipAddress;
             vm.windowTitleInfo = ' - ' + vm.windowTitleInfo;
@@ -130,5 +141,21 @@
             //$log.info('storageusb: ' + vm.autoplayUsb + ", " + userSettings.autoplayUsb);            
         }
 
+        function addClusterUnit() {
+            $log.debug('Add Cluster Unit');
+            if (vm.newUnitIp.valid) {
+                clusterService.addUnit(vm.newUnit.ip.value,
+                                       vm.newUnit.port,
+                                       vm.newUnit.delay);
+                toastr.success('New unit added.', 'Cluster');
+            }
+            else {
+                // Sticky toast
+                toastr.error('IP address of new unit', 'Invalid settings', {
+                    timeOut: 0,
+                    closeButton: true
+                });
+            }
+        }
     }
 })();

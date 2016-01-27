@@ -5,10 +5,15 @@
         .module('rameplayer.player')
         .controller('PlayerController', PlayerController);
 
-    PlayerController.$inject = ['$rootScope', '$scope', '$log', '$timeout', 'statusService', 'dataService'];
+    PlayerController.$inject = ['$rootScope', '$scope', '$log', '$timeout', 'statusService',
+        'dataService', 'clusterService'];
 
-    function PlayerController($rootScope, $scope, $log, $timeout, statusService, dataService) {
+    function PlayerController($rootScope, $scope, $log, $timeout, statusService, dataService, clusterService) {
         var vm = this;
+
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
 
         vm.timeSlider = 0;
         vm.playerStatus = statusService.status;
@@ -19,6 +24,7 @@
         vm.toggleStop = toggleStop;
         vm.stepForward = stepForward;
         vm.seek = seek;
+        vm.clusterService = clusterService;
 
         $scope.$watchCollection('vm.playerStatus', function() {
             // synchronize time slider with status position

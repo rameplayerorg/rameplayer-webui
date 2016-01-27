@@ -2,6 +2,7 @@
     'use strict';
 
     angular.module('rameplayer.settings', [
-           'ngStorage'
+        'ngStorage',
+        'ngBootstrapColorSelector'
     ]);
 })();
