@@ -1,9 +1,9 @@
 {
-    "filename": "Subdirectory 1",
+    "name": "Subdirectory 1",
     "id": "sda1:/Subdirectory%201",
     "items": [
         {
-            "filename": "1-10_pk_FI_006_r720P.mp4",
+            "name": "1-10_pk_FI_006_r720P.mp4",
             "id": "sda1:%2f1-10_pk_FI_006_r720P%2emp4",
             "modified": 1403136826000,
             "refreshed": "1449220031.18",
@@ -12,7 +12,7 @@
             "type": "regular"
         },
         {
-            "filename": "1-11_pksn_FI_088_r720P.mp4",
+            "name": "1-11_pksn_FI_088_r720P.mp4",
             "id": "sda1:%2f1-11_pksn_FI_088_r720P%2emp4",
             "modified": 1403136998000,
             "refreshed": "1449220031.19",
@@ -21,7 +21,7 @@
             "type": "regular"
         },
         {
-            "filename": "1-12_pk_FI_007_r720P.mp4",
+            "name": "1-12_pk_FI_007_r720P.mp4",
             "id": "sda1:%2f1-12_pk_FI_007_r720P%2emp4",
             "modified": 1403136836000,
             "refreshed": "1449220031.20",

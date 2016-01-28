@@ -1,7 +1,7 @@
 <div class="row media-list-item" ng-class="{ selected: vm.media.id === vm.playerStatus.cursor.id && vm.playerStatus.state !== 'playing' && vm.playerStatus.state !== 'buffering', locked: vm.media.id === vm.playerStatus.cursor.id && (vm.playerStatus.state === 'playing' || vm.playerStatus.state === 'buffering') }" ng-click="vm.itemClick($event)">
     <div class="col-sm-4 media-list-item-field ellipsis">
         <span class="glyphicon glyphicon-folder-close" ng-if="vm.media.type === 'directory'"></span>
-        {{ vm.media.filename }}
+        {{ vm.media.name }}
     </div>
     <div class="col-sm-4 media-list-item-field ellipsis">
         {{ vm.media.title }}

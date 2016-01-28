@@ -207,7 +207,7 @@
                 var date = new Date();
                 var now = date.getTime();
                 var newItem = {
-                    filename: mediaItem.uri,
+                    name: mediaItem.uri,
                     title: mediaItem.title,
                     uri: mediaItem.uri,
                     modified: now

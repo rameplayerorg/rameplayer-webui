@@ -1,9 +1,9 @@
 {
-    "filename": "sda1",
     "id": "sda1",
+    "name": "sda1",
     "items": [
         {
-            "filename": "Subdirectory 1",
+            "name": "Subdirectory 1",
             "id": "sda1Subdirectory1",
             "modified": 1447798454000,
             "refreshed": "1449220031.5",
@@ -13,7 +13,7 @@
         },
         {
             "duration": 450,
-            "filename": "00_pk_FI_000_r720P.mp4",
+            "name": "00_pk_FI_000_r720P.mp4",
             "id": "sda1:%2f00_pk_FI_000_r720P%2emp4",
             "modified": 1403137458000,
             "refreshed": "1449220031.8",
@@ -23,7 +23,7 @@
         },
         {
             "duration": 3801,
-            "filename": "01_pk_FI_001_r720P.mp4",
+            "name": "01_pk_FI_001_r720P.mp4",
             "id": "sda1:%2f01_pk_FI_001_r720P%2emp4",
             "modified": 1403136766000,
             "refreshed": "1449220031.9",
@@ -33,7 +33,7 @@
         },
         {
             "duration": 36,
-            "filename": "02_pk_FI_002_r720P.mp4",
+            "name": "02_pk_FI_002_r720P.mp4",
             "id": "sda1:%2f02_pk_FI_002_r720P%2emp4",
             "modified": 1403136792000,
             "refreshed": "1449220031.10",
@@ -43,7 +43,7 @@
         },
         {
             "duration": 560,
-            "filename": "03_pksn_FI_120_r720P.mp4",
+            "name": "03_pksn_FI_120_r720P.mp4",
             "id": "sda1:%2f03_pksn_FI_120_r720P%2emp4",
             "modified": 1403136920000,
             "refreshed": "1449220031.11",
@@ -53,7 +53,7 @@
         },
         {
             "duration": 387,
-            "filename": "04_pk_FI_003_r720P.mp4",
+            "name": "04_pk_FI_003_r720P.mp4",
             "id": "sda1:%2f04_pk_FI_003_r720P%2emp4",
             "modified": 1403136796000,
             "refreshed": "1449220031.12",
@@ -63,7 +63,7 @@
         },
         {
             "duration": 373,
-            "filename": "05_pksn_FI_106_r720P.mp4",
+            "name": "05_pksn_FI_106_r720P.mp4",
             "id": "sda1:%2f05_pksn_FI_106_r720P%2emp4",
             "modified": 1403136920000,
             "refreshed": "1449220031.13",
@@ -73,7 +73,7 @@
         },
         {
             "duration": 54,
-            "filename": "06_pk_FI_004_r720P.mp4",
+            "name": "06_pk_FI_004_r720P.mp4",
             "id": "sda1:%2f06_pk_FI_004_r720P%2emp4",
             "modified": 1403136808000,
             "refreshed": "1449220031.14",
@@ -83,7 +83,7 @@
         },
         {
             "duration": 400,
-            "filename": "07_pksn_FI_002_r720P.mp4",
+            "name": "07_pksn_FI_002_r720P.mp4",
             "id": "sda1:%2f07_pksn_FI_002_r720P%2emp4",
             "modified": 1403136972000,
             "refreshed": "1449220031.15",
@@ -93,7 +93,7 @@
         },
         {
             "duration": 874,
-            "filename": "08_pk_FI_005_r720P.mp4",
+            "name": "08_pk_FI_005_r720P.mp4",
             "id": "sda1:%2f08_pk_FI_005_r720P%2emp4",
             "modified": 1403136816000,
             "refreshed": "1449220031.16",
@@ -102,7 +102,7 @@
             "type": "regular"
         },
         {
-            "filename": "09_pksn_FI_092_r720P.mp4",
+            "name": "09_pksn_FI_092_r720P.mp4",
             "id": "sda1:%2f09_pksn_FI_092_r720P%2emp4",
             "modified": 1403136964000,
             "refreshed": "1449220031.17",
@@ -111,7 +111,7 @@
             "type": "regular"
         },
         {
-            "filename": "20_pk_FI_011_r720P.mp4",
+            "name": "20_pk_FI_011_r720P.mp4",
             "id": "sda1:%2f20_pk_FI_011_r720P%2emp4",
             "modified": 1403136878000,
             "refreshed": "1449220031.32",
@@ -120,7 +120,7 @@
             "type": "regular"
         },
         {
-            "filename": "21_pksn_FI_020_r720P.mp4",
+            "name": "21_pksn_FI_020_r720P.mp4",
             "id": "sda1:%2f21_pksn_FI_020_r720P%2emp4",
             "modified": 1433691670000,
             "refreshed": "1449220031.33",
@@ -129,7 +129,7 @@
             "type": "regular"
         },
         {
-            "filename": "22_pk_FI_900_r720P.mp4",
+            "name": "22_pk_FI_900_r720P.mp4",
             "id": "sda1:%2f22_pk_FI_900_r720P%2emp4",
             "modified": 1433691400000,
             "refreshed": "1449220031.34",
@@ -138,7 +138,7 @@
             "type": "regular"
         },
         {
-            "filename": "23_pksn_FI_053_r720P.mp4",
+            "name": "23_pksn_FI_053_r720P.mp4",
             "id": "sda1:%2f23_pksn_FI_053_r720P%2emp4",
             "modified": 1433691696000,
             "refreshed": "1449220031.35",
@@ -147,7 +147,7 @@
             "type": "regular"
         },
         {
-            "filename": "24_pk_FI_012_r720P.mp4",
+            "name": "24_pk_FI_012_r720P.mp4",
             "id": "sda1:%2f24_pk_FI_012_r720P%2emp4",
             "modified": 1433691406000,
             "refreshed": "1449220031.36",
@@ -156,7 +156,7 @@
             "type": "regular"
         },
         {
-            "filename": "25_pksn_FI_024_r720P.mp4",
+            "name": "25_pksn_FI_024_r720P.mp4",
             "id": "sda1:%2f25_pksn_FI_024_r720P%2emp4",
             "modified": 1433691744000,
             "refreshed": "1449220031.37",
@@ -165,7 +165,7 @@
             "type": "regular"
         },
         {
-            "filename": "26_pk_FI_013_r720P.mp4",
+            "name": "26_pk_FI_013_r720P.mp4",
             "id": "sda1:%2f26_pk_FI_013_r720P%2emp4",
             "modified": 1433691560000,
             "refreshed": "1449220031.38",
@@ -174,7 +174,7 @@
             "type": "regular"
         },
         {
-            "filename": "27_pksn_FI_095_r720P.mp4",
+            "name": "27_pksn_FI_095_r720P.mp4",
             "id": "sda1:%2f27_pksn_FI_095_r720P%2emp4",
             "modified": 1433691742000,
             "refreshed": "1449220031.39",
@@ -183,7 +183,7 @@
             "type": "regular"
         },
         {
-            "filename": "28_pk_FI_014_r720P.mp4",
+            "name": "28_pk_FI_014_r720P.mp4",
             "id": "sda1:%2f28_pk_FI_014_r720P%2emp4",
             "modified": 1433691456000,
             "refreshed": "1449220031.40",
@@ -192,7 +192,7 @@
             "type": "regular"
         },
         {
-            "filename": "29_pkon_FI_001_r720P.mp4",
+            "name": "29_pkon_FI_001_r720P.mp4",
             "id": "sda1:%2f29_pkon_FI_001_r720P%2emp4",
             "modified": 1433691736000,
             "refreshed": "1449220031.41",
@@ -201,7 +201,7 @@
             "type": "regular"
         },
         {
-            "filename": "30_pk_FI_015_r720P.mp4",
+            "name": "30_pk_FI_015_r720P.mp4",
             "id": "sda1:%2f30_pk_FI_015_r720P%2emp4",
             "modified": 1433691504000,
             "refreshed": "1449220031.42",
@@ -210,7 +210,7 @@
             "type": "regular"
         },
         {
-            "filename": "31_pksn_FI_056_r720P.mp4",
+            "name": "31_pksn_FI_056_r720P.mp4",
             "id": "sda1:%2f31_pksn_FI_056_r720P%2emp4",
             "modified": 1433691750000,
             "refreshed": "1449220031.43",
@@ -219,7 +219,7 @@
             "type": "regular"
         },
         {
-            "filename": "32_pk_FI_016_r720P.mp4",
+            "name": "32_pk_FI_016_r720P.mp4",
             "id": "sda1:%2f32_pk_FI_016_r720P%2emp4",
             "modified": 1433691510000,
             "refreshed": "1449220031.44",
@@ -228,7 +228,7 @@
             "type": "regular"
         },
         {
-            "filename": "ivwrd_s-Sub_FI_1_r720P.mp4",
+            "name": "ivwrd_s-Sub_FI_1_r720P.mp4",
             "id": "sda1:%2fivwrd_s%2dSub_FI_1_r720P%2emp4",
             "modified": 1439913950000,
             "refreshed": "1449220031.47",

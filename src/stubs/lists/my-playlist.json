@@ -1,6 +1,6 @@
 {
     "id": "my-playlist",
-    "filename": "my-playlist",
+    "name": "my-playlist",
     "modified": 0,
     "refreshed": 1449220031.3,
     "size": 8192,
@@ -9,7 +9,7 @@
     "items": [
         {
             "id": "my-pl%2f01_pk_FI_001_r720P%2emp4",
-            "filename": "01_pk_FI_001_r720P.mp4",
+            "name": "01_pk_FI_001_r720P.mp4",
             "modified": 1403136766000,
             "refreshed": "1449220031.9",
             "size": 75094711,
@@ -19,7 +19,7 @@
         },
         {
             "id": "my-pl%2f02_pk_FI_002_r720P%2emp4",
-            "filename": "02_pk_FI_002_r720P.mp4",
+            "name": "02_pk_FI_002_r720P.mp4",
             "modified": 1403136792000,
             "refreshed": "1449220031.10",
             "size": 35125495,
@@ -29,7 +29,7 @@
         },
         {
             "id": "my-pl%2f03_pksn_FI_120_r720P%2emp4",
-            "filename": "03_pksn_FI_120_r720P.mp4",
+            "name": "03_pksn_FI_120_r720P.mp4",
             "modified": 1403136920000,
             "refreshed": "1449220031.11",
             "size": 50823525,
@@ -39,7 +39,7 @@
         },
         {
             "id": "my-pl%2f04_pk_FI_003_r720P%2emp4",
-            "filename": "04_pk_FI_003_r720P.mp4",
+            "name": "04_pk_FI_003_r720P.mp4",
             "modified": 1403136796000,
             "refreshed": "1449220031.12",
             "size": 16342182,

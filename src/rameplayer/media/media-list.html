@@ -1,7 +1,7 @@
 <ol class="breadcrumb" ng-if="breadCrumbsEnabled">
     <li ng-repeat="listId in breadcrumbs" ng-class="{ 'last': $last }" ng-switch on="$last">
-        <span ng-switch-when="true">{{ lists[listId].filename }}</span>
-        <a href="#" ng-click="activateSlide($index)" ng-switch-default>{{ lists[listId].filename }}</a>
+        <span ng-switch-when="true">{{ lists[listId].name }}</span>
+        <a href="#" ng-click="activateSlide($index)" ng-switch-default>{{ lists[listId].name }}</a>
     </li>
 </ol>
 <div> <!-- carousel -->
