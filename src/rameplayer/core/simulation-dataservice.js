@@ -53,7 +53,9 @@
                 id: 'default',
                 items: [],
                 '$save': function() {
-                }
+                },
+                // empty promise
+                '$promise': $q.when()
             },
             playlists: []
         };
@@ -68,7 +70,9 @@
             '$save': function(func) {
                 $log.info('Saving system settings');
                 func();
-            }
+            },
+            // empty promise
+            '$promise': $q.when()
         };
 
         var service = {
