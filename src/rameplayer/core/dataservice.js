@@ -133,7 +133,7 @@
 
         function addToPlaylist(listId, item) {
             var newItem = new ListItem({
-                itemId: item.id
+                uri: item.uri
             });
             return newItem.$save({
                 listId: listId,
