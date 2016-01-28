@@ -21,7 +21,7 @@
         vm.statusErrorPromise = null;
         vm.statusError = null;
         vm.togglePlay = togglePlay;
-        vm.toggleStop = toggleStop;
+        vm.stop = stop;
         vm.stepForward = stepForward;
         vm.seek = seek;
         vm.clusterService = clusterService;
@@ -60,16 +60,6 @@
         function pause() {
             dataService.pause().then(function(data) {
             });
-        }
-
-        function toggleStop() {
-            if (vm.playerStatus.state === statusService.states.playing ||
-                vm.playerStatus.state === statusService.states.buffering) {
-                stop();
-            }
-            else {
-                stepBackward();
-            }
         }
 
         function stop() {
