@@ -3,14 +3,20 @@
         <ng-bootstrap-color-selector color-selected="vm.unit.color" colors="vm.colors"></ng-bootstrap-color-selector>
     </div>
     <h4>
-    {{ vm.unit.hostname }}</h4>
+        <span ng-if="vm.unit.hostname">
+            {{ vm.unit.hostname }}
+        </span>
+        <span ng-if="!vm.unit.hostname" translate>
+            unresolved hostname
+        </span>
+    </h4>
 
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
                 <label class="control-label" translate>IP address</label>
                 <div>
-                    <span ng-hide="vm.editMode">{{ vm.unit.address }}</span>
+                    <span ng-hide="vm.editMode">{{ vm.unit.host }}</span>
                     <rame-ip-address-block
                         ng-show="vm.editMode"
                         aria-label="DeviceIP"

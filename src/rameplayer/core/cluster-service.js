@@ -16,16 +16,17 @@
         .module('rameplayer.core')
         .factory('clusterService', clusterService);
 
-    clusterService.$inject = ['$log', 'dataService', 'uuid'];
+    clusterService.$inject = ['$log', 'dataServiceProvider', 'uuid'];
 
     /**
      * @namespace ClusterService
      * @desc Application wide service for cluster handling
      * @memberof Factories
      */
-    function clusterService($log, dataService, uuid) {
+    function clusterService($log, dataServiceProvider, uuid) {
         // cluster units
         var units = [];
+        var dataServices = {};
 
         var colors = [
             {rgb: 87,  hex: '#FF4500', name: 'orangered'},
@@ -64,13 +65,19 @@
             var color = getNextFreeColor();
             var unit = {
                 id: uuid.v4(),
-                hostname: resolveHostname(address),
-                address: address,
+                host: address,
                 port: port,
                 delay: parseFloat(delay),
                 color: color
             };
             units.push(unit);
+
+            // own dataService for cluster unit
+            var dataService = dataServiceProvider.create(unit);
+            dataServices[unit.id] = dataService;
+
+            resolveHostname(unit);
+
             $log.debug('New unit added to cluster', unit);
             return unit.id;
         }
@@ -86,8 +93,11 @@
             return false;
         }
 
-        function resolveHostname(address) {
-            return 'hostname';
+        function resolveHostname(unit) {
+            var systemSettings = dataServices[unit.id].getSystemSettings();
+            systemSettings.$promise.then(function() {
+                unit.hostname = systemSettings.hostname;
+            });
         }
 
         function getColors() {
