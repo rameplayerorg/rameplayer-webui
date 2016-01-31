@@ -39,28 +39,22 @@
 
     <!-- cluster status -->
     <div class="container-fluid text-center" ng-show="vm.clusterService.units.length">
-        <div class="cluster-unit-status" style="color: #FF4500" data-toggle="tooltip" data-html="true" title="unit1-hostname<br>Stopped">
-            <i class="glyphicon glyphicon-stop"></i> 0:00
-        </div>
+        <rame-cluster-unit-status ng-repeat="unit in vm.clusterService.units" unit="unit">
+        </rame-cluster-unit-status>
 
-        <div class="cluster-unit-status" style="color: limegreen" data-toggle="tooltip" data-html="true" title="unit2-hostname<br>00_pk_FI_000_r720P.mp4">
-            <i class="glyphicon glyphicon-play"></i> 16:35
-        </div>
-
-        <div class="cluster-unit-status" style="color: sienna" data-toggle="tooltip" data-html="true" title="unit3-hostname<br>00_pk_FI_000_r720P.mp4">
-            <i class="glyphicon glyphicon-play"></i> 16:32
-        </div>
-
-        <div class="cluster-unit-status" style="color: mediumvioletred" data-toggle="tooltip" data-html="true" title="unit4-hostname<br>00_pk_FI_000_r720P.mp4">
-            <i class="glyphicon glyphicon-play"></i> 16:31
-        </div>
-
-        <div class="cluster-unit-status" style="color: gold" data-toggle="tooltip" data-html="true" title="unit5-hostname<br>Paused 00_pk_FI_000_r720P.mp4">
-            <i class="glyphicon glyphicon-pause"></i> 4:35
-        </div>
-
-        <div class="cluster-unit-status" style="color: cornflowerblue" data-toggle="tooltip" data-html="true" title="unit6-hostname<br>Error: no response">
-            <i class="glyphicon glyphicon-exclamation-sign"></i> ?:??
-        </div>
+        <!-- tooltip template -->
+        <script type="text/ng-template" id="cluster-unit-status-tooltip.html">
+            <span>
+                <span ng-if="vm.statuses[vm.unit.id]">
+                    {{ vm.unit.hostname }}<br>
+                    {{ vm.statuses[vm.unit.id].state }}
+                </span>
+                <span ng-if="!vm.statuses[vm.unit.id]">
+                    <span ng-if="vm.unit.hostname">{{ vm.unit.hostname }}<br></span>
+                    <span ng-if="vm.unit.host">{{ vm.unit.host }}<br></span>
+                    <span translate>Error: no response</span>
+                </span>
+            </span>
+        </script>
     </div>
 </div>

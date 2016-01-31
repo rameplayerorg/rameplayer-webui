@@ -1,0 +1,9 @@
+<div class="cluster-unit-status" ng-style="{'color': vm.unit.color}" data-toggle="tooltip" data-html="true" uib-tooltip-template="'cluster-unit-status-tooltip.html'">
+    <i class="glyphicon" ng-class="{'glyphicon-stop': vm.statuses[vm.unit.id].state === 'stopped', 'glyphicon-pause': vm.statuses[vm.unit.id].state === 'paused', 'glyphicon-play': vm.statuses[vm.unit.id].state === 'playing' || vm.statuses[vm.unit.id].state === 'buffering', 'glyphicon-exclamation-sign': !vm.statuses[vm.unit.id].state }"></i>
+    <span>
+        {{ vm.statuses[vm.unit.id].position | playerTime:vm.statuses[vm.unit.id].duration }}
+    </span>
+    <span ng-if="!vm.statuses[vm.unit.id]">
+        -:--
+    </span>
+</div>
