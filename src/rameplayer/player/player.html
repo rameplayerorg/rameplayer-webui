@@ -48,6 +48,9 @@
                 <span ng-if="vm.statuses[vm.unit.id]">
                     {{ vm.unit.hostname }}<br>
                     {{ vm.statuses[vm.unit.id].state }}
+                    <span ng-if="vm.statuses[vm.unit.id].cursor.name">
+                        <br>{{ vm.statuses[vm.unit.id].cursor.name }}
+                    </span>
                 </span>
                 <span ng-if="!vm.statuses[vm.unit.id]">
                     <span ng-if="vm.unit.hostname">{{ vm.unit.hostname }}<br></span>
