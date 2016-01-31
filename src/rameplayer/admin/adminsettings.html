@@ -12,32 +12,41 @@
                 <img alt="Rame Logo" src="images/logo_fading_black_h40.gif" 
                     style="float:right;padding:2px;">
             </span>
-            <div class="form-group">
-                <label for="videoResOut" translate>Video output resolution</label>
-                <select id="videoResOut" ng-model="vm.systemSettings.resolution">
-                    <option
-                        ng-repeat="vor in vm.videoOutputResolutions"
-                        ng-value="vor" translate>{{ vor }}</option>
-                </select>
-            </div>
 
-            <div class="form-group">
-                <label for="audioPort" translate>
-                Audio port</label>
-                <select id="audioPort" ng-model="vm.systemSettings.audioPort">
-                    <option
-                        ng-repeat="port in vm.audioPorts"
-                        ng-value="port" translate>{{ port }}</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="deviceName" translate>Device name</label>
-                <input type="text" name="deviceName" id="deviceName"
-                    class="form-control" ng-model="vm.deviceName"
-                    ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?(\.[a-z\d]([a-z\d\-]{0,61}[a-z\d])?)*$/i"
-                    ng-minlength="1" ng-maxlength="63" />
-            </div>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="videoResOut" class="col-sm-3 control-label" translate>Video output resolution</label>
+                    <div class="col-sm-4">
+                        <select id="videoResOut" ng-model="vm.systemSettings.resolution" class="form-control">
+                            <option
+                                ng-repeat="vor in vm.videoOutputResolutions"
+                                ng-value="vor" translate>{{ vor }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="audioPort" class="col-sm-3 control-label" translate>
+                    Audio port</label>
+                    <div class="col-sm-4">
+                        <select id="audioPort" ng-model="vm.systemSettings.audioPort" class="form-control">
+                            <option
+                                ng-repeat="port in vm.audioPorts"
+                                ng-value="port" translate>{{ port }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="deviceName" class="col-sm-3 control-label" translate>Device name</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="deviceName" id="deviceName"
+                            class="form-control" ng-model="vm.deviceName"
+                            ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?(\.[a-z\d]([a-z\d\-]{0,61}[a-z\d])?)*$/i"
+                            ng-minlength="1" ng-maxlength="63" />
+                    </div>
+                </div>
+            </div> <!-- .form-horizontal -->
 
             <div class="form-group">
                 <label for="ipConfigurations" translate>IP Configurations</label>
