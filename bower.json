@@ -15,7 +15,7 @@
         "angular-bootstrap": "~0.14.3",
         "angular-resource": "~1.4.9",
         "angular-route": "~1.4.9",
-        "angular-sanitize": "~1.4.7",
+        "angular-sanitize": "~1.4.9",
         "angular-toastr": "~1.6.0",
         "angular-translate": "~2.8.1",        
         "angular-uuid-generator": "1.0.1",
@@ -25,6 +25,6 @@
         "Sortable": "~1.4.2"
     },
     "resolutions": {
-        "angular": "1.4.7"
+        "angular": "1.4.9"
     }
 }
