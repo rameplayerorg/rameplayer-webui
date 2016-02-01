@@ -39,8 +39,11 @@
         });
         
         vm.windowTitleInfo = 'RamePlayer';
-        vm.ipAddress = initIpAddressInfo();
-        vm.hostname = initHostnameInfo();
+        var systemSettings = dataService.getSystemSettings();
+        systemSettings.$promise.then(function() {
+            vm.ipAddress = initIpAddressInfo(systemSettings);
+            vm.hostname = initHostnameInfo(systemSettings);
+        });
 
         vm.newUnit = {
             ip: {
@@ -53,8 +56,8 @@
         vm.addClusterUnit = addClusterUnit;
         vm.clusterService = clusterService;
 
-        function initIpAddressInfo() {
-            var adr = dataService.getSystemSettings().ipAddress;
+        function initIpAddressInfo(systemSettings) {
+            var adr = systemSettings.ipAddress;
             vm.windowTitleInfo = ' - ' + vm.windowTitleInfo;
             //$log.debug(' wintit:' + vm.windowTitleInfo);
             if (adr) {
@@ -68,8 +71,8 @@
             return adr;
         }
 
-        function initHostnameInfo() {
-            var hn = dataService.getSystemSettings().hostname;
+        function initHostnameInfo(systemSettings) {
+            var hn = systemSettings.hostname;
             vm.windowTitleInfo = ' - ' + vm.windowTitleInfo;
             if (hn) {
                 vm.windowTitleInfo = hn + vm.windowTitleInfo;
