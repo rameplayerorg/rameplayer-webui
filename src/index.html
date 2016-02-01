@@ -29,13 +29,7 @@
 </head>
 
 <body>
-    <span ng-controller="SettingsController as infovm" class="pull-right">
-        <span style="float:left;padding:2px;" ng-cloak> 
-            {{ ::infovm.hostname }} <br> {{ ::infovm.ipAddress }} 
-        </span>
-        <img alt="Rame Logo" src="images/logo_fading_black_h40.gif" 
-            style="float:right;padding:2px;">
-    </span>
+    <rame-device-info></rame-device-info>
     <div class="container" ng-controller="MediaController as vmmc" ng-cloak>
         <uib-tabset type="pills">
             <uib-tab ng-repeat="listId in vmmc.rootChildren">
@@ -82,6 +76,7 @@
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="../bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="../bower_components/angular-route/angular-route.min.js"></script>
     <script src="../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="../bower_components/angular-translate/angular-translate.min.js"></script>
     <script src="../bower_components/angular-uuid-generator/angular-uuid-generator.js"></script>
@@ -100,6 +95,7 @@
     <!-- directives module -->
     <script src="rameplayer/directives/directives.module.js"></script>
     <script src="rameplayer/directives/ip-address-block.directive.js"></script>
+    <script src="rameplayer/directives/device-info.directive.js"></script>
     <script src="rameplayer/directives/ng-bootstrap-colorselector.js"></script>
 
     <!-- admin settings module -->

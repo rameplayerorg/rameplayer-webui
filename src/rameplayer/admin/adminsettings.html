@@ -4,14 +4,7 @@
             <h3 class="panel-title" translate>Admin Settings</h3>
         </div>
         <div class="panel-body ">
-            <span ng-controller="SettingsController as infovm"
-                class="pull-right">
-                <span style="float:left;padding:2px;" ng-cloak>
-                    {{ ::infovm.hostname }} <br> {{ ::infovm.ipAddress }} 
-                </span>
-                <img alt="Rame Logo" src="images/logo_fading_black_h40.gif" 
-                    style="float:right;padding:2px;">
-            </span>
+            <rame-device-info></rame-device-info>
 
             <div class="form-horizontal">
                 <div class="form-group">
