@@ -21,7 +21,7 @@
         vm.statusErrorPromise = null;
         vm.statusError = null;
         vm.togglePlay = togglePlay;
-        vm.toggleStop = toggleStop;
+        vm.stop = stop;
         vm.stepForward = stepForward;
         vm.seek = seek;
         vm.clusterService = clusterService;
@@ -60,16 +60,6 @@
         function pause() {
             dataService.pause().then(function(data) {
             });
-        }
-
-        function toggleStop() {
-            if (vm.playerStatus.state === statusService.states.playing ||
-                vm.playerStatus.state === statusService.states.buffering) {
-                stop();
-            }
-            else {
-                stepBackward();
-            }
         }
 
         function stop() {
@@ -111,11 +101,11 @@
         }
 
         function findCursorItem(cursor) {
-            var targetId = cursor.parentId;
-            if ($rootScope.lists[targetId] && $rootScope.lists[targetId].items) {
-                for (var i = 0; i < $rootScope.lists[targetId].items.length; i++) {
-                    if (cursor.id === $rootScope.lists[targetId].items[i].id) {
-                        return $rootScope.lists[targetId].items[i];
+            var id = cursor.parentId;
+            if ($rootScope.lists[id] && $rootScope.lists[id].items) {
+                for (var i = 0; i < $rootScope.lists[id].items.length; i++) {
+                    if (cursor.id === $rootScope.lists[id].items[i].id) {
+                        return $rootScope.lists[id].items[i];
                     }
                 }
             }

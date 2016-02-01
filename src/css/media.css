@@ -23,6 +23,11 @@
     width: 30px;
 }
 
+/* z-index bug in last dropdown inside carousel */
+.fcarousel .media-list {
+  padding-bottom: 35px;
+}
+
 .media-list-header {
   font-weight: 700;
 }
@@ -57,19 +62,6 @@
 .media-list-sortable .sorting-handle {
   cursor: move;
   cursor: -webkit-grabbing;
-}
-
-#play {
-    margin: 10px 0px 10px 0px;
-}
-
-#player-row-selection {
-    padding: 5px 0px 5px 0px;
-    border-bottom: 1px solid #E7E7E7;
-}
-
-#player-playlist-controls {
-    margin-bottom: 5px;
 }
 
 .folders {

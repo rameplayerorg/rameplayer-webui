@@ -32,9 +32,8 @@
         return service;
 
         function getResource(url) {
-            //var url = baseUrl + 'lists/:targetId';
             var ListResource = $resource(url, {
-                targetId: '@targetId'
+                id: '@id'
             });
 
             // add custom functions for list traversing
@@ -43,7 +42,7 @@
             ListResource.prototype.hasChildLists = function() {
                 if (this.$resolved === true) {
                     for (var i = 0; i < this.items.length; i++) {
-                        if (this.items[i].info.type === ItemTypes.LIST) {
+                        if (this.items[i].type === ItemTypes.LIST) {
                             return true;
                         }
                     }
@@ -56,9 +55,9 @@
                 if (this.$resolved === true) {
                     for (var i = 0; i < this.items.length; i++) {
                         var item = this.items[i];
-                        if (item.info.type === ItemTypes.LIST &&
-                            $rootScope.lists[item.targetId]) {
-                            childLists.push($rootScope.lists[item.targetId]);
+                        if (item.type === ItemTypes.LIST &&
+                            $rootScope.lists[item.id]) {
+                            childLists.push($rootScope.lists[item.id]);
                         }
                     }
                 }
@@ -66,10 +65,10 @@
             };
 
             ListResource.prototype.getParent = function() {
-                var targetIds = Object.keys($rootScope.lists);
-                for (var j = 0; j < targetIds.length; j++) {
-                    var targetId = targetIds[j];
-                    var list = $rootScope.lists[targetId];
+                var ids = Object.keys($rootScope.lists);
+                for (var j = 0; j < ids.length; j++) {
+                    var id = ids[j];
+                    var list = $rootScope.lists[id];
                     var childLists = list.getChildLists();
                     for (var i = 0; i < childLists.length; i++) {
                         if (childLists[i].id === this.id) {

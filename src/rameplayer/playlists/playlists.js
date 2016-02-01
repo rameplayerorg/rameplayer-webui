@@ -34,11 +34,11 @@
             var rootList = $rootScope.lists['root'];
             var playlists = [];
             for (var i = 0; i < rootList.items.length; i++) {
-                if (rootList.items[i].info.type === ItemTypes.PLAYLIST) {
-                    var targetId = rootList.items[i].targetId;
+                if (rootList.items[i].type === ItemTypes.PLAYLIST) {
+                    var id = rootList.items[i].id;
                     // make sure playlist is loaded
-                    var playlist = $rootScope.lists[targetId] || listService.add(targetId);
-                    playlists.push(targetId);
+                    var playlist = $rootScope.lists[id] || listService.add(id);
+                    playlists.push(id);
                 }
             }
             $log.info('Playlists refreshed: ', playlists);
@@ -57,9 +57,9 @@
             dataService.setCursor(mediaItem.id);
         }
 
-        function removeMedia(targetId, media) {
-            $log.info('Remove media from playlist', targetId, media);
-            dataService.removeFromPlaylist(targetId, media);
+        function removeMedia(listId, media) {
+            $log.info('Remove media from playlist', listId, media);
+            dataService.removeFromPlaylist(listId, media);
         }
 
         function addStream(playlist) {
@@ -81,7 +81,12 @@
         }
 
         function playlistSorted(playlist, item, oldIndex, newIndex) {
-            dataService.movePlaylistItem(playlist, item, oldIndex, newIndex);
+            var afterId = null;
+            if (newIndex > 0) {
+                var prev = $rootScope.lists[playlist].items[newIndex - 1];
+                afterId = prev.id;
+            }
+            dataService.movePlaylistItem(playlist, item, afterId);
         }
     }
 })();

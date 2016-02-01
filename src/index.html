@@ -16,6 +16,7 @@
     <link href="css/bootstrap-colorselector.css" rel="stylesheet" />
     <link href="css/rameplayer.css" rel="stylesheet" />
     <link href="css/media.css" rel="stylesheet" />
+    <link href="css/player.css" rel="stylesheet" />
     <link href="css/range.css" rel="stylesheet" />
     <link href="fonts/fonts.css" rel="stylesheet" />
     <!-- endinject -->
@@ -28,18 +29,12 @@
 </head>
 
 <body>
-    <span ng-controller="SettingsController as infovm" class="pull-right">
-        <span style="float:left;padding:2px;" ng-cloak> 
-            {{ ::infovm.hostname }} <br> {{ ::infovm.ipAddress }} 
-        </span>
-        <img alt="Rame Logo" src="images/logo_fading_black_h40.gif" 
-            style="float:right;padding:2px;">
-    </span>
+    <rame-device-info></rame-device-info>
     <div class="container" ng-controller="MediaController as vmmc" ng-cloak>
         <uib-tabset type="pills">
-            <uib-tab ng-repeat="targetId in vmmc.rootChildren">
-                <tab-heading translate>{{ vmmc.lists[targetId].info.title }}</tab-heading>
-                <rame-media-list target-id="targetId"></rame-media-list>
+            <uib-tab ng-repeat="listId in vmmc.rootChildren">
+                <tab-heading translate>{{ vmmc.lists[listId].title }}</tab-heading>
+                <rame-media-list list-id="listId"></rame-media-list>
             </uib-tab>
             
             <uib-tab>
@@ -47,8 +42,8 @@
                 <div class="row" ng-controller="PlaylistsController as vm">
                     <div class="col-sm-12">
                         <uib-accordion close-others="false">
-                            <rame-playlist default="true" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted(targetId, item, oldIndex, newIndex)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
-                            <rame-playlist ng-repeat="targetId in vm.playlists" target-id="targetId" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted(targetId, item, oldIndex, newIndex)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
+                            <rame-playlist default="true" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted('default', item, oldIndex, newIndex)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
+                            <rame-playlist ng-repeat="listId in vm.playlists" list-id="listId" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted(listId, item, oldIndex, newIndex)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
                         </uib-accordion>
                     </div> <!-- .col -->
                 </div> <!-- .row -->
@@ -67,7 +62,7 @@
     </div> <!-- .container -->
 
     <!-- player controls -->
-    <nav class="navbar navbar-default navbar-fixed-bottom" ng-include="'rameplayer/player/player.html'" ng-cloak>
+    <nav class="navbar navbar-default navbar-fixed-bottom navbar-player" ng-include="'rameplayer/player/player.html'" ng-cloak>
     </nav>
 
     <script>
@@ -81,6 +76,7 @@
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="../bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="../bower_components/angular-route/angular-route.min.js"></script>
     <script src="../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="../bower_components/angular-translate/angular-translate.min.js"></script>
     <script src="../bower_components/angular-uuid-generator/angular-uuid-generator.js"></script>
@@ -99,6 +95,7 @@
     <!-- directives module -->
     <script src="rameplayer/directives/directives.module.js"></script>
     <script src="rameplayer/directives/ip-address-block.directive.js"></script>
+    <script src="rameplayer/directives/device-info.directive.js"></script>
     <script src="rameplayer/directives/ng-bootstrap-colorselector.js"></script>
 
     <!-- admin settings module -->
@@ -109,6 +106,7 @@
     <script src="rameplayer/core/core.module.js"></script>
     <script src="rameplayer/core/constants.js"></script>
     <script src="rameplayer/core/config.js"></script>
+    <script src="rameplayer/core/dataservice-provider.js"></script>
     <script src="rameplayer/core/dataservice.js"></script>
     <script src="rameplayer/core/exception.js"></script>
     <script src="rameplayer/core/simulation-dataservice.js"></script>
@@ -121,6 +119,7 @@
     <script src="rameplayer/player/player.module.js"></script>
     <script src="rameplayer/player/player.js"></script>
     <script src="rameplayer/player/playertime.js"></script>
+    <script src="rameplayer/player/cluster-unit-status.directive.js"></script>
 
     <!-- media module -->
     <script src="rameplayer/media/media.module.js"></script>

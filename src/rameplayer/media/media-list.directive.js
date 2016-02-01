@@ -19,7 +19,7 @@
             link: link,
             restrict: 'E',
             scope: {
-                'targetId': '='
+                'listId': '='
             },
             templateUrl: 'rameplayer/media/media-list.html'
         };
@@ -30,7 +30,7 @@
             scope.slides = [
                 {
                     active: true,
-                    targetId: scope.targetId
+                    listId: scope.listId
                 }
             ];
 
@@ -40,9 +40,9 @@
             addEmptySlides(4);
 
             scope.breadcrumbs = [];
-            $rootScope.lists[scope.targetId].$promise.then(function(list) {
-                scope.breadCrumbsEnabled = $rootScope.lists[scope.targetId].hasChildLists();
-                scope.breadcrumbs.push(scope.targetId);
+            $rootScope.lists[scope.listId].$promise.then(function(list) {
+                scope.breadCrumbsEnabled = $rootScope.lists[scope.listId].hasChildLists();
+                scope.breadcrumbs.push(scope.listId);
             });
 
             scope.selectMedia = selectMedia;
@@ -59,7 +59,7 @@
                 dataService.addToPlaylist(ListIds.DEFAULT_PLAYLIST, item);
             }
 
-            function addSlide(targetId) {
+            function addSlide(listId) {
                 var index = 0;
                 for (var i = 0; i < scope.slides.length; i++) {
                     if (scope.slides[i].active) {
@@ -68,7 +68,7 @@
                     }
                 }
                 scope.slides[index].active = true;
-                scope.slides[index].targetId = targetId;
+                scope.slides[index].listId = listId;
 
                 // add more placeholders
                 if (index + 1 === scope.slides.length) {
@@ -80,15 +80,15 @@
                 for (var i = 0; i < amount; i++) {
                     scope.slides.push({
                         active: false,
-                        targetId: null
+                        listId: null
                     });
                 }
             }
 
             function openList(item) {
-                var list = $rootScope[item.targetId] || listService.add(item.targetId);
-                addSlide(item.targetId);
-                scope.breadcrumbs.push(item.targetId);
+                var list = $rootScope[item.id] || listService.add(item.id);
+                addSlide(item.id);
+                scope.breadcrumbs.push(item.id);
             }
 
             function activateSlide(index) {

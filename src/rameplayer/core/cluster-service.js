@@ -16,16 +16,25 @@
         .module('rameplayer.core')
         .factory('clusterService', clusterService);
 
-    clusterService.$inject = ['$log', 'dataService', 'uuid'];
+    clusterService.$inject = ['$log', '$interval', '$localStorage', 'dataServiceProvider', 'uuid'];
 
     /**
      * @namespace ClusterService
      * @desc Application wide service for cluster handling
      * @memberof Factories
      */
-    function clusterService($log, dataService, uuid) {
-        // cluster units
-        var units = [];
+    function clusterService($log, $interval, $localStorage, dataServiceProvider, uuid) {
+        // cluster units are saved to $localStorage
+        var $storage = $localStorage.$default({
+            clusterUnits: []
+        });
+
+        // create dataServices for existing cluster units
+        var dataServices = {};
+        createDataServices();
+
+        // status objects for cluster units, not persisted
+        var statuses = {};
 
         var colors = [
             {rgb: 87,  hex: '#FF4500', name: 'orangered'},
@@ -51,34 +60,62 @@
         ];
 
         var service = {
-            units: units,
+            units: $localStorage.clusterUnits,
+            statuses: statuses,
             addUnit: addUnit,
+            updateUnit: updateUnit,
             removeUnit: removeUnit,
             getColors: getColors
         };
 
+        var statusInterval = 1000;
+        startStatusPoller();
+
         return service;
+
+        function createDataServices() {
+            for (var i = 0; i < $localStorage.clusterUnits.length; i++) {
+                var unit = $localStorage.clusterUnits[i];
+                dataServices[unit.id] = dataServiceProvider.create(unit);
+            }
+        }
 
         function addUnit(address, port, delay) {
             // generate color for the new unit
             var color = getNextFreeColor();
             var unit = {
                 id: uuid.v4(),
-                hostname: resolveHostname(address),
-                address: address,
+                host: address,
                 port: port,
                 delay: parseFloat(delay),
                 color: color
             };
-            units.push(unit);
+            $localStorage.clusterUnits.push(unit);
+
+            // create dataService for new cluster unit
+            var dataService = dataServiceProvider.create(unit);
+            dataServices[unit.id] = dataService;
+
+            resolveHostname(unit);
+
             $log.debug('New unit added to cluster', unit);
             return unit.id;
         }
 
+        function updateUnit(unit) {
+            delete dataServices[unit.id];
+            // create new dataservice
+            dataServices[unit.id] = dataServiceProvider.create(unit);
+            delete statuses[unit.id];
+            delete unit.hostname;
+            resolveHostname(unit);
+            $log.debug('Cluster unit updated', unit);
+        }
+
         function removeUnit(id) {
-            for (var i = 0; i < units.length; i++) {
-                if (units[i].id === id) {
-                    units.splice(i, 1);
+            for (var i = 0; i < $localStorage.clusterUnits.length; i++) {
+                if ($localStorage.clusterUnits[i].id === id) {
+                    $localStorage.clusterUnits.splice(i, 1);
                     $log.debug('Unit ' + id + ' removed from cluster');
                     return true;
                 }
@@ -86,8 +123,11 @@
             return false;
         }
 
-        function resolveHostname(address) {
-            return 'hostname';
+        function resolveHostname(unit) {
+            var systemSettings = dataServices[unit.id].getSystemSettings();
+            systemSettings.$promise.then(function() {
+                unit.hostname = systemSettings.hostname;
+            });
         }
 
         function getColors() {
@@ -97,8 +137,8 @@
         function getNextFreeColor() {
             var i;
             var reserved = [];
-            for (i = 0; i < units.length; i++) {
-                reserved.push(units[i].color);
+            for (i = 0; i < $localStorage.clusterUnits.length; i++) {
+                reserved.push($localStorage.clusterUnits[i].color);
             }
             for (i = 0; i < colors.length; i++) {
                 if (reserved.indexOf(colors[i].hex) === -1) {
@@ -107,6 +147,35 @@
             }
             // no free labels left
             return null;
+        }
+
+        function startStatusPoller() {
+            return $interval(pollStatuses, statusInterval);
+        }
+
+        function pollStatuses() {
+            for (var i = 0; i < $localStorage.clusterUnits.length; i++) {
+                pollStatus($localStorage.clusterUnits[i].id);
+            }
+        }
+
+        function pollStatus(unitId) {
+            dataServices[unitId].getStatus({
+                // no need for lists here
+                lists: []
+            })
+            .then(function(response) {
+                var newStatus = response.data;
+                if (statuses[unitId] === undefined) {
+                    statuses[unitId] = {};
+                }
+                // save new status only when status changes
+                if (!angular.equals(newStatus, statuses[unitId])) {
+                    angular.copy(newStatus, statuses[unitId]);
+                }
+            }, function(errorResponse) {
+                $log.error('No status response from unit', unitId, errorResponse);
+            });
         }
     }
 })();

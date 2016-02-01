@@ -17,7 +17,7 @@
             restrict: 'E', // only element
             scope: {
                 // get used playlist from attribute
-                targetId: '=?',
+                listId: '=?',
                 onMediaClick: '&',
                 //removeMedia: '&',
                 onSort: '&',
@@ -34,7 +34,7 @@
             vm.lists = $rootScope.lists;
             vm.isDefaultPlaylist = (attrs.default !== undefined);
             if (vm.isDefaultPlaylist) {
-                vm.targetId = ListIds.DEFAULT_PLAYLIST;
+                vm.listId = ListIds.DEFAULT_PLAYLIST;
             }
             vm.defaultPlaylist = vm.isDefaultPlaylist ? 'true' : 'false';
             vm.sortableOptions = {
@@ -43,7 +43,7 @@
                 onSort: function(evt) {
                     // triggered after sorting
                     vm.onSort({
-                        targetId: vm.targetId,
+                        id: vm.listId,
                         item: evt.model,
                         oldIndex: evt.oldIndex,
                         newIndex: evt.newIndex
@@ -65,15 +65,13 @@
                     $log.debug('Save playlist as', result.title);
                     // server needs only some fields for playlist saving
                     var newPlaylist = {
-                        info: {
-                            title: result.title,
-                            storage: result.storage
-                        },
+                        title: result.title,
+                        storage: result.storage,
                         items: []
                     };
-                    for (var i = 0; i < $rootScope.lists[vm.targetId].items.length; i++) {
+                    for (var i = 0; i < $rootScope.lists[vm.listId].items.length; i++) {
                         newPlaylist.items.push({
-                            id: $rootScope.lists[vm.targetId].items[i].id
+                            id: $rootScope.lists[vm.listId].items[i].id
                         });
                     }
                     $log.debug('New playlist', newPlaylist);
@@ -94,15 +92,15 @@
         vm.edit = edit;
 
         function remove() {
-            dataService.removePlaylist(vm.targetId);
+            dataService.removePlaylist(vm.listId);
         }
 
         function clear() {
-            dataService.clearPlaylist(vm.targetId);
+            dataService.clearPlaylist(vm.listId);
         }
 
         function removeMedia(media) {
-            dataService.removeFromPlaylist(vm.targetId, media);
+            dataService.removeFromPlaylist(vm.listId, media);
         }
 
         function edit() {
@@ -113,19 +111,19 @@
                 controller: 'EditModalController',
                 controllerAs: 'vm',
                 resolve: {
-                    targetId: function() {
-                        return vm.targetId;
+                    listId: function() {
+                        return vm.listId;
                     }
                 }
             });
 
             modalInstance.result.then(function(result) {
-                var playlist = $rootScope.lists[vm.targetId];
-                playlist.info.title = result.title;
-                playlist.info.storage = result.storage;
+                var playlist = $rootScope.lists[vm.listId];
+                playlist.title = result.title;
+                playlist.storage = result.storage;
                 $log.debug('Edit playlist', playlist);
                 playlist.$save({
-                    targetId: vm.targetId
+                    id: vm.listId
                 });
             });
         }
