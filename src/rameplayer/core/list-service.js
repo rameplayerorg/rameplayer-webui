@@ -26,7 +26,7 @@
     function listService($rootScope, $log, dataService, ItemTypes, ListIds) {
 
         // data holder for flattened list of all List resource objects
-        // key is list targetId and value is List instance
+        // key is list listId and value is List instance
         $rootScope.lists = {};
 
         var service = {
@@ -41,8 +41,8 @@
         // then fetch all children for root
         rootList.$promise.then(function() {
             for (var i = 0; i < rootList.items.length; i++) {
-                if (rootList.items[i].info.type === ItemTypes.LIST) {
-                    add(rootList.items[i].targetId);
+                if (rootList.items[i].type === ItemTypes.LIST) {
+                    add(rootList.items[i].id);
                 }
             }
         });
@@ -52,21 +52,21 @@
 
         return service;
 
-        function add(targetId) {
-            if ($rootScope.lists[targetId] !== undefined) {
+        function add(id) {
+            if ($rootScope.lists[id] !== undefined) {
                 // already added
-                return $rootScope.lists[targetId];
+                return $rootScope.lists[id];
             }
-            var list = dataService.getList(targetId);
-            $rootScope.lists[targetId] = list;
-            $log.info('ListService: list "' + targetId + '" added to $rootScope.lists');
+            var list = dataService.getList(id);
+            $rootScope.lists[id] = list;
+            $log.info('ListService: list "' + id + '" added to $rootScope.lists');
             return list;
         }
 
-        function refresh(targetId) {
-            var list = dataService.getList(targetId);
+        function refresh(id) {
+            var list = dataService.getList(id);
             list.$promise.then(function() {
-                $rootScope.lists[targetId] = list;
+                $rootScope.lists[id] = list;
             });
             return list;
         }

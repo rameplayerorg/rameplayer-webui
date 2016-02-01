@@ -1,0 +1,37 @@
+.navbar-player {
+  min-height: 94px;
+}
+
+#play {
+  margin: 10px 0px 10px 0px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  font-size: 2em;
+  padding-left: 15px;
+  position: fixed;
+}
+
+#player-row-selection {
+    padding: 5px 0px 5px 0px;
+    border-bottom: 1px solid #E7E7E7;
+}
+
+.player-controls {
+  width: 100%;
+  /* space for play button */
+  padding-left: 90px;  
+}
+
+#player-small-controls {
+    margin-bottom: 5px;
+}
+
+#stop {
+  position: fixed;
+}
+
+.player-info {
+  /* space for stop button */
+  padding-left: 35px;
+}

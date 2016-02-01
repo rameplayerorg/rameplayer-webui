@@ -3,29 +3,20 @@
     "items": [
         {
             "id": "sda1",
-            "info": {
-                "refreshed": 1449220031300,
-                "size": 8192,
-                "type": "directory",
-                "modified": 0
-            },
-            "targetId": "sda1"
+            "refreshed": 1449220031300,
+            "size": 8192,
+            "type": "directory",
+            "modified": 0
         },
         {
             "id": "my-playlist",
-            "info": {
-                "modified": 0,
-                "title": "My Playlist",
-                "refreshed": 1449220031.3,
-                "type": "playlist"
-            },
-            "targetId": "my-playlist"
+            "modified": 0,
+            "title": "My Playlist",
+            "refreshed": 1449220031.3,
+            "type": "playlist"
         }
     ],
-    "info": {
-        "id": "root",
-        "title": "Root",
-        "refreshed": 1449220031200,
-        "editable":false
-    }
+    "title": "Root",
+    "refreshed": 1449220031200,
+    "editable":false
 }

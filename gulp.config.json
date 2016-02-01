@@ -27,6 +27,7 @@
         "./src/css/bootstrap-colorselector.css",
         "./src/css/rameplayer.css",
         "./src/css/media.css",
+        "./src/css/player.css",
         "./src/css/range.css"
     ],
     "js": [

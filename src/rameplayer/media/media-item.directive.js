@@ -42,7 +42,7 @@
             vm.itemClick = itemClick;
 
             function itemClick($event) {
-                if (vm.media.info.type === 'directory') {
+                if (vm.media.type === 'directory') {
                     vm.onOpenList();
                 }
                 else {

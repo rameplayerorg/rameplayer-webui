@@ -87,17 +87,17 @@
             var newIds = Object.keys(status.listsRefreshed);
             var promises = [];
             for (var i = 0; i < newIds.length; i++) {
-                var targetId = newIds[i];
+                var listId = newIds[i];
                 var list;
-                if (oldIds.indexOf(targetId) === -1) {
+                if (oldIds.indexOf(listId) === -1) {
                     // new list
-                    list = listService.add(targetId);
+                    list = listService.add(listId);
                     promises.push(list.$promise);
                 }
-                else if ($rootScope.lists[targetId].info &&
-                         status.listsRefreshed[targetId] !== $rootScope.lists[targetId].info.refreshed) {
+                else if ($rootScope.lists[listId].refreshed &&
+                         status.listsRefreshed[listId] !== $rootScope.lists[listId].refreshed) {
                     // refresh
-                    list = listService.refresh(targetId);
+                    list = listService.refresh(listId);
                     promises.push(list.$promise);
                 }
             }

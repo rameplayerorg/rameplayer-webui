@@ -52,9 +52,10 @@
 
         function save() {
             if (vm.editUnit.ip.valid) {
-                vm.unit.address = vm.editUnit.ip.value;
+                vm.unit.host = vm.editUnit.ip.value;
                 vm.unit.port = vm.editUnit.port;
                 vm.unit.delay = vm.editUnit.delay;
+                clusterService.updateUnit(vm.unit);
                 vm.editMode = false;
                 toastr.success('Unit settings updated.', 'Cluster');
             }
