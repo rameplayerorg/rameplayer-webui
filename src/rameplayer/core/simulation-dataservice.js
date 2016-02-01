@@ -238,7 +238,7 @@
             return server.playlists;
         }
 
-        function movePlaylistItem(playlist, item, oldIndex, newIndex) {
+        function movePlaylistItem(playlist, item, afterId) {
             return $timeout(function() {
                 $log.info('Playlist item moved');
             }, delay);

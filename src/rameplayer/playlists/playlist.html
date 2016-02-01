@@ -47,7 +47,7 @@
             <div class="col-sm-1 text-right" translate>Length</div>
             <div class="col-sm-3" translate>Date</div>
         </div>
-        <div class="media-list-sortable" ng-sortable="sortableOptions">
+        <div class="media-list-sortable" ng-sortable="vm.sortableOptions">
             <rame-media-item ng-repeat="mediaItem in vm.lists[vm.listId].items" media="mediaItem" remove="vm.removeMedia(mediaItem)" on-click="vm.onMediaClick({ media: mediaItem })"></rame-media-item>
         </div>
     </div>

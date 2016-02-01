@@ -171,15 +171,14 @@
                 });
             }
 
-            function movePlaylistItem(listId, item, oldIndex, newIndex) {
+            function movePlaylistItem(listId, item, afterId) {
                 return ListItem.update({
                     // url variables
                     listId: listId,
                     itemId: item.id,
                 }, {
                     // payload
-                    oldIndex: oldIndex,
-                    newIndex: newIndex
+                    afterId: afterId
                 });
             }
 
