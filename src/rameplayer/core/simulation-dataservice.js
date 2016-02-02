@@ -256,7 +256,7 @@
                     items: []
                 };
                 for (var i = 0; i < playlist.items.length; i++) {
-                    var result = findItem(playlist.items[i].id);
+                    var result = findItemByUriTitle(playlist.items[i].uri, playlist.items[i].title);
                     if (result) {
                         var newItem = angular.copy(result.item);
                         // generate new UUID for item
@@ -413,6 +413,26 @@
                         return {
                             parentId: listId,
                             item: $rootScope.lists[listId].items[i]
+                        };
+                    }
+                }
+            }
+            // not found
+            return null;
+        }
+
+        // Returns item and parent list by uri and title
+        function findItemByUriTitle(uri, title) {
+            var listIds = Object.keys($rootScope.lists);
+            for (var j = 0; j < listIds.length; j++) {
+                var listId = listIds[j];
+                for (var i = 0; i < $rootScope.lists[listId].items.length; i++) {
+                    var item = $rootScope.lists[listId].items[i];
+                    if (uri === item.uri &&
+                        title === item.title) {
+                        return {
+                            parentId: listId,
+                            item: item
                         };
                     }
                 }

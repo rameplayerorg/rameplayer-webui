@@ -70,8 +70,10 @@
                         items: []
                     };
                     for (var i = 0; i < $rootScope.lists[vm.listId].items.length; i++) {
+                        var item = $rootScope.lists[vm.listId].items[i];
                         newPlaylist.items.push({
-                            id: $rootScope.lists[vm.listId].items[i].id
+                            uri: item.uri,
+                            title: item.title
                         });
                     }
                     $log.debug('New playlist', newPlaylist);
