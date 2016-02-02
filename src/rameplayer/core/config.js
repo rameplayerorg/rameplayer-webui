@@ -48,7 +48,8 @@
             RESTART_REQUIRED: 'Restart required',
             RESTART_REQUIRED_DESC: 'Some changes need device to be restarted.',
             UPDATE_AVAILABLE: 'Update available',
-            UPDATE_AVAILABLE_DESC: 'Newer version of software is available.'
+            UPDATE_AVAILABLE_DESC: 'Newer version of software is available.',
+            INCOMPATIBLE_VERSION: 'Incompatible Server Version'
         });
         $translateProvider.translations('fi', {
             Settings: 'Asetukset',

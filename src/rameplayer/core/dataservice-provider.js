@@ -20,7 +20,8 @@
         .factory('dataServiceProvider', dataServiceProvider);
 
     dataServiceProvider.$inject = ['$log', '$http', '$resource', '$location',
-        'simulationDataService', 'listProvider', 'ListIds'];
+        'simulationDataService', 'listProvider', 'ListIds', 'uiVersion', 'toastr',
+        '$translate'];
 
     /**
      * @namespace DataServiceProvider
@@ -28,7 +29,7 @@
      * @memberof Factories
      */
     function dataServiceProvider($log, $http, $resource, $location, simulationDataService, listProvider,
-                         ListIds) {
+                         ListIds, uiVersion, toastr, $translate) {
         var service = {
             create: create
         };
@@ -64,6 +65,9 @@
                 }
             });
 
+            var rameVersioning;
+
+            ds.checkVersion = checkVersion;
             ds.getSettings = getSettings;
             ds.getStatus = getStatus;
             ds.setCursor = setCursor;
@@ -83,6 +87,8 @@
             ds.stepForward = stepForward;
             ds.getRameVersioning = getRameVersioning;
             ds.getSystemSettings = getSystemSettings;
+
+            checkVersion();
 
             /**
              * @name getBaseUrl
@@ -105,6 +111,57 @@
                 }
                 url += basePath;
                 return url;
+            }
+
+            /**
+             * @name checkVersion
+             * @desc Checks if server version is compatible with this version of WebUI.
+             * @returns boolean
+             */
+            function checkVersion() {
+                if (uiVersion !== 'development') {
+                    getRameVersioning().then(function(response) {
+                        if (!serverIsCompatible(response.data.backend)) {
+                            var msg = 'Server version ' + response.data.backend + ' at ' +
+                                ds.options.host + ':' + ds.options.port +
+                                ' is incompatible with Web UI ' + uiVersion + '.';
+
+                            $translate(['INCOMPATIBLE_VERSION']).then(function(translations) {
+                                toastr.warning(msg, translations.INCOMPATIBLE_VERSION, {
+                                    timeOut: 0,
+                                    extendedTimeOut: 0,
+                                    tapToDismiss: false,
+                                    closeButton: true
+                                });
+                            });
+                        }
+                    });
+                }
+            }
+
+            /**
+             * @name serverIsCompatible
+             * @desc Returns true if given server version is compatible with this
+             * Web UI version
+             * @return boolean
+             */
+            function serverIsCompatible(backendVersion) {
+                var uiVersions = uiVersion.split('.');
+                var backendVersions = backendVersion.split('.');
+                if (uiVersions.length < 2 || backendVersions.length < 2) {
+                    return false;
+                }
+                if (uiVersions[0] !== backendVersions[0]) {
+                    // major version mismatch
+                    return false;
+                }
+                var uiMinor = parseInt(uiVersions[1]);
+                var backendMinor = parseInt(backendVersions[1]);
+                if (backendMinor < uiMinor) {
+                    // minor version is too old
+                    return false;
+                }
+                return true;
             }
 
             /**
@@ -227,7 +284,11 @@
             }
 
             function getRameVersioning() {
-                return $http.get(baseUrl + 'version');
+                // cache version information
+                if (rameVersioning === undefined) {
+                    rameVersioning = $http.get(baseUrl + 'version');
+                }
+                return rameVersioning;
             }
         }
     }
