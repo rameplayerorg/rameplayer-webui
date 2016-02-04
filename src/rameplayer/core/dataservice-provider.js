@@ -122,8 +122,9 @@
                 if (uiVersion !== 'development') {
                     getRameVersioning().then(function(response) {
                         if (!serverIsCompatible(response.data.backend)) {
+                            var host = ds.options.host || location.host.split(':')[0];
                             var msg = 'Server version ' + response.data.backend + ' at ' +
-                                ds.options.host + ':' + ds.options.port +
+                                host + ':' + ds.options.port +
                                 ' is incompatible with Web UI ' + uiVersion + '.';
 
                             $translate(['INCOMPATIBLE_VERSION']).then(function(translations) {
@@ -146,6 +147,9 @@
              * @return boolean
              */
             function serverIsCompatible(backendVersion) {
+                if (backendVersion === 'development') {
+                    return true;
+                }
                 var uiVersions = uiVersion.split('.');
                 var backendVersions = backendVersion.split('.');
                 if (uiVersions.length < 2 || backendVersions.length < 2) {
