@@ -65,6 +65,10 @@
   background-color: #751414;
 }
 
+.media-list-sync-icon {
+  margin-right: 10px;
+}
+
 .ellipsis {
   white-space: nowrap;
   overflow: hidden;

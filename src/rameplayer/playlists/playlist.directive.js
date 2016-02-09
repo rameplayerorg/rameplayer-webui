@@ -95,9 +95,11 @@
         vm.removeMedia = removeMedia;
         vm.edit = edit;
         vm.openSync = openSync;
+        vm.openSyncModal = openSyncModal;
         vm.closeSync = closeSync;
         vm.removeSync = removeSync;
         vm.sync = {
+            units: clusterService.units,
             targetVisible: false,
             isOn: false,
             unit: null,
@@ -150,7 +152,15 @@
             });
         }
 
-        function openSync() {
+        /**
+         * @name openSync
+         * @desc Opens existing synchronization
+         */
+        function openSync(unit) {
+            startSync(unit, unit.syncedLists[vm.listId].targetListId);
+        }
+
+        function openSyncModal() {
             // open sync modal dialog
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -162,21 +172,26 @@
             modalInstance.result.then(function(result) {
                 vm.sync.list = null;
                 if (result.unit && result.playlist) {
-                    vm.sync.isOn = true;
-                    vm.sync.unit = result.unit;
-                    var unitDs = clusterService.getDataService(result.unit.id);
-                    vm.sync.list = unitDs.getList(result.playlist);
-                    vm.sync.list.$promise.then(function() {
-                        // playlist loaded from other unit
-                        setSyncTargetItems();
-                    });
-
-                    // wait animation to end before showing target list
-                    $timeout(function() {
-                        vm.sync.targetVisible = true;
-                    }, 1000);
+                    startSync(result.unit, result.playlist);
                 }
             });
+        }
+
+        function startSync(unit, playlist) {
+            vm.sync.isOn = true;
+            vm.sync.unit = unit;
+            var unitDs = clusterService.getDataService(unit.id);
+            vm.sync.list = unitDs.getList(playlist);
+            vm.sync.list.$promise.then(function() {
+                // playlist loaded from other unit
+                setSyncTargetItems();
+            });
+
+            // wait animation to end before showing target list
+            $timeout(function() {
+                vm.sync.targetVisible = true;
+            }, 1000);
+
         }
 
         /**

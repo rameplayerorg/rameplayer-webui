@@ -8,16 +8,19 @@
                         <span ng-switch-default>{{ vm.lists[vm.listId].title }}</span>
                     </span>
                     <span class="pull-right" ng-show="!vm.sync.isOn">
+                        <!-- existing synchronizations -->
+                        <span ng-repeat="unit in vm.sync.units" class="media-list-sync-icon"><a href ng-if="unit.syncedLists[vm.listId]" ng-click="$event.stopPropagation(); vm.openSync(unit)" ng-style="{'color': unit.color }" title="Synchronize"><i class="glyphicon glyphicon-refresh"></i></a></span>
+
+                        <!-- hamburger menu -->
                         <span uib-dropdown is-open="vm.isDropdownOpen" ng-click="$event.stopPropagation()">
                             <a href uib-dropdown-toggle>
                                 <span class="glyphicon glyphicon-menu-hamburger"></span>
                             </a>
                             <ul class="uib-dropdown-menu dropdown-menu-right">
                                 <li ng-if="vm.defaultPlaylist != 'true'">
-                                    <a href ng-click="vm.openSync(); vm.isDropdownOpen=false;">
+                                    <a href ng-click="vm.openSyncModal(); vm.isDropdownOpen=false;">
                                         <i class="glyphicon glyphicon-refresh"></i> Synchronize&hellip;
                                    </a>
-                                </li>
                                 </li>
                                 <li>
                                     <a href ng-click="vm.addStream({ playlist: vm.listId }); vm.isDropdownOpen=false;">
