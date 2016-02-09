@@ -16,14 +16,16 @@
         .module('rameplayer.core')
         .factory('clusterService', clusterService);
 
-    clusterService.$inject = ['$log', '$interval', '$localStorage', 'dataServiceProvider', 'uuid'];
+    clusterService.$inject = ['$log', '$interval', '$localStorage', 'dataService',
+        'dataServiceProvider', 'statusService', 'uuid'];
 
     /**
      * @namespace ClusterService
      * @desc Application wide service for cluster handling
      * @memberof Factories
      */
-    function clusterService($log, $interval, $localStorage, dataServiceProvider, uuid) {
+    function clusterService($log, $interval, $localStorage, dataService,
+                            dataServiceProvider, statusService, uuid) {
         // cluster units are saved to $localStorage
         var $storage = $localStorage.$default({
             clusterUnits: []
@@ -67,7 +69,13 @@
             updateUnit: updateUnit,
             removeUnit: removeUnit,
             getDataService: getDataService,
-            getColors: getColors
+            getColors: getColors,
+            // player controls
+            setCursor: setCursor,
+            play: play,
+            pause: pause,
+            stop: stop,
+            seek: seek
         };
 
         var statusInterval = 1000;
@@ -193,6 +201,80 @@
             }, function(errorResponse) {
                 $log.error('No status response from unit', unitId, errorResponse);
             });
+        }
+
+        function setCursor(itemId) {
+            dataService.setCursor(itemId);
+            runOnSynced(function(synced) {
+                dataServices[synced.unit.id].setCursor(synced.itemId);
+            }, itemId);
+        }
+
+        function play() {
+            dataService.play();
+            runOnSynced(function(synced) {
+                dataServices[synced.unit.id].play(synced.unit.delay);
+            });
+        }
+
+        function pause() {
+            dataService.pause();
+            runOnSynced(function(synced) {
+                dataServices[synced.unit.id].pause(synced.unit.delay);
+            });
+        }
+
+        function stop() {
+            dataService.stop();
+            runOnSynced(function(synced) {
+                dataServices[synced.unit.id].stop(synced.unit.delay);
+            });
+        }
+
+        function seek(position) {
+            dataService.seek(position);
+            runOnSynced(function(synced) {
+                dataServices[synced.unit.id].seek(position, synced.unit.delay);
+            });
+        }
+
+        function runOnSynced(func, itemId) {
+            var syncedItems = findSyncedItems(itemId);
+            $log.debug('clusterService: syncedItems', syncedItems);
+            for (var i = 0; i < syncedItems.length; i++) {
+                var synced = syncedItems[i];
+                func(synced);
+            }
+        }
+
+        /**
+         * @name findSyncedItems
+         * @description Returns object for every synced item in cluster. If itemId
+         * is not given, it will be fetched from status.
+         */
+        function findSyncedItems(itemId) {
+            if (itemId === undefined) {
+                itemId = statusService.status.cursor.id;
+            }
+            var targets = [];
+            for (var i = 0; i < $localStorage.clusterUnits.length; i++) {
+                var unit = $localStorage.clusterUnits[i];
+                if (unit.syncedLists) {
+                    var listIds = Object.keys(unit.syncedLists);
+                    for (var j = 0; j < listIds.length; j++) {
+                        var listId = listIds[j];
+                        var targetItemIds = Object.keys(unit.syncedLists[listId].items);
+                        var idx = targetItemIds.indexOf(itemId);
+                        if (idx >= 0) {
+                            targets.push({
+                                unit: unit,
+                                itemId: unit.syncedLists[listId].items[targetItemIds[idx]]
+                            });
+                        }
+                    }
+                }
+            }
+            return targets;
         }
     }
 })();
