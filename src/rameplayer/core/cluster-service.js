@@ -61,10 +61,12 @@
 
         var service = {
             units: $localStorage.clusterUnits,
+            getUnit: getUnit,
             statuses: statuses,
             addUnit: addUnit,
             updateUnit: updateUnit,
             removeUnit: removeUnit,
+            getDataService: getDataService,
             getColors: getColors
         };
 
@@ -80,6 +82,16 @@
             }
         }
 
+        function getUnit(id) {
+            for (var i = 0; i < $localStorage.clusterUnits.length; i++) {
+                if ($localStorage.clusterUnits[i].id === id) {
+                    return $localStorage.clusterUnits[i];
+                }
+            }
+            // not found
+            return null;
+        }
+
         function addUnit(address, port, delay) {
             // generate color for the new unit
             var color = getNextFreeColor();
@@ -88,7 +100,8 @@
                 host: address,
                 port: port,
                 delay: parseFloat(delay),
-                color: color
+                color: color,
+                syncedLists: {}
             };
             $localStorage.clusterUnits.push(unit);
 
@@ -128,6 +141,10 @@
             systemSettings.$promise.then(function() {
                 unit.hostname = systemSettings.hostname;
             });
+        }
+
+        function getDataService(unitId) {
+            return dataServices[unitId];
         }
 
         function getColors() {

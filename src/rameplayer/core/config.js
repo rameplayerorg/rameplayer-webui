@@ -49,7 +49,8 @@
             RESTART_REQUIRED_DESC: 'Some changes need device to be restarted.',
             UPDATE_AVAILABLE: 'Update available',
             UPDATE_AVAILABLE_DESC: 'Newer version of software is available.',
-            INCOMPATIBLE_VERSION: 'Incompatible Server Version'
+            INCOMPATIBLE_VERSION: 'Incompatible Server Version',
+            PLAYLIST_SYNC_REMOVED: 'Playlist $1 is not synchronized to playlist $2 anymore.'
         });
         $translateProvider.translations('fi', {
             Settings: 'Asetukset',

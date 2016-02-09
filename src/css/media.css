@@ -28,6 +28,11 @@
   padding-bottom: 35px;
 }
 
+.animated-width {
+  -webkit-transition: width 1s;
+  transition: 1s width;
+}
+
 .media-list-header {
   font-weight: 700;
 }
@@ -46,6 +51,12 @@
   background-color: rgb(58, 63, 68);
 }
 
+.media-list-item-hamburger {
+  position: absolute;
+  right: 5px;
+  top: 1px;
+}
+
 .media-list .selected {
   background-color: rgb(82, 87, 92);
 }
@@ -55,12 +66,13 @@
 }
 
 .ellipsis {
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .media-list-sortable .sorting-handle {
-  cursor: move;
+  cursor: ns-resize;
   cursor: -webkit-grabbing;
 }
 

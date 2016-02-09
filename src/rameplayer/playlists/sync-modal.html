@@ -1,0 +1,23 @@
+<form>
+    <div class="modal-header">
+        <h3 translate>Select Playlist To Synchronize With</h3>
+    </div>
+
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="clusterUnit" translate>Cluster Unit</label>
+            <select id="clusterUnit" class="form-control" ng-model="vm.unit" ng-options="unit.id as unit.hostname for unit in vm.units">
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="unitPlaylist" translate>Playlist</label>
+            <select id="unitPlaylist" class="form-control" ng-model="vm.unitPlaylist" ng-options="playlist.id as playlist.title for playlist in vm.unitPlaylists">
+            </select>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit" ng-click="vm.open()" translate>Open</button>
+        <button class="btn btn-default" type="button" ng-click="vm.cancel()" translate>Cancel</button>
+    </div>
+</form>
