@@ -115,6 +115,11 @@
             }
         };
 
+        // hovering functions for easier sync matching
+        vm.hoverIndex = null;
+        vm.mouseEnterItem = mouseEnterItem;
+        vm.mouseLeaveItem = mouseLeaveItem;
+
         function remove() {
             dataService.removePlaylist(vm.listId);
         }
@@ -293,6 +298,14 @@
                     .replace('$2', $rootScope.lists[vm.listId].title);
                 toastr.success(msg);
             });
+        }
+
+        function mouseEnterItem(index) {
+            vm.hoverIndex = index;
+        }
+
+        function mouseLeaveItem(index) {
+            vm.hoverIndex = null;
         }
     }
 })();

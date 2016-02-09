@@ -47,7 +47,7 @@
   cursor: pointer;
 }
 
-.media-list-item:hover {
+.media-list-item:hover,.media-list-item.sync-highlighted {
   background-color: rgb(58, 63, 68);
 }
 
