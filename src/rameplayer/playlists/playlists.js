@@ -54,7 +54,9 @@
         }
 
         function selectMedia(mediaItem) {
-            clusterService.setCursor(mediaItem.id);
+            if (clusterService.clusterStatus.state === 'stopped') {
+                clusterService.setCursor(mediaItem.id);
+            }
         }
 
         function removeMedia(listId, media) {

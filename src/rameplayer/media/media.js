@@ -6,16 +6,17 @@
         .controller('MediaController', MediaController);
 
     MediaController.$inject = ['$rootScope', '$scope', '$log', 'dataService',
-        'statusService', 'listService', 'ItemTypes', 'ListIds'];
+        'statusService', 'listService', 'ItemTypes', 'ListIds', 'clusterService'];
 
     function MediaController($rootScope, $scope, $log, dataService,
-                             statusService, listService, ItemTypes, ListIds) {
+                             statusService, listService, ItemTypes, ListIds, clusterService) {
         var vm = this;
 
         vm.rootChildren = [];
         vm.lists = $rootScope.lists;
         vm.selectedMedia = undefined;
         vm.playerStatus = statusService.status;
+        vm.clusterService = clusterService;
 
         $rootScope.$watchCollection('lists', function(lists) {
             $log.info('$rootScope.lists changed', lists);

@@ -38,6 +38,10 @@
         // status objects for cluster units, not persisted
         var statuses = {};
 
+        // for indicating common state for all working units
+        // in cluster. 'mixed' if not all in same state
+        var clusterStatus = { state: 'stopped' };
+
         var colors = [
             {rgb: 87,  hex: '#FF4500', name: 'orangered'},
             {rgb: 68,  hex: '#32CD32', name: 'limegreen'},
@@ -70,6 +74,7 @@
             removeUnit: removeUnit,
             getDataService: getDataService,
             getColors: getColors,
+            clusterStatus: clusterStatus,
             // player controls
             setCursor: setCursor,
             play: play,
@@ -179,9 +184,15 @@
         }
 
         function pollStatuses() {
+            var state = statusService.status.state;
             for (var i = 0; i < $localStorage.clusterUnits.length; i++) {
-                pollStatus($localStorage.clusterUnits[i].id);
+                var unit = $localStorage.clusterUnits[i];
+                pollStatus(unit.id);
+                if (statuses[unit.id] && statuses[unit.id].state !== state) {
+                    state = 'mixed';
+                }
             }
+            clusterStatus.state = state;
         }
 
         function pollStatus(unitId) {
