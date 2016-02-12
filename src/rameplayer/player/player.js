@@ -52,19 +52,15 @@
         }
 
         function play() {
-            var media = vm.selectedMedia;
-            dataService.play().then(function(data) {
-            });
+            clusterService.play();
         }
 
         function pause() {
-            dataService.pause().then(function(data) {
-            });
+            clusterService.pause();
         }
 
         function stop() {
-            dataService.stop().then(function(data) {
-            });
+            clusterService.stop();
         }
 
         function stepBackward() {
@@ -77,8 +73,7 @@
 
         function seek() {
             var position = parseFloat(vm.timeSlider);
-            dataService.seek(position).then(function(data) {
-            });
+            clusterService.seek(position);
         }
 
         function mediaSelected(media) {

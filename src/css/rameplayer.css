@@ -79,6 +79,11 @@ body {
   margin-right: 5px;
 }
 
+/* Disable underlining when hovering panel titles */
+.panel-title a:hover {
+  text-decoration: none;
+}
+
 /* Admin Settings */
 
 /* IP address input */

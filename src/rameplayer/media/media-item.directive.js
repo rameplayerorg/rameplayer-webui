@@ -21,7 +21,9 @@
                 'onOpenList': '&',
                 'remove': '&',
                 'addToDefault': '&',
-                'moveTo': '&'
+                'moveTo': '&',
+                'hideDate': '=',
+                'syncHighlight': '='
             },
             templateUrl: 'rameplayer/media/media-item.html',
             controller: ItemController,

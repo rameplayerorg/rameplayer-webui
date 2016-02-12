@@ -5,9 +5,9 @@
         .module('rameplayer.media')
         .directive('rameMediaList', rameMediaList);
 
-    rameMediaList.$inject = ['$rootScope', 'statusService', 'dataService', 'listService', 'ListIds'];
+    rameMediaList.$inject = ['$rootScope', 'statusService', 'dataService', 'clusterService', 'listService', 'ListIds'];
 
-    function rameMediaList($rootScope, statusService, dataService, listService, ListIds) {
+    function rameMediaList($rootScope, statusService, dataService, clusterService, listService, ListIds) {
         // Usage:
         //
         // Creates:
@@ -52,7 +52,7 @@
             scope.activateSlide = activateSlide;
 
             function selectMedia(item) {
-                dataService.setCursor(item.id);
+                clusterService.setCursor(item.id);
             }
 
             function addToDefault(item) {

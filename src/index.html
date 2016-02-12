@@ -39,14 +39,10 @@
             
             <uib-tab>
                 <tab-heading translate>Playlists</tab-heading>
-                <div class="row" ng-controller="PlaylistsController as vm">
-                    <div class="col-sm-12">
-                        <uib-accordion close-others="false">
-                            <rame-playlist default="true" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted('default', item, oldIndex, newIndex)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
-                            <rame-playlist ng-repeat="listId in vm.playlists" list-id="listId" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted(listId, item, oldIndex, newIndex)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
-                        </uib-accordion>
-                    </div> <!-- .col -->
-                </div> <!-- .row -->
+                <div ng-controller="PlaylistsController as vm">
+                    <rame-playlist default="true" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted('default', item, oldIndex, newIndex)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
+                    <rame-playlist ng-repeat="listId in vm.playlists" list-id="listId" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted(listId, item, oldIndex, newIndex)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
+                </div>
             </uib-tab>
 
             <uib-tab>
@@ -134,6 +130,7 @@
     <script src="rameplayer/playlists/save-as-modal.js"></script>
     <script src="rameplayer/playlists/add-stream-modal.js"></script>
     <script src="rameplayer/playlists/edit-modal.js"></script>
+    <script src="rameplayer/playlists/sync-modal.js"></script>
 
     <!-- settings module -->
     <script src="rameplayer/settings/settings.module.js"></script>

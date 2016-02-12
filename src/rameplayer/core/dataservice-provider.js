@@ -263,20 +263,37 @@
                 });
             }
 
-            function play() {
-                return $http.get(baseUrl + 'player/play');
+            function play(delay) {
+
+                var url = baseUrl + 'player/play';
+                if (delay) {
+                    url += '?delay=' + delay;
+                }
+                return $http.get(url);
             }
 
-            function pause() {
-                return $http.get(baseUrl + 'player/pause');
+            function pause(delay) {
+                var url = baseUrl + 'player/pause';
+                if (delay) {
+                    url += '?delay=' + delay;
+                }
+                return $http.get(url);
             }
 
-            function stop() {
-                return $http.get(baseUrl + 'player/stop');
+            function stop(delay) {
+                var url = baseUrl + 'player/stop';
+                if (delay) {
+                    url += '?delay=' + delay;
+                }
+                return $http.get(url);
             }
 
-            function seek(position) {
-                return $http.get(baseUrl + 'player/seek/' + position);
+            function seek(position, delay) {
+                var url = baseUrl + 'player/seek/' + position;
+                if (delay) {
+                    url += '?delay=' + delay;
+                }
+                return $http.get(url);
             }
 
             function stepBackward() {

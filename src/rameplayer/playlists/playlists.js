@@ -6,10 +6,10 @@
         .controller('PlaylistsController', PlaylistsController);
 
     PlaylistsController.$inject = ['$rootScope', '$scope', '$log', 'dataService',
-        'statusService', 'listService', '$uibModal', 'uuid', 'ItemTypes'];
+        'statusService', 'clusterService', 'listService', '$uibModal', 'uuid', 'ItemTypes'];
 
     function PlaylistsController($rootScope, $scope, $log, dataService,
-                                 statusService, listService, $uibModal, uuid, ItemTypes) {
+                                 statusService, clusterService, listService, $uibModal, uuid, ItemTypes) {
         var vm = this;
 
         vm.lists = [];
@@ -54,7 +54,7 @@
         }
 
         function selectMedia(mediaItem) {
-            dataService.setCursor(mediaItem.id);
+            clusterService.setCursor(mediaItem.id);
         }
 
         function removeMedia(listId, media) {

@@ -1,56 +1,112 @@
-<uib-accordion-group is-open="vm.isDefaultPlaylist">
-    <uib-accordion-heading>
-         <span ng-switch on="vm.defaultPlaylist">
-             <span ng-switch-when="true">Default</span>
-             <span ng-switch-default>{{ vm.lists[vm.listId].title }}</span>
-         </span>
-         <span class="pull-right">
-             <span uib-dropdown is-open="vm.isDropdownOpen" ng-click="$event.stopPropagation()">
-                 <a href uib-dropdown-toggle>
-                     <span class="glyphicon glyphicon-menu-hamburger"></span>
-                 </a>
-                 <ul class="uib-dropdown-menu dropdown-menu-right">
-                     <li>
-                         <a href ng-click="vm.addStream({ playlist: vm.listId }); vm.isDropdownOpen=false;">
-                             <i class="glyphicon glyphicon-cloud"></i> Add Stream&hellip;
-                         </a>
-                     </li>
-                     <li ng-switch on="vm.defaultPlaylist">
-                         <a href ng-switch-when="true" ng-click="vm.saveAs(); vm.isDropdownOpen=false;">
-                             <i class="glyphicon glyphicon-save"></i> Save as&hellip;
-                         </a>
-                         <a href ng-switch-default ng-click="$event.stopPropagation();" ng-if="false">
-                             <i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;
-                         </a>
-                     </li>
-                     <li ng-if="false && vm.defaultPlaylist != 'true'">
-                         <a href><i class="glyphicon glyphicon-lock"></i> Lock</a>
-                     <li>
-                     <li ng-if="vm.defaultPlaylist != 'true'">
-                         <a href ng-click="vm.edit(); vm.isDropdownOpen=false"><i class="glyphicon glyphicon-pencil"></i> Edit&hellip;</a>
-                     <li>
-                     <li ng-switch on="vm.defaultPlaylist">
-                         <a href ng-switch-when="true" ng-click="vm.clear(); vm.isDropdownOpen=false"><i class="glyphicon glyphicon-remove"></i> Clear</a>
-                         <a href ng-switch-default ng-click="vm.remove(); vm.isDropdownOpen=false"><i class="glyphicon glyphicon-remove"></i> Remove</a>
-                     </li>
-                 </ul>
-             </span>
-         </span>
-    </uib-accordion-heading>
+<div class="row">
+    <div class="animated-width" ng-class="{ 'col-md-12': !vm.sync.isOn, 'col-md-6': vm.sync.isOn }">
+        <uib-accordion close-others="false">
+            <uib-accordion-group is-open="vm.isDefaultPlaylist">
+                <uib-accordion-heading>
+                    <span ng-switch on="vm.defaultPlaylist">
+                        <span ng-switch-when="true">Default</span>
+                        <span ng-switch-default>{{ vm.lists[vm.listId].title }}</span>
+                    </span>
+                    <span class="pull-right" ng-show="!vm.sync.isOn">
+                        <!-- existing synchronizations -->
+                        <span ng-repeat="unit in vm.sync.units" class="media-list-sync-icon"><a href ng-if="unit.syncedLists[vm.listId]" ng-click="$event.stopPropagation(); vm.openSync(unit)" ng-style="{'color': unit.color }" title="Synchronize"><i class="glyphicon glyphicon-refresh"></i></a></span>
 
-    <div ng-if="!vm.lists[vm.listId].items.length">Playlist is empty.</div>
+                        <!-- hamburger menu -->
+                        <span uib-dropdown is-open="vm.isDropdownOpen" ng-click="$event.stopPropagation()">
+                            <a href uib-dropdown-toggle>
+                                <span class="glyphicon glyphicon-menu-hamburger"></span>
+                            </a>
+                            <ul class="uib-dropdown-menu dropdown-menu-right">
+                                <li ng-if="vm.defaultPlaylist != 'true'">
+                                    <a href ng-click="vm.openSyncModal(); vm.isDropdownOpen=false;">
+                                        <i class="glyphicon glyphicon-refresh"></i> Synchronize&hellip;
+                                   </a>
+                                </li>
+                                <li>
+                                    <a href ng-click="vm.addStream({ playlist: vm.listId }); vm.isDropdownOpen=false;">
+                                        <i class="glyphicon glyphicon-cloud"></i> Add Stream&hellip;
+                                    </a>
+                                </li>
+                                <li ng-switch on="vm.defaultPlaylist">
+                                    <a href ng-switch-when="true" ng-click="vm.saveAs(); vm.isDropdownOpen=false;">
+                                        <i class="glyphicon glyphicon-save"></i> Save as&hellip;
+                                    </a>
+                                    <a href ng-switch-default ng-click="$event.stopPropagation();" ng-if="false">
+                                        <i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;
+                                    </a>
+                                </li>
+                                <li ng-if="false && vm.defaultPlaylist != 'true'">
+                                    <a href><i class="glyphicon glyphicon-lock"></i> Lock</a>
+                                <li>
+                                <li ng-if="vm.defaultPlaylist != 'true'">
+                                    <a href ng-click="vm.edit(); vm.isDropdownOpen=false"><i class="glyphicon glyphicon-pencil"></i> Edit&hellip;</a>
+                                <li>
+                                <li ng-switch on="vm.defaultPlaylist">
+                                    <a href ng-switch-when="true" ng-click="vm.clear(); vm.isDropdownOpen=false"><i class="glyphicon glyphicon-remove"></i> Clear</a>
+                                    <a href ng-switch-default ng-click="vm.remove(); vm.isDropdownOpen=false"><i class="glyphicon glyphicon-remove"></i> Remove</a>
+                                </li>
+                            </ul>
+                        </span>
+                    </span>
+                </uib-accordion-heading>
 
-    <div class="media-list" ng-if="vm.lists[vm.listId].items.length">
-        <div class="row hidden-xs media-list-header">
-            <div class="col-sm-4" translate>Name</div>
-            <div class="col-sm-4" translate>Title</div>
-            <div class="col-sm-1 text-right" translate>Length</div>
-            <div class="col-sm-3" translate>Date</div>
-        </div>
-        <div class="media-list-sortable" ng-sortable="vm.sortableOptions">
-            <rame-media-item ng-repeat="mediaItem in vm.lists[vm.listId].items" media="mediaItem" remove="vm.removeMedia(mediaItem)" on-click="vm.onMediaClick({ media: mediaItem })"></rame-media-item>
-        </div>
+                <div ng-if="!vm.lists[vm.listId].items.length" translate>Playlist is empty.</div>
+
+                <div class="media-list" ng-class="{'media-list-sync': vm.sync.isOn }" ng-if="vm.lists[vm.listId].items.length">
+                    <div class="row hidden-xs media-list-header">
+                        <div class="col-sm-4" translate>Name</div>
+                        <div class="col-sm-4" translate>Title</div>
+                        <div class="col-sm-1 text-right" translate>Length</div>
+                        <div class="col-sm-3" ng-if="!vm.sync.isOn" translate>Date</div>
+                    </div>
+                    <div class="source-media-list media-list-sortable" ng-sortable="vm.sortableOptions">
+                        <rame-media-item ng-repeat="mediaItem in vm.lists[vm.listId].items" media="mediaItem" remove="vm.removeMedia(mediaItem)" on-click="vm.onMediaClick({ media: mediaItem })" hide-date="vm.sync.isOn" ng-mouseenter="vm.mouseEnterItem($index)" ng-mouseleave="vm.mouseLeaveItem($index)" sync-highlight="$index === vm.hoverIndex"></rame-media-item>
+                    </div>
+                </div>
+
+            </uib-accordion-group>
+        </uib-accordion>
+    </div> <!-- .col -->
+
+    <!-- Synchronization Playlist -->
+    <!-- visible only when synchronizing -->
+
+    <div class="col-md-6" ng-if="vm.sync.targetVisible">
+        <uib-accordion close-others="false">
+            <uib-accordion-group is-open="true">
+                <uib-accordion-heading>
+                    <span ng-style="{'color': vm.sync.unit.color }">
+                        <i class="glyphicon glyphicon-time"></i>
+                        {{ vm.sync.unit.delay }} s -
+                        {{ vm.sync.unit.hostname }} / {{ vm.sync.list.title }}
+                    </span>
+                    <span class="pull-right">
+                        <span ng-click="$event.stopPropagation()">
+                            <a href ng-click="vm.removeSync()" title="Stop synchronizing this playlist">
+                                <span class="glyphicon glyphicon-ban-circle" ng-style="{'color': vm.sync.unit.color}"></span>
+                            </a>
+                            <a href ng-click="vm.closeSync()" title="Close" style="margin-left: 10px">
+                                <span class="glyphicon glyphicon-remove" ng-style="{'color': vm.sync.unit.color}"></span>
+                            </a>
+                        </span>
+                    </span>
+                </uib-accordion-heading>
+
+                <div ng-if="!vm.sync.list.items.length" translate>Playlist is empty.</div>
+
+                <div class="media-list" ng-class="{'media-list-sync': vm.sync.isOn }" ng-if="vm.sync.list.items.length">
+                    <div class="row hidden-xs media-list-header">
+                        <div class="col-sm-4" translate>Name</div>
+                        <div class="col-sm-4" translate>Title</div>
+                        <div class="col-sm-1 text-right" translate>Length</div>
+                        <!--<div class="col-sm-3" translate>Date</div>-->
+                    </div>
+                    <div class="target-media-list media-list-sortable" ng-sortable="vm.sync.sortableOptions">
+                        <rame-media-item ng-repeat="mediaItem in vm.sync.targetItems" media="mediaItem" remove="vm.removeMedia(mediaItem)" on-click="" hide-date="true" ng-mouseenter="vm.mouseEnterItem($index)" ng-mouseleave="vm.mouseLeaveItem($index)" sync-highlight="$index === vm.hoverIndex"></rame-media-item>
+                    </div>
+                </div>
+
+            </uib-accordion-group>
+        </uib-accordion>
     </div>
-
-</uib-accordion-group>
-
+</div> <!-- .row -->
