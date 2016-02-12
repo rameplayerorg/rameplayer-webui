@@ -142,7 +142,7 @@
                 }
             }
             
-            if (vm.manualTimeConfig){
+            if (vm.useManualTimeConfigs){
                 if (vm.dateUserInput === undefined) {
                     invalidFields.push('Manual date');
                 }
