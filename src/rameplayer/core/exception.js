@@ -34,8 +34,8 @@
             // Toasts thrown from arbitrary exception overrides more settings to make them sticky
             // $injector.get('toastr').error(exceptionMessage);
             $injector.get('toastr').error(
-                    '' + exception, 
-                    'Exception (" + cause + ")',
+                    '' + exception,
+                    'Exception (' + cause + ')',
                     {
                         allowHtml : false,
                         closeButton : true,

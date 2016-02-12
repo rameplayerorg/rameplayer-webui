@@ -187,6 +187,88 @@
                     </div> <!-- .list-group-item -->
                 </div> <!-- .list-group -->
             </div> <!-- .form-group -->
+            <div class="form-group">
+                <div>
+                    <label for="ntpConfigurations" translate>Time Configurations</label>
+                    <em class="text-info"><span translate>Device thinks time is</span> {{ vm.timeInitially }}</em>
+                </div>                        
+                <div class="list-group" id="ntpConfigurations">
+                    <div class="list-group-item">
+                        <div class="form-group row">
+                            <label for="ntpHostname" class="col-sm-3 control-label" translate>NTP server hostname</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="ntpHostname" id="ntpHostname" class="form-control" 
+                                    ng-model="vm.ntpHostname" ng-disabled="vm.useManualTimeConfigs || vm.useNtpIp"
+                                    ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?(\.[a-z\d]([a-z\d\-]{0,61}[a-z\d])?)*$/i"
+                                    ng-minlength="1" ng-maxlength="63" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row checkbox center-block">
+                                <label class="col-sm-7 col-sm-offset-1">
+                                    <input type="checkbox"
+                                        ng-model="vm.useNtpIp"
+                                        ng-disabled="vm.useManualTimeConfigs">
+                                    <span translate>
+                                        Use IP address
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="row center-block">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" translate>
+                                            NTP Server IP
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <rame-ip-address-block
+                                                aria-label="NTPserverIP"
+                                                disabilify="!vm.useNtpIp || vm.useManualTimeConfigs"
+                                                value="vm.ntpServerIp.value"
+                                                is-valid="vm.ntpServerIp.valid">
+                                            </rame-ip-address-block>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row checkbox form-group center-block">
+                            <label class="col-sm-3 control-label">
+                                <input type="checkbox"
+                                    ng-click="vm.manualTimeConfig"
+                                    ng-model="vm.useManualTimeConfigs">
+                                <span translate>
+                                    Configure date and time manually
+                                </span>
+                            </label>
+                        </div>
+                        <div class="row center-block">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-1 col-sm-offset-1 control-label" translate>
+                                    Date:
+                                    </label>
+                                    <div class="col-sm-3">
+                                        <input type="text" id="dateInput" 
+                                        ng-model="vm.dateUserInput" ng-disabled="!vm.useManualTimeConfigs"
+                                        placeholder="yyyy-MM-dd" ng-pattern="/^\d\d\d\d-\d\d-\d\d$/" />
+                                        <br><em class="text-muted">yyyy-MM-dd</em>
+                                   </div>
+                                   <label class="col-sm-1 control-label" translate>
+                                   Time:
+                                   </label>
+                                   <div class="col-sm-3">
+                                        <input type="text" id="timeInput" 
+                                        ng-model="vm.timeInput" ng-disabled="!vm.useManualTimeConfigs"
+                                        placeholder="HH:mm" ng-pattern="/^\d?\d:\d\d$/" />
+                                        <br><em class="text-muted">HH:mm</em>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div> <!-- .panel-body -->
 
         <div class="panel-footer">

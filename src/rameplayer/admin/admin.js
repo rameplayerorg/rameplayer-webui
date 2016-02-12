@@ -57,6 +57,19 @@
         vm.isClusterMaster = false;
         vm.slaveIps = [];
 
+        vm.ntpHostname = vm.systemSettings.ntpServerAddress;
+        vm.useNtpIp = false;
+        vm.ntpServerIp = {
+            value : vm.systemSettings['ntpServerAddress'],
+            valid : true
+        };
+        vm.timeInitially = vm.systemSettings.dateAndtimeInUTC;
+        vm.useManualTimeConfigs = false;
+        vm.manualTimeConfig = manualTimeConfig;
+        vm.manualDateTime;
+        vm.dateUserInput;
+        vm.timeUserInput;
+
         vm.videoOutputResolutions = [
             'rameAutodetect',
             'rame720p50',
@@ -129,6 +142,19 @@
                 }
             }
             
+            if (vm.manualTimeConfig){
+                if (vm.dateUserInput === undefined) {
+                    invalidFields.push('Manual date');
+                }
+                if (vm.timeUserInput === undefined) {
+                    invalidFields.push('Manual time');
+                }
+                vm.manualDateTime = validateManualDateTime(vm.dateUserInput, vm.timeUserInput);
+            }
+            else if (vm.useNtpIp && !vm.ntpServerIp.valid) {
+                invalidFields.push('NTP Server IP');
+            }
+            
             if (invalidFields.length) {
                 valid = false;
                 // Sticky toast
@@ -151,6 +177,14 @@
                         vm.systemSettings.ipDhcpRangeStart = vm.dhcpRangeStartIp.value;
                         vm.systemSettings.ipDhcpRangeEnd = vm.dhcpRangeEndIp.value;
                     }
+                }
+                
+                if (vm.manualTimeConfig){
+                    vm.systemSettings.dateAndtimeInUTC = vm.manualDateTime;
+                } else if (vm.useNtpIp){
+                    vm.systemSettings.ntpServerAddress = vm.ntpServerIp;
+                } else {
+                    vm.systemSettings.ntpServerAddress = vm.ntpHostname;
                 }
                 vm.systemSettings.$save(function() {
                     vm.savingStatus = 'saved';
@@ -189,6 +223,20 @@
             var ip = octets[0] + '.' + octets[1] + '.' + octets[2] + '.';
             vm.dhcpServerRangeStartIp.value = ip;
             vm.dhcpServerRangeEndIp.value = ip;
+        }
+        
+        function manualTimeConfig() {
+            vm.useManualTimeConfigs = !vm.useManualTimeConfigs;
+            if(vm.useManualTimeConfigs){
+                vm.useNtpIp = false;
+            }
+        }
+        
+        function validateManualDateTime(date, time){
+            if (date != undefined && time != undefined){
+                return (date + ' ' + time);
+            }
+            return undefined; 
         }
     }
 })();
