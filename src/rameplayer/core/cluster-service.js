@@ -40,7 +40,9 @@
 
         // for indicating common state for all working units
         // in cluster. 'mixed' if not all in same state
-        var clusterStatus = { state: 'stopped' };
+        var clusterStatus = {
+            state: 'stopped'
+        };
 
         var colors = [
             {rgb: 87,  hex: '#FF4500', name: 'orangered'},
