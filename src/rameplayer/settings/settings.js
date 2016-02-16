@@ -118,10 +118,11 @@
         function saveUsbSetting() {
             vm.userSettings.$save(function() {
                 toastr.clear();
-                //toastr.success('Option saved: Autoplay USB');
-                toastr.error('Option saving to backend: Autoplay USB', 'TODO');
+                toastr.success('Option Autoplay USB ' + (vm.userSettings.autoplayUsb ? 'enabled' : 'disabled') + '.', 'Option saved');
+            }, function() {
+                toastr.clear();
+                toastr.error('Option Autoplay USB saving failed.', 'Option saving failed');
             });
-            //$log.info('storageusb: ' + vm.autoplayUsb + ", " + userSettings.autoplayUsb);            
         }
 
         function addClusterUnit() {
