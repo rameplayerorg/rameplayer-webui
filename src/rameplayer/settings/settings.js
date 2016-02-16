@@ -21,9 +21,8 @@
         $scope.storage = $localStorage;        
         vm.languageId = initLanguage();
         vm.saveLanguageSettings = saveLanguageSettings;
-                
-        var userSettings = dataService.getSettings();
-        vm.autoplayUsb = initAutoplayUsb();
+
+        vm.userSettings = dataService.getSettings();
         vm.saveUsbSetting = saveUsbSetting;
         
         vm.uiVersion = uiVersion;
@@ -115,28 +114,9 @@
             
             toastr.success('Language saved.');
         }
-        
-        function initAutoplayUsb() {
-            var autoplay = userSettings.autoplayUsb;
-            if (autoplay !== undefined) {
-                return autoplay;
-            }
-            else {
-                autoplay = true;
-            }
-            return autoplay;
-        }
-        
-        function validateAutoplayUsb() {
-            if (vm.autoplayUsb !== undefined) {
-                return vm.autoplayUsb;
-            }
-            return true;
-        }
-        
+
         function saveUsbSetting() {
-            userSettings.autoplayUsb = validateAutoplayUsb();
-            userSettings.$save(function() {
+            vm.userSettings.$save(function() {
                 toastr.clear();
                 //toastr.success('Option saved: Autoplay USB');
                 toastr.error('Option saving to backend: Autoplay USB', 'TODO');

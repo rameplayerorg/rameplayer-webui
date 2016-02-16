@@ -7,14 +7,12 @@
         </div>
         <div class="panel-body ng-cloak">
             <div class="form-group">
-                <label for="autoplayUsb" translate>AUTOPLAY_USB</label>
-                <input type="checkbox" name="autoplayUsb" id="autoplayUsb" 
-                    ng-model="settingvm.autoplayUsb" 
-                    ng-change="settingvm.saveUsbSetting()">
-                <!-- <input data-toggle="toggle"> 
-                <script type="text/javascript">
-                    $(function() {$('#autoplayUsb').bootstrapToggle()})
-                </script> -->
+                <label>
+                    <input type="checkbox" name="autoplayUsb" id="autoplayUsb"
+                        ng-model="settingvm.userSettings.autoplayUsb"
+                        ng-change="settingvm.saveUsbSetting()">
+                    <span translate>AUTOPLAY_USB</span>
+                </label>
             </div>
             <div class="form-group">
                 <label for="language" translate>UI_LANGUAGE</label>
