@@ -4,9 +4,10 @@
     angular
         .module('rameplayer.core')
         // minimum server version, used in dataServiceProvider checkVersion()
-        .constant('minServerVersion', '0.4.0')
+        .constant('minServerVersion', '0.5.0')
         .constant('ItemTypes', {
-            LIST: 'directory',
+            DEVICE: 'device',
+            DIRECTORY: 'directory',
             SINGLE: 'regular',
             PLAYLIST: 'playlist'
         })

@@ -38,10 +38,10 @@
         // begin by fetching root list
         var rootList = add(ListIds.ROOT);
 
-        // then fetch all children for root
+        // then fetch all devices under root
         rootList.$promise.then(function() {
             for (var i = 0; i < rootList.items.length; i++) {
-                if (rootList.items[i].type === ItemTypes.LIST) {
+                if (rootList.items[i].type === ItemTypes.DEVICE) {
                     add(rootList.items[i].id);
                 }
             }

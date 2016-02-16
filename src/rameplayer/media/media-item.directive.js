@@ -5,9 +5,9 @@
         .module('rameplayer.media')
         .directive('rameMediaItem', rameMediaItem);
 
-    rameMediaItem.$inject = ['$animate', '$log', 'statusService'];
+    rameMediaItem.$inject = ['$animate', '$log', 'statusService', 'ItemTypes'];
 
-    function rameMediaItem($animate, $log, statusService) {
+    function rameMediaItem($animate, $log, statusService, ItemTypes) {
         // Usage:
         //
         // Creates:
@@ -44,7 +44,7 @@
             vm.itemClick = itemClick;
 
             function itemClick($event) {
-                if (vm.media.type === 'directory') {
+                if (vm.media.type === ItemTypes.DIRECTORY) {
                     vm.onOpenList();
                 }
                 else {

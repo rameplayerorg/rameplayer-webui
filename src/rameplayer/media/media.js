@@ -31,7 +31,7 @@
             var rootList = $rootScope.lists['root'];
             var rootChildren = [];
             for (var i = 0; i < rootList.items.length; i++) {
-                if (rootList.items[i].type === ItemTypes.LIST) {
+                if (rootList.items[i].type === ItemTypes.DEVICE) {
                     var id = rootList.items[i].id;
                     // make sure list is loaded
                     var rootChild = $rootScope.lists[id] || listService.add(id);
