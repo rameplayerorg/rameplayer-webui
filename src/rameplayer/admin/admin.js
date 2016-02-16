@@ -141,8 +141,8 @@
                     }                    
                 }
             }
-            
-            if (vm.useManualTimeConfigs){
+
+            if (vm.useManualTimeConfigs) {
                 if (vm.dateUserInput === undefined) {
                     invalidFields.push('Manual date');
                 }
@@ -179,18 +179,27 @@
                     }
                 }
                 
-                if (vm.manualTimeConfig){
+                if (vm.manualTimeConfig) {
                     vm.systemSettings.dateAndtimeInUTC = vm.manualDateTime;
-                } else if (vm.useNtpIp){
+                }
+                else if (vm.useNtpIp) {
                     vm.systemSettings.ntpServerAddress = vm.ntpServerIp;
-                } else {
+                }
+                else {
                     vm.systemSettings.ntpServerAddress = vm.ntpHostname;
                 }
-                vm.systemSettings.$save(function() {
-                    vm.savingStatus = 'saved';
-                    toastr.clear();
-                    toastr.success('Admin settings saved.', 'Saved');
-                });
+                vm.systemSettings
+                        .$save(function() {
+                            vm.savingStatus = 'saved';
+                            toastr.clear();
+                            toastr.success('Admin settings saved.', 'Saved');
+                        }, function() {
+                            toastr.clear();
+                            toastr.error('Saving admin settings failed.', 'Saving failed', {
+                               timeOut : 0,
+                               closeButton : true
+                           });
+                        });
             }
             else {
                 toastr.error('Admin settings not saved.', 'Check inserted values');
@@ -227,16 +236,16 @@
         
         function manualTimeConfig() {
             vm.useManualTimeConfigs = !vm.useManualTimeConfigs;
-            if(vm.useManualTimeConfigs){
+            if (vm.useManualTimeConfigs) {
                 vm.useNtpIp = false;
             }
         }
         
-        function validateManualDateTime(date, time){
-            if (date != undefined && time != undefined){
+        function validateManualDateTime(date, time) {
+            if (date != undefined && time != undefined) {
                 return (date + ' ' + time);
             }
-            return undefined; 
+            return undefined;
         }
     }
 })();
