@@ -44,6 +44,9 @@
 
 .media-list-item {
   border-top: 1px solid #35393D;
+}
+
+.cluster-stopped .media-list-item {
   cursor: pointer;
 }
 
