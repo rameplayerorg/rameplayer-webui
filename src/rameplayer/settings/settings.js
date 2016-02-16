@@ -118,7 +118,9 @@
         function saveUsbSetting() {
             vm.userSettings.$save(function() {
                 toastr.clear();
-                toastr.success('Option Autoplay USB ' + (vm.userSettings.autoplayUsb ? 'enabled' : 'disabled') + '.', 'Option saved');
+                toastr.success('Option Autoplay USB ' +
+                               (vm.userSettings.autoplayUsb ? 'enabled' : 'disabled') +
+                               '.', 'Option saved');
             }, function() {
                 toastr.clear();
                 toastr.error('Option Autoplay USB saving failed.', 'Option saving failed');
