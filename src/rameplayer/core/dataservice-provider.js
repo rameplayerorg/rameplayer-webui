@@ -21,7 +21,7 @@
 
     dataServiceProvider.$inject = ['$log', '$http', '$resource', '$location',
         'simulationDataService', 'listProvider', 'ListIds', 'uiVersion', 'toastr',
-        '$translate'];
+        '$translate', 'minServerVersion'];
 
     /**
      * @namespace DataServiceProvider
@@ -29,7 +29,7 @@
      * @memberof Factories
      */
     function dataServiceProvider($log, $http, $resource, $location, simulationDataService, listProvider,
-                         ListIds, uiVersion, toastr, $translate) {
+                         ListIds, uiVersion, toastr, $translate, minServerVersion) {
         var service = {
             create: create
         };
@@ -123,9 +123,9 @@
                     getRameVersioning().then(function(response) {
                         if (!serverIsCompatible(response.data.backend)) {
                             var host = ds.options.host || location.host.split(':')[0];
-                            var msg = 'Server version ' + response.data.backend + ' at ' +
+                            var msg = 'Incompatible server version ' + response.data.backend + ' at ' +
                                 host + ':' + ds.options.port +
-                                ' is incompatible with Web UI ' + uiVersion + '.';
+                                '.';
 
                             $translate(['INCOMPATIBLE_VERSION']).then(function(translations) {
                                 toastr.warning(msg, translations.INCOMPATIBLE_VERSION, {
@@ -150,7 +150,7 @@
                 if (backendVersion === 'development') {
                     return true;
                 }
-                var uiVersions = uiVersion.split('.');
+                var uiVersions = minServerVersion.split('.');
                 var backendVersions = backendVersion.split('.');
                 if (uiVersions.length < 2 || backendVersions.length < 2) {
                     return false;
