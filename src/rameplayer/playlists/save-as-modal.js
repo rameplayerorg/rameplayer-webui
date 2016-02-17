@@ -5,25 +5,16 @@
         .module('rameplayer.playlists')
         .controller('SaveAsModalController', SaveAsModalController);
 
-    SaveAsModalController.$inject = ['$timeout', '$log', '$uibModalInstance'];
+    SaveAsModalController.$inject = ['$rootScope', '$timeout', '$log', '$uibModalInstance',
+        'ListIds', 'ItemTypes'];
 
-    function SaveAsModalController($timeout, $log, $uibModalInstance) {
+    function SaveAsModalController($rootScope, $timeout, $log, $uibModalInstance,
+                                   ListIds, ItemTypes) {
         var vm = this;
 
         vm.playlistTitle = '';
 
-        // TODO: Storage options should come from server
-        vm.storageOptions = [
-            {
-                value: 'usb', name: 'USB 1'
-            },
-            {
-                value: 'usb2', name: 'USB 2'
-            },
-            {
-                value: 'browser', name: 'Browser'
-            }
-        ];
+        vm.storageOptions = getStorageOptions();
         vm.storage = vm.storageOptions[0].value;
         vm.save = save;
         vm.cancel = cancel;
@@ -37,6 +28,26 @@
                 $('#newPlaylistTitle').focus();
             }, delay);
         });
+
+        /**
+         * @name getStorageOptions
+         * @description Makes a list of suitable storage options.
+         * Collects all devices under root list.
+         * @return Array
+         */
+        function getStorageOptions() {
+            var options = [];
+            for (var i = 0; i < $rootScope.lists[ListIds.ROOT].items.length; i++) {
+                var item = $rootScope.lists[ListIds.ROOT].items[i];
+                if (item.type === ItemTypes.DEVICE) {
+                    options.push({
+                        value: item.id,
+                        name: $rootScope.lists[item.id].title
+                    });
+                }
+            }
+            return options;
+        }
 
         function save() {
             // validate form

@@ -5,7 +5,7 @@
             "id": "sda1",
             "refreshed": 1449220031300,
             "size": 8192,
-            "type": "directory",
+            "type": "device",
             "modified": 0
         },
         {

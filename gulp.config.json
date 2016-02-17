@@ -29,6 +29,7 @@
         "./src/css/rameplayer.css",
         "./src/css/media.css",
         "./src/css/player.css",
+        "./src/css/time-slider.css",
         "./src/css/range.css"
     ],
     "js": [

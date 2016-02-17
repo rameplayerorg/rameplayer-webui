@@ -1,6 +1,6 @@
 /**
- * Rameplayer-WebUI
- * Copyright (C) 2015
+ * RamePlayer WebUI
+ * Copyright (C) 2015-2016
  *
  * See LICENSE.
  */
@@ -40,6 +40,9 @@
         function playerTimeFilter(seconds, measure) {
             if (seconds === undefined) {
                 return '';
+            }
+            if (seconds < 0) {
+                seconds = Math.abs(seconds);
             }
             measure = measure ? measure : seconds;
             seconds = Math.floor(seconds);

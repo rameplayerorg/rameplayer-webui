@@ -28,7 +28,7 @@
         vm.editMode = false;
         vm.editUnit = {
             ip: {
-                value: vm.unit.address,
+                value: vm.unit.host,
                 valid: true,
             },
             port: vm.unit.port,

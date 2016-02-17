@@ -233,21 +233,21 @@
         function pause() {
             dataService.pause();
             runOnSynced(function(synced) {
-                dataServices[synced.unit.id].pause(synced.unit.delay);
+                dataServices[synced.unit.id].pause();
             });
         }
 
         function stop() {
             dataService.stop();
             runOnSynced(function(synced) {
-                dataServices[synced.unit.id].stop(synced.unit.delay);
+                dataServices[synced.unit.id].stop();
             });
         }
 
         function seek(position) {
             dataService.seek(position);
             runOnSynced(function(synced) {
-                dataServices[synced.unit.id].seek(position, synced.unit.delay);
+                dataServices[synced.unit.id].seek(position - synced.unit.delay);
             });
         }
 

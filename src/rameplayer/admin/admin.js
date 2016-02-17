@@ -1,5 +1,5 @@
-/*jshint maxcomplexity:15 */
-/*jshint maxstatements:50 */
+/*jshint maxcomplexity:22 */
+/*jshint maxstatements:54 */
 (function() {
 
     'use strict';
@@ -56,8 +56,7 @@
         
         vm.isClusterMaster = false;
         vm.slaveIps = [];
-
-        vm.ntpHostname = vm.systemSettings.ntpServerAddress;
+        
         vm.useNtpIp = false;
         vm.ntpServerIp = {
             value : vm.systemSettings['ntpServerAddress'],
@@ -66,9 +65,9 @@
         vm.timeInitially = vm.systemSettings.dateAndtimeInUTC;
         vm.useManualTimeConfigs = false;
         vm.manualTimeConfig = manualTimeConfig;
-        vm.manualDateTime;
-        vm.dateUserInput;
-        vm.timeUserInput;
+        vm.manualDateTime = null;
+        vm.dateUserInput = null;
+        vm.timeUserInput = null;
 
         vm.videoOutputResolutions = [
             'rameAutodetect',
@@ -153,6 +152,10 @@
             }
             else if (vm.useNtpIp && !vm.ntpServerIp.valid) {
                 invalidFields.push('NTP Server IP');
+            } else if ($('#ntpHostname').hasClass('ng-not-empty') &&
+                       $('#ntpHostname').hasClass('ng-invalid')) 
+            {
+                invalidFields.push('NTP Server Hostname');                
             }
             
             if (invalidFields.length) {
@@ -184,9 +187,6 @@
                 }
                 else if (vm.useNtpIp) {
                     vm.systemSettings.ntpServerAddress = vm.ntpServerIp;
-                }
-                else {
-                    vm.systemSettings.ntpServerAddress = vm.ntpHostname;
                 }
                 vm.systemSettings
                         .$save(function() {
@@ -242,7 +242,7 @@
         }
         
         function validateManualDateTime(date, time) {
-            if (date != undefined && time != undefined) {
+            if (date !== undefined && time !== undefined) {
                 return (date + ' ' + time);
             }
             return undefined;

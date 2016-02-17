@@ -1,0 +1,51 @@
+.time-slider {
+    position: relative;
+    width: 100%;
+    height: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #60656a;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    cursor: pointer;
+}
+
+.time-slider-progress {
+    position: absolute;
+    float: left;
+    height: 100%;
+    font-size: 12px;
+    line-height: 20px;
+    color: #fff;
+    text-align: center;
+    background-color: #9C1212;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+    z-index: 1;
+
+    /* animations */
+    -webkit-transition: width 1s linear;
+    -o-transition: width 1s linear;
+    transition: width 1s linear;
+}
+
+.time-slider-handle {
+    position: absolute;
+    top: -5px;
+    border: none;
+    height: 15px;
+    width: 15px;
+    margin-left: -6px;
+    border-radius: 50%;
+    background-color: #B00D0D;
+    box-shadow: 0 0 2px rgba(0,0,0,.3);
+    z-index: 2;
+
+    /* animations */
+    -webkit-transition: left 1s linear;
+    -o-transition: left 1s linear;
+    transition: left 1s linear;
+}
+
+.time-slider-handle {
+    cursor: move;
+}
+
