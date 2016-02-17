@@ -56,8 +56,7 @@
         
         vm.isClusterMaster = false;
         vm.slaveIps = [];
-
-        vm.ntpHostname = vm.systemSettings.ntpServerAddress;
+        
         vm.useNtpIp = false;
         vm.ntpServerIp = {
             value : vm.systemSettings['ntpServerAddress'],
@@ -153,6 +152,10 @@
             }
             else if (vm.useNtpIp && !vm.ntpServerIp.valid) {
                 invalidFields.push('NTP Server IP');
+            } else if (angular.element(ntpHostname).hasClass('ng-not-empty')
+                    && angular.element(ntpHostname).hasClass('ng-invalid')) 
+            {
+                invalidFields.push('NTP Server Hostname');                
             }
             
             if (invalidFields.length) {
@@ -184,9 +187,6 @@
                 }
                 else if (vm.useNtpIp) {
                     vm.systemSettings.ntpServerAddress = vm.ntpServerIp;
-                }
-                else {
-                    vm.systemSettings.ntpServerAddress = vm.ntpHostname;
                 }
                 vm.systemSettings
                         .$save(function() {
