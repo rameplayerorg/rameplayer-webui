@@ -1,4 +1,4 @@
-<div class="time-slider" ng-mousedown="vm.startSeek($event)">
+<div class="time-slider" ng-mousedown="vm.startSeek($event)" ng-mousemove="vm.showMousePos($event)">
     <div class="time-slider-progress" ng-style="{ width: vm.percentage + '%'}">
     </div>
     <div class="time-slider-handle" ng-style="{ left: vm.percentage + '%'}">

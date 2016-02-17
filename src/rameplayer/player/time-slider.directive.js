@@ -22,24 +22,33 @@
 
         function link(scope, element, attrs) {
             scope.vm.slider = $(element).children('.time-slider');
+
+            // create tooltip instance
+            scope.vm.slider.tooltip({
+                trigger: 'hover',
+                animation: false,
+                title: '-',
+            });
         }
     }
 
-    TimeSliderController.$inject = ['$scope', '$log', '$timeout'];
+    TimeSliderController.$inject = ['$scope', '$log', '$timeout', '$filter'];
 
-    function TimeSliderController($scope, $log, $timeout) {
+    function TimeSliderController($scope, $log, $timeout, $filter) {
         var vm = this;
         var seeking = false;
         // prevent seek for chokingTime
         var chokingTime = 1000;
         var choked = false;
         var lastSeekPos = null;
+        var tooltipElem;
+        var tooltipElemText;
 
-        vm.mousePos = 0;
         vm.percentage = 0;
         vm.startSeek = startSeek;
         vm.seek = seek;
         vm.stopSeek = stopSeek;
+        vm.showMousePos = showMousePos;
 
         $scope.$watchGroup(['vm.position', 'vm.duration'], function() {
             updatePercentage();
@@ -110,6 +119,28 @@
             seek(event, false);
             seeking = false;
             lastSeekPos = null;
+        }
+
+        /**
+         * @name showMousePos
+         * @description Shows position under mouse cursor in tooltip
+         */
+        function showMousePos(event) {
+            var mousePos = getPosByEvent(event);
+            mousePos = $filter('playerTime')(mousePos);
+
+            if (tooltipElem === undefined) {
+                tooltipElem = vm.slider.next('.tooltip').css({ position: 'fixed' });
+            }
+            if (tooltipElemText === undefined) {
+                tooltipElemText = tooltipElem.children('.tooltip-inner');
+            }
+            // change tooltip text
+            tooltipElemText.html(mousePos);
+
+            // move tooltip horizontally
+            var left = event.clientX - (tooltipElem.width() / 2);
+            tooltipElem.css({ left: left });
         }
     }
 })();
