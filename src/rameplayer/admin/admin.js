@@ -1,5 +1,5 @@
-/*jshint maxcomplexity:15 */
-/*jshint maxstatements:50 */
+/*jshint maxcomplexity:22 */
+/*jshint maxstatements:54 */
 (function() {
 
     'use strict';
@@ -65,9 +65,9 @@
         vm.timeInitially = vm.systemSettings.dateAndtimeInUTC;
         vm.useManualTimeConfigs = false;
         vm.manualTimeConfig = manualTimeConfig;
-        vm.manualDateTime;
-        vm.dateUserInput;
-        vm.timeUserInput;
+        vm.manualDateTime = null;
+        vm.dateUserInput = null;
+        vm.timeUserInput = null;
 
         vm.videoOutputResolutions = [
             'rameAutodetect',
@@ -152,8 +152,8 @@
             }
             else if (vm.useNtpIp && !vm.ntpServerIp.valid) {
                 invalidFields.push('NTP Server IP');
-            } else if (angular.element(ntpHostname).hasClass('ng-not-empty')
-                    && angular.element(ntpHostname).hasClass('ng-invalid')) 
+            } else if ($('#ntpHostname').hasClass('ng-not-empty') &&
+                       $('#ntpHostname').hasClass('ng-invalid')) 
             {
                 invalidFields.push('NTP Server Hostname');                
             }
@@ -242,7 +242,7 @@
         }
         
         function validateManualDateTime(date, time) {
-            if (date != undefined && time != undefined) {
+            if (date !== undefined && time !== undefined) {
                 return (date + ' ' + time);
             }
             return undefined;
