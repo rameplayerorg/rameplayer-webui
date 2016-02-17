@@ -36,7 +36,7 @@
                         <input type="text" name="deviceName" id="deviceName"
                             class="form-control" ng-model="vm.deviceName"
                             ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?(\.[a-z\d]([a-z\d\-]{0,61}[a-z\d])?)*$/i"
-                            ng-minlength="1" ng-maxlength="63" />
+                            ng-minlength="1" ng-maxlength="63" required/>
                     </div>
                 </div>
             </div> <!-- .form-horizontal -->
@@ -198,7 +198,7 @@
                             <label for="ntpHostname" class="col-sm-3 control-label" translate>NTP server hostname</label>
                             <div class="col-sm-9">
                                 <input type="text" name="ntpHostname" id="ntpHostname" class="form-control" 
-                                    ng-model="vm.ntpHostname" ng-disabled="vm.useManualTimeConfigs || vm.useNtpIp"
+                                    ng-model="vm.systemSettings.ntpServerAddress" ng-disabled="vm.useManualTimeConfigs || vm.useNtpIp"
                                     ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?(\.[a-z\d]([a-z\d\-]{0,61}[a-z\d])?)*$/i"
                                     ng-minlength="1" ng-maxlength="63" />
                             </div>
@@ -269,6 +269,7 @@
                     </div>
                 </div>
             </div>
+            
         </div> <!-- .panel-body -->
 
         <div class="panel-footer">
