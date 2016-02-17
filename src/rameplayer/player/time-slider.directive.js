@@ -81,7 +81,9 @@
             var seekToPos = getPosByEvent(event);
             // do not seek twice to same pos
             if (seekToPos !== lastSeekPos && (!obeyChoke || !choked)) {
-                vm.onSeek({ position: seekToPos });
+                vm.onSeek({
+                    position: seekToPos
+                });
                 choked = true;
                 $timeout(function() {
                     choked = false;

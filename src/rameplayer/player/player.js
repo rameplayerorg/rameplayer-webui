@@ -71,8 +71,8 @@
             dataService.stepForward();
         }
 
-        function seek() {
-            var position = parseFloat(vm.timeSlider);
+        function seek(position) {
+            $log.debug('player.seek', position);
             clusterService.seek(position);
         }
 
