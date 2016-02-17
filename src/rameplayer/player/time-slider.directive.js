@@ -130,7 +130,9 @@
             mousePos = $filter('playerTime')(mousePos);
 
             if (tooltipElem === undefined) {
-                tooltipElem = vm.slider.next('.tooltip').css({ position: 'fixed' });
+                tooltipElem = vm.slider.next('.tooltip').css({
+                    position: 'fixed'
+                });
             }
             if (tooltipElemText === undefined) {
                 tooltipElemText = tooltipElem.children('.tooltip-inner');
@@ -140,7 +142,9 @@
 
             // move tooltip horizontally
             var left = event.clientX - (tooltipElem.width() / 2);
-            tooltipElem.css({ left: left });
+            tooltipElem.css({
+                left: left
+            });
         }
     }
 })();
