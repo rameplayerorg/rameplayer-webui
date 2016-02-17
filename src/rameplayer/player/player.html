@@ -6,10 +6,7 @@
                     <span class="glyphicon" ng-class="{ 'glyphicon-play': vm.playerStatus.state !== 'playing' && vm.playerStatus.state !== 'buffering', 'glyphicon-pause': vm.playerStatus.state === 'playing' || vm.playerStatus.state === 'buffering' }"></span>
                 </button>
                 <div class="player-controls">
-                    <div class="time-slider">
-                        <input id="time-slider" type="range" max="{{ vm.playerStatus.duration }}" min="0" step="1" name="range" ng-model="vm.timeSlider" ng-change="vm.seek()" class="timeSlider"></input>
-                    </div>
-
+                    <rame-time-slider position="vm.timeSlider" duration="vm.playerStatus.duration" on-seek="vm.seek(position)"></rame-time-slider>
                     <div id="player-small-controls">
                         <button id="stop" type="button" class="btn btn-default btn-xs" title="{{ 'Stop' | translate }}" ng-click="vm.stop()">
                             <span class="glyphicon glyphicon-stop"></span>
