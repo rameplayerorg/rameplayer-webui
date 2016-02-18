@@ -14,55 +14,17 @@
     function AdminController($log, dataService, toastr, $rootScope) {
         var vm = this;
         vm.systemSettings = dataService.getSystemSettings();
+        vm.systemSettings.$promise.then(function() {
+            init();
+        });
+
         vm.audioPorts = [
             'rameAnalogOnly', 'rameHdmiOnly', 'rameHdmiAndAnalog'
         ];
-        
-        vm.manualIpConfig = !vm.systemSettings.ipDhcpClient;
-        vm.deviceName = vm.systemSettings.hostname;
-
-        vm.deviceIp = {
-            value: vm.systemSettings['ipAddress'],
-            valid: true
-        };
-        vm.subnetMask = {
-            value: vm.systemSettings['ipSubnetMask'],
-            valid: true
-        };
-        vm.gatewayIp = {
-            value: vm.systemSettings['ipGateway'],
-            valid: true
-        };
-        vm.dnsServerIp = {
-            value: vm.systemSettings['ipDnsPrimary'],
-            valid: true
-        };
-        vm.dnsAlternativeServerIp = {
-            value: vm.systemSettings['ipDnsSecondary'],
-            valid: true
-        };
-        vm.dhcpServerRangeStartIp = {
-            value: vm.systemSettings['ipDhcpRangeStart'],
-            valid: true
-        };
-        vm.dhcpServerRangeEndIp = {
-            value: vm.systemSettings['ipDhcpRangeEnd'],
-            valid: true
-        };
         vm.prefillDhcpOcts = prefillDhcpOcts;
-
         vm.saveSettings = saveSettings;
         vm.savingStatus = 'loaded';
-        
-        vm.isClusterMaster = false;
-        vm.slaveIps = [];
-        
         vm.useNtpIp = false;
-        vm.ntpServerIp = {
-            value : vm.systemSettings['ntpServerAddress'],
-            valid : true
-        };
-        vm.timeInitially = vm.systemSettings.dateAndtimeInUTC;
         vm.useManualTimeConfigs = false;
         vm.manualTimeConfig = manualTimeConfig;
         vm.manualDateTime = null;
@@ -78,6 +40,51 @@
             'rame1080p50',
             'rame1080p60'
         ];
+
+        /**
+         * @name init
+         * @description Initializes variables.
+         * Called after system settings are fetched from server.
+         */
+        function init() {
+            vm.manualIpConfig = !vm.systemSettings.ipDhcpClient;
+            vm.deviceName = vm.systemSettings.hostname;
+
+            vm.deviceIp = {
+                value: vm.systemSettings['ipAddress'],
+                valid: true
+            };
+            vm.subnetMask = {
+                value: vm.systemSettings['ipSubnetMask'],
+                valid: true
+            };
+            vm.gatewayIp = {
+                value: vm.systemSettings['ipGateway'],
+                valid: true
+            };
+            vm.dnsServerIp = {
+                value: vm.systemSettings['ipDnsPrimary'],
+                valid: true
+            };
+            vm.dnsAlternativeServerIp = {
+                value: vm.systemSettings['ipDnsSecondary'],
+                valid: true
+            };
+            vm.dhcpServerRangeStartIp = {
+                value: vm.systemSettings['ipDhcpRangeStart'],
+                valid: true
+            };
+            vm.dhcpServerRangeEndIp = {
+                value: vm.systemSettings['ipDhcpRangeEnd'],
+                valid: true
+            };
+
+            vm.ntpServerIp = {
+                value : vm.systemSettings['ntpServerAddress'],
+                valid : true
+            };
+            vm.timeInitially = vm.systemSettings.dateAndtimeInUTC;
+        }
 
         function saveSettings() {
             $log.debug('deviceIp', vm.deviceIp);
