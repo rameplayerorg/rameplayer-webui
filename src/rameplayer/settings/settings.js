@@ -91,16 +91,16 @@
                 $log.debug('Using language from localstorage:', langId);
             }
             else if ($window.navigator.language) {
-                langId = $window.navigator.language;
+                langId = $window.navigator.language.toLowerCase();
                 $log.debug('Detected browser language', langId);
             }
             else if ($window.navigator.browserLanguage) {
                 // IE
-                langId = $window.navigator.browserLanguage;
+                langId = $window.navigator.browserLanguage.toLowerCase();
                 $log.debug('Detected browser language (browserLanguage)', langId);
             }
             else {
-                langId = 'en-US';
+                langId = 'en-us';
                 $log.debug('Using default language', langId);
             }
             $translate.use(langId);
