@@ -147,12 +147,12 @@
                     }                    
                 }
             }
-
+            
             if (vm.useManualTimeConfigs) {
-                if (vm.dateUserInput === undefined) {
+                if (!vm.dateUserInput) {
                     invalidFields.push('Manual date');
                 }
-                if (vm.timeUserInput === undefined) {
+                if (!vm.timeUserInput) {
                     invalidFields.push('Manual time');
                 }
                 vm.manualDateTime = validateManualDateTime(vm.dateUserInput, vm.timeUserInput);
@@ -175,26 +175,7 @@
             }
             
             if (valid) {
-                vm.systemSettings.hostname = vm.deviceName;
-                vm.systemSettings.ipDhcpClient = !vm.manualIpConfig;
-                if (vm.manualIpConfig) {
-                    vm.systemSettings.ipAddress = vm.deviceIp.value;
-                    vm.systemSettings.ipSubnetMask = vm.subnetMask.value;
-                    vm.systemSettings.ipGateway = vm.gatewayIp.value;
-                    vm.systemSettings.ipDnsPrimary = vm.dnsServerIp.value;
-                    vm.systemSettings.ipDnsSecondary = vm.dnsAlternativeServerIp.value;
-                    if (vm.systemSettings.ipDhcpServer) {
-                        vm.systemSettings.ipDhcpRangeStart = vm.dhcpRangeStartIp.value;
-                        vm.systemSettings.ipDhcpRangeEnd = vm.dhcpRangeEndIp.value;
-                    }
-                }
-                
-                if (vm.manualTimeConfig) {
-                    vm.systemSettings.dateAndtimeInUTC = vm.manualDateTime;
-                }
-                else if (vm.useNtpIp) {
-                    vm.systemSettings.ntpServerAddress = vm.ntpServerIp;
-                }
+                assignSystemSettings();
                 vm.systemSettings
                         .$save(function() {
                             vm.savingStatus = 'saved';
@@ -213,6 +194,29 @@
             }
             //toastr.error('saveSettings: ' + $rootScope.rameExceptions, $rootScope.rameException);
             //throw new Error('testerror');
+        }
+        
+        function assignSystemSettings() {
+            vm.systemSettings.hostname = vm.deviceName;
+            vm.systemSettings.ipDhcpClient = !vm.manualIpConfig;
+            if (vm.manualIpConfig) {
+                vm.systemSettings.ipAddress = vm.deviceIp.value;
+                vm.systemSettings.ipSubnetMask = vm.subnetMask.value;
+                vm.systemSettings.ipGateway = vm.gatewayIp.value;
+                vm.systemSettings.ipDnsPrimary = vm.dnsServerIp.value;
+                vm.systemSettings.ipDnsSecondary = vm.dnsAlternativeServerIp.value;
+                if (vm.systemSettings.ipDhcpServer) {
+                    vm.systemSettings.ipDhcpRangeStart = vm.dhcpRangeStartIp.value;
+                    vm.systemSettings.ipDhcpRangeEnd = vm.dhcpRangeEndIp.value;
+                }
+            }
+            
+            if (vm.manualTimeConfig) {
+                vm.systemSettings.dateAndtimeInUTC = vm.manualDateTime;
+            }
+            else if (vm.useNtpIp) {
+                vm.systemSettings.ntpServerAddress = vm.ntpServerIp;
+            }
         }
 
         function validateIpOrdering(smallerIp, biggerIp) {
@@ -249,7 +253,7 @@
         }
         
         function validateManualDateTime(date, time) {
-            if (date !== undefined && time !== undefined) {
+            if (date != undefined && time != undefined) { // jshint ignore:line
                 return (date + ' ' + time);
             }
             return undefined;

@@ -1,11 +1,11 @@
 <div class="container" ng-controller="AdminController as vm">
     <div class="panel panel-default">
-        <div class="panel-heading ">            
+        <div class="panel-heading">
             <h3 class="panel-title" translate>Admin Settings</h3>
         </div>
-        <div class="panel-body ">
+        <div class="panel-body">
             <rame-device-info></rame-device-info>
-
+            <form name="basicsForm">
             <div class="form-horizontal">
                 <div class="form-group">
                     <label for="videoResOut" class="col-sm-3 control-label" translate>Video output resolution</label>
@@ -37,9 +37,13 @@
                             class="form-control" ng-model="vm.deviceName"
                             ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?(\.[a-z\d]([a-z\d\-]{0,61}[a-z\d])?)*$/i"
                             ng-minlength="1" ng-maxlength="63" required/>
+                        <span class="text-warning glyphicon glyphicon-alert" 
+                            ng-show="!basicsForm.deviceName.$valid || basicsForm.deviceName.$error.required">
+                        </span>
                     </div>
                 </div>
             </div> <!-- .form-horizontal -->
+            </form> <!-- basicsForm -->
 
             <div class="form-group">
                 <label for="ipConfigurations" translate>IP Configurations</label>
@@ -189,8 +193,11 @@
             </div> <!-- .form-group -->
             <div class="form-group">
                 <div>
-                    <label for="ntpConfigurations" translate>Time Configurations</label>
-                    <em class="text-info"><span translate>Device thinks time is</span> {{ vm.timeInitially }}</em>
+                    <label for="ntpConfigurations" translate>Time Configurations</label> 
+                    <div class="pull-right">
+                        <em class="text-info"><span translate>Device thinks time is</span>
+                        &nbsp;{{ !vm.timeInitially ? '--:--:--' : vm.timeInitially }}</em>
+                    </div>
                 </div>                        
                 <div class="list-group" id="ntpConfigurations">
                     <div class="list-group-item">
@@ -251,7 +258,7 @@
                                     <div class="col-sm-3">
                                         <input type="text" id="dateInput" 
                                         ng-model="vm.dateUserInput" ng-disabled="!vm.useManualTimeConfigs"
-                                        placeholder="yyyy-MM-dd" ng-pattern="/^\d\d\d\d-\d\d-\d\d$/" />
+                                        placeholder="yyyy-MM-dd" ng-pattern="/^\d\d\d\d-((0\d)|(1(0|1|2)))-(((0|1|2)\d)|(3(0|1)))$/" />
                                         <br><em class="text-muted">yyyy-MM-dd</em>
                                    </div>
                                    <label class="col-sm-1 control-label" translate>
@@ -259,9 +266,9 @@
                                    </label>
                                    <div class="col-sm-3">
                                         <input type="text" id="timeInput" 
-                                        ng-model="vm.timeInput" ng-disabled="!vm.useManualTimeConfigs"
-                                        placeholder="HH:mm" ng-pattern="/^\d?\d:\d\d$/" />
-                                        <br><em class="text-muted">HH:mm</em>
+                                        ng-model="vm.timeUserInput" ng-disabled="!vm.useManualTimeConfigs"
+                                        placeholder="HH:mm:ss" ng-pattern="/^(0|1|2)\d:\d\d:\d\d$/" />
+                                        <br><em class="text-muted">HH:mm:ss</em>
                                     </div>
                                 </div>
                             </div>
@@ -269,7 +276,6 @@
                     </div>
                 </div>
             </div>
-            
         </div> <!-- .panel-body -->
 
         <div class="panel-footer">
