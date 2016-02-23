@@ -7,6 +7,12 @@
     background-color: #60656a;
     box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
     cursor: pointer;
+
+    /* do not let select anything to avoid drag events */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .time-slider-progress {
@@ -19,7 +25,7 @@
     text-align: center;
     background-color: #9C1212;
     box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
-    z-index: 1;
+    z-index: 3;
 
     /* animations */
     -webkit-transition: width 1s linear;
@@ -37,7 +43,7 @@
     border-radius: 50%;
     background-color: #B00D0D;
     box-shadow: 0 0 2px rgba(0,0,0,.3);
-    z-index: 2;
+    z-index: 4;
 
     /* animations */
     -webkit-transition: left 1s linear;
@@ -45,7 +51,29 @@
     transition: left 1s linear;
 }
 
+.time-slider-handle-target {
+    display: none;
+    position: absolute;
+    top: -5px;
+    border: none;
+    height: 15px;
+    width: 15px;
+    margin-left: -6px;
+    border-radius: 50%;
+    background-color: #5F6469;
+    opacity: 0.6;
+    z-index: 2;
+}
+
 .time-slider-handle {
     cursor: move;
 }
 
+.time-slider+.tooltip {
+    /* do not let select anything to avoid drag events */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index: 1;
+}

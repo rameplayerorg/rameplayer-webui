@@ -22,6 +22,7 @@
 
         function link(scope, element, attrs) {
             scope.vm.slider = $(element).children('.time-slider');
+            scope.vm.seekTarget = scope.vm.slider.children('.time-slider-handle-target');
 
             // create tooltip instance
             scope.vm.slider.tooltip({
@@ -32,21 +33,20 @@
         }
     }
 
-    TimeSliderController.$inject = ['$scope', '$log', '$timeout', '$filter'];
+    TimeSliderController.$inject = ['$scope', '$log', '$interval', '$filter'];
 
-    function TimeSliderController($scope, $log, $timeout, $filter) {
+    function TimeSliderController($scope, $log, $interval, $filter) {
         var vm = this;
         var seeking = false;
-        // prevent seek for chokingTime
-        var chokingTime = 1000;
-        var choked = false;
+        var seekIntervalTime = 500;
+        var seekIntervalHandle;
+        var seekToPos = null;
         var lastSeekPos = null;
         var tooltipElem;
         var tooltipElemText;
 
         vm.percentage = 0;
         vm.startSeek = startSeek;
-        vm.seek = seek;
         vm.stopSeek = stopSeek;
         vm.showMousePos = showMousePos;
 
@@ -55,16 +55,24 @@
         });
 
         // stop seeking also when mouse button gets up elsewhere
-        $(document).on('mouseup dragend', function(event) {
+        $(document).on('mouseup', function(event) {
             if (seeking) {
                 stopSeek(event);
             }
         });
 
+        // make sure to stop seeking in case of dragend event
+        // for some reason event.pageX is weird
+        $(document).on('dragend', function(event) {
+            seeking = false;
+            vm.seekTarget.hide();
+        });
+
         // keep dragging slider everywhere on page
-        $(document).mousemove(function(event) {
+        $(document).on('mousemove', function(event) {
             if (seeking) {
-                seek(event, true);
+                countSeekToPos(event);
+                moveSeekTarget(event);
             }
         });
 
@@ -83,22 +91,22 @@
         }
 
         function startSeek($event) {
+            countSeekToPos($event);
             seeking = true;
+            moveSeekTarget($event);
+            vm.seekTarget.show();
+            seekIntervalHandle = $interval(function() {
+                if (seekToPos !== lastSeekPos) {
+                    vm.onSeek({
+                        position: seekToPos
+                    });
+                    lastSeekPos = seekToPos;
+                }
+            }, seekIntervalTime);
         }
 
-        function seek(event, obeyChoke) {
-            var seekToPos = getPosByEvent(event);
-            // do not seek twice to same pos
-            if (seekToPos !== lastSeekPos && (!obeyChoke || !choked)) {
-                vm.onSeek({
-                    position: seekToPos
-                });
-                choked = true;
-                $timeout(function() {
-                    choked = false;
-                }, chokingTime);
-                lastSeekPos = seekToPos;
-            }
+        function countSeekToPos(event) {
+            seekToPos = getPosByEvent(event);
         }
 
         function getPosByEvent(event) {
@@ -116,7 +124,12 @@
         }
 
         function stopSeek(event) {
-            seek(event, false);
+            $interval.cancel(seekIntervalHandle);
+            seekIntervalHandle = undefined;
+            vm.onSeek({
+                position: seekToPos
+            });
+            vm.seekTarget.hide();
             seeking = false;
             lastSeekPos = null;
         }
@@ -143,6 +156,24 @@
             // move tooltip horizontally
             var left = event.clientX - (tooltipElem.width() / 2);
             tooltipElem.css({
+                left: left
+            });
+        }
+
+        /**
+         * @name moveSeekTarget
+         * @description Moves handle target element (ghost) so user sees
+         * where seek is going to happen
+         */
+        function moveSeekTarget(event) {
+            var left = event.pageX - vm.slider.offset().left;
+            if (left < 0) {
+                left = 0;
+            }
+            if (left > vm.slider.width()) {
+                left = vm.slider.width();
+            }
+            vm.seekTarget.css({
                 left: left
             });
         }
