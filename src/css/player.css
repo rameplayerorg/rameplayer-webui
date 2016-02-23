@@ -35,3 +35,11 @@
   /* space for stop button */
   padding-left: 35px;
 }
+
+.player-info .player-position {
+  cursor: pointer;
+}
+
+.seek-form input {
+    width: 60px;
+}

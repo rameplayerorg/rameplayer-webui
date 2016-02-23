@@ -25,6 +25,13 @@
         vm.stepForward = stepForward;
         vm.seek = seek;
         vm.clusterService = clusterService;
+        vm.jumpForm = {
+            open: false,
+            hour: 0,
+            min: 0,
+            sec: 0,
+            jump: jump
+        };
 
         $scope.$watchCollection('vm.playerStatus', function() {
             // synchronize time slider with status position
@@ -106,6 +113,16 @@
             }
             // not found
             return null;
+        }
+
+        /**
+         * @name jump
+         * @description Called from the form in position popover.
+         */
+        function jump() {
+            var position = vm.jumpForm.hour * 3600 + vm.jumpForm.min * 60 + vm.jumpForm.sec;
+            clusterService.seek(position);
+            vm.jumpForm.open = false;
         }
     }
 })();
