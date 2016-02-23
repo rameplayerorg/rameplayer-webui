@@ -55,7 +55,7 @@
         });
 
         // stop seeking also when mouse button gets up elsewhere
-        $(document).mouseup(function(event) {
+        $(document).on('mouseup dragend', function(event) {
             if (seeking) {
                 stopSeek(event);
             }
