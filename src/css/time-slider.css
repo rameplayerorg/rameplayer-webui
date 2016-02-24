@@ -70,6 +70,8 @@
 }
 
 .time-slider+.tooltip {
+    position: fixed;
+
     /* do not let select anything to avoid drag events */
     -webkit-user-select: none;
     -moz-user-select: none;

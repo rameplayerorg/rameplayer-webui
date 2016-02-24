@@ -26,7 +26,7 @@
 
             // create tooltip instance
             scope.vm.slider.tooltip({
-                trigger: 'hover',
+                trigger: 'manual',
                 animation: false,
                 title: '-',
             });
@@ -49,6 +49,7 @@
         vm.startSeek = startSeek;
         vm.stopSeek = stopSeek;
         vm.showMousePos = showMousePos;
+        vm.hideMousePos = hideMousePos;
 
         $scope.$watchGroup(['vm.position', 'vm.duration'], function() {
             updatePercentage();
@@ -141,23 +142,32 @@
         function showMousePos(event) {
             var mousePos = getPosByEvent(event);
             mousePos = $filter('playerTime')(mousePos);
+            if (tooltipElem !== undefined && tooltipElem.length !== 0) {
+                // change tooltip text
+                tooltipElemText.html(mousePos);
 
-            if (tooltipElem === undefined) {
-                tooltipElem = vm.slider.next('.tooltip').css({
-                    position: 'fixed'
+                // move tooltip horizontally
+                var left = event.clientX - (tooltipElem.width() / 2);
+                tooltipElem.css({
+                    left: left,
+                    display: 'block'
                 });
             }
-            if (tooltipElemText === undefined) {
-                tooltipElemText = tooltipElem.children('.tooltip-inner');
+            else {
+                vm.slider.one('shown.bs.tooltip', function(showEvent) {
+                    // show tooltip first time in right place
+                    tooltipElem = $(showEvent.target).next('.tooltip');
+                    tooltipElemText = tooltipElem.children('.tooltip-inner');
+                    showMousePos(event);
+                });
+                vm.slider.tooltip('show');
             }
-            // change tooltip text
-            tooltipElemText.html(mousePos);
+        }
 
-            // move tooltip horizontally
-            var left = event.clientX - (tooltipElem.width() / 2);
-            tooltipElem.css({
-                left: left
-            });
+        function hideMousePos() {
+            if (tooltipElem !== undefined) {
+                tooltipElem.hide();
+            }
         }
 
         /**
