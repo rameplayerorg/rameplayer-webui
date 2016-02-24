@@ -88,6 +88,7 @@
             ds.stepForward = stepForward;
             ds.getRameVersioning = getRameVersioning;
             ds.getSystemSettings = getSystemSettings;
+            ds.writeLog = writeLog;
 
             checkVersion();
 
@@ -298,6 +299,15 @@
                     rameVersioning = $http.get(baseUrl + 'version');
                 }
                 return rameVersioning;
+            }
+
+            function writeLog(level, message) {
+                var url = baseUrl + 'log';
+                $http.post(url, {
+                    time: Date.now(),
+                    level: level,
+                    message: message
+                });
             }
         }
     }

@@ -5,10 +5,10 @@
         .module('rameplayer.playlists')
         .controller('PlaylistsController', PlaylistsController);
 
-    PlaylistsController.$inject = ['$rootScope', '$scope', '$log', 'dataService',
+    PlaylistsController.$inject = ['$rootScope', '$scope', 'logger', 'dataService',
         'statusService', 'clusterService', 'listService', '$uibModal', 'uuid', 'ItemTypes'];
 
-    function PlaylistsController($rootScope, $scope, $log, dataService,
+    function PlaylistsController($rootScope, $scope, logger, dataService,
                                  statusService, clusterService, listService, $uibModal, uuid, ItemTypes) {
         var vm = this;
 
@@ -22,7 +22,7 @@
         vm.addStream = addStream;
 
         $rootScope.$watchCollection('lists', function(lists) {
-            $log.info('Playlists: $rootScope.lists changed', lists);
+            logger.debug('Playlists: $rootScope.lists changed', lists);
             if (lists['root']) {
                 lists['root'].$promise.then(function(rootList) {
                     updatePlaylists();
@@ -41,7 +41,7 @@
                     playlists.push(id);
                 }
             }
-            $log.info('Playlists refreshed: ', playlists);
+            logger.debug('Playlists refreshed: ', playlists);
             vm.playlists = playlists;
         }
 
@@ -60,7 +60,7 @@
         }
 
         function removeMedia(listId, media) {
-            $log.info('Remove media from playlist', listId, media);
+            logger.info('Remove media from playlist', listId, media);
             dataService.removeFromPlaylist(listId, media);
         }
 

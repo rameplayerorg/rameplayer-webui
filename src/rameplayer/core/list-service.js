@@ -16,14 +16,14 @@
         .module('rameplayer.core')
         .factory('listService', listService);
 
-    listService.$inject = ['$rootScope', '$log', 'dataService', 'ItemTypes', 'ListIds'];
+    listService.$inject = ['$rootScope', 'logger', 'dataService', 'ItemTypes', 'ListIds'];
 
     /**
      * @namespace ListService
      * @desc Application wide service for lists
      * @memberof Factories
      */
-    function listService($rootScope, $log, dataService, ItemTypes, ListIds) {
+    function listService($rootScope, logger, dataService, ItemTypes, ListIds) {
 
         // data holder for flattened list of all List resource objects
         // key is list listId and value is List instance
@@ -59,7 +59,7 @@
             }
             var list = dataService.getList(id);
             $rootScope.lists[id] = list;
-            $log.info('ListService: list "' + id + '" added to $rootScope.lists');
+            logger.info('ListService: list "' + id + '" added to $rootScope.lists');
             return list;
         }
 
@@ -73,7 +73,7 @@
 
         function remove(id) {
             delete $rootScope.lists[id];
-            $log.info('ListService: list "' + id + '" removed from $rootScope.lists');
+            logger.info('ListService: list "' + id + '" removed from $rootScope.lists');
         }
     }
 })();

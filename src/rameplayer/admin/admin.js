@@ -8,10 +8,10 @@
             'AdminController', AdminController);
 
     AdminController.$inject = [
-            '$log', 'dataService', 'toastr', '$rootScope'
+            'logger', 'dataService', 'toastr', '$rootScope'
     ];
 
-    function AdminController($log, dataService, toastr, $rootScope) {
+    function AdminController(logger, dataService, toastr, $rootScope) {
         var vm = this;
         vm.systemSettings = dataService.getSystemSettings();
         vm.systemSettings.$promise.then(function() {
@@ -87,7 +87,6 @@
         }
 
         function saveSettings() {
-            $log.debug('deviceIp', vm.deviceIp);
             var valid = true;
             var invalidFields = [];
             

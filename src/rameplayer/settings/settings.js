@@ -7,11 +7,11 @@
         .controller('SettingsController', SettingsController);
 
     SettingsController.$inject = [
-        '$log', '$http', 'dataService', 'clusterService', '$translate', 'uiVersion',
+        'logger', '$http', 'dataService', 'clusterService', '$translate', 'uiVersion',
         'toastr', '$scope', '$localStorage', '$window', '$document'
     ];
 
-    function SettingsController($log, $http, dataService, clusterService, $translate,
+    function SettingsController(logger, $http, dataService, clusterService, $translate,
                                 uiVersion, toastr, $scope, $localStorage, $window, $document) {
 
         var $injector = angular.injector();
@@ -32,9 +32,9 @@
             rameVersioning = response.data;
             vm.rameVersionSoftware = rameVersioning.backend;
             vm.rameVersionHardware = rameVersioning.hw;
-            $log.info('Version fetched', response);
+            logger.info('Version fetched', response);
         }, function(errorResponse) {
-            $log.error('Version fetching failed', errorResponse);
+            logger.error('Version fetching failed', errorResponse);
         });
         
         vm.windowTitleInfo = 'RamePlayer';
@@ -88,20 +88,20 @@
             var langId;
             if ($scope.storage.language) {
                 langId = $scope.storage.language;
-                $log.debug('Using language from localstorage:', langId);
+                logger.debug('Using language from localstorage:', langId);
             }
             else if ($window.navigator.language) {
                 langId = $window.navigator.language.toLowerCase();
-                $log.debug('Detected browser language', langId);
+                logger.debug('Detected browser language', langId);
             }
             else if ($window.navigator.browserLanguage) {
                 // IE
                 langId = $window.navigator.browserLanguage.toLowerCase();
-                $log.debug('Detected browser language (browserLanguage)', langId);
+                logger.debug('Detected browser language (browserLanguage)', langId);
             }
             else {
                 langId = 'en-us';
-                $log.debug('Using default language', langId);
+                logger.debug('Using default language', langId);
             }
             $translate.use(langId);
             return langId;
@@ -128,7 +128,7 @@
         }
 
         function addClusterUnit() {
-            $log.debug('Add Cluster Unit');
+            logger.debug('Add Cluster Unit');
             if (vm.newUnitIp.valid) {
                 clusterService.addUnit(vm.newUnit.ip.value,
                                        vm.newUnit.port,

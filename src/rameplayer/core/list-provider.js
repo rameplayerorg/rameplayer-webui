@@ -1,7 +1,7 @@
 
 /**
  * Rameplayer WebUI
- * Copyright (C) 2015
+ * Copyright (C) 2015-2016
  *
  * See LICENSE.
  */
@@ -17,14 +17,14 @@
         .module('rameplayer.core')
         .factory('listProvider', listProvider);
 
-    listProvider.$inject = ['$log', '$resource', '$rootScope', 'ItemTypes'];
+    listProvider.$inject = ['$resource', '$rootScope', 'ItemTypes'];
 
     /**
      * @namespace List
      * @desc Resource for List
      * @memberof Factories
      */
-    function listProvider($log, $resource, $rootScope, ItemTypes) {
+    function listProvider($resource, $rootScope, ItemTypes) {
 
         var service = {
             getResource: getResource

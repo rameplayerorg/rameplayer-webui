@@ -5,10 +5,10 @@
         .module('rameplayer.media')
         .controller('MediaController', MediaController);
 
-    MediaController.$inject = ['$rootScope', '$scope', '$log', 'dataService',
+    MediaController.$inject = ['$rootScope', '$scope', 'logger', 'dataService',
         'statusService', 'listService', 'ItemTypes', 'ListIds', 'clusterService'];
 
-    function MediaController($rootScope, $scope, $log, dataService,
+    function MediaController($rootScope, $scope, logger, dataService,
                              statusService, listService, ItemTypes, ListIds, clusterService) {
         var vm = this;
 
@@ -19,7 +19,7 @@
         vm.clusterService = clusterService;
 
         $rootScope.$watchCollection('lists', function(lists) {
-            $log.info('$rootScope.lists changed', lists);
+            logger.debug('$rootScope.lists changed', lists);
             if (lists['root']) {
                 lists['root'].$promise.then(function(rootList) {
                     updateRootChildren();
@@ -44,7 +44,7 @@
 
         function loadLists() {
             return getMedias().then(function() {
-                $log.info('Lists loaded', vm.lists);
+                logger.debug('Lists loaded', vm.lists);
             });
         }
 

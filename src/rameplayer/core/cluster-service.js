@@ -16,7 +16,7 @@
         .module('rameplayer.core')
         .factory('clusterService', clusterService);
 
-    clusterService.$inject = ['$log', '$interval', '$localStorage', 'dataService',
+    clusterService.$inject = ['logger', '$interval', '$localStorage', 'dataService',
         'dataServiceProvider', 'statusService', 'uuid'];
 
     /**
@@ -24,7 +24,7 @@
      * @desc Application wide service for cluster handling
      * @memberof Factories
      */
-    function clusterService($log, $interval, $localStorage, dataService,
+    function clusterService(logger, $interval, $localStorage, dataService,
                             dataServiceProvider, statusService, uuid) {
         // cluster units are saved to $localStorage
         var $storage = $localStorage.$default({
@@ -126,7 +126,7 @@
 
             resolveHostname(unit);
 
-            $log.debug('New unit added to cluster', unit);
+            logger.debug('New unit added to cluster', unit);
             return unit.id;
         }
 
@@ -137,14 +137,14 @@
             delete statuses[unit.id];
             delete unit.hostname;
             resolveHostname(unit);
-            $log.debug('Cluster unit updated', unit);
+            logger.debug('Cluster unit updated', unit);
         }
 
         function removeUnit(id) {
             for (var i = 0; i < $localStorage.clusterUnits.length; i++) {
                 if ($localStorage.clusterUnits[i].id === id) {
                     $localStorage.clusterUnits.splice(i, 1);
-                    $log.debug('Unit ' + id + ' removed from cluster');
+                    logger.debug('Unit ' + id + ' removed from cluster');
                     return true;
                 }
             }
@@ -212,7 +212,7 @@
                     angular.copy(newStatus, statuses[unitId]);
                 }
             }, function(errorResponse) {
-                $log.error('No status response from unit', unitId, errorResponse);
+                logger.error('No status response from unit', unitId, errorResponse);
             });
         }
 
@@ -253,7 +253,7 @@
 
         function runOnSynced(func, itemId) {
             var syncedItems = findSyncedItems(itemId);
-            $log.debug('clusterService: syncedItems', syncedItems);
+            logger.debug('clusterService: syncedItems', syncedItems);
             for (var i = 0; i < syncedItems.length; i++) {
                 var synced = syncedItems[i];
                 func(synced);

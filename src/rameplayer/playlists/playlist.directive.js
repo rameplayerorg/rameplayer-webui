@@ -5,9 +5,9 @@
         .module('rameplayer.playlists')
         .directive('ramePlaylist', ramePlaylist);
 
-    ramePlaylist.$inject = ['$rootScope', '$log', '$uibModal', 'dataService', 'ListIds'];
+    ramePlaylist.$inject = ['$rootScope', 'logger', '$uibModal', 'dataService', 'ListIds'];
 
-    function ramePlaylist($rootScope, $log, $uibModal, dataService, ListIds) {
+    function ramePlaylist($rootScope, logger, $uibModal, dataService, ListIds) {
         // Usage:
         //
         // Creates:
@@ -62,7 +62,7 @@
                 });
 
                 modalInstance.result.then(function(result) {
-                    $log.debug('Save playlist as', result.title);
+                    logger.debug('Save playlist as', result.title);
                     // server needs only some fields for playlist saving
                     var newPlaylist = {
                         title: result.title,
@@ -76,17 +76,17 @@
                             title: item.title
                         });
                     }
-                    $log.debug('New playlist', newPlaylist);
+                    logger.debug('New playlist', newPlaylist);
                     dataService.createPlaylist(newPlaylist);
                 });
             }
         }
     }
 
-    PlaylistController.$inject = ['$rootScope', '$log', '$uibModal', 'dataService',
+    PlaylistController.$inject = ['$rootScope', 'logger', '$uibModal', 'dataService',
         'clusterService', 'toastr', '$translate', '$timeout'];
 
-    function PlaylistController($rootScope, $log, $uibModal, dataService,
+    function PlaylistController($rootScope, logger, $uibModal, dataService,
                                 clusterService, toastr, $translate, $timeout) {
         var vm = this;
         vm.isDropdownOpen = false;
@@ -150,7 +150,7 @@
                 var playlist = $rootScope.lists[vm.listId];
                 playlist.title = result.title;
                 playlist.storage = result.storage;
-                $log.debug('Edit playlist', playlist);
+                logger.debug('Edit playlist', playlist);
                 playlist.$save({
                     id: vm.listId
                 });
@@ -263,7 +263,7 @@
          * @desc Saves sync mapping data for unit object
          */
         function saveSyncData() {
-            $log.debug('saveSyncData()');
+            logger.debug('saveSyncData()');
             var syncedList = {
                 targetListId: vm.sync.list.id,
                 items: {}
@@ -272,7 +272,7 @@
             for (var i = 0; i < sourceItems.length; i++) {
                 syncedList.items[sourceItems[i].id] = vm.sync.targetItems[i].id;
             }
-            $log.debug('syncedList', syncedList);
+            logger.debug('syncedList', syncedList);
             vm.sync.unit.syncedLists[vm.listId] = syncedList;
         }
 
