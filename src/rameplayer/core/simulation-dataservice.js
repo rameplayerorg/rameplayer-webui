@@ -94,7 +94,8 @@
             stepBackward: stepBackward,
             stepForward: stepForward,
             getRameVersioning: getRameVersioning,
-            getSystemSettings: getSystemSettings
+            getSystemSettings: getSystemSettings,
+            writeLog: writeLog
         };
 
         var delay = 50;
@@ -452,6 +453,9 @@
             }
             // not found
             return null;
+        }
+
+        function writeLog(level, message) {
         }
     }
 })();
