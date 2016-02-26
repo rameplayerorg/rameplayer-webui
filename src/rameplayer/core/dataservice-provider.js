@@ -1,5 +1,5 @@
 /*jshint maxcomplexity:9 */
-/*jshint maxstatements:55 */
+/*jshint maxstatements:57 */
 /*jshint maxparams:11 */
 
 /**
