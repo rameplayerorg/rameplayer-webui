@@ -1,5 +1,5 @@
-<div class="container" ng-controller="AdminController as vm">
-    <div class="panel panel-default">
+<div class="container">
+    <div ng-controller="AdminController as vm" class="panel panel-default">
         <div class="panel-heading">
             <ul class="list-inline">
                 <li>
@@ -293,6 +293,43 @@
                     ng-class="{ 'glyphicon-floppy-disk': vm.savingStatus !== 'saved', 'glyphicon-floppy-saved': vm.savingStatus === 'saved' }"
                     aria-hidden="true"></span>
                 <span translate>SAVE_SETTINGS</span>
+            </button>
+        </div>
+    </div>
+    
+    <div ng-controller="FirmwareController as fwvm" class="panel panel-default">
+        <div class="panel-body">
+            <form name="upgradeForm">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="upgradesAvailable" class="col-sm-3 control-label" translate>Available firmware upgrades</label>
+                    <div class="col-sm-4">
+                        <select id="upgradesAvailable" ng-model="fwvm.upgradeSelection" class="form-control"
+                        ng-options="ua as ua.firmwareVersion for ua in fwvm.upgradesAvailable.firmwareVersions track by ua.firmwareVersion">                            
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <span translate>Recommended upgrade</span>:
+                        <br> 
+                        {{ !fwvm.upgradeRecommendation ? ('No recommendation' | translate ) : fwvm.upgradeRecommendation.firmwareVersion }}
+                        <br>
+                        <span translate>Current firmware</span>:
+                        <br>
+                        {{ fwvm.rameVersionSoftware }}
+                        <br>
+                        <span translate>Device hardware</span>:
+                        <br>
+                        {{ fwvm.rameVersionHardware }}
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-default"
+                ng-click="fwvm.upgradeSoftware()">
+                <span class="glyphicon glyphicon-import" aria-hidden="true"></span>
+                <span translate>Upgrade firmware</span>
             </button>
         </div>
     </div>

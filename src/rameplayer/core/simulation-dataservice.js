@@ -74,6 +74,23 @@
             // empty promise
             '$promise': $q.when()
         };
+        var UpgradesAvailable =
+            {
+                'firmwareVersions': [
+                 {
+                'firmwareVersion': 'Release 1.0.0',
+                'downloadURL': 'rsync://example.org/',
+                'firmwareDate': '2016-02-09 13:57',
+                'production': true,
+                'recommend': true},
+                {'firmwareVersion': 'Release 1.0.1',
+                 'downloadURL': 'rsync://example.org/',
+                 'firmwareDate': '2016-02-11 13:57',
+                 'production': false,
+                 'recommend': false}
+                ],
+                '$promise': $q.when()
+            };
 
         var service = {
             getSettings: getSettings,
@@ -94,6 +111,7 @@
             stepBackward: stepBackward,
             stepForward: stepForward,
             getRameVersioning: getRameVersioning,
+            getUpgradesAvailable: getUpgradesAvailable,
             getSystemSettings: getSystemSettings,
             writeLog: writeLog
         };
@@ -402,6 +420,10 @@
 
         function getSystemSettings() {
             return SystemSettings;
+        }
+        
+        function getUpgradesAvailable() {
+            return UpgradesAvailable;
         }
 
         // Returns item and parent list

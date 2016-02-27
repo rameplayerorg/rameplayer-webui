@@ -55,6 +55,7 @@
             var baseUrl = getBaseUrl();
             var Settings = $resource(baseUrl + 'settings/user/');
             var SystemSettings = $resource(baseUrl + 'settings/system/');
+            var UpgradesAvailable = $resource(baseUrl + 'upgrade/');
             var List = listProvider.getResource(baseUrl + 'lists/:id');
             var listItemUrl = baseUrl + 'lists/:listId/items/:itemId';
             var ListItem = $resource(listItemUrl, {
@@ -88,6 +89,7 @@
             ds.stepForward = stepForward;
             ds.getRameVersioning = getRameVersioning;
             ds.getSystemSettings = getSystemSettings;
+            ds.getUpgradesAvailable = getUpgradesAvailable; 
             ds.writeLog = writeLog;
 
             checkVersion();
@@ -189,6 +191,10 @@
             function getSystemSettings() {
                 return SystemSettings.get();
             }
+            
+            function getUpgradesAvailable() {
+                return UpgradesAvailable.get();
+            }            
 
             function getStatus(payload) {
                 return $http.post(baseUrl + 'status', payload);
