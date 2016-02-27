@@ -76,16 +76,16 @@
         };
         var UpgradesAvailable =
             {
-                'firmwareVersions': [
+                'firmwares': [
                  {
-                'firmwareVersion': 'Release 1.0.0',
+                'version': 'Release 1.0.0',
                 'downloadURL': 'rsync://example.org/',
-                'firmwareDate': '2016-02-09 13:57',
+                'date': '2016-02-09 13:57',
                 'production': true,
                 'recommend': true},
-                {'firmwareVersion': 'Release 1.0.1',
+                {'version': 'Release 1.0.1',
                  'downloadURL': 'rsync://example.org/',
-                 'firmwareDate': '2016-02-11 13:57',
+                 'date': '2016-02-11 13:57',
                  'production': false,
                  'recommend': false}
                 ],

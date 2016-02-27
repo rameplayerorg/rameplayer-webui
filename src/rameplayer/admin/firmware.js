@@ -39,18 +39,17 @@
          *              fetched from server.
          */
         function init() {
-            logger.warn(vm.upgradesAvailable.firmwareVersions);
-            var lnth = vm.upgradesAvailable.firmwareVersions.length;
+            //logger.warn(vm.upgradesAvailable.firmwares);
+            var lnth = vm.upgradesAvailable.firmwares.length;
             for (var i = 0; i < lnth; i++) {
-                if (!vm.upgradesAvailable.firmwareVersions[i].recommend) {} // jshint ignore:line
+                if (!vm.upgradesAvailable.firmwares[i].recommend) {} // jshint ignore:line
                 else {
-                    vm.upgradeRecommendation = vm.upgradesAvailable.firmwareVersions[i];
-                    vm.upgradeSelection = vm.upgradesAvailable.firmwareVersions[i];
-                    logger
-                            .warn(vm.upgradesAvailable.firmwareVersions[i].recommend);
+                    vm.upgradeRecommendation = vm.upgradesAvailable.firmwares[i];
+                    vm.upgradeSelection = vm.upgradesAvailable.firmwares[i];
+                    //logger.warn(vm.upgradesAvailable.firmwares[i].recommend);
                 }
                 if ((i === lnth - 1) && !vm.upgradeRecommendation) {
-                    vm.upgradeSelection = vm.upgradesAvailable.firmwareVersions[i];
+                    vm.upgradeSelection = vm.upgradesAvailable.firmwares[i];
                 }
             }
         }
