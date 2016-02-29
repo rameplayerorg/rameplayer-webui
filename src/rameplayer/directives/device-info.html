@@ -5,6 +5,13 @@
         <br>
         {{ ::infovm.ipAddress }}
     </span>
-    <img alt="Rame Logo" src="images/logo_fading_black_h40.gif"
-        style="float: right; padding: 2px;">
+    <span style="float: right; padding: 2px;" uib-dropdown>
+        <img alt="Rame Logo" src="images/logo_fading_black_h40.gif" uib-dropdown-toggle>
+        <ul uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="simple-dropdown">
+            <li>
+                <a href ng-click="infovm.openReportModal()">
+                    <span translate>Report a Problem</span></a>
+            </li>
+        </ul>
+    </span>
 </span>

@@ -1,4 +1,4 @@
-/* jshint maxparams:11 */
+/* jshint maxparams:12 */
 (function() {
     'use strict';
 
@@ -8,11 +8,12 @@
 
     SettingsController.$inject = [
         'logger', '$http', 'dataService', 'clusterService', '$translate', 'uiVersion',
-        'toastr', '$scope', '$localStorage', '$window', '$document'
+        'toastr', '$scope', '$localStorage', '$window', '$document', '$uibModal'
     ];
 
     function SettingsController(logger, $http, dataService, clusterService, $translate,
-                                uiVersion, toastr, $scope, $localStorage, $window, $document) {
+                                uiVersion, toastr, $scope, $localStorage, $window, $document,
+                                $uibModal) {
 
         var $injector = angular.injector();
 
@@ -54,6 +55,7 @@
         };
         vm.addClusterUnit = addClusterUnit;
         vm.clusterService = clusterService;
+        vm.openReportModal = openReportModal;
 
         function initIpAddressInfo(systemSettings) {
             var adr = systemSettings.ipAddress;
@@ -142,6 +144,18 @@
                     closeButton: true
                 });
             }
+        }
+
+        function openReportModal() {
+            logger.debug('open report modal');
+
+            // open modal dialog
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'rameplayer/settings/report-problem-modal.html',
+                controller: 'ReportProblemModalController',
+                controllerAs: 'vm'
+            });
         }
     }
 })();

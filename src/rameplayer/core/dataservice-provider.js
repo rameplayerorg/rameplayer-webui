@@ -1,6 +1,6 @@
 /*jshint maxcomplexity:9 */
 /*jshint maxstatements:55 */
-/*jshint maxparams:11 */
+/*jshint maxparams:12 */
 
 /**
  * Rameplayer WebUI
@@ -22,7 +22,7 @@
 
     dataServiceProvider.$inject = ['$log', '$http', '$resource', '$location',
         'simulationDataService', 'listProvider', 'ListIds', 'uiVersion', 'toastr',
-        '$translate', 'minServerVersion'];
+        '$translate', 'minServerVersion', 'reportServerEntry'];
 
     /**
      * @namespace DataServiceProvider
@@ -30,7 +30,8 @@
      * @memberof Factories
      */
     function dataServiceProvider($log, $http, $resource, $location, simulationDataService, listProvider,
-                         ListIds, uiVersion, toastr, $translate, minServerVersion) {
+                         ListIds, uiVersion, toastr, $translate, minServerVersion,
+                         reportServerEntry) {
         var service = {
             create: create
         };
@@ -91,6 +92,9 @@
             ds.getSystemSettings = getSystemSettings;
             ds.getUpgradesAvailable = getUpgradesAvailable; 
             ds.writeLog = writeLog;
+            ds.getLog = getLog;
+            ds.getReportConfig = getReportConfig;
+            ds.sendReport = sendReport;
 
             checkVersion();
 
@@ -314,6 +318,18 @@
                     level: level,
                     message: message
                 });
+            }
+
+            function getLog() {
+                return $http.get(baseUrl + 'log');
+            }
+
+            function getReportConfig() {
+                return $http.get(reportServerEntry);
+            }
+
+            function sendReport(url, data) {
+                return $http.post(url, data);
             }
         }
     }

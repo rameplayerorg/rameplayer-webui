@@ -4,6 +4,7 @@
     angular.module('rameplayer.core', [
         // angular translate
         'pascalprecht.translate',
+        'ngFileSaver',
         'ngSanitize',
         'ngResource',
         'ng-sortable',

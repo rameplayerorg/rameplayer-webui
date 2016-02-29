@@ -15,5 +15,6 @@
             ROOT: 'root',
             DEFAULT_PLAYLIST: 'default'
         })
+        .constant('reportServerEntry', 'http://dev.rameplayer.org/reports/config.php')
         .constant('serverConfig', rameServerConfig); // jshint ignore:line
 })();
