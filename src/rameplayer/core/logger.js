@@ -45,26 +45,31 @@
 
         function log() {
             send('', arguments);
+            /* jshint validthis:true */
             return $log.log.apply(this, arguments);
         }
 
         function info() {
             send(level.INFO, arguments);
+            /* jshint validthis:true */
             return $log.info.apply(this, arguments);
         }
 
         function warn() {
             send(level.WARNING, arguments);
+            /* jshint validthis:true */
             $log.warn.apply(this, arguments);
         }
 
         function error() {
             send(level.ERROR, arguments);
+            /* jshint validthis:true */
             $log.error.apply(this, arguments);
         }
 
         function debug() {
             send(level.DEBUG, arguments);
+            /* jshint validthis:true */
             $log.debug.apply(this, arguments);
         }
 
