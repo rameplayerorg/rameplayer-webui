@@ -1,4 +1,4 @@
-/* jshint maxparams:12 */
+/* jshint maxparams:14 */
 (function() {
     'use strict';
 
@@ -56,6 +56,8 @@
         vm.addClusterUnit = addClusterUnit;
         vm.clusterService = clusterService;
         vm.openReportModal = openReportModal;
+        vm.openClusterImportModal = openClusterImportModal;
+        vm.exportClusterConfig = exportClusterConfig;
 
         function initIpAddressInfo(systemSettings) {
             var adr = systemSettings.ipAddress;
@@ -156,6 +158,20 @@
                 controller: 'ReportProblemModalController',
                 controllerAs: 'vm'
             });
+        }
+
+        function openClusterImportModal() {
+            // open modal dialog
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'rameplayer/settings/import-cluster-modal.html',
+                controller: 'ImportClusterModalController',
+                controllerAs: 'vm'
+            });
+        }
+
+        function exportClusterConfig() {
+            clusterService.exportConfig();
         }
     }
 })();

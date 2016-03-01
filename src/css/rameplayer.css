@@ -79,6 +79,25 @@ body {
   margin-right: 5px;
 }
 
+.hidden-file-input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  text-align: right;
+  opacity: 0;
+  cursor: inherit;
+  display: block;
+}
+.cluster-import-button {
+  cursor: pointer;
+}
+
+.cluster-import-button+input[type="file"] {
+  display: none;
+}
+
 /* Disable underlining when hovering panel titles */
 .panel-title a:hover {
   text-decoration: none;

@@ -2,6 +2,7 @@
     'use strict';
 
     angular.module('rameplayer.core', [
+        'filereader',
         // angular translate
         'pascalprecht.translate',
         'ngFileSaver',

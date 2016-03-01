@@ -17,7 +17,7 @@
         .factory('clusterService', clusterService);
 
     clusterService.$inject = ['logger', '$interval', '$localStorage', 'dataService',
-        'dataServiceProvider', 'statusService', 'uuid'];
+        'dataServiceProvider', 'statusService', 'uuid', 'FileSaver', 'Blob'];
 
     /**
      * @namespace ClusterService
@@ -25,7 +25,7 @@
      * @memberof Factories
      */
     function clusterService(logger, $interval, $localStorage, dataService,
-                            dataServiceProvider, statusService, uuid) {
+                            dataServiceProvider, statusService, uuid, FileSaver, Blob) {
         // cluster units are saved to $localStorage
         var $storage = $localStorage.$default({
             clusterUnits: []
@@ -82,7 +82,9 @@
             play: play,
             pause: pause,
             stop: stop,
-            seek: seek
+            seek: seek,
+            importConfig: importConfig,
+            exportConfig: exportConfig
         };
 
         var statusInterval = 1000;
@@ -288,6 +290,26 @@
                 }
             }
             return targets;
+        }
+
+        function importConfig(newUnits) {
+            // maintain reference to array
+            $localStorage.clusterUnits.length = 0;
+            for (var i = 0; i < newUnits.length; i++) {
+                $localStorage.clusterUnits.push(newUnits[i]);
+            }
+            var dataServices = {};
+            createDataServices();
+            logger.info('cluster config imported');
+        }
+
+        function exportConfig() {
+            logger.info('export cluster config');
+            var data = angular.toJson($localStorage.clusterUnits);
+            var blob = new Blob([data], {
+                type: 'application/json;charset=utf-8'
+            });
+            FileSaver.saveAs(blob, 'rameplayer-cluster.json');
         }
     }
 })();
