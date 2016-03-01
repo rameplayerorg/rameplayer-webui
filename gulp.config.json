@@ -8,7 +8,8 @@
         "./bower_components/bootstrap/dist/js/bootstrap.min.js",
         "./bower_components/angular-animate/angular-animate.min.js",
         "./bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
-        "./bower_components/angular-fileupload/angular-filereader.min.js",
+        "./bower_components/angular-filereader/angular-filereader.min.js",
+        "./bower_components/angular-file-saver/dist/angular-file-saver.bundle.min.js",
         "./bower_components/angular-resource/angular-resource.min.js",
         "./bower_components/angular-route/angular-route.min.js",
         "./bower_components/angular-sanitize/angular-sanitize.min.js",
@@ -16,7 +17,6 @@
         "./bower_components/angular-translate/angular-translate.min.js",
         "./bower_components/angular-uuid-generator/angular-uuid-generator.js",
         "./bower_components/bootstrap-toggle/js/bootstrap-toggle.min.js",
-        "./bower_components/file-saver.js/FileSaver.js",
         "./bower_components/Sortable/Sortable.min.js",
         "./bower_components/Sortable/ng-sortable.js",
         "./bower_components/ngstorage/ngStorage.min.js"
