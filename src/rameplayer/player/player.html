@@ -23,10 +23,10 @@
                                 &ndash;
                                 {{ vm.cursorItem.name }}
                             </div>
-                            <div ng-show="vm.statusError">
+                            <div ng-show="vm.statusService.error.message">
                                 <img src="images/spinner1_16_bkg248.gif" alt="">
                                 <span class="label label-danger" translate>
-                                    Connection error {{ vm.statusError }}. Connecting...
+                                    Connection error {{ vm.statusService.error.message }}. Connecting...
                                 </span>
                             </div>
                         </div>

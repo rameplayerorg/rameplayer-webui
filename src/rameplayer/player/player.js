@@ -16,10 +16,9 @@
         });
 
         vm.timeSlider = 0;
+        vm.statusService = statusService;
         vm.playerStatus = statusService.status;
         vm.cursorItem = null;
-        vm.statusErrorPromise = null;
-        vm.statusError = null;
         vm.togglePlay = togglePlay;
         vm.stop = stop;
         vm.stepForward = stepForward;
@@ -90,16 +89,6 @@
         function statusChanged(playerStatus) {
             vm.playerStatus = playerStatus;
             vm.timeSlider = vm.playerStatus.position ? vm.playerStatus.position : 0;
-        }
-
-        function pollerError(errorResponse) {
-            vm.statusError = errorResponse.status;
-            if (vm.statusErrorTimeout) {
-                $timeout.cancel(vm.statusErrorTimeout);
-            }
-            vm.statusErrorTimeout = $timeout(function() {
-                vm.statusError = null;
-            }, 3000);
         }
 
         function findCursorItem(cursor) {

@@ -30,8 +30,10 @@
         var status = {
             position: 0
         };
-        var pollerErrorCallbacks = [];
         var itemFinders = [];
+        var error = {
+            message: null
+        };
         var service = {
             states: {
                 stopped:   'stopped',
@@ -40,8 +42,8 @@
                 buffering: 'buffering',
                 error:     'error'
             },
-            status:            status,
-            onPollerError:     onPollerError
+            status: status,
+            error: error
         };
 
         var displayedNotifications = {
@@ -53,21 +55,15 @@
 
         return service;
 
-        function onPollerError(func) {
-            pollerErrorCallbacks.push(func);
-        }
-
         function startStatusPoller() {
             return $interval(pollStatus, statusInterval);
         }
 
         function pollStatus() {
-            dataService.getStatus(
-                {
-                    lists: Object.keys($rootScope.lists)
-                }
-                )
-                .then(function(response) {
+            dataService.getStatus({
+                lists: Object.keys($rootScope.lists)
+            })
+            .then(function(response) {
                 var newStatus = response.data;
                 // notify only when status changes
                 if (!angular.equals(newStatus, status)) {
@@ -75,10 +71,10 @@
                     syncLists();
                     checkServerNotifications();
                 }
+                error.message = null;
             }, function(errorResponse) {
-                angular.forEach(pollerErrorCallbacks, function(callback) {
-                    callback(errorResponse);
-                });
+                $log.error('Status query failed', errorResponse);
+                error.message = errorResponse.status + ' ' + errorResponse.statusText;
             });
         }
 
