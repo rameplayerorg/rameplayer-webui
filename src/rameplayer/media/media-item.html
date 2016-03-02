@@ -1,4 +1,4 @@
-<div class="row media-list-item" ng-class="{ selected: vm.media.id === vm.playerStatus.cursor.id && vm.playerStatus.state !== 'playing' && vm.playerStatus.state !== 'buffering', locked: vm.media.id === vm.playerStatus.cursor.id && (vm.playerStatus.state === 'playing' || vm.playerStatus.state === 'buffering'), 'sync-highlighted': vm.syncHighlight }" ng-click="vm.itemClick($event)">
+<div class="row media-list-item" ng-class="{ selected: vm.media.id === vm.playerStatus.cursor.id && vm.playerStatus.state !== 'playing' && vm.playerStatus.state !== 'buffering', paused: vm.media.id === vm.playerStatus.cursor.id && vm.playerStatus.state === 'paused', locked: vm.media.id === vm.playerStatus.cursor.id && (vm.playerStatus.state === 'playing' || vm.playerStatus.state === 'buffering'), 'sync-highlighted': vm.syncHighlight }" ng-click="vm.itemClick($event)">
     <div class="col-sm-4 media-list-item-field ellipsis">
         <span class="glyphicon glyphicon-folder-close" ng-if="vm.media.type === 'directory'"></span>
         {{ vm.media.name }}

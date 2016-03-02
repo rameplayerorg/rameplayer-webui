@@ -33,6 +33,10 @@
     transition: width 1s linear;
 }
 
+.time-slider-progress.paused {
+    background-color: #F99E1C;
+}
+
 .time-slider-handle {
     position: absolute;
     top: -5px;
@@ -49,6 +53,10 @@
     -webkit-transition: left 1s linear;
     -o-transition: left 1s linear;
     transition: left 1s linear;
+}
+
+.time-slider-handle.paused {
+    background-color: #F99E1C;
 }
 
 .time-slider-handle-target {
