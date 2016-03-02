@@ -60,11 +60,11 @@
             // TODO:
             logger.warn(vm.upgradeRecommendation);
             logger.info(vm.upgradesAvailable);
-            toastr.error('TODO');
+            toastr.warning('TODO');
         }
         
         function factoryReset(){
-            toastr.error('TODO');
+            toastr.warning('TODO');
         }
     }
 })();
