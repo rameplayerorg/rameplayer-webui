@@ -33,9 +33,9 @@
         }
     }
 
-    TimeSliderController.$inject = ['$scope', '$log', '$interval', '$filter'];
+    TimeSliderController.$inject = ['$scope', '$log', '$interval', '$filter', 'statusService'];
 
-    function TimeSliderController($scope, $log, $interval, $filter) {
+    function TimeSliderController($scope, $log, $interval, $filter, statusService) {
         var vm = this;
         var seeking = false;
         var seekIntervalTime = 500;
@@ -50,6 +50,7 @@
         vm.stopSeek = stopSeek;
         vm.showMousePos = showMousePos;
         vm.hideMousePos = hideMousePos;
+        vm.playerStatus = statusService.status;
 
         $scope.$watchGroup(['vm.position', 'vm.duration'], function() {
             updatePercentage();

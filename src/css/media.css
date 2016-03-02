@@ -64,6 +64,10 @@
   background-color: rgb(82, 87, 92);
 }
 
+.media-list .paused {
+  background-color: rgb(158, 87, 8);
+}
+
 .media-list .locked {
   background-color: #751414;
 }

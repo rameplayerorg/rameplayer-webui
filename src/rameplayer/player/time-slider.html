@@ -1,7 +1,7 @@
 <div class="time-slider" ng-mousedown="vm.startSeek($event)" ng-mousemove="vm.showMousePos($event)" ng-mouseleave="vm.hideMousePos()">
-    <div class="time-slider-progress" ng-style="{ width: vm.percentage + '%'}">
+    <div class="time-slider-progress" ng-class="{ paused: vm.playerStatus.state === 'paused' }" ng-style="{ width: vm.percentage + '%'}">
     </div>
-    <div class="time-slider-handle" ng-style="{ left: vm.percentage + '%'}">
+    <div class="time-slider-handle" ng-class="{ paused: vm.playerStatus.state === 'paused' }" ng-style="{ left: vm.percentage + '%'}">
     </div>
     <div class="time-slider-handle-target">
     </div>
