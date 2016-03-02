@@ -32,7 +32,32 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title" translate>Cluster</h3>
+
+            <h4 class="panel-title">
+                <span translate>Cluster</span>
+                <span class="pull-right">
+                    <!-- hamburger menu -->
+                    <span uib-dropdown is-open="vm.isDropdownOpen">
+                        <a href uib-dropdown-toggle>
+                            <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        </a>
+                        <ul class="uib-dropdown-menu dropdown-menu-right">
+                            <li>
+                                <a href ng-click="settingvm.openClusterImportModal()">
+                                    <i class="glyphicon glyphicon-import"></i>
+                                    <span translate>Import Configuration&hellip;</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href ng-click="settingvm.exportClusterConfig()">
+                                    <i class="glyphicon glyphicon-export"></i>
+                                    <span translate>Export Configuration</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </span>
+                </span> <!-- .pull-right -->
+            </h4>
         </div>
         <div class="panel-body">
             <h4 ng-if="settingvm.clusterService.units.length" translate>Units</h4>

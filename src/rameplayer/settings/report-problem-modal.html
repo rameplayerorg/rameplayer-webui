@@ -1,0 +1,44 @@
+<form>
+    <div class="modal-header">
+        <h3 translate>Report a Problem</h3>
+    </div>
+
+    <div class="modal-body">
+        <div ng-if="vm.checkingConnection" translate>
+            Checking internet connection&hellip;
+        </div>
+        <div ng-if="vm.isOnline">
+            <div class="form-group">
+                <textarea ng-model="vm.description" class="form-control" placeholder="Describe the problem"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="reporter">Reporter</label>
+                <input type="email" id="reporter" class="form-control" placeholder="Email" ng-model="vm.reporter">
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="vm.includeLogs"> <span translate>Include logs</span>
+                </label>
+            </div>
+        </div>
+        <div ng-if="vm.isOffline">
+            <p>
+            Could not connect to the report server.
+            </p>
+            <p>
+            Please
+            <a href ng-click="vm.downloadLogs()">download log</a> and send it
+            to support@rameplayer.org and describe the problem in the email message.
+            </p>
+        </div>
+    </div>
+
+    <div class="modal-footer" ng-if="vm.isOnline">
+        <button class="btn btn-primary" type="submit" ng-click="vm.send()" translate>Send</button>
+        <button class="btn btn-default" type="button" ng-click="vm.cancel()" translate>Cancel</button>
+    </div>
+
+    <div class="modal-footer" ng-if="!vm.isOnline">
+        <button class="btn btn-default" type="button" ng-click="vm.cancel()" translate>Close</button>
+    </div>
+</form>

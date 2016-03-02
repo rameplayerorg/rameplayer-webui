@@ -1,0 +1,21 @@
+<form>
+    <div class="modal-header">
+        <h3 translate>Import Cluster Configuration</h3>
+    </div>
+
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="cluster-file" translate>Cluster Configuration File</label>
+            <input id="cluster-file" type="file" rame-read-json-file="vm.onFileRead(data)" on-read-json="vm.onFileRead(data)">
+            <p class="help-block" translate>
+                Select a file containing cluster configuration data and click Import.
+                Note: import will override any existing configuration.
+            </p>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit" ng-click="vm.importFile()" ng-disabled="!vm.readData" translate>Import</button>
+        <button class="btn btn-default" type="button" ng-click="vm.cancel()" translate>Cancel</button>
+    </div>
+</form>

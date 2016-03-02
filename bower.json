@@ -13,6 +13,8 @@
         "angular": "~1.4.9",
         "angular-animate": "~1.4.9",
         "angular-bootstrap": "~0.14.3",
+        "angular-file-saver": "~1.1.0",
+        "angular-filereader": "~1.0.4",
         "angular-resource": "~1.4.9",
         "angular-route": "~1.4.9",
         "angular-sanitize": "~1.4.9",
