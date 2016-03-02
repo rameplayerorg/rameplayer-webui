@@ -43,7 +43,7 @@
                     <div class="col-sm-9">
                         <input type="text" name="deviceName" id="deviceName"
                             class="form-control" ng-model="vm.deviceName"
-                            ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?(\.[a-z\d]([a-z\d\-]{0,61}[a-z\d])?)*$/i"
+                            ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?$/i"
                             ng-minlength="1" ng-maxlength="63" required/>
                         <span class="text-warning glyphicon glyphicon-alert" 
                             ng-show="!basicsForm.deviceName.$valid || basicsForm.deviceName.$error.required">
@@ -297,50 +297,5 @@
         </div>
     </div>
     
-    <div ng-controller="FirmwareController as fwvm" class="panel panel-default">
-        <div class="panel-body">
-            <form name="upgradeForm">
-            <div class="form-horizontal">
-                <div class="form-group">
-                    <label for="upgradesAvailable" class="col-sm-3 control-label" translate>Available firmwares</label>
-                    <div class="col-sm-4">
-                        <select id="upgradesAvailable" ng-model="fwvm.upgradeSelection" class="form-control"
-                        ng-options="ua as ua.version for ua in fwvm.upgradesAvailable.firmwares track by ua.version">                            
-                        </select>
-                    </div>
-                    
-                </div>
-            </div>
-            </form>
-            <div class="row">
-                <div class="col-sm-4">
-                    <span translate>Recommended upgrade</span>
-                    :
-                    <br>
-                    {{ !fwvm.upgradeRecommendation 
-                        ? ('No recommendation' | translate ) 
-                        : fwvm.upgradeRecommendation.version }}
-                    <br>
-                </div>
-                <div class="col-sm-4">
-                    <span translate>Current firmware</span>:
-                    <br>
-                    {{ fwvm.rameVersionSoftware }}
-                    <br>
-                </div>
-                <div class="col-sm-4">
-                    <span translate>Device hardware</span>:
-                    <br>
-                    {{ fwvm.rameVersionHardware }}
-                </div>
-            </div>
-        </div>
-        <div class="panel-footer">
-            <button type="button" class="btn btn-default"
-                ng-click="fwvm.upgradeSoftware()">
-                <span class="glyphicon glyphicon-import" aria-hidden="true"></span>
-                <span translate>Upgrade</span>
-            </button>
-        </div>
-    </div>
+    <div ng-include="'rameplayer/admin/firmware.html'" ng-cloak></div>
 </div>

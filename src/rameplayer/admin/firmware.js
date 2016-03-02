@@ -32,6 +32,8 @@
         }, function(errorResponse) {
             logger.error('Software version fetching failed', errorResponse);
         });
+        
+        vm.factoryReset = factoryReset;
 
         /**
          * @name init
@@ -58,6 +60,10 @@
             // TODO:
             logger.warn(vm.upgradeRecommendation);
             logger.info(vm.upgradesAvailable);
+            toastr.error('TODO');
+        }
+        
+        function factoryReset(){
             toastr.error('TODO');
         }
     }
