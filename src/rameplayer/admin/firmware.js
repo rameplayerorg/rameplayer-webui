@@ -63,7 +63,7 @@
             toastr.warning('TODO');
         }
         
-        function factoryReset(){
+        function factoryReset() {
             toastr.warning('TODO');
         }
     }
