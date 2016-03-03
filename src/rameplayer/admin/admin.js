@@ -79,6 +79,7 @@
                 valid: true
             };
 
+            vm.ntpServerAddress = vm.systemSettings.ntpServerAddress;
             vm.ntpServerIp = {
                 value : vm.systemSettings['ntpServerAddress'],
                 valid : true
@@ -156,13 +157,14 @@
                 }
                 vm.manualDateTime = validateManualDateTime(vm.dateUserInput, vm.timeUserInput);
             }
-            else if (vm.useNtpIp && !vm.ntpServerIp.valid) {
-                invalidFields.push('NTP Server IP');
-            } else if ($('#ntpHostname').hasClass('ng-not-empty') &&
-                       $('#ntpHostname').hasClass('ng-invalid')) 
-            {
-                invalidFields.push('NTP Server Hostname');                
+            else if (!vm.ntpForm.ntpHostname.$valid){
+                invalidFields.push('NTP Server Hostname');
+                
             }
+//            logger.info(basicsForm.deviceName.$valid);
+//            logger.info($('#ntpHostname').$valid);
+//            logger.info(vm.ntpForm.ntpHostname.$valid);
+//            logger.info(vm.ntpServerAddress);
             
             if (invalidFields.length) {
                 valid = false;
@@ -215,6 +217,9 @@
             }
             else if (vm.useNtpIp) {
                 vm.systemSettings.ntpServerAddress = vm.ntpServerIp;
+            }
+            else {
+                vm.systemSettings.ntpServerAddress = vm.ntpServerAddress;
             }
         }
 

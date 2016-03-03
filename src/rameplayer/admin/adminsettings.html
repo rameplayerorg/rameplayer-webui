@@ -200,6 +200,7 @@
                 </div> <!-- .list-group -->
             </div> <!-- .form-group -->
             <div class="form-group">
+            <form name="vm.ntpForm">
                 <div>
                     <label for="ntpConfigurations" translate>Time Configurations</label> 
                     <div class="pull-right">
@@ -210,14 +211,17 @@
                 <div class="list-group" id="ntpConfigurations">
                     <div class="list-group-item">
                         <div class="form-group row">
-                            <label for="ntpHostname" class="col-sm-3 control-label" translate>NTP server hostname</label>
+                            <label for="ntpHostname" class="col-sm-3 control-label" translate>NTP server</label>
                             <div class="col-sm-9">
                                 <input type="text" name="ntpHostname" id="ntpHostname" class="form-control" 
-                                    ng-model="vm.systemSettings.ntpServerAddress" ng-disabled="vm.useManualTimeConfigs || vm.useNtpIp"
+                                    ng-model="vm.ntpServerAddress" ng-disabled="vm.useManualTimeConfigs || vm.useNtpIp"
                                     ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?(\.[a-z\d]([a-z\d\-]{0,61}[a-z\d])?)*$/i"
                                     ng-minlength="1" ng-maxlength="63" />
+                                    <span class="text-warning glyphicon glyphicon-alert" ng-show="!vm.ntpForm.ntpHostname.$valid">
+                        </span>
                             </div>
                         </div>
+                        <!-- 
                         <div class="form-group">
                             <div class="row checkbox center-block">
                                 <label class="col-sm-7 col-sm-offset-1">
@@ -247,6 +251,7 @@
                                 </div>
                             </div>
                         </div>
+                         -->
                         <div class="row checkbox form-group center-block">
                             <label class="col-sm-3 control-label">
                                 <input type="checkbox"
@@ -283,6 +288,7 @@
                         </div>
                     </div>
                 </div>
+            </form>
             </div>
         </div> <!-- .panel-body -->
 
