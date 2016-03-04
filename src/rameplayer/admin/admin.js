@@ -23,6 +23,7 @@
         ];
         vm.prefillDhcpOcts = prefillDhcpOcts;
         vm.saveSettings = saveSettings;
+        vm.factoryReset = factoryReset;
         vm.savingStatus = 'loaded';
         vm.useNtpIp = false;
         vm.useManualTimeConfigs = false;
@@ -220,6 +221,10 @@
             else {
                 vm.systemSettings.ntpServerAddress = vm.ntpServerAddress;
             }
+        }
+        
+        function factoryReset() {
+            toastr.warning('TODO Factory reset');
         }
 
         function validateIpOrdering(smallerIp, biggerIp) {

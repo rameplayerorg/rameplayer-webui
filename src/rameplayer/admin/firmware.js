@@ -21,6 +21,7 @@
 
         vm.upgradeLatestStable = null;
         vm.upgradeSelection = null;
+        vm.upgradeFirmware = upgradeFirmware;
 
         var rameVersioning = '';
         dataService.getRameVersioning().then(function(response) {
@@ -32,9 +33,6 @@
             logger.error('Software version fetching failed', errorResponse);
         });
         
-        vm.upgradeFirmware = upgradeFirmware;
-        vm.factoryReset = factoryReset;
-
         /**
          * @name init
          * @description Initializes variables. Called after system settings are
@@ -64,10 +62,6 @@
             //dataService.startFirmwareUpgrade(vm.upgradeSelection.uri);
             //toastr.success('Start upgrading firmware');
             toastr.warning('TODO Start upgrading firmware');
-        }
-        
-        function factoryReset() {
-            toastr.warning('TODO Factory reset');
         }
     }
 })();
