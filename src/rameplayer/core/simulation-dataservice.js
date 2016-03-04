@@ -74,20 +74,20 @@
             // empty promise
             '$promise': $q.when()
         };
-        var UpgradesAvailable =
+        var FirmwareUpgradesAvailable =
             {
                 'firmwares': [
                  {
-                'version': 'Release 1.0.0',
-                'downloadURL': 'rsync://example.org/',
+                'title': 'Release 1.0.0',
+                'uri': 'rsync://example.org/',
                 'date': '2016-02-09 13:57',
-                'production': true,
-                'recommend': true},
-                {'version': 'Release 1.0.1',
-                 'downloadURL': 'rsync://example.org/',
+                'stable': false,
+                'latest': false},
+                {'title': 'Release 1.0.1',
+                 'uri': 'rsync://example.org/',
                  'date': '2016-02-11 13:57',
-                 'production': false,
-                 'recommend': false}
+                 'stable': true,
+                 'latest': true}
                 ],
                 '$promise': $q.when()
             };
@@ -111,7 +111,8 @@
             stepBackward: stepBackward,
             stepForward: stepForward,
             getRameVersioning: getRameVersioning,
-            getUpgradesAvailable: getUpgradesAvailable,
+            getFirmwareUpgradesAvailable: getFirmwareUpgradesAvailable,
+            startFirmwareUpgrade: startFirmwareUpgrade,
             getSystemSettings: getSystemSettings,
             writeLog: writeLog
         };
@@ -422,8 +423,12 @@
             return SystemSettings;
         }
         
-        function getUpgradesAvailable() {
-            return UpgradesAvailable;
+        function getFirmwareUpgradesAvailable() {
+            return FirmwareUpgradesAvailable;
+        }
+        
+        function startFirmwareUpgrade(downloadURI) {
+            return (baseUrl + 'upgrade/');
         }
 
         // Returns item and parent list

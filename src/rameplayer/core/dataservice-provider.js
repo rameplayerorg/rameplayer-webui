@@ -1,5 +1,5 @@
 /*jshint maxcomplexity:9 */
-/*jshint maxstatements:66 */
+/*jshint maxstatements:68 */
 /*jshint maxparams:12 */
 
 /**
@@ -56,7 +56,7 @@
             var baseUrl = getBaseUrl();
             var Settings = $resource(baseUrl + 'settings/user/');
             var SystemSettings = $resource(baseUrl + 'settings/system/');
-            var UpgradesAvailable = $resource(baseUrl + 'upgrade/');
+            var FirmwareUpgrade = $resource(baseUrl + 'upgrade/');
             var List = listProvider.getResource(baseUrl + 'lists/:id');
             var listItemUrl = baseUrl + 'lists/:listId/items/:itemId';
             var ListItem = $resource(listItemUrl, {
@@ -90,7 +90,8 @@
             ds.stepForward = stepForward;
             ds.getRameVersioning = getRameVersioning;
             ds.getSystemSettings = getSystemSettings;
-            ds.getUpgradesAvailable = getUpgradesAvailable; 
+            ds.getFirmwareUpgradesAvailable = getFirmwareUpgradesAvailable;
+            ds.startFirmwareUpgrade = startFirmwareUpgrade;
             ds.writeLog = writeLog;
             ds.getLog = getLog;
             ds.getReportConfig = getReportConfig;
@@ -195,10 +196,16 @@
             function getSystemSettings() {
                 return SystemSettings.get();
             }
-            
-            function getUpgradesAvailable() {
-                return UpgradesAvailable.get();
-            }            
+
+            function getFirmwareUpgradesAvailable() {
+                return FirmwareUpgrade.get();
+            }
+
+            function startFirmwareUpgrade(downloadURI) {
+                return $http.put(baseUrl + 'upgrade/', {
+                    uri: downloadURI
+                });
+            }
 
             function getStatus(payload) {
                 return $http.post(baseUrl + 'status', payload);

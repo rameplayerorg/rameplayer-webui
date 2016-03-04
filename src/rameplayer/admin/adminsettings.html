@@ -13,7 +13,7 @@
         </div>
         <div class="panel-body">
             <rame-device-info></rame-device-info>
-            <form name="basicsForm">
+            <form name="vm.basicsForm">
             <div class="form-horizontal">
                 <div class="form-group">
                     <label for="videoResOut" class="col-sm-3 control-label" translate>Video output resolution</label>
@@ -46,7 +46,7 @@
                             ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?$/i"
                             ng-minlength="1" ng-maxlength="63" required/>
                         <span class="text-warning glyphicon glyphicon-alert" 
-                            ng-show="!basicsForm.deviceName.$valid || basicsForm.deviceName.$error.required">
+                            ng-show="!vm.basicsForm.deviceName.$valid || vm.basicsForm.deviceName.$error.required">
                         </span>
                     </div>
                 </div>

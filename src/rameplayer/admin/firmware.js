@@ -14,13 +14,12 @@
     function FirmwareController(logger, dataService, toastr, $rootScope) {
         var vm = this;
 
-        vm.upgradesAvailable = dataService.getUpgradesAvailable();
+        vm.upgradesAvailable = dataService.getFirmwareUpgradesAvailable();
         vm.upgradesAvailable.$promise.then(function() {
             init();
         });
 
-        vm.upgradeRecommendation = null;
-        vm.upgradeSoftware = upgradeSoftware;
+        vm.upgradeLatestStable = null;
         vm.upgradeSelection = null;
 
         var rameVersioning = '';
@@ -33,6 +32,7 @@
             logger.error('Software version fetching failed', errorResponse);
         });
         
+        vm.upgradeFirmware = upgradeFirmware;
         vm.factoryReset = factoryReset;
 
         /**
@@ -41,30 +41,33 @@
          *              fetched from server.
          */
         function init() {
-            //logger.warn(vm.upgradesAvailable.firmwares);
+            //logger.warn(vm.upgradesAvailable.firmwares);  // jshint ignore:line 
             var lnth = vm.upgradesAvailable.firmwares.length;
             for (var i = 0; i < lnth; i++) {
-                if (!vm.upgradesAvailable.firmwares[i].recommend) {} // jshint ignore:line
-                else {
-                    vm.upgradeRecommendation = vm.upgradesAvailable.firmwares[i];
+                if (vm.upgradesAvailable.firmwares[i].stable == true // jshint ignore:line
+                        && vm.upgradesAvailable.firmwares[i].latest == true) // jshint ignore:line
+                { 
+                    vm.upgradeLatestStable = vm.upgradesAvailable.firmwares[i];
                     vm.upgradeSelection = vm.upgradesAvailable.firmwares[i];
-                    //logger.warn(vm.upgradesAvailable.firmwares[i].recommend);
                 }
-                if ((i === lnth - 1) && !vm.upgradeRecommendation) {
+                
+                if ((i === lnth - 1) && !vm.upgradeLatestStable) {
                     vm.upgradeSelection = vm.upgradesAvailable.firmwares[i];
                 }
             }
         }
 
-        function upgradeSoftware() {
-            // TODO:
-            logger.warn(vm.upgradeRecommendation);
-            logger.info(vm.upgradesAvailable);
-            toastr.warning('TODO');
+        function upgradeFirmware() {
+            // TODO: Upgrade firmware
+            logger.debug(vm.upgradeLatestStable);
+            logger.debug(vm.upgradesAvailable);
+            //dataService.startFirmwareUpgrade(vm.upgradeSelection.uri);
+            //toastr.success('Start upgrading firmware');
+            toastr.warning('TODO Start upgrading firmware');
         }
         
         function factoryReset() {
-            toastr.warning('TODO');
+            toastr.warning('TODO Factory reset');
         }
     }
 })();

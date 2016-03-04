@@ -1,59 +1,65 @@
-<!-- <div class="container"> -->  
-    <div ng-controller="FirmwareController as fwvm" class="panel panel-default">
-        <div class="panel-heading">
+<!-- <div class="container"> -->
+<div ng-controller="FirmwareController as vm"
+    class="panel panel-default">
+    <div class="panel-heading">
         <span translate class="panel-title">Firmware upgrade</span>
-                        <br><span translate>Recommendation</span>:
-                        {{ !fwvm.upgradeRecommendation 
-                            ? ('No recommendation' | translate ) 
-                            : fwvm.upgradeRecommendation.version }}
-                    
-        </div>
-        <div class="panel-body">
-            <form name="upgradeForm">
+    </div>
+    <div class="panel-body">
+        <form name="upgradeForm">
             <div class="form-horizontal">
                 <div class="form-group">
-                    <label for="upgradesAvailable" class="col-sm-3 control-label" translate>Available firmwares</label>
-                    <div class="col-sm-3">
-                        <select id="upgradesAvailable" ng-model="fwvm.upgradeSelection" class="form-control"
-                        ng-options="ua as ua.version for ua in fwvm.upgradesAvailable.firmwares track by ua.version">                            
+                    <label for="upgradesAvailable"
+                        class="col-sm-4 control-label" translate>
+                        Available firmwares</label>
+                    <div class="col-sm-4">
+                        <select id="upgradesAvailable"
+                            ng-model="vm.upgradeSelection"
+                            class="form-control"
+                            ng-options="ua as ua.title for ua in vm.upgradesAvailable.firmwares track by ua.title">
                         </select>
                     </div>
-                    
                     <div class="col-sm-3">
-                    <button type="button" class="btn btn-default"
-                ng-click="fwvm.upgradeSoftware()">
-                <span class="glyphicon glyphicon-import" aria-hidden="true"></span>
-                <span translate>Upgrade</span>
-            </button>    </div>
-            
+                        <button type="button" class="btn btn-default"
+                            ng-click="vm.upgradeFirmware()">
+                            <span class="glyphicon glyphicon-import"
+                                aria-hidden="true"></span>
+                            <span translate>Upgrade</span>
+                        </button>
+                    </div>
                 </div>
             </div>
-            </form>
-            <div class="row">
-            <div class="col-sm-6">
-                    </div>    
-            </div>
-            <div class="row">                
-                <div class="col-sm-5 text-info">
-                    <span translate>Current firmware</span>:
-                    &nbsp;
-                    {{ fwvm.rameVersionSoftware }}
-                </div>           
-                <div class="col-sm-5 text-info">
-                    <span translate>Device hardware</span>:
-                    &nbsp;
-                    {{ fwvm.rameVersionHardware }}
+        </form>
+        <div class="row">
+            <div class="col-sm-5 col-sm-offset-1">
+                <div class="row">
+                    <span translate>Latest stable firmware version</span>: 
+                    {{ !vm.upgradeLatestStable 
+                        ? ('Nothing stable' | translate ) 
+                        : vm.upgradeLatestStable.title }}
                 </div>
-                     <div class="col-sm-2">
-            <div class="pull-right">
-                <span translate>Factory reset</span>:
-                <button type="button" class="btn btn-default btn-xs"
-                    ng-click="fwvm.factoryReset()">
-                    <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>                        
-                </button>                    
+                <div class="row">
+                    <span translate>Current firmware</span>: 
+                    {{ vm.rameVersionSoftware }}
+                </div>
             </div>
+            <div class="col-sm-5">
+                <div class="row">
+                    <!-- <div class="col-sm-4 text-info"> -->
+                    <span translate>Device hardware</span>: 
+                    {{ vm.rameVersionHardware }}
+                    
+                </div>
+                <div class="row">
+                    <span translate>Factory reset firmware</span>
+                    <button type="button"
+                        class="btn btn-default btn-xs"
+                        ng-click="vm.factoryReset()">
+                        <span class="glyphicon glyphicon-erase"
+                            aria-hidden="true"></span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <!-- </div> -->
