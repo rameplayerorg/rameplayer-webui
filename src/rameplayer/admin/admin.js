@@ -157,14 +157,13 @@
                 }
                 vm.manualDateTime = validateManualDateTime(vm.dateUserInput, vm.timeUserInput);
             }
-            else if (!vm.ntpForm.ntpHostname.$valid){
+            else if (!vm.ntpForm.ntpHostname.$valid) {
                 invalidFields.push('NTP Server Hostname');
-                
             }
-//            logger.info(basicsForm.deviceName.$valid);
-//            logger.info($('#ntpHostname').$valid);
-//            logger.info(vm.ntpForm.ntpHostname.$valid);
-//            logger.info(vm.ntpServerAddress);
+            // logger.info(basicsForm.deviceName.$valid);
+            // logger.info($('#ntpHostname').$valid);
+            // logger.info(vm.ntpForm.ntpHostname.$valid);
+            //            logger.info(vm.ntpServerAddress);
             
             if (invalidFields.length) {
                 valid = false;
