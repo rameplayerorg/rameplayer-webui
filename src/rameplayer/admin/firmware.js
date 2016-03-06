@@ -8,10 +8,10 @@
             .controller('FirmwareController', FirmwareController);
 
     FirmwareController.$inject = [
-    'logger', 'dataService', 'toastr', '$rootScope'
+    'logger', 'dataService', 'toastr', '$uibModal'
     ];
 
-    function FirmwareController(logger, dataService, toastr, $rootScope) {
+    function FirmwareController(logger, dataService, toastr, $uibModal) {
         var vm = this;
 
         vm.upgradesAvailable = dataService.getFirmwareUpgradesAvailable();
@@ -22,6 +22,7 @@
         vm.upgradeLatestStable = null;
         vm.upgradeSelection = null;
         vm.upgradeFirmware = upgradeFirmware;
+        vm.upgradeFirmwareModal = upgradeFirmwareModal;
 
         var rameVersioning = '';
         dataService.getRameVersioning().then(function(response) {
@@ -56,12 +57,24 @@
         }
 
         function upgradeFirmware() {
-            // TODO: Upgrade firmware
+            // TODO: Upgrade firmware, perhaps use modal (see below)
             logger.debug(vm.upgradeLatestStable);
             logger.debug(vm.upgradesAvailable);
-            //dataService.startFirmwareUpgrade(vm.upgradeSelection.uri);
-            //toastr.success('Start upgrading firmware');
-            toastr.warning('TODO Start upgrading firmware');
+            dataService.startFirmwareUpgrade(vm.upgradeSelection.uri);
+            toastr.success('Start upgrading firmware');
+            //toastr.warning('TODO Start upgrading firmware');
+        }
+        
+        function upgradeFirmwareModal() {
+            logger.debug('upgrade firmware modal');
+
+            // open modal dialog
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'rameplayer/admin/upgrade-firmware-modal.html',
+                controller: 'UpgradeFirmwareModalController',
+                controllerAs: 'vm'
+            });
         }
     }
 })();
