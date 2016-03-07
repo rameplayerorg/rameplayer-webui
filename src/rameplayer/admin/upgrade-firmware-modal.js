@@ -5,11 +5,11 @@
         .module('rameplayer.admin')
         .controller('UpgradeFirmwareModalController', UpgradeFirmwareModalController);
 
-    UpgradeFirmwareModalController.$inject = ['logger', '$uibModalInstance', 'dataService',
-        'upgradeSelection', 'statusService'];
+    UpgradeFirmwareModalController.$inject = ['logger', '$scope', '$timeout', '$uibModalInstance', 'dataService',
+        'upgradeSelection', 'statusService', 'toastr'];
 
-    function UpgradeFirmwareModalController(logger, $uibModalInstance, dataService,
-                                            upgradeSelection, statusService) {
+    function UpgradeFirmwareModalController(logger, $scope, $timeout, $uibModalInstance, dataService,
+                                            upgradeSelection, statusService, toastr) {
         var vm = this;
 
         vm.progress = 0;
@@ -18,19 +18,52 @@
         vm.start = start;
         vm.cancel = cancel;
         vm.started = false;
-        vm.restartTimeout = 2 * 60000; // 2 mins
+        vm.statusService = statusService;
+
+        var restarting = false;
+        var restartTimeout = 2 * 60000; // 2 mins
+        var restartTimeoutPromise;
 
         function start() {
             vm.started = true;
             dataService.upgradeFirmware(vm.upgradeSelection.uri)
                 .then(function(response) {
-                    // upgrade complete
-                    vm.progress = 100;
-                    vm.status = 'Restarting device...';
+                    // upgrade started
+                    followStatus();
                 },
                 function(errorResponse) {
                     logger.error('Firmware upgrade failed', vm.upgradeSelection, errorResponse);
+                    toastr.error('Firmware upgrade failed to ' + vm.upgradeSelection.title + '.', 'Upgrade Failed');
+                    followStatus();
                 });
+        }
+
+        function followStatus() {
+            $scope.$watch('vm.statusService.status.state', function(newState) {
+                if (newState === statusService.states.offline) {
+                    // server went offline, most probably rebooting
+                    restartBegan();
+                }
+                else if (restarting && newState !== statusService.states.offline) {
+                    // received first status after restart
+                    restartFinished();
+                }
+            });
+        }
+
+        function restartBegan() {
+            vm.progress = 100;
+            restarting = true;
+            vm.status = 'Restarting device...';
+            restartTimeoutPromise = $timeout(function() {
+                vm.status = 'Could not connect to device. Check if IP address has changed.';
+            }, restartTimeout);
+        }
+
+        function restartFinished() {
+            // device has restarted, reload without cache
+            vm.status = 'Reloading page...';
+            location.reload(true);
         }
 
         function cancel() {
