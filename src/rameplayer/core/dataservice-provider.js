@@ -91,7 +91,7 @@
             ds.getRameVersioning = getRameVersioning;
             ds.getSystemSettings = getSystemSettings;
             ds.getFirmwareUpgradesAvailable = getFirmwareUpgradesAvailable;
-            ds.startFirmwareUpgrade = startFirmwareUpgrade;
+            ds.upgradeFirmware = upgradeFirmware;
             ds.writeLog = writeLog;
             ds.getLog = getLog;
             ds.getReportConfig = getReportConfig;
@@ -201,7 +201,7 @@
                 return FirmwareUpgrade.get();
             }
 
-            function startFirmwareUpgrade(downloadURI) {
+            function upgradeFirmware(downloadURI) {
                 return $http.put(baseUrl + 'upgrade/', {
                     uri: downloadURI
                 });

@@ -112,7 +112,7 @@
             stepForward: stepForward,
             getRameVersioning: getRameVersioning,
             getFirmwareUpgradesAvailable: getFirmwareUpgradesAvailable,
-            startFirmwareUpgrade: startFirmwareUpgrade,
+            upgradeFirmware: upgradeFirmware,
             getSystemSettings: getSystemSettings,
             writeLog: writeLog
         };
@@ -427,8 +427,10 @@
             return FirmwareUpgradesAvailable;
         }
         
-        function startFirmwareUpgrade(downloadURI) {
-            return (baseUrl + 'upgrade/');
+        function upgradeFirmware(downloadURI) {
+            return $timeout(function() {
+                $log.info('upgrade firmware to ', downloadURI);
+            }, delay);
         }
 
         // Returns item and parent list
