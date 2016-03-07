@@ -40,6 +40,7 @@
                 playing:   'playing',
                 paused:    'paused',
                 buffering: 'buffering',
+                offline:   'offline',
                 error:     'error'
             },
             status: status,
@@ -75,6 +76,10 @@
             }, function(errorResponse) {
                 $log.error('Status query failed', errorResponse);
                 error.message = errorResponse.status + ' ' + errorResponse.statusText;
+                if (errorResponse.status === -1) {
+                    // network error
+                    status.state = service.states.offline;
+                }
             });
         }
 

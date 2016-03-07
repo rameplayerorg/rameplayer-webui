@@ -68,7 +68,8 @@
         <script type="text/ng-template" id="cluster-unit-status-tooltip.html">
             <span>
                 <span ng-if="vm.statuses[vm.unit.id]">
-                    {{ vm.unit.hostname }}<br>
+                    <span ng-if="vm.unit.hostname">{{ vm.unit.hostname }}<br></span>
+                    <span ng-if="vm.unit.host">{{ vm.unit.host }}<br></span>
                     {{ vm.statuses[vm.unit.id].state }}
                     <span ng-if="vm.statuses[vm.unit.id].cursor.name">
                         <br>{{ vm.statuses[vm.unit.id].cursor.name }}

@@ -214,7 +214,14 @@
                     angular.copy(newStatus, statuses[unitId]);
                 }
             }, function(errorResponse) {
-                logger.error('No status response from unit', unitId, errorResponse);
+                logger.error('Error status response from unit', unitId, errorResponse);
+                if (errorResponse.status === -1) {
+                    // network error
+                    if (statuses[unitId] === undefined) {
+                        statuses[unitId] = {};
+                    }
+                    statuses[unitId].state = 'offline';
+                }
             });
         }
 

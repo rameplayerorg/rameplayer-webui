@@ -5,9 +5,11 @@
         .module('rameplayer.admin')
         .controller('UpgradeFirmwareModalController', UpgradeFirmwareModalController);
 
-    UpgradeFirmwareModalController.$inject = ['logger', '$uibModalInstance', 'dataService', 'upgradeSelection'];
+    UpgradeFirmwareModalController.$inject = ['logger', '$uibModalInstance', 'dataService',
+        'upgradeSelection', 'statusService'];
 
-    function UpgradeFirmwareModalController(logger, $uibModalInstance, dataService, upgradeSelection) {
+    function UpgradeFirmwareModalController(logger, $uibModalInstance, dataService,
+                                            upgradeSelection, statusService) {
         var vm = this;
 
         vm.progress = 0;
@@ -16,6 +18,7 @@
         vm.start = start;
         vm.cancel = cancel;
         vm.started = false;
+        vm.restartTimeout = 2 * 60000; // 2 mins
 
         function start() {
             vm.started = true;
