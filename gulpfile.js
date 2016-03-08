@@ -136,13 +136,11 @@ gulp.task('fonts', function() {
 gulp.task('rev-and-inject', ['js', 'vendorjs', 'css', 'vendorcss'], function() {
     var minified = paths.build + '**/*.min.*';
     var indexHtml = paths.app + 'index.html';
-    var adminHtml = paths.app + 'admin.html';
     var minFilter = plugins.filter(['**/*.min.*', '!**/*.map']);
     var indexHtmlFilter = plugins.filter(['index.html']);
-    var adminHtmlFilter = plugins.filter(['admin.html']);
 
     return gulp
-        .src([].concat(minified, indexHtml, adminHtml)) // add all built min files and html files
+        .src([].concat(minified, indexHtml)) // add all built min files and html file
         .pipe(minFilter) // filter the stream to minified css and js
         .pipe(plugins.rev()) // create files with rev's
         .pipe(gulp.dest(paths.build)) // write the ref files
@@ -157,15 +155,6 @@ gulp.task('rev-and-inject', ['js', 'vendorjs', 'css', 'vendorcss'], function() {
         .pipe(gulp.dest(paths.build)) // write the rev files
         .pipe(indexHtmlFilter.restore()) // back to original stream
 
-        // handle admin.html
-        .pipe(adminHtmlFilter)
-        .pipe(inject('css/vendor.min.css', 'inject-vendor'))
-        .pipe(inject('css/rameplayer.min.css'))
-        .pipe(inject('vendor.min.js', 'inject-vendor'))
-        .pipe(inject('rameplayer.min.js'))
-        .pipe(gulp.dest(paths.build)) // write the rev files
-        .pipe(adminHtmlFilter.restore()) // back to original stream
-
         // replace files referenced in index.html with the rev'd files
         .pipe(plugins.revReplace()) // substitute in new filenames
         .pipe(gulp.dest(paths.build)) // write new index.html
@@ -177,25 +166,15 @@ gulp.task('inject-version', ['rev-and-inject'], function(cb) {
     exec('git describe --tags', function(err, stdout, stderr) {
         stdout = stdout.replace(/^\s+|\s+$/g, '');
         var indexHtml = paths.build + 'index.html';
-        var adminHtml = paths.build + 'admin.html';
         var indexHtmlFilter = plugins.filter(['index.html']);
-        var adminHtmlFilter = plugins.filter(['admin.html']);
         return gulp
-            .src([].concat(indexHtml, adminHtml))
+            .src([].concat(indexHtml))
             .pipe(indexHtmlFilter)
             .pipe(plugins.replace('development', stdout))
             // change settings for production environment
             .pipe(plugins.replace("{ basePath: 'stubs/', simulation: true }",
                                   "{ port: 8000, basePath: '/' }"))
             .pipe(gulp.dest(paths.build))
-            .pipe(indexHtmlFilter.restore())
-
-            .pipe(adminHtmlFilter)
-            .pipe(plugins.replace('development', stdout))
-            // change settings for production environment
-            .pipe(plugins.replace("{ basePath: 'stubs/', simulation: true }",
-                                  "{ port: 8000, basePath: '/' }"))
-            .pipe(gulp.dest(paths.build));
     });
     return gulp
         .src('');

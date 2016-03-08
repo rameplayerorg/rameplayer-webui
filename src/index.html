@@ -29,37 +29,7 @@
 </head>
 
 <body>
-    <rame-device-info></rame-device-info>
-    <div class="container" ng-controller="MediaController as vmmc" ng-cloak ng-class="{'cluster-stopped': vmmc.clusterService.clusterStatus.state === 'stopped' }">
-        <uib-tabset type="pills">
-            <uib-tab ng-repeat="listId in vmmc.rootChildren">
-                <tab-heading translate>{{ vmmc.lists[listId].title }}</tab-heading>
-                <rame-media-list list-id="listId"></rame-media-list>
-            </uib-tab>
-            
-            <uib-tab>
-                <tab-heading translate>Playlists</tab-heading>
-                <div ng-controller="PlaylistsController as vm">
-                    <rame-playlist default="true" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted('default', item, oldIndex, newIndex)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
-                    <rame-playlist ng-repeat="listId in vm.playlists" list-id="listId" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted(listId, item, oldIndex, newIndex)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
-                </div>
-            </uib-tab>
-
-            <uib-tab>
-                <tab-heading>
-                    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
-                </tab-heading>
-                <!-- <h1 translate>Settings</h1> -->
-                <div class="row" ng-include="'rameplayer/settings/settings.html'" ng-cloak>
-                
-                </div>
-            </uib-tab>
-        </uib-tabset>
-    </div> <!-- .container -->
-
-    <!-- player controls -->
-    <nav class="navbar navbar-default navbar-fixed-bottom navbar-player" ng-include="'rameplayer/player/player.html'" ng-cloak>
-    </nav>
+    <div ui-view></div>
 
     <script>
         var rameServerConfig = { basePath: 'stubs/', simulation: true };
@@ -68,13 +38,13 @@
     <!-- inject-vendor:js -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="../bower_components/angular-filereader/angular-filereader.min.js"></script>
     <script src="../bower_components/angular-file-saver/dist/angular-file-saver.bundle.min.js"></script>
     <script src="../bower_components/angular-resource/angular-resource.min.js"></script>
-    <script src="../bower_components/angular-route/angular-route.min.js"></script>
     <script src="../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="../bower_components/angular-translate/angular-translate.min.js"></script>
     <script src="../bower_components/angular-uuid-generator/angular-uuid-generator.js"></script>
@@ -97,14 +67,11 @@
     <script src="rameplayer/directives/read-json-file.directive.js"></script>
     <script src="rameplayer/directives/ng-bootstrap-colorselector.js"></script>
 
-    <!-- admin settings module -->
-    <script src="rameplayer/admin/admin.module.js"></script>
-    <script src="rameplayer/admin/admin.js"></script>
-
     <!-- core module -->
     <script src="rameplayer/core/core.module.js"></script>
     <script src="rameplayer/core/constants.js"></script>
     <script src="rameplayer/core/config.js"></script>
+    <script src="rameplayer/core/router.js"></script>
     <script src="rameplayer/core/logger.js"></script>
     <script src="rameplayer/core/dataservice-provider.js"></script>
     <script src="rameplayer/core/dataservice.js"></script>
@@ -114,6 +81,12 @@
     <script src="rameplayer/core/cluster-service.js"></script>
     <script src="rameplayer/core/list-service.js"></script>
     <script src="rameplayer/core/list-provider.js"></script>
+
+    <!-- admin settings module -->
+    <script src="rameplayer/admin/admin.module.js"></script>
+    <script src="rameplayer/admin/admin.js"></script>
+    <script src="rameplayer/admin/firmware.js"></script>
+    <script src="rameplayer/admin/upgrade-firmware-modal.js"></script>
 
     <!-- playback module -->
     <script src="rameplayer/player/player.module.js"></script>
