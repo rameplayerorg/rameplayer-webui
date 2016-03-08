@@ -6,10 +6,10 @@
         .controller('UpgradeFirmwareModalController', UpgradeFirmwareModalController);
 
     UpgradeFirmwareModalController.$inject = ['logger', '$scope', '$timeout', '$uibModalInstance', 'dataService',
-        'upgradeSelection', 'statusService', 'toastr'];
+        'upgradeSelection', 'statusService', 'toastr', '$window'];
 
     function UpgradeFirmwareModalController(logger, $scope, $timeout, $uibModalInstance, dataService,
-                                            upgradeSelection, statusService, toastr) {
+                                            upgradeSelection, statusService, toastr, $window) {
         var vm = this;
 
         vm.progress = 0;
@@ -49,21 +49,28 @@
                     restartFinished();
                 }
             });
+
+            // update progress bar
+            $scope.$watch('vm.statusService.status.player.upgradeProgress', function(newProgress) {
+                if (newProgress !== undefined) {
+                    vm.progress = newProgress;
+                }
+            });
         }
 
         function restartBegan() {
             vm.progress = 100;
             restarting = true;
-            vm.status = 'Restarting device...';
+            vm.status = 'Waiting for device to restart...';
             restartTimeoutPromise = $timeout(function() {
                 vm.status = 'Could not connect to device. Check if IP address has changed.';
             }, restartTimeout);
         }
 
         function restartFinished() {
-            // device has restarted, reload without cache
+            // device has restarted, reload page without cache
             vm.status = 'Reloading page...';
-            location.reload(true);
+            $window.location.reload(true);
         }
 
         function cancel() {
