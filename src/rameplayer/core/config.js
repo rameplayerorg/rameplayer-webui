@@ -50,7 +50,9 @@
             UPDATE_AVAILABLE: 'Update available',
             UPDATE_AVAILABLE_DESC: 'Newer version of software is available.',
             INCOMPATIBLE_VERSION: 'Incompatible Server Version',
-            PLAYLIST_SYNC_REMOVED: 'Playlist $1 is not synchronized to playlist $2 anymore.'
+            PLAYLIST_SYNC_REMOVED: 'Playlist $1 is not synchronized to playlist $2 anymore.',
+            FIRMWARE_UPGRADED: 'Firmware upgraded',
+            FIRMWARE_UPGRADED_DESC: 'Firmware version $1 is now installed.'
         });
         $translateProvider.translations('fi', {
             Settings: 'Asetukset',

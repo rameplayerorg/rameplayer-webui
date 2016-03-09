@@ -22,7 +22,7 @@
 
     dataServiceProvider.$inject = ['$log', '$http', '$resource', '$location',
         'simulationDataService', 'listProvider', 'ListIds', 'uiVersion', 'toastr',
-        '$translate', 'minServerVersion', 'reportServerEntry'];
+        '$translate', 'minServerVersion', 'reportServerEntry', '$window', '$localStorage'];
 
     /**
      * @namespace DataServiceProvider
@@ -31,7 +31,7 @@
      */
     function dataServiceProvider($log, $http, $resource, $location, simulationDataService, listProvider,
                          ListIds, uiVersion, toastr, $translate, minServerVersion,
-                         reportServerEntry) {
+                         reportServerEntry, $window, $localStorage) {
         var service = {
             create: create
         };
@@ -97,7 +97,14 @@
             ds.getReportConfig = getReportConfig;
             ds.sendReport = sendReport;
 
+            // store firmware version so we know when it changes
+            $localStorage.$default({
+                fwVersion: null,
+                newFwMessage: null
+            });
+
             checkVersion();
+            showNewFwVersionMessage();
 
             /**
              * @name getBaseUrl
@@ -124,29 +131,31 @@
 
             /**
              * @name checkVersion
-             * @desc Checks if server version is compatible with this version of WebUI.
+             * @description Checks if firmware has been upgraded and server version is
+             *              compatible with this version of WebUI.
              * @returns boolean
              */
             function checkVersion() {
-                if (uiVersion !== 'development') {
-                    getRameVersioning().then(function(response) {
-                        if (!serverIsCompatible(response.data.backend)) {
-                            var host = ds.options.host || location.host.split(':')[0];
-                            var msg = 'Incompatible server version ' + response.data.backend + ' at ' +
-                                host + ':' + ds.options.port +
-                                '.';
+                getRameVersioning().then(function(response) {
+                    if (isNewFwVersion(response.data.firmware)) {
+                        handleNewFwVersion(response.data.firmware);
+                    }
+                    else if (!serverIsCompatible(response.data.backend)) {
+                        var host = ds.options.host || location.host.split(':')[0];
+                        var msg = 'Incompatible server version ' + response.data.backend + ' at ' +
+                            host + ':' + ds.options.port +
+                            '.';
 
-                            $translate(['INCOMPATIBLE_VERSION']).then(function(translations) {
-                                toastr.warning(msg, translations.INCOMPATIBLE_VERSION, {
-                                    timeOut: 0,
-                                    extendedTimeOut: 0,
-                                    tapToDismiss: false,
-                                    closeButton: true
-                                });
+                        $translate(['INCOMPATIBLE_VERSION']).then(function(translations) {
+                            toastr.warning(msg, translations.INCOMPATIBLE_VERSION, {
+                                timeOut: 0,
+                                extendedTimeOut: 0,
+                                tapToDismiss: false,
+                                closeButton: true
                             });
-                        }
-                    });
-                }
+                        });
+                    }
+                });
             }
 
             /**
@@ -156,7 +165,7 @@
              * @return boolean
              */
             function serverIsCompatible(backendVersion) {
-                if (backendVersion === 'development') {
+                if (uiVersion === 'development' || backendVersion === 'development') {
                     return true;
                 }
                 var uiVersions = minServerVersion.split('.');
@@ -175,6 +184,49 @@
                     return false;
                 }
                 return true;
+            }
+
+            function isNewFwVersion(fwVersion) {
+                if ($localStorage.fwVersion && fwVersion &&
+                    $localStorage.fwVersion !== fwVersion) {
+                    $log.info('New firmware version detected: ', fwVersion, ', cached: ', $localStorage.fwVersion);
+                    return true;
+                }
+                if (!$localStorage.fwVersion) {
+                    // initialize firmwareVersion in localStorage
+                    $localStorage.fwVersion = fwVersion;
+                }
+                return false;
+            }
+
+            function handleNewFwVersion(fwVersion) {
+                $localStorage.fwVersion = fwVersion;
+
+                $translate(['FIRMWARE_UPGRADED_DESC']).then(function(translations) {
+                    $localStorage.newFwMessage = translations.FIRMWARE_UPGRADED_DESC
+                        .replace('$1', fwVersion);
+
+                    // reload page without cache, making sure we load latest index.html
+                    // after reload new firmware message should be displayed
+                    $window.location.reload(true);
+                });
+            }
+
+            /**
+             * @name showNewFwVersionMessage
+             * @description Shows toastr message when the message has been stored into
+             *              local storage.
+             */
+            function showNewFwVersionMessage() {
+                if ($localStorage.newFwMessage) {
+                    $translate(['FIRMWARE_UPGRADED']).then(function(translations) {
+                        toastr.success($localStorage.newFwMessage, translations.FIRMWARE_UPGRADED, {
+                            timeOut: 60000,
+                            closeButton: true
+                        });
+                        $localStorage.newFwMessage = null;
+                    });
+                }
             }
 
             /**
