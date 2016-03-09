@@ -23,8 +23,6 @@
             ADMIN_SETTINGS_LINK: 'Admin Settings',
             AUTOPLAY_USB: 'Automatically play files from USB',
             UI_LANGUAGE: 'Language of the user interface',
-            //DHCP_CLIENT_SETTING: 'Configure networking manually',
-            //DHCP_SERVER_SETTING: 'Use as DHCP server',
             //IP_ADDRESS: 'IP address',
             //HOSTNAME: 'Hostname',
             rameAnalogOnly: 'Analog',
@@ -154,18 +152,7 @@
             'Configure date and time manually': 'Aseta päivämäärä ja aika käsin',
             'Date:': 'Päivämäärä',
             'Time:': 'Aika:',
-            'Factory reset': 'Palauta oletukset',
-            '': '',
-            '': '',
-            '': '',
-            '': '',
-            '': '',
-            '': '',
-            '': '',
-            
-            
-            
-                        
+            'Factory reset': 'Palauta oletukset',            
             VERSION: 'versio',
             INFORMATION:'-tietoja',
             'Software version': 'Ohjelmistoversio',
@@ -179,10 +166,6 @@
             ADMIN_SETTINGS_LINK: 'Järjestelmäasetukset',
             AUTOPLAY_USB: 'Aloita soitto automaattisesti USB-tikulta',
             UI_LANGUAGE: 'Käyttöliittymän kieli',
-            
-            
-            //DHCP_CLIENT_SETTING: 'Aseta IP-osoitteet käsin',
-            //DHCP_SERVER_SETTING: 'Käytä tätä DHCP serverinä',
             IP_ADDRESS: 'IP-osoite',
             HOSTNAME: 'Koneen nimi',
             rameAnalogOnly: 'Analoginen',
