@@ -114,7 +114,10 @@
             getFirmwareUpgradesAvailable: getFirmwareUpgradesAvailable,
             upgradeFirmware: upgradeFirmware,
             getSystemSettings: getSystemSettings,
-            writeLog: writeLog
+            writeLog: writeLog,
+            getLog: getLog,
+            getReportConfig: getReportConfig,
+            sendReport: sendReport
         };
 
         var delay = 50;
@@ -485,6 +488,29 @@
         }
 
         function writeLog(level, message) {
+        }
+
+        function getLog() {
+            return $timeout(function() {
+                return {
+                };
+            }, delay);
+        }
+
+        function getReportConfig() {
+            return $timeout(function() {
+                return {
+                    data: {
+                    }
+                };
+            }, delay);
+        }
+
+        function sendReport(url, data) {
+            return $timeout(function() {
+                return {
+                };
+            }, delay);
         }
     }
 })();
