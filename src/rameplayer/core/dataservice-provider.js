@@ -1,6 +1,6 @@
 /*jshint maxcomplexity:9 */
-/*jshint maxstatements:68 */
-/*jshint maxparams:12 */
+/*jshint maxstatements:73 */
+/*jshint maxparams:14 */
 
 /**
  * Rameplayer WebUI
