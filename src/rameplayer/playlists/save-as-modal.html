@@ -1,12 +1,12 @@
 <form>
     <div class="modal-header">
-        <h3>Save Playlist As&hellip;</h3>
+        <h3><span translate>Save Playlist As</span>&hellip;</h3>
     </div>
 
     <div class="modal-body">
         <div class="form-group">
             <label for="newPlaylistTitle" translate>Name</label>
-            <input type="text" id="newPlaylistTitle" class="form-control" placeholder="Playlist name" ng-model="saveAs.playlistTitle" required>
+            <input type="text" id="newPlaylistTitle" class="form-control" placeholder="{{ 'Playlist name' | translate }}" ng-model="saveAs.playlistTitle" required>
         </div>
         <div class="form-group">
             <label for="newPlaylistStorage" translate>Storage</label>

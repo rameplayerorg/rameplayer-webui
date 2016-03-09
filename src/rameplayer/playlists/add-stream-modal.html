@@ -10,12 +10,12 @@
         </div>
         <div class="form-group">
             <label for="url" translate>Title</label>
-            <input type="text" id="title" class="form-control" placeholder="Title" ng-model="saveAs.title">
+            <input type="text" id="title" class="form-control" placeholder="{{ 'Title' | translate }}" ng-model="saveAs.title">
         </div>
    </div>
 
     <div class="modal-footer">
-        <button class="btn btn-primary" type="submit" ng-click="saveAs.save()">Add</button>
-        <button class="btn btn-warning" type="button" ng-click="saveAs.cancel()">Cancel</button>
+        <button class="btn btn-primary" type="submit" ng-click="saveAs.save()" translate>Add</button>
+        <button class="btn btn-warning" type="button" ng-click="saveAs.cancel()" translate>Cancel</button>
     </div>
 </form>

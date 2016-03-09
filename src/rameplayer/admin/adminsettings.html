@@ -3,11 +3,14 @@
         <div class="panel-heading">
             <ul class="list-inline">
                 <li>
-                    <h3 class="panel-title" translate>Admin Settings</h3>
+                    <h4 translate>Admin Settings</h4>
                 </li>
-                <li class="pull-right">
-                    <a class="" ui-sref="main">
-                    <span translate>To Player</span></a>&nbsp;<span class="glyphicon glyphicon-link"></span>
+                <li class="pull-right">                    
+                    <button type="button"
+                        class="btn btn-default btn-sm" ui-sref="main">
+                         RamePlayer
+                        <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                    </button>
                 </li>
             </ul>
         </div>
@@ -62,7 +65,7 @@
                                 <input type="checkbox"
                                     ng-model="vm.manualIpConfig">
                                 <span translate>
-                                    DHCP_CLIENT_SETTING
+                                    Configure networking manually
                                 </span>
                             </label>
                         </div>
@@ -158,7 +161,7 @@
                                     ng-disabled="!vm.manualIpConfig"
                                     ng-click="vm.prefillDhcpOcts()">
                                 <span translate>
-                                    DHCP_SERVER_SETTING
+                                    Use as DHCP server
                                 </span>
                             </label>
                         </div>
@@ -298,7 +301,7 @@
                 <span class="glyphicon"
                     ng-class="{ 'glyphicon-floppy-disk': vm.savingStatus !== 'saved', 'glyphicon-floppy-saved': vm.savingStatus === 'saved' }"
                     aria-hidden="true"></span>
-                <span translate>SAVE_SETTINGS</span>
+                <span translate>Save</span>
             </button>
             <div class="pull-right">
                 <span translate>Factory reset</span>

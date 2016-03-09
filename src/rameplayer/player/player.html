@@ -25,8 +25,10 @@
                             </div>
                             <div ng-show="vm.statusService.error.message">
                                 <img src="images/spinner1_16_bkg248.gif" alt="">
-                                <span class="label label-danger" translate>
-                                    Connection error {{ vm.statusService.error.message }}. Connecting...
+                                <span class="label label-danger">
+                                    <span translate>Connection error</span> 
+                                    {{ vm.statusService.error.message }}. 
+                                    <span translate>Connecting...</span>
                                 </span>
                             </div>
                         </div>
