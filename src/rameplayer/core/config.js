@@ -48,6 +48,7 @@
         });
         $translateProvider.translations('fi', {
             '': '',
+            // settings.html
             'User Settings': 'Käyttäjäasetukset',            
             'Cluster': 'Koneiden klusterointi',
             'Import Configuration': 'Tuo asetukset',
@@ -58,6 +59,7 @@
             'Play Delay (sec)': 'Soiton viive (sekunteina)',
             'Add': 'Lisää',
             'Hostname': 'Koneen nimi',
+            // report-problem-modal.html
             'Add Unit': 'Lisää kone',
             'Report a Problem': 'Raportoi ongelma',
             'Checking Internet connection': 'Varmistetaan Internet-yhteys',
@@ -72,32 +74,57 @@
             'Could not connect to the report server.': 'Palvelimeen ei saatu yhteyttä',
             'Please': 'Ole hyvä,',
             'and send it to support@rameplayer.org and describe the problem in the email message.': 'ja lähetä se sähköpostin liitteenä osoitteeseen support@rameplayer.org sekä lisäksi kuvaile ongelmaa sähköpostiviestissä.',
+            // remove-unit-modal.html
             'Are You Sure?': 'Oletko aivan varma?',
             'Do you really want to remove cluster unit': 'Haluatko poistaa tämän koneen klusterista:',
-            'Remove': 'Poista',            
+            'Remove': 'Poista',
+            // import-cluster-modal.html
             'Import Cluster Configuration': 'Tuo klusteriasetukset',
             'Cluster Configuration File': 'Tiedosto klusteriasetuksista',
             'Select a file containing cluster configuration data and click Import. Note: import will override any existing configuration.': 'Valitse klusteriasetukset sisältävä tiedosto ja hyväksy tuonti. Huomio: asetusten tuonti poistaa aiemmat asetukset.',
             'Import': 'Tuo',
-            'unresolved': 'ei selvillä',
+            // cluster-unit.html
+            'Hostname unresolved': 'Koneen nimi ei selvillä',
             'Save': 'Tallenna',
             'Edit': 'Muokkaa',
             'Remove unit': 'Poista kone',
-            '': '',
-            '': '',
+            // sync-modal.html
+            'Select Playlist To Synchronize With': 'Valitse synkronoitava soittolista',
+            'Cluster Unit': 'Kone klusterissa',
+            'Playlist': 'Soittolista',
+            'Open': 'Avaa',
+            // save-as-modal.html
+            'Save Playlist As': 'Tallenna soittolista nimellä',
+            'Name': 'Nimi',
+            'Storage': 'Tallennuspaikka',
+            'Playlist name': 'Soittolistan nimi',
+            // playlist.html
+            'Playlist is empty.': 'Soittolista on tyhjä.',
+            'Title': 'Otsikko',
+            'Length': 'Kesto',
+            'Date': 'Pvm',
+            'Default': 'Oletus',
+            'Synchronize': 'Synkronoi',
+            'Add Stream': 'Lisää syöte',
+            'Save as': 'Tallenna nimellä',
+            'Move to': 'Siirrä',
+            'Lock': 'Lukitse',
+            'Clear': 'Tyhjennä',
+            'Stop synchronizing this playlist': 'Lakkaa synkronoimasta tätä soittolistaa',
+            // edit-modal.html
+            'Edit Playlist': 'Muokkaa soittolistaa',
+            // add-stream-modal.html
+            'Add Network Stream': 'Lisää verkosta tuleva syöte',
+            'URL': 'URL-osoite',
             '': '',
             '': '',
             '': '',
             '': '',
             
-            Settings: 'Asetukset',
-            Name: 'Nimi',
-            Filename: 'Tiedosto',
-            Title: 'Otsikko',
-            Length: 'Kesto',
-            'Date': 'Pvm',
+            
+            
             'Selected': 'Valittu',
-            Save: 'Tallenna',
+            
             VERSION: 'versio',
             INFORMATION:'-tietoja',
             'Software version': 'Ohjelmistoversio',

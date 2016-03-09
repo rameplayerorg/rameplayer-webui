@@ -4,12 +4,17 @@
             <uib-accordion-group is-open="vm.isDefaultPlaylist">
                 <uib-accordion-heading>
                     <span ng-switch on="vm.defaultPlaylist">
-                        <span ng-switch-when="true">Default</span>
+                        <span ng-switch-when="true" translate>Default</span>
                         <span ng-switch-default>{{ vm.lists[vm.listId].title }}</span>
                     </span>
                     <span class="pull-right" ng-show="!vm.sync.isOn">
                         <!-- existing synchronizations -->
-                        <span ng-repeat="unit in vm.sync.units" class="media-list-sync-icon"><a href ng-if="unit.syncedLists[vm.listId]" ng-click="$event.stopPropagation(); vm.openSync(unit)" ng-style="{'color': unit.color }" title="Synchronize"><i class="glyphicon glyphicon-refresh"></i></a></span>
+                        <span ng-repeat="unit in vm.sync.units" class="media-list-sync-icon">
+                        <a href ng-if="unit.syncedLists[vm.listId]" ng-click="$event.stopPropagation(); vm.openSync(unit)" 
+                            ng-style="{'color': unit.color }" title="{{ 'Synchronize' | translate }}">
+                        <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        </span>
 
                         <!-- hamburger menu -->
                         <span uib-dropdown is-open="vm.isDropdownOpen" ng-click="$event.stopPropagation()">
@@ -19,31 +24,31 @@
                             <ul class="uib-dropdown-menu dropdown-menu-right">
                                 <li ng-if="vm.defaultPlaylist != 'true'">
                                     <a href ng-click="vm.openSyncModal(); vm.isDropdownOpen=false;">
-                                        <i class="glyphicon glyphicon-refresh"></i> Synchronize&hellip;
+                                        <i class="glyphicon glyphicon-refresh"></i>&nbsp;<span translate>Synchronize</span>&hellip;
                                    </a>
                                 </li>
                                 <li>
                                     <a href ng-click="vm.addStream({ playlist: vm.listId }); vm.isDropdownOpen=false;">
-                                        <i class="glyphicon glyphicon-cloud"></i> Add Stream&hellip;
+                                        <i class="glyphicon glyphicon-cloud"></i>&nbsp;<span translate>Add Stream</span>&hellip;
                                     </a>
                                 </li>
                                 <li ng-switch on="vm.defaultPlaylist">
                                     <a href ng-switch-when="true" ng-click="vm.saveAs(); vm.isDropdownOpen=false;">
-                                        <i class="glyphicon glyphicon-save"></i> Save as&hellip;
+                                        <i class="glyphicon glyphicon-save"></i>&nbsp;<span translate>Save as</span>&hellip;
                                     </a>
                                     <a href ng-switch-default ng-click="$event.stopPropagation();" ng-if="false">
-                                        <i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;
+                                        <i class="glyphicon glyphicon-share-alt"></i>&nbsp;<span translate>Move to</span>&hellip;
                                     </a>
                                 </li>
                                 <li ng-if="false && vm.defaultPlaylist != 'true'">
-                                    <a href><i class="glyphicon glyphicon-lock"></i> Lock</a>
+                                    <a href><i class="glyphicon glyphicon-lock"></i>&nbsp;<span translate>Lock</span></a>
                                 <li>
                                 <li ng-if="vm.defaultPlaylist != 'true'">
-                                    <a href ng-click="vm.edit(); vm.isDropdownOpen=false"><i class="glyphicon glyphicon-pencil"></i> Edit&hellip;</a>
+                                    <a href ng-click="vm.edit(); vm.isDropdownOpen=false"><i class="glyphicon glyphicon-pencil"></i>&nbsp;<span translate>Edit</span>&hellip;</a>
                                 <li>
                                 <li ng-switch on="vm.defaultPlaylist">
-                                    <a href ng-switch-when="true" ng-click="vm.clear(); vm.isDropdownOpen=false"><i class="glyphicon glyphicon-remove"></i> Clear</a>
-                                    <a href ng-switch-default ng-click="vm.remove(); vm.isDropdownOpen=false"><i class="glyphicon glyphicon-remove"></i> Remove</a>
+                                    <a href ng-switch-when="true" ng-click="vm.clear(); vm.isDropdownOpen=false"><i class="glyphicon glyphicon-remove"></i>&nbsp;<span translate>Clear</span></a>
+                                    <a href ng-switch-default ng-click="vm.remove(); vm.isDropdownOpen=false"><i class="glyphicon glyphicon-remove"></i>&nbsp;<span translate>Remove</span></a>
                                 </li>
                             </ul>
                         </span>
@@ -82,10 +87,10 @@
                     </span>
                     <span class="pull-right">
                         <span ng-click="$event.stopPropagation()">
-                            <a href ng-click="vm.removeSync()" title="Stop synchronizing this playlist">
+                            <a href ng-click="vm.removeSync()" title="{{ 'Stop synchronizing this playlist' | translate }}">
                                 <span class="glyphicon glyphicon-ban-circle" ng-style="{'color': vm.sync.unit.color}"></span>
                             </a>
-                            <a href ng-click="vm.closeSync()" title="Close" style="margin-left: 10px">
+                            <a href ng-click="vm.closeSync()" title="{{ 'Close' | translate }}" style="margin-left: 10px">
                                 <span class="glyphicon glyphicon-remove" ng-style="{'color': vm.sync.unit.color}"></span>
                             </a>
                         </span>
