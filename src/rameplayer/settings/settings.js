@@ -67,8 +67,8 @@
                 vm.windowTitleInfo = adr + vm.windowTitleInfo; 
             }
             else {
-                adr = 'IP address not available';
-                vm.windowTitleInfo = 'No IP' + vm.windowTitleInfo;
+                adr = '0.0.0.0';
+                vm.windowTitleInfo = '0.0.0.0' + vm.windowTitleInfo;
             }
             $document[0].title = vm.windowTitleInfo;
             return adr;
@@ -81,8 +81,8 @@
                 vm.windowTitleInfo = hn + vm.windowTitleInfo;
             }
             else {
-                hn = 'Hostname not set';
-                vm.windowTitleInfo = 'No name' + vm.windowTitleInfo;
+                hn = '???!?!?!!';
+                vm.windowTitleInfo = '?' + vm.windowTitleInfo;
             }
             $document[0].title = vm.windowTitleInfo;
             return hn;
@@ -116,18 +116,35 @@
             $scope.storage.language = vm.languageId;
             $translate.use(vm.languageId);
             
-            toastr.success('Language saved.');
+            $translate(['LANGUAGE_SAVED'])
+            .then(function(translations) {
+                toastr.success(translations.LANGUAGE_SAVED);
+            });
+            
         }
 
         function saveUsbSetting() {
             vm.userSettings.$save(function() {
                 toastr.clear();
-                toastr.success('Option Autoplay USB ' +
-                               (vm.userSettings.autoplayUsb ? 'enabled' : 'disabled') +
-                               '.', 'Option saved');
+                $translate(['OPTION_SAVED', 'OPTION_AUTOPLAY_USB_DESC', 'OPTION_ENABLED', 'OPTION_DISABLED'])
+                    .then(function(translations) {
+                        toastr.success(translations.OPTION_AUTOPLAY_USB_DESC + ' ' + 
+                                (vm.userSettings.autoplayUsb ? 
+                                        translations.OPTION_ENABLED : 
+                                        translations.OPTION_DISABLED) + 
+                                '.', translations.OPTION_SAVED);
+                    });
             }, function() {
                 toastr.clear();
-                toastr.error('Option Autoplay USB saving failed.', 'Option saving failed');
+                $translate(['OPTION_SAVE_FAILED', 'OPTION_AUTOPLAY_USB_FAILED_DESC'])
+                    .then(function(translations) {
+                        toastr.error(translations.OPTION_AUTOPLAY_USB_FAILED_DESC, translations.OPTION_SAVE_FAILED, {
+                            timeOut : 0,
+                            extendedTimeOut : 0,
+                            tapToDismiss : false,
+                            closeButton : true
+                        });
+                    });
             });
         }
 
@@ -137,13 +154,19 @@
                 clusterService.addUnit(vm.newUnit.ip.value,
                                        vm.newUnit.port,
                                        vm.newUnit.delay);
-                toastr.success('New unit added.', 'Cluster');
+                $translate(['NEW_CLUSTER_UNIT_ADDED_DESC', 'NEW_ADDED'])
+                .then(function(translations) {
+                    toastr.success(translations.NEW_CLUSTER_UNIT_ADDED_DESC, translations.NEW_ADDED);
+                });
             }
             else {
                 // Sticky toast
-                toastr.error('IP address of new unit', 'Invalid settings', {
-                    timeOut: 0,
-                    closeButton: true
+                $translate(['INVALID_SETTINGS', 'INVALID_CLUSTER_SETTINGS_DESC'])
+                .then(function(translations) {
+                    toastr.error(translations.INVALID_CLUSTER_SETTINGS_DESC, translations.INVALID_SETTINGS, {
+                        timeOut : 0,
+                        closeButton : true
+                    });
                 });
             }
         }

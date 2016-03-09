@@ -11,11 +11,11 @@
                     <input type="checkbox" name="autoplayUsb" id="autoplayUsb"
                         ng-model="settingvm.userSettings.autoplayUsb"
                         ng-change="settingvm.saveUsbSetting()">
-                    <span translate>AUTOPLAY_USB</span>
+                    <span translate>Automatically play files from USB</span>
                 </label>
             </div>
             <div class="form-group">
-                <label for="language" translate>UI_LANGUAGE</label>
+                <label for="language" translate>Language of the user interface</label>
                 <select name="language" ng-model="settingvm.languageId"
                     id="language" class="form-control"
                     ng-change="settingvm.saveLanguageSettings()">
@@ -138,7 +138,7 @@
     <div>
         <a class="btn btn-default" ui-sref="admin" role="button">
            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-           <span translate>ADMIN_SETTINGS_LINK</span>
+           <span translate>Admin Settings</span>
         </a>
     </div>
 </div>

@@ -12,19 +12,7 @@
         $translateProvider.translations('en-us', {            
             VERSION: 'Version',
             INFORMATION: 'Information',
-            SOFTWARE_VERSION: 'Software version',
-            HARDWARE_VERSION: 'Hardware version',
-            UI_VERSION: 'UI version',
-            SAVE_SETTINGS:'Save settings',
-            USER_SETTINGS: 'User settings',
-            SLAVE_DELAY: 'Slave delay in seconds',
-            HDMI_POWERCYCLING: 'Internal powercycle of HDMI-splitter',
-            HDMI_POWERCYCLING_INFO: 'Workaround for failed HDMI handshake.',
-            ADMIN_SETTINGS_LINK: 'Admin Settings',
-            AUTOPLAY_USB: 'Automatically play files from USB',
-            UI_LANGUAGE: 'Language of the user interface',
-            //IP_ADDRESS: 'IP address',
-            //HOSTNAME: 'Hostname',
+            // admin.js
             rameAnalogOnly: 'Analog',
             rameHdmiOnly: 'HDMI',
             rameHdmiAndAnalog: 'Both',
@@ -35,19 +23,36 @@
             rame1080i60: '1080i 60 Hz',
             rame1080p50: '1080p 50 Hz',
             rame1080p60: '1080p 60 Hz',
+            // dataservice-provider.js
+            INCOMPATIBLE_VERSION: 'Incompatible Server Version',            
+            FIRMWARE_UPGRADED: 'Firmware upgraded',
+            FIRMWARE_UPGRADED_DESC: 'Firmware version $1 is now installed.',
+            // playlist.directive.js
+            PLAYLIST_SYNC_REMOVED: 'Playlist $1 is not synchronized to playlist $2 anymore.',
+            // statusservice.js
             RESTART_REQUIRED: 'Restart required',
             RESTART_REQUIRED_DESC: 'Some changes need device to be restarted.',
             UPDATE_AVAILABLE: 'Update available',
             UPDATE_AVAILABLE_DESC: 'Newer version of software is available.',
-            INCOMPATIBLE_VERSION: 'Incompatible Server Version',
-            PLAYLIST_SYNC_REMOVED: 'Playlist $1 is not synchronized to playlist $2 anymore.',
-            FIRMWARE_UPGRADED: 'Firmware upgraded',
-            FIRMWARE_UPGRADED_DESC: 'Firmware version $1 is now installed.'
+            // settings.js
+            OPTION_SAVED: 'Option saved',
+            OPTION_AUTOPLAY_USB_DESC: 'Option Autoplay USB',
+            OPTION_ENABLED: 'enabled',
+            OPTION_DISABLED: 'disabled',
+            OPTION_SAVE_FAILED: 'Option saving failed',
+            OPTION_AUTOPLAY_USB_FAILED_DESC: 'Option Autoplay USB saving failed.',
+            LANGUAGE_SAVED: 'Language saved.',
+            INVALID_CLUSTER_SETTINGS_DESC: 'IP address of new unit',
+            INVALID_SETTINGS: 'Invalid settings',
+            NEW_ADDED:'Added new',
+            NEW_CLUSTER_UNIT_ADDED_DESC: 'New cluster unit added.',            
         });
         $translateProvider.translations('fi', {
             '': '',
             // settings.html
-            'User Settings': 'Käyttäjäasetukset',            
+            'User Settings': 'Käyttäjäasetukset',
+            'Automatically play files from USB': 'Aloita soitto automaattisesti USB-tikulta',
+            'Language of the user interface': 'Käyttöliittymän kieli',
             'Cluster': 'Koneiden klusterointi',
             'Import Configuration': 'Tuo asetukset',
             'Export Configuration': 'Vie asetukset',
@@ -57,6 +62,10 @@
             'Play Delay (sec)': 'Soiton viive (sekunteina)',
             'Add': 'Lisää',
             'Hostname': 'Koneen nimi',
+            INFORMATION:'-tietoja',
+            'Software version': 'Ohjelmistoversio',
+            'Hardware version': 'Laiteversio',
+            'UI version': 'Käyttöliittymäversio',
             // report-problem-modal.html
             'Add Unit': 'Lisää kone',
             'Report a Problem': 'Raportoi ongelma',
@@ -71,7 +80,8 @@
             'download log': 'lataa logitiedosto',
             'Could not connect to the report server.': 'Palvelimeen ei saatu yhteyttä',
             'Please': 'Ole hyvä,',
-            'and send it to support@rameplayer.org and describe the problem in the email message.': 'ja lähetä se sähköpostin liitteenä osoitteeseen support@rameplayer.org sekä lisäksi kuvaile ongelmaa sähköpostiviestissä.',
+            'and send it to support@rameplayer.org and describe the problem in the email message.': // jshint ignore:line
+                'ja lähetä se sähköpostin liitteenä osoitteeseen support@rameplayer.org sekä lisäksi kuvaile ongelmaa sähköpostiviestissä.', // jshint ignore:line
             // remove-unit-modal.html
             'Are You Sure?': 'Oletko aivan varma?',
             'Do you really want to remove cluster unit': 'Haluatko poistaa tämän koneen klusterista:',
@@ -79,7 +89,8 @@
             // import-cluster-modal.html
             'Import Cluster Configuration': 'Tuo klusteriasetukset',
             'Cluster Configuration File': 'Tiedosto klusteriasetuksista',
-            'Select a file containing cluster configuration data and click Import. Note: import will override any existing configuration.': 'Valitse klusteriasetukset sisältävä tiedosto ja hyväksy tuonti. Huomio: asetusten tuonti poistaa aiemmat asetukset.',
+            'Select a file containing cluster configuration data and click Import. Note: import will override any existing configuration.': // jshint ignore:line
+                'Valitse klusteriasetukset sisältävä tiedosto ja hyväksy tuonti. Huomio: asetusten tuonti poistaa aiemmat asetukset.', // jshint ignore:line
             'Import': 'Tuo',
             // cluster-unit.html
             'Hostname unresolved': 'Koneen nimi ei selvillä',
@@ -133,9 +144,12 @@
             'Current firmware': 'Koneen ohjelmistoversio nyt',
             'Device hardware': 'Koneen kokoonpanoversio',
             // adminsettings.html
-            'Admin Settings': 'Järjestelmän asetukset',            
+            'Admin Settings': 'Järjestelmäasetukset',            
             'Video output resolution': 'Videon resoluutio',
             'Audio port': 'Äänilähtö',
+            rameAnalogOnly: 'Analoginen',
+            rameHdmiOnly: 'HDMI',
+            rameHdmiAndAnalog: 'Molemmat',
             'Device name': 'Koneen nimi',
             'Device IP': 'Koneen IP-osoite',
             'Subnet mask': 'Aliverkon peite',
@@ -152,25 +166,30 @@
             'Configure date and time manually': 'Aseta päivämäärä ja aika käsin',
             'Date:': 'Päivämäärä',
             'Time:': 'Aika:',
-            'Factory reset': 'Palauta oletukset',            
-            VERSION: 'versio',
-            INFORMATION:'-tietoja',
-            'Software version': 'Ohjelmistoversio',
-            'Hardware version': 'Laiteversio',
-            'UI version': 'Käyttöliittymäversio',
-            SAVE_SETTINGS:'Tallenna asetukset',
-            USER_SETTINGS: 'Käyttäjäasetukset',
-            SLAVE_DELAY: 'Slave delay, viive sekunteina',
-            HDMI_POWERCYCLING: 'HDMI-jakajan uudelleenkäynnistys',
-            HDMI_POWERCYCLING_INFO: 'Epäonnistuneen HDMI handshaken varalta.',
-            ADMIN_SETTINGS_LINK: 'Järjestelmäasetukset',
-            AUTOPLAY_USB: 'Aloita soitto automaattisesti USB-tikulta',
-            UI_LANGUAGE: 'Käyttöliittymän kieli',
-            IP_ADDRESS: 'IP-osoite',
-            HOSTNAME: 'Koneen nimi',
-            rameAnalogOnly: 'Analoginen',
-            rameHdmiOnly: 'HDMI',
-            rameHdmiAndAnalog: 'Molemmat'
+            'Factory reset': 'Palauta oletukset',
+            // settings.js            
+            OPTION_SAVED: 'Valinta tallennettu',
+            OPTION_AUTOPLAY_USB_DESC: 'Automaattinen soitto USB-tikulta',
+            OPTION_ENABLED: 'päällä',
+            OPTION_DISABLED: 'pois päältä',
+            OPTION_SAVE_FAILED: 'Valinnan tallennus epäonnistui',
+            OPTION_AUTOPLAY_USB_FAILED_DESC: 'Automaattinen soitto USB-tikulta',
+            LANGUAGE_SAVED: 'Kielivalinta tallennettu',
+            INVALID_CLUSTER_SETTINGS_DESC: 'Lisätyn koneen IP-osoite ei kelpaa.',
+            INVALID_SETTINGS: 'Tarkista asetus',
+            NEW_ADDED:'Lisätty uusi',
+            NEW_CLUSTER_UNIT_ADDED_DESC: 'Uusi kone lisätty klusteriin.',
+            // dataservice-provider.js
+            FIRMWARE_UPGRADED: 'Ohjelmisto päivitetty',
+            FIRMWARE_UPGRADED_DESC: 'Ohjelmistoversio $1 on nyt päivitetty koneeseen.',
+            INCOMPATIBLE_VERSION: 'Palvelimen versio epäyhteensopiva',
+            // statusservice.js
+            RESTART_REQUIRED: 'Uudelleenkäynnistys tarvitaan',
+            RESTART_REQUIRED_DESC: 'Jotkin muutoksista vaativat koneen uudelleenkäynnistystä.',
+            UPDATE_AVAILABLE: 'Päivitys saatavilla',
+            UPDATE_AVAILABLE_DESC: 'Uudempi ohjelmistoversio koneeseen on saatavilla.',
+            // playlist.directive.js
+            PLAYLIST_SYNC_REMOVED: 'Soittolistat $1 ja $2 eivät ole enää synkronoituna.',
         });
         $translateProvider.preferredLanguage('en-us');
         $translateProvider.fallbackLanguage('en-us');
