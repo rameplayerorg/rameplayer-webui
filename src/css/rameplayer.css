@@ -103,6 +103,11 @@ body {
   text-decoration: none;
 }
 
+/* Toastr dark shadow */
+#toast-container > div {
+  box-shadow: 0 0 12px #000000;
+}
+
 /* Admin Settings */
 
 /* IP address input */
