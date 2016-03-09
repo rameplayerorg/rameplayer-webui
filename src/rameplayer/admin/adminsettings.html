@@ -216,7 +216,7 @@
                                 <input type="text" name="ntpHostname" id="ntpHostname" class="form-control" 
                                     ng-model="vm.ntpServerAddress" ng-disabled="vm.useManualTimeConfigs || vm.useNtpIp"
                                     ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?(\.[a-z\d]([a-z\d\-]{0,61}[a-z\d])?)*$/i"
-                                    ng-minlength="1" ng-maxlength="63" />
+                                    ng-minlength="1" ng-maxlength="253" />
                                     <span class="text-warning glyphicon glyphicon-alert" ng-show="!vm.ntpForm.ntpHostname.$valid">
                         </span>
                             </div>
