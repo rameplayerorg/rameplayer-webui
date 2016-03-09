@@ -4,31 +4,31 @@
     </div>
 
     <div class="modal-body">
-        <div ng-if="vm.checkingConnection" translate>
-            Checking internet connection&hellip;
+        <div ng-if="vm.checkingConnection">
+            <span translate>Checking Internet connection</span>&hellip;
         </div>
         <div ng-if="vm.isOnline">
             <div class="form-group">
-                <textarea ng-model="vm.description" class="form-control" placeholder="Describe the problem"></textarea>
+                <textarea ng-model="vm.description" class="form-control" placeholder="{{ 'Describe the problem' | translate }}"></textarea>
             </div>
             <div class="form-group">
-                <label for="reporter">Reporter</label>
-                <input type="email" id="reporter" class="form-control" placeholder="Email" ng-model="vm.reporter">
+                <label for="reporter" translate>Reporter</label>
+                <input type="email" id="reporter" class="form-control" placeholder="{{ 'Email' | translate }}" ng-model="vm.reporter">
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="vm.includeLogs"> <span translate>Include logs</span>
+                    <input type="checkbox" ng-model="vm.includeLogs"><span translate>Include logs</span>
                 </label>
             </div>
         </div>
         <div ng-if="vm.isOffline">
-            <p>
+            <p translate>
             Could not connect to the report server.
             </p>
             <p>
-            Please
-            <a href ng-click="vm.downloadLogs()">download log</a> and send it
-            to support@rameplayer.org and describe the problem in the email message.
+            <span translate>Please</span> 
+            <a href ng-click="vm.downloadLogs()" translate>download log</a> 
+            <span translate>and send it to support@rameplayer.org and describe the problem in the email message.</span>
             </p>
         </div>
     </div>
