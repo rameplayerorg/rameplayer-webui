@@ -16,13 +16,16 @@
         
         vm.isCollapsed = true;
         
-        vm.uiVersion = uiVersion;
+        vm.rameVersionWebUI = uiVersion;
         
         var rameVersioning = '';
         dataService.getRameVersioning().then(function(response) {
             rameVersioning = response.data;
-            vm.rameVersionSoftware = rameVersioning.backend;
+            vm.rameVersionBackend = rameVersioning.backend;
             vm.rameVersionHardware = rameVersioning.hw;
+            vm.rameVersionHardwareAddon = rameVersioning.hwAddon;
+            vm.rameVersionHardwareCfg = rameVersioning.hwCfg;
+            vm.rameVersionFirmware = rameVersioning.firmware;
             logger.debug('Software version fetched', response);
         }, function(errorResponse) {
             logger.error('Software version fetching failed', errorResponse);

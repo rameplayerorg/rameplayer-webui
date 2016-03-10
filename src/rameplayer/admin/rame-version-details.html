@@ -1,0 +1,61 @@
+
+<div ng-controller="RameVersionController as vm" class="well well-sm">
+    <ul class="list-unstyled">
+        <li>
+            <strong>RamePlayer <span translate>INFORMATION</span></strong>
+        </li>
+        <li>
+            <span translate>UI version</span>
+            : {{ vm.rameVersionWebUI }}
+        </li>
+        <li>
+            <span translate>Firmware version</span>
+            : {{ vm.rameVersionFirmware }}
+        </li>
+        <li>
+            <span translate>Backend version</span>
+            : {{ vm.rameVersionBackend }}
+        </li>
+        <li>
+            <span translate>Hardware version</span>
+            : {{ vm.rameVersionHardware }}
+        </li>        
+        <li>
+            <span translate>Hardware add-on info</span>
+            : {{ vm.rameVersionHardwareAddon }}
+        </li>
+        <li>
+            <span translate>Hardware config</span>
+            : {{ vm.rameVersionHardwareCfg }}
+        </li>
+        <li>
+            <!-- 
+            <ul class="list-inline">
+                <li>
+                 -->
+            <div class="row">
+                <div class="col-sm-1">
+                    <button type="button" class="btn btn-link"
+                        ng-click="vm.isCollapsed = !vm.isCollapsed">
+                        <span class="glyphicon glyphicon-plus"
+                            aria-hidden="true"></span>
+                        <span translate>Details</span>
+                    </button>
+                    <!-- </li> <li> -->
+                </div>
+                <div class="col-sm-9 col-sm-offset-1">
+                    <div uib-collapse="vm.isCollapsed">
+                        <div class="">
+                            <span translate>Hardware add-on info</span>
+                            : {{ vm.rameVersionHardwareAddon }}
+                            <br>
+                            <span translate>Hardware config</span>
+                            : {{ vm.rameVersionHardwareCfg }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- </li> </ul> -->
+        </li>
+    </ul>
+</div>

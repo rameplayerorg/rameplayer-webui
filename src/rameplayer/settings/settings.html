@@ -119,15 +119,17 @@
     <div class="well well-sm"  ng-controller="RameVersionController as vvm">
         <strong>RamePlayer <span translate>INFORMATION</span></strong>
         <br>
-        <span translate>Software version</span>:
-        {{ vvm.rameVersionSoftware }}
+        <span translate>Firmware version</span>:
+        {{ vvm.rameVersionFirmware }}
         <br>
-        <span translate>Hardware version</span>:
-        {{ vvm.rameVersionHardware }}
+        <!-- 
+        <span translate>Backend software version</span>:
+        {{ vvm.rameVersionBackend }}
         <br>
         <span translate>UI version</span>:
-        {{ vvm.uiVersion }}
+        {{ vvm.rameVersionWebUI }}
         <br>
+         -->
         <span translate>Hostname</span>:
         {{ settingvm.hostname }}
         <br>
