@@ -29,7 +29,7 @@
                 </div>
             </div>
         </form>
-        <div class="row">
+        <div class="row" ng-controller="RameVersionController as vvm">
             <div class="col-sm-5 col-sm-offset-1">
                 <div class="row">
                     <span translate>Latest stable firmware version</span>: 
@@ -39,15 +39,16 @@
                 </div>
                 <div class="row">
                     <span translate>Current firmware</span>: 
-                    {{ vm.rameVersionSoftware }}
+                    {{ vvm.rameVersionSoftware }}
                 </div>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-4 col-sm-offset-1">
                 <div class="row">
                     <!-- <div class="col-sm-4 text-info"> -->
                     <span translate>Device hardware</span>: 
-                    {{ vm.rameVersionHardware }}
-                </div>                
+                    {{ vvm.rameVersionHardware }}
+                    <!-- </div> -->
+                </div>
             </div>
         </div>
     </div>

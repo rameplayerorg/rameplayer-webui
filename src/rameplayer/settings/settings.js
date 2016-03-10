@@ -26,18 +26,6 @@
         vm.userSettings = dataService.getSettings();
         vm.saveUsbSetting = saveUsbSetting;
         
-        vm.uiVersion = uiVersion;
-        //$log.info('test:' + uiVersion);
-        var rameVersioning = '';
-        dataService.getRameVersioning().then(function(response) {
-            rameVersioning = response.data;
-            vm.rameVersionSoftware = rameVersioning.backend;
-            vm.rameVersionHardware = rameVersioning.hw;
-            logger.info('Version fetched', response);
-        }, function(errorResponse) {
-            logger.error('Version fetching failed', errorResponse);
-        });
-        
         vm.windowTitleInfo = 'RamePlayer';
         var systemSettings = dataService.getSystemSettings();
         systemSettings.$promise.then(function() {
