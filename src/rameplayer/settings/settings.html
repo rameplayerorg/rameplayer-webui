@@ -116,17 +116,17 @@
         </div>
     </div>
 
-    <div class="well well-sm">
+    <div class="well well-sm"  ng-controller="RameVersionController as vvm">
         <strong>RamePlayer <span translate>INFORMATION</span></strong>
         <br>
         <span translate>Software version</span>:
-        {{ settingvm.rameVersionSoftware }}
+        {{ vvm.rameVersionSoftware }}
         <br>
         <span translate>Hardware version</span>:
-        {{ settingvm.rameVersionHardware }}
+        {{ vvm.rameVersionHardware }}
         <br>
         <span translate>UI version</span>:
-        {{ settingvm.uiVersion }}
+        {{ vvm.uiVersion }}
         <br>
         <span translate>Hostname</span>:
         {{ settingvm.hostname }}

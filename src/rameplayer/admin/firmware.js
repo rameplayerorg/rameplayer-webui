@@ -22,16 +22,6 @@
         vm.upgradeLatestStable = null;
         vm.upgradeSelection = null;
         vm.upgradeFirmwareModal = upgradeFirmwareModal;
-
-        var rameVersioning = '';
-        dataService.getRameVersioning().then(function(response) {
-            rameVersioning = response.data;
-            vm.rameVersionSoftware = rameVersioning.backend;
-            vm.rameVersionHardware = rameVersioning.hw;
-            logger.info('Software version fetched', response);
-        }, function(errorResponse) {
-            logger.error('Software version fetching failed', errorResponse);
-        });
         
         /**
          * @name init
