@@ -1,15 +1,15 @@
 <div class="row" style="margin-bottom: 10px">
     <div class="col-sm-3">
-        <a href ng-click="vm.toggle()" fdata-target="#vol-form-{{ vm.channel }}" fdata-toggle="collapse">
-            <span translate>{{ vm.channel }}</span>
+        <a href ng-click="vm.toggle()">
+            <span translate>{{ vm.channel.id }}</span>
             <span>{{ vm.volume }}%</span>
             <span class="glyphicon" ng-class="{ 'glyphicon-chevron-right': !vm.isOpen, 'glyphicon-chevron-left': vm.isOpen }"></span>
         </a>
     </div>
 
     <div class="col-sm-6">
-        <div class="horizontal-collapse" id="vol-form-{{ vm.channel }}">
-            <input type="range" min="0" max="100" step="1" ng-model="vm.volume" class="volume-slider">
+        <div class="horizontal-collapse">
+            <input type="range" min="{{ vm.channel.min }}" max="{{ vm.channel.max }}" step="1" ng-model="vm.channel.volume" ng-change="vm.setVolume()" class="volume-slider">
         </div>
     </div>
 </div>

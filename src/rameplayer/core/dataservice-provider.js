@@ -96,6 +96,8 @@
             ds.getLog = getLog;
             ds.getReportConfig = getReportConfig;
             ds.sendReport = sendReport;
+            ds.getAudio = getAudio;
+            ds.setVolume = setVolume;
 
             // store firmware version so we know when it changes
             $localStorage.$default({
@@ -389,6 +391,16 @@
 
             function sendReport(url, data) {
                 return $http.post(url, data);
+            }
+
+            function getAudio() {
+                return $http.get(baseUrl + 'audio');
+            }
+
+            function setVolume(channel, volume) {
+                return $http.put(baseUrl + 'audio/' + channel, {
+                    volume: parseInt(volume)
+                });
             }
         }
     }

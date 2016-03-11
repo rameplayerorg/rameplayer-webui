@@ -94,6 +94,19 @@
                 '$promise': $q.when()
             };
 
+        var audioConfig = {
+            channels: [
+                {
+                    id: 'channel1',
+                    volume: 80,
+                },
+                {
+                    id: 'channel2',
+                    volume: 100
+                }
+            ]
+        };
+
         var service = {
             getSettings: getSettings,
             getStatus: getStatus,
@@ -119,7 +132,9 @@
             writeLog: writeLog,
             getLog: getLog,
             getReportConfig: getReportConfig,
-            sendReport: sendReport
+            sendReport: sendReport,
+            getAudio: getAudio,
+            setVolume: setVolume
         };
 
         var delay = 50;
@@ -509,6 +524,19 @@
         }
 
         function sendReport(url, data) {
+            return $timeout(function() {
+                return {
+                };
+            }, delay);
+        }
+
+        function getAudio() {
+            return $timeout(function() {
+                return audioConfig;
+            }, delay);
+        }
+
+        function setVolume(channel, volume) {
             return $timeout(function() {
                 return {
                 };
