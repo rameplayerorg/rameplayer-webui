@@ -97,11 +97,15 @@
         var audioConfig = {
             channels: [
                 {
-                    id: 'channel1',
+                    id: 'headphone',
+                    min: 0,
+                    max: 110,
                     volume: 80,
                 },
                 {
-                    id: 'channel2',
+                    id: 'lineout',
+                    min: 0,
+                    max: 110,
                     volume: 100
                 }
             ]
@@ -532,7 +536,9 @@
 
         function getAudio() {
             return $timeout(function() {
-                return audioConfig;
+                return {
+                    data: audioConfig
+                };
             }, delay);
         }
 
