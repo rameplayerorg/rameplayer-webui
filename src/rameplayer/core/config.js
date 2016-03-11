@@ -45,7 +45,8 @@
             INVALID_CLUSTER_SETTINGS_DESC: 'IP address of new unit',
             INVALID_SETTINGS: 'Invalid settings',
             NEW_ADDED:'Added new',
-            NEW_CLUSTER_UNIT_ADDED_DESC: 'New cluster unit added.',            
+            NEW_CLUSTER_UNIT_ADDED_DESC: 'New cluster unit added.',
+            lineOut: 'Line out',
         });
         $translateProvider.translations('fi', {
             '': '',
