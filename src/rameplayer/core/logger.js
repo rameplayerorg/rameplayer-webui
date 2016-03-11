@@ -25,10 +25,10 @@
      */
     function logger($log, dataService) {
         var level = {
-            DEBUG: 'debug',
-            INFO: 'info',
-            WARNING: 'warning',
-            ERROR: 'error'
+            DEBUG: 'DEBUG',
+            INFO: 'INFO',
+            WARNING: 'WARNING',
+            ERROR: 'ERROR'
         };
 
         var service = {
