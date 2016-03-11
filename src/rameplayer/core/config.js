@@ -164,8 +164,8 @@
             'NTP server': 'NTP-palvelin',
             'Use IP address': 'Aseta IP-osoitteella',
             'Configure date and time manually': 'Aseta päivämäärä ja aika käsin',
-            'Date:': 'Päivämäärä',
-            'Time:': 'Aika:',
+            'Date:': 'Päivämäärä:',
+            'Time:': 'Kellonaika:',
             'Factory reset': 'Palauta oletukset',
             // settings.js            
             OPTION_SAVED: 'Valinta tallennettu',
