@@ -44,7 +44,7 @@
         ////////////////////
 
         function log() {
-            send('', arguments);
+            send(level.INFO, arguments);
             /* jshint validthis:true */
             return $log.log.apply(this, arguments);
         }
