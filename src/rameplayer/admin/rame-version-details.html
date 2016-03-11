@@ -1,38 +1,21 @@
-
+<!-- 
+NOTE: Intentionally no translation of fields to other languages
+to simplify debugging and helpdesking. 
+-->
 <div ng-controller="RameVersionController as vm" class="well well-sm">
     <ul class="list-unstyled">
         <li>
             <strong>RamePlayer <span translate>INFORMATION</span></strong>
         </li>
         <li>
-            <span translate>UI version</span>
-            : {{ vm.rameVersionWebUI }}
+            <span>Firmware</span>: 
+            {{ vm.rameVersionFirmware }}
         </li>
         <li>
-            <span translate>Firmware version</span>
-            : {{ vm.rameVersionFirmware }}
+            <span>Hardware</span>: 
+            {{ vm.rameVersionHardware }}
         </li>
         <li>
-            <span translate>Backend version</span>
-            : {{ vm.rameVersionBackend }}
-        </li>
-        <li>
-            <span translate>Hardware version</span>
-            : {{ vm.rameVersionHardware }}
-        </li>        
-        <li>
-            <span translate>Hardware add-on info</span>
-            : {{ vm.rameVersionHardwareAddon }}
-        </li>
-        <li>
-            <span translate>Hardware config</span>
-            : {{ vm.rameVersionHardwareCfg }}
-        </li>
-        <li>
-            <!-- 
-            <ul class="list-inline">
-                <li>
-                 -->
             <div class="row">
                 <div class="col-sm-1">
                     <button type="button" class="btn btn-link"
@@ -45,17 +28,27 @@
                 </div>
                 <div class="col-sm-9 col-sm-offset-1">
                     <div uib-collapse="vm.isCollapsed">
-                        <div class="">
-                            <span translate>Hardware add-on info</span>
-                            : {{ vm.rameVersionHardwareAddon }}
-                            <br>
-                            <span translate>Hardware config</span>
-                            : {{ vm.rameVersionHardwareCfg }}
-                        </div>
+                        <ul class="list-unstyled">
+                            <li>
+                                <span>Backend version</span>: 
+                                {{ vm.rameVersionBackend }}
+                            </li>
+                            <li>
+                                <span>Hardware add-on info</span>: 
+                                {{ vm.rameVersionHardwareAddon }}
+                            </li>
+                            <li>
+                                <span>Hardware config</span>: 
+                                {{ vm.rameVersionHardwareCfg }}
+                            </li>
+                            <li>
+                                <span>Web UI version</span>: 
+                                {{ vm.rameVersionWebUI }}
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <!-- </li> </ul> -->
         </li>
     </ul>
 </div>
