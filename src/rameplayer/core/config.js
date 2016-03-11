@@ -46,7 +46,8 @@
             INVALID_SETTINGS: 'Invalid settings',
             NEW_ADDED:'Added new',
             NEW_CLUSTER_UNIT_ADDED_DESC: 'New cluster unit added.',
-            lineOut: 'Line out',
+            headphone: 'Headphone',
+            lineout: 'Line out'
         });
         $translateProvider.translations('fi', {
             '': '',
