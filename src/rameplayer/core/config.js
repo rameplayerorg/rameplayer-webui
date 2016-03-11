@@ -189,14 +189,15 @@
             UPDATE_AVAILABLE_DESC: 'Uudempi ohjelmistoversio laitteeseen on saatavilla.',
             // playlist.directive.js
             PLAYLIST_SYNC_REMOVED: 'Soittolistat $1 ja $2 eivät ole enää synkronoituna.',
-            // rame-version.html
+            // rame-version-details.html 
+            //Translations for info fields not used 
+            //for sake of consistency in debugging
             'Backend version': 'Taustaohjelmisto (Backend)',
             'Hardware add-on info': 'Laitteen lisäosatieto (Hw add-on)',
             'Hardware config': 'Laitteen kokoonpano (Hw cfg)',
             'Web UI version': 'Käyttöliittymä (Web UI)',
             'Details': 'Lisätietoja',
-            'Software version': 'Ohjelmistoversio',
-            
+            'Software version': 'Ohjelmistoversio',            
             'UI version': 'Käyttöliittymä',
         });
         $translateProvider.preferredLanguage('en-us');
