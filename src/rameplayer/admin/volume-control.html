@@ -2,7 +2,7 @@
     <div class="col-sm-3">
         <a href ng-click="vm.toggle()">
             <span translate>{{ vm.channel.id }}</span>
-            <span>{{ vm.volume }}%</span>
+            <span>{{ vm.channel.volume }}%</span>
             <span class="glyphicon" ng-class="{ 'glyphicon-chevron-right': !vm.isOpen, 'glyphicon-chevron-left': vm.isOpen }"></span>
         </a>
     </div>
