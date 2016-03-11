@@ -53,7 +53,7 @@
             'User Settings': 'Käyttäjäasetukset',
             'Automatically play files from USB': 'Aloita soitto automaattisesti USB-tikulta',
             'Language of the user interface': 'Käyttöliittymän kieli',
-            'Cluster': 'Koneiden klusterointi',
+            'Cluster': 'Laitteiden klusterointi',
             'Import Configuration': 'Tuo asetukset',
             'Export Configuration': 'Vie asetukset',
             'Units': 'Units',
@@ -61,13 +61,12 @@
             'Port': 'Portti',
             'Play Delay (sec)': 'Soiton viive (sekunteina)',
             'Add': 'Lisää',
-            'Hostname': 'Koneen nimi',
+            'Hostname': 'Laitteen nimi',
             INFORMATION:'-tietoja',
-            'Software version': 'Ohjelmistoversio',
-            'Hardware version': 'Laiteversio',
-            'UI version': 'Käyttöliittymäversio',
+            'Firmware version': 'Laiteohjelmisto (Firmware)',
+            'Hardware version': 'Laitteisto',
             // report-problem-modal.html
-            'Add Unit': 'Lisää kone',
+            'Add Unit': 'Lisää laite',
             'Report a Problem': 'Raportoi ongelma',
             'Checking Internet connection': 'Varmistetaan Internet-yhteys',
             'Describe the problem': 'Kuvaile ongelma',
@@ -84,7 +83,7 @@
                 'ja lähetä se sähköpostin liitteenä osoitteeseen support@rameplayer.org sekä lisäksi kuvaile ongelmaa sähköpostiviestissä.', // jshint ignore:line
             // remove-unit-modal.html
             'Are You Sure?': 'Oletko aivan varma?',
-            'Do you really want to remove cluster unit': 'Haluatko poistaa tämän koneen klusterista:',
+            'Do you really want to remove cluster unit': 'Haluatko poistaa tämän laitteen klusterista:',
             'Remove': 'Poista',
             // import-cluster-modal.html
             'Import Cluster Configuration': 'Tuo klusteriasetukset',
@@ -93,13 +92,13 @@
                 'Valitse klusteriasetukset sisältävä tiedosto ja hyväksy tuonti. Huomio: asetusten tuonti poistaa aiemmat asetukset.', // jshint ignore:line
             'Import': 'Tuo',
             // cluster-unit.html
-            'Hostname unresolved': 'Koneen nimi ei selvillä',
+            'Hostname unresolved': 'Laitteen nimi ei selvillä',
             'Save': 'Tallenna',
             'Edit': 'Muokkaa',
-            'Remove unit': 'Poista kone',
+            'Remove unit': 'Poista laite',
             // sync-modal.html
             'Select Playlist To Synchronize With': 'Valitse synkronoitava soittolista',
-            'Cluster Unit': 'Kone klusterissa',
+            'Cluster Unit': 'Laite klusterissa',
             'Playlist': 'Soittolista',
             'Open': 'Avaa',
             // save-as-modal.html
@@ -130,19 +129,19 @@
             'Connection error': 'Yhteysvirhe',
             'Connecting...': 'Yhdistetään...',
             'Jump': 'Hyppää',
-            'Error: no response': 'Virhe: kone ei vastaa',
+            'Error: no response': 'Virhe: laite ei vastaa',
             // main.html
             'Playlists': 'Soittolistat',
             // upgrade-firmware-modal.html
-            'Upgrade To': 'Päivitä koneen ohjelmisto versioon',
+            'Upgrade To': 'Päivitä laitteen ohjelmisto versioon',
             'Upgrade': 'Päivitä',
             // firmware.html
-            'Firmware upgrade': 'Koneen ohjelmistopäivitys',
+            'Firmware upgrade': 'Laitteen ohjelmistopäivitys',
             'Available firmwares': 'Saatavilla olevat versiot',
             'Latest stable firmware version': 'Viimeisin vakaa ohjelmistoversio',
             'Only development versions available': 'Vain kehitysversioita saatavilla',
-            'Current firmware': 'Koneen ohjelmistoversio nyt',
-            'Device hardware': 'Koneen kokoonpanoversio',
+            'Current firmware': 'Laitteen ohjelmistoversio nyt',
+            'Device hardware': 'Laitteen kokoonpanoversio',
             // adminsettings.html
             'Admin Settings': 'Järjestelmäasetukset',            
             'Video output resolution': 'Videon resoluutio',
@@ -150,17 +149,17 @@
             rameAnalogOnly: 'Analoginen',
             rameHdmiOnly: 'HDMI',
             rameHdmiAndAnalog: 'Molemmat',
-            'Device name': 'Koneen nimi',
-            'Device IP': 'Koneen IP-osoite',
+            'Device name': 'Laitteen nimi',
+            'Device IP': 'Laitteen IP-osoite',
             'Subnet mask': 'Aliverkon peite',
             'Gateway IP': 'Gatewayn IP-osoite',
             'DNS, preferred': 'DNS, ensisijainen',
             'DNS, alternative': 'DNS, vaihtoehtoinen',
             'IP Configurations': 'IP-osoiteasetukset',
             'Configure networking manually': 'Aseta IP-osoitteet käsin',
-            'Use as DHCP server': 'Käytä konetta DHCP serverinä',
+            'Use as DHCP server': 'Käytä laitetta DHCP serverinä',
             'Time Configurations': 'Aika-asetukset',
-            'Device thinks time is': 'Koneen mielestä kello kulkee',
+            'Device thinks time is': 'Laitteen mielestä kello kulkee',
             'NTP server': 'NTP-palvelin',
             'Use IP address': 'Aseta IP-osoitteella',
             'Configure date and time manually': 'Aseta päivämäärä ja aika käsin',
@@ -175,21 +174,30 @@
             OPTION_SAVE_FAILED: 'Valinnan tallennus epäonnistui',
             OPTION_AUTOPLAY_USB_FAILED_DESC: 'Automaattinen soitto USB-tikulta',
             LANGUAGE_SAVED: 'Kielivalinta tallennettu',
-            INVALID_CLUSTER_SETTINGS_DESC: 'Lisätyn koneen IP-osoite ei kelpaa.',
+            INVALID_CLUSTER_SETTINGS_DESC: 'Lisätyn laitteen IP-osoite ei kelpaa.',
             INVALID_SETTINGS: 'Tarkista asetus',
             NEW_ADDED:'Lisätty uusi',
-            NEW_CLUSTER_UNIT_ADDED_DESC: 'Uusi kone lisätty klusteriin.',
+            NEW_CLUSTER_UNIT_ADDED_DESC: 'Uusi laite lisätty klusteriin.',
             // dataservice-provider.js
             FIRMWARE_UPGRADED: 'Ohjelmisto päivitetty',
-            FIRMWARE_UPGRADED_DESC: 'Ohjelmistoversio $1 on nyt päivitetty koneeseen.',
+            FIRMWARE_UPGRADED_DESC: 'Ohjelmistoversio $1 on nyt päivitetty laitteeseen.',
             INCOMPATIBLE_VERSION: 'Palvelimen versio epäyhteensopiva',
             // statusservice.js
             RESTART_REQUIRED: 'Uudelleenkäynnistys tarvitaan',
-            RESTART_REQUIRED_DESC: 'Jotkin muutoksista vaativat koneen uudelleenkäynnistystä.',
+            RESTART_REQUIRED_DESC: 'Jotkin muutoksista vaativat laitteen uudelleenkäynnistystä.',
             UPDATE_AVAILABLE: 'Päivitys saatavilla',
-            UPDATE_AVAILABLE_DESC: 'Uudempi ohjelmistoversio koneeseen on saatavilla.',
+            UPDATE_AVAILABLE_DESC: 'Uudempi ohjelmistoversio laitteeseen on saatavilla.',
             // playlist.directive.js
             PLAYLIST_SYNC_REMOVED: 'Soittolistat $1 ja $2 eivät ole enää synkronoituna.',
+            // rame-version.html
+            'Backend version': 'Taustaohjelmisto (Backend)',
+            'Hardware add-on info': 'Laitteen lisäosatieto (Hw add-on)',
+            'Hardware config': 'Laitteen kokoonpano (Hw cfg)',
+            'Web UI version': 'Käyttöliittymä (Web UI)',
+            'Details': 'Lisätietoja',
+            'Software version': 'Ohjelmistoversio',
+            
+            'UI version': 'Käyttöliittymä',
         });
         $translateProvider.preferredLanguage('en-us');
         $translateProvider.fallbackLanguage('en-us');
