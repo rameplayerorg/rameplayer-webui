@@ -210,6 +210,7 @@
         // Global settings and configurations
         // Toasts thrown from arbitrary exception overrides more settings to make them sticky
         angular.extend(toastrConfig, {
+            allowHtml : true,
             autoDismiss : false,
             containerId : 'toast-container',
             maxOpened : 0,
