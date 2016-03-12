@@ -201,6 +201,11 @@
             'Details': 'Lisätietoja',
             'Software version': 'Ohjelmistoversio',            
             'UI version': 'Käyttöliittymä',
+            // volumes.html
+            'Volumes': 'Äänenvoimakkuudet',
+            // volume-control.html
+            headphone: 'Kuulokkeet',
+            lineout: 'Linjalähtö',
         });
         $translateProvider.preferredLanguage('en-us');
         $translateProvider.fallbackLanguage('en-us');
