@@ -5,6 +5,7 @@
         <span translate class="panel-title">Firmware upgrade</span>
     </div>
     <div class="panel-body">
+        <div class="row center-block" >
         <form name="upgradeForm">
             <div class="form-horizontal">
                 <div class="form-group">
@@ -26,29 +27,28 @@
                             <span translate>Upgrade</span>
                         </button>
                     </div>
-                </div>
+                </div>                
             </div>
         </form>
+        </div>
         <div class="row" ng-controller="RameVersionController as vvm">
-            <div class="col-sm-5 col-sm-offset-1">
-                <div class="row">
-                    <span translate>Latest stable firmware version</span>: 
-                    {{ !vm.upgradeLatestStable 
-                        ? ('Only development versions available' | translate ) 
-                        : vm.upgradeLatestStable.title }}
-                </div>
-                <div class="row">
-                    <span translate>Current firmware</span>: 
-                    {{ vvm.rameVersionFirmware }}
-                </div>
-            </div>
-            <div class="col-sm-4 col-sm-offset-1">
-                <div class="row">
-                    <!-- <div class="col-sm-4 text-info"> -->
-                    <span translate>Device hardware</span>: 
-                    {{ vvm.rameVersionHardware }}
-                    <!-- </div> -->
-                </div>
+            <div class="col-sm-12">
+                <ul class="list-unstyled">
+                    <li>                
+                        <span translate>Latest stable firmware version</span>: 
+                        {{ !vm.upgradeLatestStable 
+                            ? ('Only development versions available' | translate ) 
+                            : vm.upgradeLatestStable.title }}
+                    </li>
+                    <li>
+                        <span translate>Current firmware</span>: 
+                        {{ vvm.rameVersionFirmware }}
+                    </li>
+                    <li>
+                        <span translate>Device hardware</span>: 
+                        {{ vvm.rameVersionHardware }}
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
