@@ -8,10 +8,10 @@
             'AdminController', AdminController);
 
     AdminController.$inject = [
-            'logger', 'dataService', 'toastr', '$rootScope'
+            'logger', 'dataService', 'toastr', '$rootScope', '$translate'
     ];
 
-    function AdminController(logger, dataService, toastr, $rootScope) {
+    function AdminController(logger, dataService, toastr, $rootScope, $translate) {
         var vm = this;
         vm.systemSettings = dataService.getSystemSettings();
         vm.systemSettings.$promise.then(function() {
@@ -96,17 +96,17 @@
                 // Compliance to Internet standard specification RFC 1123
                 // Match against regexp already done using ng-pattern
                 //.match(/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?(\.[a-z\d]([a-z\d\-]{0,61}[a-z\d])?)*$/i)){
-                invalidFields.push('Device hostname');
+                invalidFields.push('DEVICE_HOSTNAME');
                 valid = false;
             }  
             
             if (vm.manualIpConfig) {
                 vm.systemSettings.ipDhcpClient = false;
                 if (!vm.deviceIp.valid) {
-                    invalidFields.push('IP address');
+                    invalidFields.push('DEVICE_IP');
                 }
                 if (!vm.subnetMask.valid) {
-                    invalidFields.push('Subnet mask');
+                    invalidFields.push('SUBNET_MASK');
                 }
                 /* 
                 // TODO: ?? Should it be possible to leave these unset,
@@ -123,43 +123,43 @@
                 */
                 if (vm.systemSettings.ipDhcpServer) {
                     var octets;
-                    if (!vm.dhcpRangeStartIp.valid) {
-                        invalidFields.push('DHCP Range Start');
+                    if (!vm.dhcpServerRangeStartIp.valid) {
+                        invalidFields.push('DHCP_RANGE_START');
                     }
                     else {
-                        octets = vm.dhcpRangeStartIp.value.split('.');
+                        octets = vm.dhcpServerRangeStartIp.value.split('.');
                         if (octets[3] === '0') {
-                            invalidFields.push('DHCP Range Start Not Allowed');
+                            invalidFields.push('DHCP_RANGE_START');
                         }
                     }
 
-                    if (!vm.dhcpRangeEndIp.valid) {
-                        invalidFields.push('DHCP Range End');
+                    if (!vm.dhcpServerRangeEndIp.valid) {
+                        invalidFields.push('DHCP_RANGE_END');
                     }
                     else {
-                        octets = vm.dhcpRangeEndIp.value.split('.');
+                        octets = vm.dhcpServerRangeEndIp.value.split('.');
                         if (octets[3] === '255') {
-                            invalidFields.push('DHCP Range End Not Allowed');
+                            invalidFields.push('DHCP_RANGE_END');
                         }
                     }
 
                     if (!validateIpOrdering(vm.dhcpServerRangeStartIp.value, vm.dhcpServerRangeEndIp.value)) {
-                        invalidFields.push('DHCP Range Definition');
+                        invalidFields.push('DHCP_RANGE_DEF');
                     }                    
                 }
             }
             
             if (vm.useManualTimeConfigs) {
                 if (!vm.dateUserInput) {
-                    invalidFields.push('Manual date');
+                    invalidFields.push('MANUAL_DATE');
                 }
                 if (!vm.timeUserInput) {
-                    invalidFields.push('Manual time');
+                    invalidFields.push('MANUAL_TIME');
                 }
                 vm.manualDateTime = validateManualDateTime(vm.dateUserInput, vm.timeUserInput);
             }
             else if (!vm.ntpForm.ntpHostname.$valid) {
-                invalidFields.push('NTP Server Hostname');
+                invalidFields.push('NTP_SERVER_HOSTNAME');
             }
             // logger.info(basicsForm.deviceName.$valid);
             // logger.info($('#ntpHostname').$valid);
@@ -168,10 +168,19 @@
             
             if (invalidFields.length) {
                 valid = false;
-                // Sticky toast
-                toastr.error(invalidFields.join(', '), 'Invalid settings', {
-                    timeOut : 0,
-                    closeButton: true
+                $translate(invalidFields).then(function(tr) {
+                    var msg = '';
+                    for (var i = 0; i < invalidFields.length; i++) {
+                        msg += tr[invalidFields[i]];
+                        if (i > 0) {
+                            msg += ', ';
+                        }
+                    }
+                    // Sticky toast
+                    toastr.error(msg, 'Invalid settings', {
+                        timeOut : 0,
+                        closeButton: true
+                    });
                 });
             }
             
