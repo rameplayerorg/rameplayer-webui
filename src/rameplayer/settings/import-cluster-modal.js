@@ -5,9 +5,9 @@
         .module('rameplayer.settings')
         .controller('ImportClusterModalController', ImportClusterModalController);
 
-    ImportClusterModalController.$inject = ['logger', '$uibModalInstance', 'clusterService', 'toastr'];
+    ImportClusterModalController.$inject = ['logger', '$uibModalInstance', 'clusterService', 'toastr', '$translate'];
 
-    function ImportClusterModalController(logger, $uibModalInstance, clusterService, toastr) {
+    function ImportClusterModalController(logger, $uibModalInstance, clusterService, toastr, $translate) {
         var vm = this;
 
         vm.onFileRead = onFileRead;
@@ -23,7 +23,11 @@
             if (vm.readData !== undefined) {
                 $uibModalInstance.close();
                 clusterService.importConfig(vm.readData);
-                toastr.success('Cluster configuration imported successfully.', 'Cluster Configuration Imported');
+                $translate(['CLUSTER_CONFIG_IMPORTED', 'CLUSTER_CONFIG_IMPORTED_SUCCESS_DESC'])
+                .then(function(translations) {
+                    toastr.success(translations.CLUSTER_CONFIG_IMPORTED_SUCCESS_DESC, 
+                            translations.CLUSTER_CONFIG_IMPORTED);
+                });
             }
         }
 

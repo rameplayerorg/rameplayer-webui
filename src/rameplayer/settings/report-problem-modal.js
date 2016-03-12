@@ -6,10 +6,10 @@
         .controller('ReportProblemModalController', ReportProblemModalController);
 
     ReportProblemModalController.$inject = ['logger', '$uibModalInstance', 'dataService', 'toastr',
-        'FileSaver', 'Blob'];
+        'FileSaver', 'Blob', '$translate'];
 
     function ReportProblemModalController(logger, $uibModalInstance, dataService, toastr,
-                                          FileSaver, Blob) {
+                                          FileSaver, Blob, $translate) {
         var vm = this;
         var sendUrl;
 
@@ -55,7 +55,10 @@
                         sendReport(response.data);
                     },
                     function() {
-                        toastr.error('Could not load logs from server.', 'Report not sent');
+                        $translate(['REPORT_NOT_SENT', 'LOADING_LOGS_FAILED_DESC'])
+                        .then(function(translations) {
+                            toastr.error(translations.LOADING_LOGS_FAILED_DESC, translations.REPORT_NOT_SENT);
+                        });
                         logger.error('Could not load logs from server');
                     });
                 }
@@ -72,10 +75,16 @@
                 log: log
             };
             dataService.sendReport(sendUrl, report).then(function(response) {
-                toastr.success('Thank you for sending the report!', 'Report sent');
+                $translate(['REPORT_SENT', 'REPORT_SENT_SUCCESS_DESC'])
+                .then(function(translations) {
+                    toastr.success(translations.REPORT_SENT_SUCCESS_DESC, translations.REPORT_SENT);
+                });
             },
             function() {
-                toastr.error('Sending report failed.', 'Report not sent');
+                $translate(['REPORT_NOT_SENT', 'SENDING_REPORT_FAILED_DESC'])
+                .then(function(translations) {
+                    toastr.error(translations.SENDING_REPORT_FAILED_DESC, translations.REPORT_NOT_SENT);
+                });                
                 logger.error('Could not send report to ', sendUrl);
             });
         }
@@ -89,7 +98,10 @@
                 FileSaver.saveAs(blob, 'rameplayer.log');
             },
             function() {
-                toastr.error('Could not load logs from server.', 'Error loading logs');
+                $translate(['LOADING_LOGS_ERROR', 'LOADING_LOGS_FAILED_DESC'])
+                .then(function(translations) {
+                    toastr.error(translations.LOADING_LOGS_FAILED_DESC, translations.LOADING_LOGS_ERROR);
+                });
                 logger.error('Could not load logs from server');
             });
         }

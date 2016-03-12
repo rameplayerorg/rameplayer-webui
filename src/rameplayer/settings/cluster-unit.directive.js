@@ -21,9 +21,9 @@
         return directive;
     }
 
-    ClusterUnitController.$inject = ['$log', '$uibModal', 'clusterService', 'toastr'];
+    ClusterUnitController.$inject = ['$log', '$uibModal', 'clusterService', 'toastr', '$translate'];
 
-    function ClusterUnitController($log, $uibModal, clusterService, toastr) {
+    function ClusterUnitController($log, $uibModal, clusterService, toastr, $translate) {
         var vm = this;
         vm.editMode = false;
         vm.editUnit = {
@@ -57,10 +57,16 @@
                 vm.unit.delay = vm.editUnit.delay;
                 clusterService.updateUnit(vm.unit);
                 vm.editMode = false;
-                toastr.success('Unit settings updated.', 'Cluster');
+                $translate(['CLUSTER', 'UNIT_SETTINGS_UPDATED_DESC'])
+                .then(function(translations) {
+                    toastr.success(translations.UNIT_SETTINGS_UPDATED_DESC, translations.CLUSTER);
+                });
             }
             else {
-                toastr.error('IP address is invalid.', 'Cluster Unit Settings');
+                $translate(['CLUSTER_UNIT_SETTINGS', 'IP_ADDRESS_INVALID_DESC'])
+                .then(function(translations) {
+                    toastr.error(translations.IP_ADDRESS_INVALID_DESC, translations.CLUSTER_UNIT_SETTINGS);
+                });
             }
         }
 
@@ -81,7 +87,10 @@
 
             modalInstance.result.then(function(result) {
                 clusterService.removeUnit(vm.unit.id);
-                toastr.success('Unit removed.', 'Cluster');
+                $translate(['CLUSTER', 'UNIT_REMOVED_DESC'])
+                .then(function(translations) {
+                    toastr.success(translations.UNIT_REMOVED_DESC, translations.CLUSTER);
+                });
             });
         }
     }
