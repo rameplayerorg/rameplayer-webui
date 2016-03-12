@@ -6,10 +6,10 @@
         .controller('UpgradeFirmwareModalController', UpgradeFirmwareModalController);
 
     UpgradeFirmwareModalController.$inject = ['logger', '$scope', '$timeout', '$uibModalInstance', 'dataService',
-        'upgradeSelection', 'statusService', 'toastr', '$window'];
+        'upgradeSelection', 'statusService', 'toastr', '$window', '$translate'];
 
     function UpgradeFirmwareModalController(logger, $scope, $timeout, $uibModalInstance, dataService,
-                                            upgradeSelection, statusService, toastr, $window) {
+                                            upgradeSelection, statusService, toastr, $window, $translate) {
         var vm = this;
 
         vm.progress = 0;
@@ -33,7 +33,12 @@
                 },
                 function(errorResponse) {
                     logger.error('Firmware upgrade failed', vm.upgradeSelection, errorResponse);
-                    toastr.error('Firmware upgrade failed to ' + vm.upgradeSelection.title + '.', 'Upgrade Failed');
+                    $translate(['UPGRADE_FAILED', 'FIRMWARE_UPGRADE_FAILED_DESC'])
+                    .then(function(translations) {
+                        toastr.error(
+                                translations.FIRMWARE_UPGRADE_FAILED_DESC + vm.upgradeSelection.title + '.', 
+                                translations.UPGRADE_FAILED);
+                    });
                     followStatus();
                 });
         }

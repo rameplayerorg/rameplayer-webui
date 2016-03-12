@@ -34,6 +34,22 @@
             RESTART_REQUIRED_DESC: 'Some changes need device to be restarted.',
             UPDATE_AVAILABLE: 'Update available',
             UPDATE_AVAILABLE_DESC: 'Newer version of software is available.',
+            // report-problem.js
+            REPORT_NOT_SENT: 'Report not sent',
+            SENDING_REPORT_FAILED_DESC: 'Sending report failed.',
+            LOADING_LOGS_FAILED_DESC: 'Could not load logs from server.',
+            LOADING_LOGS_ERROR: 'Error loading logs',
+            REPORT_SENT: 'Report sent',
+            REPORT_SENT_SUCCESS_DESC: 'Thank you for sending the report!',
+            // import-cluster-modal.js
+            CLUSTER_CONFIG_IMPORTED: 'Cluster Configuration Imported',
+            CLUSTER_CONFIG_IMPORTED_SUCCESS_DESC: 'Cluster configuration imported successfully.',
+            //cluster-unit.directive.js
+            CLUSTER: 'Cluster',
+            UNIT_SETTINGS_UPDATED_DESC: 'Unit settings updated.',
+            UNIT_REMOVED_DESC: 'Unit removed.',
+            IP_ADDRESS_INVALID_DESC: 'IP address is invalid.', 
+            CLUSTER_UNIT_SETTINGS: 'Cluster Unit Settings',
             // settings.js
             OPTION_SAVED: 'Option saved',
             OPTION_AUTOPLAY_USB_DESC: 'Option Autoplay USB',
@@ -191,6 +207,25 @@
             UPDATE_AVAILABLE_DESC: 'Uudempi ohjelmistoversio laitteeseen on saatavilla.',
             // playlist.directive.js
             PLAYLIST_SYNC_REMOVED: 'Soittolistat $1 ja $2 eivät ole enää synkronoituna.',
+            //cluster-unit.directive.js
+            CLUSTER: 'Klusteri',
+            UNIT_SETTINGS_UPDATED_DESC: 'Klusterin laitteen asetukset päivitetty.',
+            UNIT_REMOVED_DESC: 'Laite poistettu klusterista.',
+            IP_ADDRESS_INVALID_DESC: 'IP-osoite ei kelpaa.', 
+            CLUSTER_UNIT_SETTINGS: 'Klusterilaiteasetus',
+            // upgrade-firmware-modal.js
+            FIRMWARE_UPGRADE_FAILED_DESC: 'Firmware upgrade failed to ',
+            UPGRADE_FAILED: 'Upgrade Failed',
+            // report-problem.js
+            REPORT_NOT_SENT: 'Raporttia ei lähetetty',
+            SENDING_REPORT_FAILED_DESC: 'Raportin lähettäminen epäonnistui.',
+            LOADING_LOGS_FAILED_DESC: 'Logitiedostoa ei voitu ladata palvelimelta.',
+            LOADING_LOGS_ERROR: 'Virhe logien lataamisessa',
+            REPORT_SENT: 'Raportti lähetetty',
+            REPORT_SENT_SUCCESS_DESC: 'Kiitos raportoinnista!',
+            // import-cluster-modal.js
+            CLUSTER_CONFIG_IMPORTED: 'Klusteriasetukset tuotu',
+            CLUSTER_CONFIG_IMPORTED_SUCCESS_DESC: 'Klusteriasetusten tuonti onnistui.',
             // rame-version-details.html 
             //Translations for info fields not used 
             //for sake of consistency in debugging
