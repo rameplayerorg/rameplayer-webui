@@ -66,7 +66,7 @@
             lineout: 'Line out'
         });
         $translateProvider.translations('fi', {
-            '': '',
+            //'': '',
             // settings.html
             'User Settings': 'Käyttäjäasetukset',
             'Automatically play files from USB': 'Aloita soitto automaattisesti USB-tikulta',
