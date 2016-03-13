@@ -17,7 +17,8 @@
         .factory('clusterService', clusterService);
 
     clusterService.$inject = ['logger', '$interval', '$localStorage', 'dataService',
-        'dataServiceProvider', 'statusService', 'uuid', 'FileSaver', 'Blob'];
+        'dataServiceProvider', 'statusService', 'uuid', 'FileSaver', 'Blob',
+        '$pageVisibility'];
 
     /**
      * @namespace ClusterService
@@ -25,7 +26,8 @@
      * @memberof Factories
      */
     function clusterService(logger, $interval, $localStorage, dataService,
-                            dataServiceProvider, statusService, uuid, FileSaver, Blob) {
+                            dataServiceProvider, statusService, uuid, FileSaver, Blob,
+                            $pageVisibility) {
         // cluster units are saved to $localStorage
         var $storage = $localStorage.$default({
             clusterUnits: []
@@ -88,7 +90,9 @@
         };
 
         var statusInterval = 1000;
-        startStatusPoller();
+        var pollerHandler = startStatusPoller();
+        $pageVisibility.$on('pageFocused', pageFocused);
+        $pageVisibility.$on('pageBlurred', pageBlurred);
 
         return service;
 
@@ -185,6 +189,13 @@
 
         function startStatusPoller() {
             return $interval(pollStatuses, statusInterval);
+        }
+
+        function stopStatusPoller() {
+            if (pollerHandler) {
+                $interval.cancel(pollerHandler);
+                pollerHandler = null;
+            }
         }
 
         function pollStatuses() {
@@ -317,6 +328,20 @@
                 type: 'application/json;charset=utf-8'
             });
             FileSaver.saveAs(blob, 'rameplayer-cluster.json');
+        }
+
+        function pageFocused() {
+            if (!pollerHandler) {
+                logger.debug('page visible, start cluster status polling');
+                pollerHandler = startStatusPoller();
+            }
+        }
+
+        function pageBlurred() {
+            if (pollerHandler) {
+                logger.debug('page not visible, stop cluster status polling');
+                stopStatusPoller();
+            }
         }
     }
 })();

@@ -10,6 +10,7 @@
         'ngSanitize',
         'ngResource',
         'ng-sortable',
+        'angular-page-visibility',
         'angular-uuid-generator',
         'ngStorage'
     ]);

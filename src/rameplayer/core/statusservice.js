@@ -17,7 +17,7 @@
         .factory('statusService', statusService);
 
     statusService.$inject = ['$rootScope', '$log', '$interval', '$q', '$translate',
-        'dataService', 'listService', 'toastr', 'serverConfig'];
+        'dataService', 'listService', 'toastr', 'serverConfig', '$pageVisibility'];
 
     /**
      * @namespace StatusService
@@ -25,7 +25,7 @@
      * @memberof Factories
      */
     function statusService($rootScope, $log, $interval, $q, $translate,
-                           dataService, listService, toastr, serverConfig) {
+                           dataService, listService, toastr, serverConfig, $pageVisibility) {
         var statusInterval = serverConfig.statusInterval || 1000;
         var status = {
             position: 0
@@ -52,12 +52,21 @@
             updateAvailable: false
         };
 
-        startStatusPoller();
+        var pollerHandler = startStatusPoller();
+        $pageVisibility.$on('pageFocused', pageFocused);
+        $pageVisibility.$on('pageBlurred', pageBlurred);
 
         return service;
 
         function startStatusPoller() {
             return $interval(pollStatus, statusInterval);
+        }
+
+        function stopStatusPoller() {
+            if (pollerHandler) {
+                $interval.cancel(pollerHandler);
+                pollerHandler = null;
+            }
         }
 
         function pollStatus() {
@@ -143,6 +152,20 @@
                                 });
                     displayedNotifications.updateAvailable = true;
                 });
+            }
+        }
+
+        function pageFocused() {
+            if (!pollerHandler) {
+                $log.debug('page visible, start status polling');
+                pollerHandler = startStatusPoller();
+            }
+        }
+
+        function pageBlurred() {
+            if (pollerHandler) {
+                $log.debug('page not visible, stop status polling');
+                stopStatusPoller();
             }
         }
     }
