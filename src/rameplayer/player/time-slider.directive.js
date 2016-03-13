@@ -33,9 +33,11 @@
         }
     }
 
-    TimeSliderController.$inject = ['$scope', '$log', '$interval', '$filter', 'statusService'];
+    TimeSliderController.$inject = ['$scope', '$log', '$interval', '$filter', 'statusService',
+        '$pageVisibility'];
 
-    function TimeSliderController($scope, $log, $interval, $filter, statusService) {
+    function TimeSliderController($scope, $log, $interval, $filter, statusService,
+                                  $pageVisibility) {
         var vm = this;
         var seeking = false;
         var seekIntervalTime = 500;
@@ -45,7 +47,7 @@
         var tooltipElem;
         var tooltipElemText;
 
-        vm.percentage = 0;
+        vm.percentage = null;
         vm.startSeek = startSeek;
         vm.stopSeek = stopSeek;
         vm.showMousePos = showMousePos;
@@ -78,9 +80,11 @@
             }
         });
 
+        $pageVisibility.$on('pageBlurred', pageBlurred);
+
         function updatePercentage() {
-            var percentage = 0;
-            if (vm.position !== undefined && vm.duration !== undefined) {
+            var percentage = null;
+            if (vm.position !== undefined && vm.duration) {
                 percentage = vm.position / vm.duration * 100;
                 if (percentage < 0) {
                     percentage = 0;
@@ -195,6 +199,13 @@
             vm.seekTarget.css({
                 left: left
             });
+        }
+
+        function pageBlurred() {
+            // hide time-slider progress and handle, so it will
+            // jump without transition to correct place when page
+            // is visible again
+            vm.percentage = null;
         }
     }
 })();
