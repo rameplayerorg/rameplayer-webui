@@ -98,7 +98,7 @@
             moveSeekTarget($event);
             vm.seekTarget.show();
             seekIntervalHandle = $interval(function() {
-                if (seekToPos !== lastSeekPos) {
+                if (seekToPos !== undefined && seekToPos !== lastSeekPos) {
                     vm.onSeek({
                         position: seekToPos
                     });
@@ -112,6 +112,9 @@
         }
 
         function getPosByEvent(event) {
+            if (!vm.duration) {
+                return undefined;
+            }
             // get clicked position in % of time-slider width
             var x = event.pageX - vm.slider.offset().left;
             var relative = x / vm.slider.width();
@@ -128,9 +131,11 @@
         function stopSeek(event) {
             $interval.cancel(seekIntervalHandle);
             seekIntervalHandle = undefined;
-            vm.onSeek({
-                position: seekToPos
-            });
+            if (seekToPos !== undefined) {
+                vm.onSeek({
+                    position: seekToPos
+                });
+            }
             vm.seekTarget.hide();
             seeking = false;
             lastSeekPos = null;
@@ -141,6 +146,9 @@
          * @description Shows position under mouse cursor in tooltip
          */
         function showMousePos(event) {
+            if (!vm.duration) {
+                return;
+            }
             var mousePos = getPosByEvent(event);
             mousePos = $filter('playerTime')(mousePos);
             if (tooltipElem !== undefined && tooltipElem.length !== 0) {
