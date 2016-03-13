@@ -93,7 +93,7 @@
             'Units': 'Units',
             'IP address': 'IP-osoite',
             'Port': 'Portti',
-            'Play Delay (sec)': 'Soiton viive (sekunteina)',
+            'Play Delay (sec)': 'Soiton viive (sek)',
             'Add': 'Lisää',
             'Hostname': 'Laitteen nimi',
             INFORMATION:'-tietoja',
