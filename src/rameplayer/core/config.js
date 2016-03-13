@@ -12,6 +12,9 @@
         $translateProvider.translations('en-us', {            
             VERSION: 'Version',
             INFORMATION: 'Information',
+            // playlist.html
+            'Default': 'Work list',
+
             // admin.js
             rameAnalogOnly: 'Analog',
             rameHdmiOnly: 'HDMI',
@@ -96,6 +99,10 @@
             INFORMATION:'-tietoja',
             'Firmware version': 'Laiteohjelmisto (Firmware)',
             'Hardware version': 'Laitteisto',
+            // media-item.html
+            'Add to Work list': 'Lisää koontilistaan',
+            'Remove': 'Poista',
+            'Move to': 'Siirrä',
             // report-problem-modal.html
             'Add Unit': 'Lisää laite',
             'Report a Problem': 'Raportoi ongelma',
@@ -134,6 +141,7 @@
             'Open': 'Avaa',
             // save-as-modal.html
             'Save Playlist As': 'Tallenna soittolista nimellä',
+            'Save Playlist': 'Tallenna soittolista',
             'Name': 'Nimi',
             'Storage': 'Tallennuspaikka',
             'Playlist name': 'Soittolistan nimi',
@@ -142,7 +150,7 @@
             'Title': 'Otsikko',
             'Length': 'Kesto',
             'Date': 'Pvm',
-            'Default': 'Oletus',
+            'Default': 'Koontilista',
             'Synchronize': 'Synkronoi',
             'Add Stream': 'Lisää syöte',
             'Save as': 'Tallenna nimellä',

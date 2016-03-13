@@ -20,13 +20,16 @@
                 </a>
                 <ul uib-dropdown-menu class="dropdown-menu-right">
                     <li ng-if="vm.isMovable">
-                        <a href ng-click="vm.moveTo()"><i class="glyphicon glyphicon-share-alt"></i> Move to&hellip;</a>
+                        <a href ng-click="vm.moveTo()"><i class="glyphicon glyphicon-share-alt"></i>
+                            <span translate>Move to</span>&hellip;</a>
                     </li>
                     <li ng-if="vm.isRemovable">
-                        <a href ng-click="vm.remove(); vm.isDropdownOpen=false;"><i class="glyphicon glyphicon-remove"></i> Remove</a>
+                        <a href ng-click="vm.remove(); vm.isDropdownOpen=false;"><i class="glyphicon glyphicon-remove"></i>
+                            <span translate>Remove</span></a>
                     </li>
                     <li ng-if="vm.canAddToDefault">
-                        <a href ng-click="vm.addToDefault(); vm.isDropdownOpen=false;"><i class="glyphicon glyphicon-plus"></i> Add to Default Playlist</a>
+                        <a href ng-click="vm.addToDefault(); vm.isDropdownOpen=false;"><i class="glyphicon glyphicon-plus"></i>
+                            <span translate>Add to Work list</span></a>
                     </li>
                 </ul>
             </span>
