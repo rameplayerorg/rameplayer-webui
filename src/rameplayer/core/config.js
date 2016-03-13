@@ -122,7 +122,6 @@
             // remove-unit-modal.html
             'Are You Sure?': 'Oletko aivan varma?',
             'Do you really want to remove cluster unit': 'Haluatko poistaa tämän laitteen klusterista:',
-            'Remove': 'Poista',
             // import-cluster-modal.html
             'Import Cluster Configuration': 'Tuo klusteriasetukset',
             'Cluster Configuration File': 'Tiedosto klusteriasetuksista',
@@ -154,7 +153,6 @@
             'Synchronize': 'Synkronoi',
             'Add Stream': 'Lisää syöte',
             'Save as': 'Tallenna nimellä',
-            'Move to': 'Siirrä',
             'Lock': 'Lukitse',
             'Clear': 'Tyhjennä',
             'Stop synchronizing this playlist': 'Lakkaa synkronoimasta tätä soittolistaa',
