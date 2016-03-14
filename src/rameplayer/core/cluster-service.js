@@ -29,9 +29,9 @@
                             dataServiceProvider, statusService, uuid, FileSaver, Blob,
                             $pageVisibility) {
         // cluster units are saved to $localStorage
-        var $storage = $localStorage.$default({
-            clusterUnits: []
-        });
+        if ($localStorage.clusterUnits === undefined) {
+            $localStorage.clusterUnits = [];
+        }
 
         // create dataServices for existing cluster units
         var dataServices = {};
@@ -132,7 +132,7 @@
 
             resolveHostname(unit);
 
-            logger.debug('New unit added to cluster', unit);
+            logger.debug('New unit added to cluster', unit.id, $localStorage.clusterUnits);
             return unit.id;
         }
 

@@ -99,12 +99,6 @@
             ds.getAudio = getAudio;
             ds.setVolume = setVolume;
 
-            // store firmware version so we know when it changes
-            $localStorage.$default({
-                fwVersion: null,
-                newFwMessage: null
-            });
-
             checkVersion();
             showNewFwVersionMessage();
 
