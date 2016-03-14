@@ -246,7 +246,12 @@
         function play() {
             dataService.play();
             runOnSynced(function(synced) {
-                dataServices[synced.unit.id].play(synced.unit.delay);
+                if (synced.itemId) {
+                    dataServices[synced.unit.id].play({
+                        pos: 0 - synced.unit.delay,
+                        itemId: synced.itemId
+                    });
+                }
             });
         }
 

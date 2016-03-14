@@ -330,10 +330,23 @@
                 });
             }
 
-            function play(delay) {
+            /**
+             * @name play
+             * @param options Options object:
+             *                - pos: start position
+             *                - itemId: item id to be played, else cursor
+             */
+            function play(options) {
                 var url = baseUrl + 'player/play';
-                if (delay) {
-                    url += '?pos=-' + delay;
+                var params = [];
+                if (options && options.pos) {
+                    params.push('pos=' + options.pos);
+                }
+                if (options && options.itemId) {
+                    params.push('id=' + options.itemId);
+                }
+                if (params.length > 0) {
+                    url += '?' + params.join('&');
                 }
                 return $http.get(url);
             }
