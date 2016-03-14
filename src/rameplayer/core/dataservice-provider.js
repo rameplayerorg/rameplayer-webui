@@ -332,7 +332,7 @@
 
             /**
              * @name play
-             * @param options Options object:
+             * @param {object} options Options object:
              *                - pos: start position
              *                - itemId: item id to be played, else cursor
              */
