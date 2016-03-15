@@ -29,6 +29,10 @@ to simplify debugging and helpdesking.
                     <div uib-collapse="vm.isCollapsed">
                         <ul class="list-unstyled">
                             <li>
+                                <span>Web UI version</span>: 
+                                {{ vm.rameVersionWebUI }}
+                            </li>
+                            <li>
                                 <span>Backend version</span>: 
                                 {{ vm.rameVersionBackend }}
                             </li>
@@ -39,11 +43,7 @@ to simplify debugging and helpdesking.
                             <li>
                                 <span>Hardware config</span>: 
                                 {{ vm.rameVersionHardwareCfg }}
-                            </li>
-                            <li>
-                                <span>Web UI version</span>: 
-                                {{ vm.rameVersionWebUI }}
-                            </li>
+                            </li>                            
                         </ul>
                     </div>
                 </div>
