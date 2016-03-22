@@ -1,5 +1,5 @@
 <ol class="breadcrumb" ng-if="breadCrumbsEnabled">
-    <li ng-repeat="listId in breadcrumbs" ng-class="{ 'last': $last }" ng-switch on="$last">
+    <li ng-repeat="listId in breadcrumbs track by $index" ng-class="{ 'last': $last }" ng-switch on="$last">
         <span ng-switch-when="true">{{ lists[listId].name }}</span>
         <a href="#" ng-click="activateSlide($index)" ng-switch-default>{{ lists[listId].name }}</a>
     </li>

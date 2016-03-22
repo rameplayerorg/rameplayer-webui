@@ -6,10 +6,10 @@
         .directive('rameMediaList', rameMediaList);
 
     rameMediaList.$inject = ['$rootScope', 'statusService', 'dataService', 'clusterService',
-        'listService', 'ListIds'];
+        'listService', 'ListIds', 'logger'];
 
     function rameMediaList($rootScope, statusService, dataService, clusterService,
-                           listService, ListIds) {
+                           listService, ListIds, logger) {
         // Usage:
         //
         // Creates:
@@ -73,6 +73,7 @@
                 }
                 scope.slides[index].active = true;
                 scope.slides[index].listId = listId;
+                //logger.debug('slides ' + listId);
 
                 // add more placeholders
                 if (index + 1 === scope.slides.length) {
@@ -91,8 +92,28 @@
 
             function openList(item) {
                 var list = $rootScope[item.id] || listService.add(item.id);
-                addSlide(item.id);
-                scope.breadcrumbs.push(item.id);
+                //logger.debug(list);
+                var index;
+                for (var i = 0; i < scope.slides.length; i++) {
+                    if (scope.slides[i].listId === item.id) {
+                        index = i;
+                        break;
+                    }
+                }
+                if (!scope.slides[index]) {
+                    addSlide(item.id);
+                    logger.debug('add slide');
+                    logger.debug(scope.slides);
+                } else {
+                    activateSlide(index);
+                    logger.debug('activate slide');
+                    logger.debug(scope.slides);
+                }
+                if (scope.breadcrumbs.indexOf(item.id) === -1) {
+                    scope.breadcrumbs.push(item.id);
+                    logger.debug('crumbs found');
+                    logger.debug(scope.slides);
+                }
             }
 
             function activateSlide(index) {
