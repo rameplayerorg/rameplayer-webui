@@ -22,10 +22,10 @@
                                 <span class="glyphicon glyphicon-menu-hamburger"></span>
                             </a>
                             <ul class="uib-dropdown-menu dropdown-menu-right">
-                                <li ng-if="vm.defaultPlaylist != 'true'">
+                                <li ng-if="vm.defaultPlaylist != 'true' && vm.sync.units.length">
                                     <a href ng-click="vm.openSyncModal(); vm.isDropdownOpen=false;">
                                         <i class="glyphicon glyphicon-refresh"></i>&nbsp;<span translate>Synchronize</span>&hellip;
-                                   </a>
+                                    </a>
                                 </li>
                                 <li>
                                     <a href ng-click="vm.addStream({ playlist: vm.listId }); vm.isDropdownOpen=false;">
