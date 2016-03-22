@@ -84,7 +84,6 @@
 
 .media-list-sortable .sorting-handle {
   cursor: ns-resize;
-  cursor: -webkit-grabbing;
 }
 
 .folders {
