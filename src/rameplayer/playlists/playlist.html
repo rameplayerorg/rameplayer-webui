@@ -64,9 +64,11 @@
                         <div class="col-sm-1 text-right" translate>Length</div>
                         <div class="col-sm-3" ng-if="!vm.sync.isOn" translate>Date</div>
                     </div>
-                    <div class="source-media-list media-list-sortable" ng-sortable="vm.sortableOptions">
-                        <rame-media-item ng-repeat="mediaItem in vm.lists[vm.listId].items" media="mediaItem" remove="vm.removeMedia(mediaItem)" on-click="vm.onMediaClick({ media: mediaItem })" hide-date="vm.sync.isOn" ng-mouseenter="vm.mouseEnterItem($index)" ng-mouseleave="vm.mouseLeaveItem($index)" sync-highlight="$index === vm.hoverIndex"></rame-media-item>
-                    </div>
+                    <ul class="source-media-list media-list-sortable" ng-sortable="vm.sortableOptions">
+                        <li ng-repeat="mediaItem in vm.lists[vm.listId].items">
+                            <rame-media-item media="mediaItem" remove="vm.removeMedia(mediaItem)" on-click="vm.onMediaClick({ media: mediaItem })" hide-date="vm.sync.isOn" ng-mouseenter="vm.mouseEnterItem($index)" ng-mouseleave="vm.mouseLeaveItem($index)" sync-highlight="$index === vm.hoverIndex"></rame-media-item>
+                        </li>
+                    </ul>
                 </div>
 
             </uib-accordion-group>
@@ -106,8 +108,10 @@
                         <div class="col-sm-1 text-right" translate>Length</div>
                         <!--<div class="col-sm-3" translate>Date</div>-->
                     </div>
-                    <div class="target-media-list media-list-sortable" ng-sortable="vm.sync.sortableOptions">
-                        <rame-media-item ng-repeat="mediaItem in vm.sync.targetItems" media="mediaItem" remove="vm.removeMedia(mediaItem)" on-click="" hide-date="true" ng-mouseenter="vm.mouseEnterItem($index)" ng-mouseleave="vm.mouseLeaveItem($index)" sync-highlight="$index === vm.hoverIndex"></rame-media-item>
+                    <ul class="target-media-list media-list-sortable" ng-sortable="vm.sync.sortableOptions">
+                        <li ng-repeat="mediaItem in vm.sync.targetItems">
+                            <rame-media-item media="mediaItem" remove="vm.removeMedia(mediaItem)" on-click="" hide-date="true" ng-mouseenter="vm.mouseEnterItem($index)" ng-mouseleave="vm.mouseLeaveItem($index)" sync-highlight="$index === vm.hoverIndex"></rame-media-item>
+                        </li>
                     </div>
                 </div>
 

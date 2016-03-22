@@ -42,6 +42,11 @@
   line-height: 1.42857;
 }
 
+ul.media-list-sortable {
+  list-style-type: none;
+  padding: 0;
+}
+
 .media-list-item {
   border-top: 1px solid #35393D;
 }
