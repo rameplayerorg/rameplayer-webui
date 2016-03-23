@@ -38,6 +38,7 @@
             }
             vm.defaultPlaylist = vm.isDefaultPlaylist ? 'true' : 'false';
             vm.sortableOptions = {
+                group: 'source',
                 handle: '.sorting-handle',
                 animation: 150,
                 onSort: function(evt) {
@@ -48,6 +49,14 @@
                         oldIndex: evt.oldIndex,
                         newIndex: evt.newIndex
                     });
+                },
+                onRemove: function(evt) {
+                    logger.info('Remove from playlist', vm.listId, evt.model);
+                    vm.removeMedia(evt.model);
+                },
+                onAdd: function(evt) {
+                    logger.info('Add to playlist', vm.listId, evt.model);
+                    vm.addMedia(evt.model);
                 }
             };
             vm.saveAs = saveAs;
@@ -92,6 +101,7 @@
         vm.isDropdownOpen = false;
         vm.remove = remove;
         vm.clear = clear;
+        vm.addMedia = addMedia;
         vm.removeMedia = removeMedia;
         vm.edit = edit;
         vm.openSync = openSync;
@@ -126,6 +136,10 @@
 
         function clear() {
             dataService.clearPlaylist(vm.listId);
+        }
+
+        function addMedia(media) {
+            dataService.addToPlaylist(vm.listId, media);
         }
 
         function removeMedia(media) {
