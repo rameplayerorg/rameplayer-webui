@@ -80,12 +80,13 @@
                     toastr.success(translations.REPORT_SENT_SUCCESS_DESC, translations.REPORT_SENT);
                 });
             },
-            function() {
+            function(response) {
                 $translate(['REPORT_NOT_SENT', 'SENDING_REPORT_FAILED_DESC'])
                 .then(function(translations) {
                     toastr.error(translations.SENDING_REPORT_FAILED_DESC, translations.REPORT_NOT_SENT);
                 });                
                 logger.error('Could not send report to ', sendUrl);
+                logger.debug('Could not send report, response: ', response.data);
             });
         }
 

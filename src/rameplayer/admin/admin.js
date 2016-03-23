@@ -111,16 +111,16 @@
                 /* 
                 // TODO: ?? Should it be possible to leave these unset,
                 // empty or zero, in case of not connected to Internet ?? 
-                if (!gatewayIp) {
-                    invalidFields.push('Gateway');
+                */ 
+                if (!vm.gatewayIp.valid) {
+                    invalidFields.push('GATEWAY_IP');
                 }
-                if (!dnsServerIp) {
-                    invalidFields.push('Primary DNS server');
+                if (!vm.dnsServerIp.valid) {
+                    invalidFields.push('DNS_FIRST');
                 }
-                if (!dnsAlternativeServerIp) {
-                    invalidFields.push('Secondary DNS server');
+                if (!vm.dnsAlternativeServerIp.valid) {
+                    invalidFields.push('DNS_SECOND');
                 }
-                */
                 if (vm.systemSettings.ipDhcpServer) {
                     var octets;
                     if (!vm.dhcpServerRangeStartIp.valid) {
@@ -168,18 +168,20 @@
             
             if (invalidFields.length) {
                 valid = false;
-                $translate(invalidFields).then(function(tr) {
-                    var msg = '';
-                    for (var i = 0; i < invalidFields.length; i++) {
-                        msg += tr[invalidFields[i]];
-                        if (i > 0) {
-                            msg += ', ';
+                $translate(['INVALID_SETTINGS']).then(function(tr) {
+                    $translate(invalidFields).then(function(trf) {
+                        var msg = '';
+                        for (var i = 0; i < invalidFields.length; i++) {
+                            msg += trf[invalidFields[i]];
+                            if (invalidFields.length > 1 && i < invalidFields.length - 1) {
+                                msg += ', ';
+                            }
                         }
-                    }
-                    // Sticky toast
-                    toastr.error(msg, 'Invalid settings', {
-                        timeOut : 0,
-                        closeButton: true
+                        // Sticky toast
+                        toastr.error(msg, tr.INVALID_SETTINGS, {
+                            timeOut : 0,
+                            closeButton: true
+                        });
                     });
                 });
             }
@@ -187,20 +189,28 @@
             if (valid) {
                 assignSystemSettings();
                 vm.systemSettings
-                        .$save(function() {
+                        .$save(function(response) {
                             vm.savingStatus = 'saved';
+                            logger.debug('Admin setting save success, response: ' + response.data);
+                            logger.debug(response);
                             toastr.clear();
                             toastr.success('Admin settings saved.', 'Saved');
-                        }, function() {
+                        }, function(response) {
+                            logger.error('Admin setting save failed, response data: ' + response.data);
+                            logger.debug(response);
                             toastr.clear();
                             toastr.error('Saving admin settings failed.', 'Saving failed', {
-                               timeOut : 0,
-                               closeButton : true
-                           });
+                                timeOut : 0,
+                                closeButton : true
+                            });
+                            throw new Error(response.data + ' ' + response.toString()); 
                         });
             }
             else {
-                toastr.error('Admin settings not saved.', 'Check inserted values');
+                $translate(['CHECK_INSERTED_VALUES', 'ADMIN_SETTINGS_NOT_SAVED'])
+                    .then(function(tr) {
+                    toastr.error(tr.ADMIN_SETTINGS_NOT_SAVED, tr.CHECK_INSERTED_VALUES);
+                });
             }
             //toastr.error('saveSettings: ' + $rootScope.rameExceptions, $rootScope.rameException);
             //throw new Error('testerror');
@@ -215,6 +225,7 @@
                 vm.systemSettings.ipGateway = vm.gatewayIp.value;
                 vm.systemSettings.ipDnsPrimary = vm.dnsServerIp.value;
                 vm.systemSettings.ipDnsSecondary = vm.dnsAlternativeServerIp.value;
+                //logger.debug(vm.deviceIp + ' ' + vm.systemSettings.ipAddress);
                 if (vm.systemSettings.ipDhcpServer) {
                     vm.systemSettings.ipDhcpRangeStart = vm.dhcpRangeStartIp.value;
                     vm.systemSettings.ipDhcpRangeEnd = vm.dhcpRangeEndIp.value;
