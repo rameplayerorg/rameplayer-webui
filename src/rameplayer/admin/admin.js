@@ -85,7 +85,7 @@
                 value : vm.systemSettings['ntpServerAddress'],
                 valid : true
             };
-            vm.timeInitially = vm.systemSettings.dateAndtimeInUTC;
+            vm.timeInitially = vm.systemSettings.dateAndTimeInUTC;
         }
 
         function saveSettings() {
@@ -194,7 +194,7 @@
                             logger.debug('Admin setting save success, response: ' + response.data, response);
                             toastr.clear();
                             toastr.success('Admin settings saved.', 'Saved');
-                            statusService.resetRebootRequiredStatus();
+                            statusService.resetServerNotifications();
                         }, function(response) {
                             logger.error('Admin setting save failed, response data: ' + response.data);
                             logger.debug(response);
@@ -203,7 +203,7 @@
                                 timeOut : 0,
                                 closeButton : true
                             });
-                            statusService.resetRebootRequiredStatus();
+                            statusService.resetServerNotifications();
                             throw new Error(response.data + ' ' + response.toString()); 
                         });
             }
@@ -233,8 +233,8 @@
                 }
             }
             
-            if (vm.manualTimeConfig) {
-                vm.systemSettings.dateAndtimeInUTC = vm.manualDateTime;
+            if (vm.useManualTimeConfigs) {
+                vm.systemSettings.dateAndTimeInUTC = vm.manualDateTime;
             }
             else if (vm.useNtpIp) {
                 vm.systemSettings.ntpServerAddress = vm.ntpServerIp;

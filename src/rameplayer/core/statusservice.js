@@ -46,10 +46,10 @@
             },
             status: status,
             error: error,
-            resetRebootRequiredStatus: resetRebootRequiredStatus
+            resetServerNotifications: resetServerNotifications
         };
 
-        var forceRebootRefresh = false;
+        var forceNotificationCheck = false;
         var displayedNotifications = {
             restartRequired: false,
             updateAvailable: false
@@ -72,8 +72,8 @@
             }
         }
         
-        function resetRebootRequiredStatus() {
-            forceRebootRefresh = true;
+        function resetServerNotifications() {
+            forceNotificationCheck = true;
         }
 
         function pollStatus() {
@@ -93,9 +93,9 @@
                     angular.copy(newStatus, status);
                     syncLists();
                     checkServerNotifications();
-                } else if (forceRebootRefresh) {
+                } else if (forceNotificationCheck) {
                     checkServerNotifications();
-                    forceRebootRefresh = false;
+                    forceNotificationCheck = false;
                 }
                 error.message = null;
             }, function(errorResponse) {
