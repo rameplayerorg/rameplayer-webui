@@ -122,6 +122,7 @@
                                         translations.OPTION_DISABLED) + 
                                 '.', translations.OPTION_SAVED);
                     });
+                statusService.resetServerNotifications();
             }, function() {
                 toastr.clear();
                 $translate(['OPTION_SAVE_FAILED', 'OPTION_AUTOPLAY_USB_FAILED_DESC'])
@@ -133,6 +134,7 @@
                             closeButton : true
                         });
                     });
+                statusService.resetServerNotifications();
             });
         }
 

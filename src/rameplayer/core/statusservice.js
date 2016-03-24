@@ -34,6 +34,7 @@
         var error = {
             message: null
         };
+
         var service = {
             states: {
                 stopped:   'stopped',
@@ -44,14 +45,16 @@
                 error:     'error'
             },
             status: status,
-            error: error
+            error: error,
+            resetServerNotifications: resetServerNotifications
         };
 
+        var forceNotificationCheck = false;
         var displayedNotifications = {
             restartRequired: false,
             updateAvailable: false
         };
-
+        
         var pollerHandler = startStatusPoller();
         $pageVisibility.$on('pageFocused', pageFocused);
         $pageVisibility.$on('pageBlurred', pageBlurred);
@@ -68,6 +71,10 @@
                 pollerHandler = null;
             }
         }
+        
+        function resetServerNotifications() {
+            forceNotificationCheck = true;
+        }
 
         function pollStatus() {
             dataService.getStatus({
@@ -75,11 +82,20 @@
             })
             .then(function(response) {
                 var newStatus = response.data;
+                /*if (status.player.rebootRequired &&
+                    !newStatus.player.rebootRequired)
+                {
+                    // TODO after reboot, refresh to start page http://ip/
+                    // document.location = 'http://' + ip; //?
+                }*/
                 // notify only when status changes
                 if (!angular.equals(newStatus, status)) {
                     angular.copy(newStatus, status);
                     syncLists();
                     checkServerNotifications();
+                } else if (forceNotificationCheck) {
+                    checkServerNotifications();
+                    forceNotificationCheck = false;
                 }
                 error.message = null;
             }, function(errorResponse) {
@@ -88,6 +104,8 @@
                 if (errorResponse.status === -1) {
                     // network error
                     status.state = service.states.offline;
+                    displayedNotifications.restartRequired = false;
+                    displayedNotifications.updateAvailable = false;
                 }
             });
         }
@@ -127,23 +145,26 @@
             // restart required notification
             if (status.player &&
                 status.player.rebootRequired &&
-                !displayedNotifications.restartRequired) {
+                (!displayedNotifications.restartRequired ||
+                 !displayedNotifications.restartRequired.isOpened))
+            {                
                 $translate(['RESTART_REQUIRED', 'RESTART_REQUIRED_DESC']).then(function(translations) {
-                    toastr.warning(translations.RESTART_REQUIRED_DESC,
-                                   translations.RESTART_REQUIRED, {
-                                       timeOut: 0,
-                                       extendedTimeOut: 0,
-                                       tapToDismiss: false,
-                                       closeButton: true
-                                   });
-                    displayedNotifications.restartRequired = true;
+                    displayedNotifications.restartRequired = toastr.warning(
+                        translations.RESTART_REQUIRED_DESC, translations.RESTART_REQUIRED, {
+                            autoDismiss: false, 
+                            timeOut: 0,
+                            extendedTimeOut: 0,
+                            tapToDismiss: false,
+                            preventOpenDuplicates: true
+                        });
                 });
             }
 
             // update available notification
             if (status.player &&
                 status.player.updateAvailable &&
-                !displayedNotifications.updateAvailable) {
+                !displayedNotifications.updateAvailable) 
+            {
                 $translate(['UPDATE_AVAILABLE', 'UPDATE_AVAILABLE_DESC']).then(function(translations) {
                     toastr.info(translations.UPDATE_AVAILABLE_DESC,
                                 translations.UPDATE_AVAILABLE, {
