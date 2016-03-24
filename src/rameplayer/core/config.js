@@ -9,7 +9,7 @@
     translation.$inject = ['$translateProvider'];
 
     function translation($translateProvider) {
-        $translateProvider.translations('en-us', {            
+        $translateProvider.translations('en-us', {
             VERSION: 'Version',
             INFORMATION: 'Information',
             // playlist.html
@@ -41,14 +41,14 @@
             ADMIN_SETTINGS_NOT_SAVED: 'Admin settings not saved.',
             CHECK_INSERTED_VALUES: 'Check inserted values',
             // dataservice-provider.js
-            INCOMPATIBLE_VERSION: 'Incompatible Server Version',            
+            INCOMPATIBLE_VERSION: 'Incompatible Server Version',
             FIRMWARE_UPGRADED: 'Firmware upgraded',
             FIRMWARE_UPGRADED_DESC: 'Firmware version $1 is now installed.',
             // playlist.directive.js
             PLAYLIST_SYNC_REMOVED: 'Playlist $1 is not synchronized to playlist $2 anymore.',
             // statusservice.js
             RESTART_REQUIRED: 'Restart required',
-            RESTART_REQUIRED_DESC: 'Some changes need device to be restarted.',
+            RESTART_REQUIRED_DESC: 'Some changes need device to be restarted. Open main player page after reboot.',
             UPDATE_AVAILABLE: 'Update available',
             UPDATE_AVAILABLE_DESC: 'Newer version of software is available.',
             // report-problem.js
@@ -181,7 +181,7 @@
             'Current firmware': 'Laitteen ohjelmistoversio nyt',
             'Device hardware': 'Laitteen kokoonpanoversio',
             // adminsettings.html
-            'Admin Settings': 'Järjestelmäasetukset',            
+            'Admin Settings': 'Järjestelmäasetukset',
             'Video output resolution': 'Videon resoluutio',
             'Audio port': 'Äänilähtö',
             rameAnalogOnly: 'Analoginen',
@@ -221,7 +221,7 @@
             NTP_SERVER_HOSTNAME: 'NTP-palvelimen nimi',
             ADMIN_SETTINGS_NOT_SAVED: 'Järjestelmäasetuksia ei tallennettu.',
             CHECK_INSERTED_VALUES: 'Tarkista syötetyt arvot',
-            // settings.js            
+            // settings.js
             OPTION_SAVED: 'Valinta tallennettu',
             OPTION_AUTOPLAY_USB_DESC: 'Automaattinen soitto USB-tikulta',
             OPTION_ENABLED: 'päällä',
@@ -239,7 +239,7 @@
             INCOMPATIBLE_VERSION: 'Palvelimen versio epäyhteensopiva',
             // statusservice.js
             RESTART_REQUIRED: 'Uudelleenkäynnistys tarvitaan',
-            RESTART_REQUIRED_DESC: 'Jotkin muutoksista vaativat laitteen uudelleenkäynnistystä.',
+            RESTART_REQUIRED_DESC: 'Jotkin muutoksista vaativat laitteen uudelleenkäynnistystä. Palaa sen jälkeen aloitussivulle.', // jshint ignore:line
             UPDATE_AVAILABLE: 'Päivitys saatavilla',
             UPDATE_AVAILABLE_DESC: 'Uudempi ohjelmistoversio laitteeseen on saatavilla.',
             // playlist.directive.js
@@ -271,7 +271,7 @@
             'Hardware config': 'Laitteen kokoonpano (Hw cfg)',
             'Web UI version': 'Käyttöliittymä (Web UI)',
             'Details': 'Lisätietoja',
-            'Software version': 'Ohjelmistoversio',            
+            'Software version': 'Ohjelmistoversio',
             'UI version': 'Käyttöliittymä',
             // volumes.html
             'Volumes': 'Äänenvoimakkuudet',

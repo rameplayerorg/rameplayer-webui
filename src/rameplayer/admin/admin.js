@@ -8,10 +8,10 @@
             'AdminController', AdminController);
 
     AdminController.$inject = [
-            'logger', 'dataService', 'toastr', '$rootScope', '$translate'
+            'logger', 'dataService', 'toastr', '$rootScope', '$translate', 'statusService'
     ];
 
-    function AdminController(logger, dataService, toastr, $rootScope, $translate) {
+    function AdminController(logger, dataService, toastr, $rootScope, $translate, statusService) {
         var vm = this;
         vm.systemSettings = dataService.getSystemSettings();
         vm.systemSettings.$promise.then(function() {
@@ -191,10 +191,10 @@
                 vm.systemSettings
                         .$save(function(response) {
                             vm.savingStatus = 'saved';
-                            logger.debug('Admin setting save success, response: ' + response.data);
-                            logger.debug(response);
+                            logger.debug('Admin setting save success, response: ' + response.data, response);
                             toastr.clear();
                             toastr.success('Admin settings saved.', 'Saved');
+                            statusService.resetRebootRequiredStatus();
                         }, function(response) {
                             logger.error('Admin setting save failed, response data: ' + response.data);
                             logger.debug(response);
@@ -203,6 +203,7 @@
                                 timeOut : 0,
                                 closeButton : true
                             });
+                            statusService.resetRebootRequiredStatus();
                             throw new Error(response.data + ' ' + response.toString()); 
                         });
             }
