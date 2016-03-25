@@ -40,6 +40,7 @@
             NTP_SERVER_HOSTNAME: 'NTP server hostname',
             ADMIN_SETTINGS_NOT_SAVED: 'Admin settings not saved.',
             CHECK_INSERTED_VALUES: 'Check inserted values',
+            INVALID_OPTIONAL_SETTINGS: 'Optional settings with invalid values',
             // dataservice-provider.js
             INCOMPATIBLE_VERSION: 'Incompatible Server Version',
             FIRMWARE_UPGRADED: 'Firmware upgraded',
@@ -221,6 +222,7 @@
             NTP_SERVER_HOSTNAME: 'NTP-palvelimen nimi',
             ADMIN_SETTINGS_NOT_SAVED: 'Järjestelmäasetuksia ei tallennettu.',
             CHECK_INSERTED_VALUES: 'Tarkista syötetyt arvot',
+            INVALID_OPTIONAL_SETTINGS: 'Vapaaehtoisissa asetuksissa epäkelpoja arvoja',
             // settings.js
             OPTION_SAVED: 'Valinta tallennettu',
             OPTION_AUTOPLAY_USB_DESC: 'Automaattinen soitto USB-tikulta',

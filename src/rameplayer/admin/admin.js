@@ -60,7 +60,7 @@
                 valid: true
             };
             vm.gatewayIp = {
-                value: vm.systemSettings['ipGateway'],
+                value: vm.systemSettings['ipDefaultGateway'],
                 valid: true
             };
             vm.dnsServerIp = {
@@ -69,7 +69,8 @@
             };
             vm.dnsAlternativeServerIp = {
                 value: vm.systemSettings['ipDnsSecondary'],
-                valid: true
+                valid: true,
+                optional: true
             };
             vm.dhcpServerRangeStartIp = {
                 value: vm.systemSettings['ipDhcpRangeStart'],
@@ -91,6 +92,7 @@
         function saveSettings() {
             var valid = true;
             var invalidFields = [];
+            var invalidOptionalFields = [];
             
             if (!vm.deviceName) {
                 // Compliance to Internet standard specification RFC 1123
@@ -107,19 +109,15 @@
                 }
                 if (!vm.subnetMask.valid) {
                     invalidFields.push('SUBNET_MASK');
-                }
-                /* 
-                // TODO: ?? Should it be possible to leave these unset,
-                // empty or zero, in case of not connected to Internet ?? 
-                */ 
-                if (!vm.gatewayIp.valid) {
+                } 
+                if (!vm.gatewayIp.valid && !vm.systemSettings.ipDhcpServer) {
                     invalidFields.push('GATEWAY_IP');
                 }
                 if (!vm.dnsServerIp.valid) {
                     invalidFields.push('DNS_FIRST');
                 }
                 if (!vm.dnsAlternativeServerIp.valid) {
-                    invalidFields.push('DNS_SECOND');
+                    invalidOptionalFields.push('DNS_SECOND');
                 }
                 if (vm.systemSettings.ipDhcpServer) {
                     var octets;
@@ -142,7 +140,6 @@
                             invalidFields.push('DHCP_RANGE_END');
                         }
                     }
-
                     if (!validateIpOrdering(vm.dhcpServerRangeStartIp.value, vm.dhcpServerRangeEndIp.value)) {
                         invalidFields.push('DHCP_RANGE_DEF');
                     }                    
@@ -164,7 +161,22 @@
             // logger.info(basicsForm.deviceName.$valid);
             // logger.info($('#ntpHostname').$valid);
             // logger.info(vm.ntpForm.ntpHostname.$valid);
-            //            logger.info(vm.ntpServerAddress);
+            // logger.info(vm.ntpServerAddress);
+            
+            if (invalidOptionalFields.length) {
+                $translate(['INVALID_OPTIONAL_SETTINGS']).then(function(tr) {
+                    $translate(invalidOptionalFields).then(function(trf) {
+                        var msg = '';
+                        for (var i = 0; i < invalidOptionalFields.length; i++) {
+                            msg += trf[invalidOptionalFields[i]];
+                            if (invalidOptionalFields.length > 1 && i < invalidOptionalFields.length - 1) {
+                                msg += ', ';
+                            }
+                        }
+                        toastr.warning(msg, tr.INVALID_OPTIONAL_SETTINGS);
+                    });
+                });
+            }
             
             if (invalidFields.length) {
                 valid = false;
@@ -191,12 +203,13 @@
                 vm.systemSettings
                         .$save(function(response) {
                             vm.savingStatus = 'saved';
-                            logger.debug('Admin setting save success, response: ' + response.data, response);
+                            logger.debug('Admin setting save success, response: ', response);
                             toastr.clear();
                             toastr.success('Admin settings saved.', 'Saved');
                             statusService.resetServerNotifications();
                         }, function(response) {
-                            logger.error('Admin setting save failed, response data: ' + response.data);
+                            logger.error('Admin setting save failed, response data: ' + 
+                                    response.status + ' ' + response.statusText + ' ' + response.data.error);
                             logger.debug(response);
                             toastr.clear();
                             toastr.error('Saving admin settings failed.', 'Saving failed', {
@@ -204,7 +217,7 @@
                                 closeButton : true
                             });
                             statusService.resetServerNotifications();
-                            throw new Error(response.data + ' ' + response.toString()); 
+                            //throw new Error(response.status + ' ' + response.statusText, response.data.error); 
                         });
             }
             else {
@@ -223,13 +236,18 @@
             if (vm.manualIpConfig) {
                 vm.systemSettings.ipAddress = vm.deviceIp.value;
                 vm.systemSettings.ipSubnetMask = vm.subnetMask.value;
-                vm.systemSettings.ipGateway = vm.gatewayIp.value;
+                vm.systemSettings.ipDefaultGateway = vm.gatewayIp.value;
                 vm.systemSettings.ipDnsPrimary = vm.dnsServerIp.value;
-                vm.systemSettings.ipDnsSecondary = vm.dnsAlternativeServerIp.value;
+                if (vm.dnsAlternativeServerIp.valid) {
+                    vm.systemSettings.ipDnsSecondary = vm.dnsAlternativeServerIp.value;
+                } else {
+                    // optional
+                    vm.systemSettings.ipDnsSecondary = undefined;
+                }
                 //logger.debug(vm.deviceIp + ' ' + vm.systemSettings.ipAddress);
                 if (vm.systemSettings.ipDhcpServer) {
-                    vm.systemSettings.ipDhcpRangeStart = vm.dhcpRangeStartIp.value;
-                    vm.systemSettings.ipDhcpRangeEnd = vm.dhcpRangeEndIp.value;
+                    vm.systemSettings.ipDhcpRangeStart = vm.dhcpServerRangeStartIp.value;
+                    vm.systemSettings.ipDhcpRangeEnd = vm.dhcpServerRangeEndIp.value;
                 }
             }
             

@@ -8,12 +8,12 @@
 
     SettingsController.$inject = [
         'logger', '$http', 'dataService', 'clusterService', '$translate', 'uiVersion',
-        'toastr', '$scope', '$localStorage', '$window', '$document', '$uibModal'
+        'toastr', '$scope', '$localStorage', '$window', '$document', '$uibModal', 'statusService'
     ];
 
     function SettingsController(logger, $http, dataService, clusterService, $translate,
                                 uiVersion, toastr, $scope, $localStorage, $window, $document,
-                                $uibModal) {
+                                $uibModal, statusService) {
 
         var $injector = angular.injector();
 
