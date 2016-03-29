@@ -54,6 +54,9 @@
             restartRequired: false,
             updateAvailable: false
         };
+
+        dataService.checkVersionUpgrade();
+        dataService.showNewFwVersionMessage();
         
         var pollerHandler = startStatusPoller();
         $pageVisibility.$on('pageFocused', pageFocused);

@@ -71,7 +71,8 @@
             var rameVersioning;
             var uiLog = [];
 
-            ds.checkVersion = checkVersion;
+            ds.checkVersionUpgrade = checkVersionUpgrade;
+            ds.showNewFwVersionMessage = showNewFwVersionMessage;
             ds.getSettings = getSettings;
             ds.getStatus = getStatus;
             ds.setCursor = setCursor;
@@ -101,8 +102,7 @@
             ds.getAudio = getAudio;
             ds.setVolume = setVolume;
 
-            checkVersion();
-            showNewFwVersionMessage();
+            checkVersionCompatibility();
 
             /**
              * @name getBaseUrl
@@ -128,17 +128,13 @@
             }
 
             /**
-             * @name checkVersion
-             * @description Checks if firmware has been upgraded and server version is
-             *              compatible with this version of WebUI.
+             * @name checkVersionCompatibility
+             * @description Checks if server version is compatible with this version of WebUI.
              * @returns boolean
              */
-            function checkVersion() {
+            function checkVersionCompatibility() {
                 getRameVersioning().then(function(response) {
-                    if (isNewFwVersion(response.data.firmware)) {
-                        handleNewFwVersion(response.data.firmware);
-                    }
-                    else if (!serverIsCompatible(response.data.backend)) {
+                    if (!serverIsCompatible(response.data.backend)) {
                         var host = ds.options.host || location.host.split(':')[0];
                         var msg = 'Incompatible server version ' + response.data.backend + ' at ' +
                             host + ':' + ds.options.port +
@@ -182,6 +178,19 @@
                     return false;
                 }
                 return true;
+            }
+
+            /**
+             * @name checkVersionUpgrade
+             * @description Checks if firmware has been upgraded.
+             * @returns boolean
+             */
+            function checkVersionUpgrade() {
+                getRameVersioning().then(function(response) {
+                    if (isNewFwVersion(response.data.firmware)) {
+                        handleNewFwVersion(response.data.firmware);
+                    }
+                });
             }
 
             function isNewFwVersion(fwVersion) {
