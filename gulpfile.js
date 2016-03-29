@@ -173,7 +173,7 @@ gulp.task('inject-version', ['rev-and-inject'], function(cb) {
             .pipe(plugins.replace('development', stdout))
             // change settings for production environment
             .pipe(plugins.replace("{ basePath: 'stubs/', simulation: true }",
-                                  "{ port: 8000, basePath: '/' }"))
+                                  "{ port: 8000, basePath: '/', sendLog: true }"))
             .pipe(gulp.dest(paths.build))
     });
     return gulp

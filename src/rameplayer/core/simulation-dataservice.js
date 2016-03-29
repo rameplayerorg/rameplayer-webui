@@ -134,7 +134,8 @@
             upgradeFirmware: upgradeFirmware,
             getSystemSettings: getSystemSettings,
             writeLog: writeLog,
-            getLog: getLog,
+            getServerLog: getServerLog,
+            getUILog: getUILog,
             getReportConfig: getReportConfig,
             sendReport: sendReport,
             getAudio: getAudio,
@@ -511,11 +512,15 @@
         function writeLog(level, message) {
         }
 
-        function getLog() {
+        function getServerLog() {
             return $timeout(function() {
                 return {
                 };
             }, delay);
+        }
+
+        function getUILog() {
+            return [];
         }
 
         function getReportConfig() {

@@ -51,7 +51,7 @@
             if (valid) {
                 $uibModalInstance.close();
                 if (vm.includeLogs) {
-                    dataService.getLog().then(function(response) {
+                    dataService.getServerLog().then(function(response) {
                         sendReport(response.data);
                     },
                     function() {
@@ -68,11 +68,12 @@
             }
         }
 
-        function sendReport(log) {
+        function sendReport(serverLog) {
             var report = {
                 description: vm.description,
                 reporter: vm.reporter,
-                log: log
+                serverLog: serverLog,
+                uiLog: dataService.getUILog()
             };
             dataService.sendReport(sendUrl, report).then(function(response) {
                 $translate(['REPORT_SENT', 'REPORT_SENT_SUCCESS_DESC'])

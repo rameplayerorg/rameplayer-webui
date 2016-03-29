@@ -69,6 +69,7 @@
             });
 
             var rameVersioning;
+            var uiLog = [];
 
             ds.checkVersion = checkVersion;
             ds.getSettings = getSettings;
@@ -93,7 +94,8 @@
             ds.getFirmwareUpgradesAvailable = getFirmwareUpgradesAvailable;
             ds.upgradeFirmware = upgradeFirmware;
             ds.writeLog = writeLog;
-            ds.getLog = getLog;
+            ds.getServerLog = getServerLog;
+            ds.getUILog = getUILog;
             ds.getReportConfig = getReportConfig;
             ds.sendReport = sendReport;
             ds.getAudio = getAudio;
@@ -380,16 +382,29 @@
             }
 
             function writeLog(level, message) {
-                var url = baseUrl + 'log';
-                $http.post(url, {
-                    time: Date.now(),
-                    level: level,
-                    message: message
-                });
+                if (ds.sendLog) {
+                    var url = baseUrl + 'log';
+                    $http.post(url, {
+                        time: Date.now(),
+                        level: level,
+                        message: message
+                    });
+                }
+                else {
+                    uiLog.push({
+                        time: Date.now(),
+                        level: level,
+                        message: message
+                    });
+                }
             }
 
-            function getLog() {
+            function getServerLog() {
                 return $http.get(baseUrl + 'log');
+            }
+
+            function getUILog() {
+                return uiLog;
             }
 
             function getReportConfig() {
