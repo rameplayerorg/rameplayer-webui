@@ -277,6 +277,7 @@
             'UI version': 'Käyttöliittymä',
             // volumes.html
             'Volumes': 'Äänenvoimakkuudet',
+            'Volume settings are unavailable when audio out is set to:': 'Äänenvoimakkuuden säätö ei ole mahdollista kun äänilähdöksi on määritelty:', // jshint ignore:line
             // volume-control.html
             headphone: 'Kuulokkeet',
             lineout: 'Linjalähtö',

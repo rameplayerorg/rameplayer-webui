@@ -3,6 +3,12 @@
         <h3 translate class="panel-title">Volumes</h3>
     </div>
     <div class="panel-body">
-        <rame-volume-control ng-repeat="channel in vm.channels" channel="channel"></rame-volume-control>
+        <div ng-show="vm.audioPort === 'rameHdmiOnly'">
+            <span translate>Volume settings are unavailable when audio out is set to:</span> 
+            <span translate>{{ vm.audioPort }}</span>
+        </div>
+        <div ng-if="vm.audioPort !== 'rameHdmiOnly'" >
+            <rame-volume-control ng-repeat="channel in vm.channels" channel="channel"></rame-volume-control>
+        </div>
     </div>
 </div>

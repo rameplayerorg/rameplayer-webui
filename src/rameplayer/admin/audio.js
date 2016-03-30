@@ -9,6 +9,12 @@
 
     function AudioController(logger, dataService) {
         var vm = this;
+
+        vm.systemSettings = dataService.getSystemSettings();
+        vm.systemSettings.$promise.then(function() {
+            vm.audioPort = vm.systemSettings.audioPort; 
+        });
+
         getAudio();
 
         function getAudio() {
