@@ -1,0 +1,31 @@
+<uib-accordion-heading>
+    <span ng-style="{'color': vm.unit.color }">
+        <i class="glyphicon glyphicon-time"></i>
+        {{ vm.unit.delay }} s -
+        {{ vm.unit.hostname }} / {{ vm.targetList.title }}
+
+    </span>
+    <span class="pull-right">
+        <span ng-click="$event.stopPropagation()">
+            <a href ng-click="vm.removeSync()" title="{{ 'Remove' | translate }}">
+                <span class="glyphicon glyphicon-remove" ng-style="{'color': vm.unit.color}"></span>
+            </a>
+        </span>
+    </span>
+</uib-accordion-heading>
+
+<div ng-if="!vm.targetItems.length" translate>Playlist is empty.</div>
+
+<div class="media-list media-list-sync" ng-if="vm.targetItems.length">
+    <div class="row hidden-xs media-list-header">
+        <div class="col-sm-4" translate>Name</div>
+        <div class="col-sm-4" translate>Title</div>
+        <div class="col-sm-1 text-right" translate>Length</div>
+    </div>
+
+    <ul class="target-media-list media-list-sortable" ng-sortable="vm.sortableOptions">
+        <li ng-repeat="mediaItem in vm.targetItems">
+            <rame-media-item media="mediaItem" remove="" on-click="" hide-date="true" ng-mouseenter="vm.mouseEnterItem($index)" ng-mouseleave="vm.mouseLeaveItem($index)" sync-highlight="$index === vm.hoverIndex"></rame-media-item>
+        </li>
+    </ul>
+</div>

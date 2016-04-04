@@ -202,7 +202,7 @@
             var state = statusService.status.state;
             for (var i = 0; i < $localStorage.clusterUnits.length; i++) {
                 var unit = $localStorage.clusterUnits[i];
-                pollStatus(unit.id);
+                pollStatus(unit);
                 if (statuses[unit.id] && statuses[unit.id].state !== state) {
                     state = 'mixed';
                 }
@@ -210,30 +210,78 @@
             clusterStatus.state = state;
         }
 
-        function pollStatus(unitId) {
-            dataServices[unitId].getStatus({
-                // no need for lists here
-                lists: []
+        /**
+         * Returns a list of all target list ids of an unit.
+         */
+        function getTargetListIds(unit) {
+            var targetListIds = [];
+            var keys = Object.keys(unit.syncedLists);
+            for (var i = 0; i < keys.length; i++) {
+                targetListIds.push(unit.syncedLists[keys[i]].targetList.id);
+            }
+            return targetListIds;
+        }
+
+        function pollStatus(unit) {
+            // give list of synced list ids
+            dataServices[unit.id].getStatus({
+                lists: getTargetListIds(unit)
             })
             .then(function(response) {
                 var newStatus = response.data;
-                if (statuses[unitId] === undefined) {
-                    statuses[unitId] = {};
+                if (statuses[unit.id] === undefined) {
+                    statuses[unit.id] = {};
                 }
                 // save new status only when status changes
-                if (!angular.equals(newStatus, statuses[unitId])) {
-                    angular.copy(newStatus, statuses[unitId]);
+                if (!angular.equals(newStatus, statuses[unit.id])) {
+                    angular.copy(newStatus, statuses[unit.id]);
+                    refreshLists(unit, newStatus);
                 }
             }, function(errorResponse) {
-                logger.error('Error status response from unit', unitId, errorResponse);
+                logger.error('Error status response from unit', unit.id, errorResponse);
                 if (errorResponse.status === -1) {
                     // network error
-                    if (statuses[unitId] === undefined) {
-                        statuses[unitId] = {};
+                    if (statuses[unit.id] === undefined) {
+                        statuses[unit.id] = {};
                     }
-                    statuses[unitId].state = 'offline';
+                    statuses[unit.id].state = 'offline';
                 }
             });
+        }
+
+        /**
+         * Refreshes list data from server.
+         */
+        function refreshLists(unit, status) {
+            var targetListsRefreshed = {};
+            var listIds = Object.keys(unit.syncedLists);
+            var i;
+            for (i = 0; i < listIds.length; i++) {
+                var targetList = unit.syncedLists[listIds[i]].targetList;
+                targetListsRefreshed[targetList.id] = targetList.refreshed;
+            }
+
+            var newIds = Object.keys(status.listsRefreshed);
+            for (i = 0; i < newIds.length; i++) {
+                var listId = newIds[i];
+                if (targetListsRefreshed[listId] &&
+                    targetListsRefreshed[listId] !== status.listsRefreshed[listId]) {
+                    logger.info('playlist updated on another cluster unit', unit, listId);
+                    // refreshed timestamp differs, target playlist has been updated
+                    // TODO: do something
+                }
+            }
+
+            var oldIds = Object.keys(targetListsRefreshed);
+
+            // playlist has been removed
+            // toastr.warning (synced playlist was removed in unit XYZ)
+            for (i = 0; i < oldIds.length; i++) {
+                if (newIds.indexOf(oldIds[i]) === -1) {
+                    logger.info('playlist was removed on another cluster unit', unit, oldIds[i]);
+                    // TODO: do something
+                }
+            }
         }
 
         function setCursor(itemId) {

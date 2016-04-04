@@ -92,10 +92,10 @@
         }
     }
 
-    PlaylistController.$inject = ['$rootScope', 'logger', '$uibModal', 'dataService',
+    PlaylistController.$inject = ['$rootScope', '$scope', 'logger', '$uibModal', 'dataService',
         'clusterService', 'toastr', '$translate', '$timeout'];
 
-    function PlaylistController($rootScope, logger, $uibModal, dataService,
+    function PlaylistController($rootScope, $scope, logger, $uibModal, dataService,
                                 clusterService, toastr, $translate, $timeout) {
         var vm = this;
         vm.isDropdownOpen = false;
@@ -106,23 +106,11 @@
         vm.edit = edit;
         vm.openSync = openSync;
         vm.openSyncModal = openSyncModal;
-        vm.closeSync = closeSync;
-        vm.removeSync = removeSync;
+        vm.clusterUnits = clusterService.units;
         vm.sync = {
-            units: clusterService.units,
+            units: [],
             targetVisible: false,
-            isOn: false,
-            unit: null,
-            list: null,
-            targetItems: [],
-            sortableOptions: {
-                handle: '.sorting-handle',
-                animation: 150,
-                onSort: function(evt) {
-                    // triggered after sorting
-                    syncSort(evt);
-                }
-            }
+            isOn: false
         };
 
         // hovering functions for easier sync matching
@@ -130,8 +118,42 @@
         vm.mouseEnterItem = mouseEnterItem;
         vm.mouseLeaveItem = mouseLeaveItem;
 
+        // watch clusterUnits - warning: this is heavy way
+        $scope.$watch('vm.clusterUnits', function(newUnits) {
+            // update vm.sync.units to have only those which have this list synced
+            var units = [];
+            for (var i = 0; i < newUnits.length; i++) {
+                if (newUnits[i].syncedLists[vm.listId]) {
+                    units.push(newUnits[i]);
+                }
+            }
+            // sort sync lists by delay
+            units.sort(function(a, b) {
+                return a.delay - b.delay;
+            });
+            vm.sync.units = units;
+            if (vm.sync.units.length > 0) {
+                vm.sync.isOn = true;
+                // wait animation to end before showing target list
+                $timeout(function() {
+                    vm.sync.targetVisible = true;
+                }, 1100);
+            }
+            else {
+                vm.sync.isOn = false;
+                vm.sync.targetVisible = false;
+            }
+        }, true);
+
         function remove() {
             dataService.removePlaylist(vm.listId);
+
+            // remove all synced lists
+            for (var i = 0; i < vm.sync.units.length; i++) {
+                if (vm.sync.units[i].syncedLists[vm.listId]) {
+                    delete vm.sync.units[i].syncedLists[vm.listId];
+                }
+            }
         }
 
         function clear() {
@@ -176,7 +198,7 @@
          * @desc Opens existing synchronization
          */
         function openSync(unit) {
-            startSync(unit, unit.syncedLists[vm.listId].targetListId);
+            startSync(unit, unit.syncedLists[vm.listId].targetList.id);
         }
 
         function openSyncModal() {
@@ -189,129 +211,26 @@
             });
 
             modalInstance.result.then(function(result) {
-                vm.sync.list = null;
                 if (result.unit && result.playlist) {
-                    startSync(result.unit, result.playlist);
+                    createSyncTarget(result.unit, result.playlist);
                 }
             });
+        }
+
+        function createSyncTarget(unit, playlist) {
+            var syncedList = {
+                targetList: {
+                    id: playlist,
+                    refreshed: null
+                },
+                items: {}
+            };
+            unit.syncedLists[vm.listId] = syncedList;
         }
 
         function startSync(unit, playlist) {
             vm.sync.isOn = true;
             vm.sync.unit = unit;
-            var unitDs = clusterService.getDataService(unit.id);
-            vm.sync.list = unitDs.getList(playlist);
-            vm.sync.list.$promise.then(function() {
-                // playlist loaded from other unit
-                setSyncTargetItems();
-            });
-
-            // wait animation to end before showing target list
-            $timeout(function() {
-                vm.sync.targetVisible = true;
-            }, 1000);
-
-        }
-
-        /**
-         * @name syncSort
-         * @desc Called when items in sync list have been sorted.
-         */
-        function syncSort(event) {
-            saveSyncData();
-        }
-
-        function createTargetItems() {
-            var targetItems = angular.copy(vm.sync.list.items);
-            for (var i = targetItems.length; i < $rootScope.lists[vm.listId].items.length; i++) {
-                // fill target list with empty items until it's as big as source list
-                targetItems.push(getEmptyItem());
-            }
-            return targetItems;
-        }
-
-        function setSyncTargetItems() {
-
-            var targetItems = createTargetItems();
-            if (vm.sync.unit.syncedLists[vm.listId] !== undefined &&
-                vm.sync.unit.syncedLists[vm.listId].targetListId === vm.sync.list.id) {
-
-                // synced list exists
-                var sourceItems = $rootScope.lists[vm.listId].items;
-                var sorted = [];
-                var i;
-                for (i = 0; i < sourceItems.length; i++) {
-                    var targetItemId = vm.sync.unit.syncedLists[vm.listId].items[sourceItems[i].id];
-                    sorted.push(popTargetItem(targetItemId));
-                }
-                for (i = 0; i < targetItems.length; i++) {
-                    // extend sorted array with remaining target items,
-                    // ignoring empty target items
-                    if (targetItems[i].id) {
-                        sorted.push(targetItems[i]);
-                    }
-                }
-                targetItems = sorted;
-            }
-            vm.sync.targetItems = targetItems;
-
-            if (vm.sync.unit.syncedLists[vm.listId] === undefined) {
-                // first save
-                saveSyncData();
-            }
-
-            // finds given item and removes it from targetItems array,
-            // or if not found, returns empty item
-            function popTargetItem(itemId) {
-                for (var i = 0; i < targetItems.length; i++) {
-                    if (targetItems[i].id === itemId) {
-                        return targetItems.splice(i, 1)[0];
-                    }
-                }
-                return getEmptyItem();
-            }
-        }
-
-        /**
-         * @name saveSyncTargetItems
-         * @desc Saves sync mapping data for unit object
-         */
-        function saveSyncData() {
-            logger.debug('saveSyncData()');
-            var syncedList = {
-                targetListId: vm.sync.list.id,
-                items: {}
-            };
-            var sourceItems = $rootScope.lists[vm.listId].items;
-            for (var i = 0; i < sourceItems.length; i++) {
-                syncedList.items[sourceItems[i].id] = vm.sync.targetItems[i].id;
-            }
-            logger.debug('syncedList', syncedList);
-            vm.sync.unit.syncedLists[vm.listId] = syncedList;
-        }
-
-        function getEmptyItem() {
-            return {
-                id: null,
-                name: '–'
-            };
-        }
-
-        function closeSync() {
-            vm.sync.targetVisible = false;
-            vm.sync.isOn = false;
-        }
-
-        function removeSync() {
-            closeSync();
-            delete vm.sync.unit.syncedLists[vm.listId];
-            $translate(['PLAYLIST_SYNC_REMOVED']).then(function(translations) {
-                var msg = translations.PLAYLIST_SYNC_REMOVED;
-                msg = msg
-                    .replace('$1', vm.sync.unit.hostname + ' / ' + vm.sync.list.title)
-                    .replace('$2', $rootScope.lists[vm.listId].title);
-                toastr.success(msg);
-            });
         }
 
         function mouseEnterItem(index) {

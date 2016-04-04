@@ -1,6 +1,6 @@
 /**
- * Rameplayer-WebUI
- * Copyright (C) 2015
+ * RamePlayer WebUI
+ * Copyright (C) 2015-2016
  *
  * See LICENSE.
  */
@@ -94,7 +94,7 @@
                 // notify only when status changes
                 if (!angular.equals(newStatus, status)) {
                     angular.copy(newStatus, status);
-                    syncLists();
+                    refreshLists();
                     checkServerNotifications();
                 } else if (forceNotificationCheck) {
                     checkServerNotifications();
@@ -113,7 +113,10 @@
             });
         }
 
-        function syncLists() {
+        /**
+         * Refreshes list data from server.
+         */
+        function refreshLists() {
             var oldIds = Object.keys($rootScope.lists);
             var newIds = Object.keys(status.listsRefreshed);
             var promises = [];
