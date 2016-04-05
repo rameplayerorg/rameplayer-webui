@@ -65,7 +65,7 @@
                 // open modal dialog
                 var modalInstance = $uibModal.open({
                     animation: true,
-                    templateUrl: 'rameplayer/playlists/save-as-modal.html',
+                    templateUrl: 'rameplayer/playlists/modals/save-as-modal.html',
                     controller: 'SaveAsModalController',
                     controllerAs: 'saveAs'
                 });
@@ -172,7 +172,7 @@
             // open modal dialog
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'rameplayer/playlists/edit-modal.html',
+                templateUrl: 'rameplayer/playlists/modals/edit-modal.html',
                 controller: 'EditModalController',
                 controllerAs: 'vm',
                 resolve: {
@@ -205,7 +205,7 @@
             // open sync modal dialog
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'rameplayer/playlists/sync-modal.html',
+                templateUrl: 'rameplayer/playlists/modals/sync-modal.html',
                 controller: 'SyncModalController',
                 controllerAs: 'vm'
             });

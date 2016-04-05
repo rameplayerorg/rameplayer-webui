@@ -27,9 +27,11 @@
         return directive;
     }
 
-    PlaylistSyncTargetController.$inject = ['$rootScope', 'logger', 'clusterService', 'toastr', '$translate'];
+    PlaylistSyncTargetController.$inject = ['$rootScope', 'logger', 'clusterService', 'toastr',
+        '$translate', '$uibModal'];
 
-    function PlaylistSyncTargetController($rootScope, logger, clusterService, toastr, $translate) {
+    function PlaylistSyncTargetController($rootScope, logger, clusterService, toastr,
+                                          $translate, $uibModal) {
         var vm = this;
         vm.targetItems = [];
         vm.removeSync = removeSync;
@@ -145,13 +147,30 @@
 
         function removeSync() {
             //closeSync();
-            delete vm.unit.syncedLists[vm.listId];
-            $translate(['PLAYLIST_SYNC_REMOVED']).then(function(translations) {
-                var msg = translations.PLAYLIST_SYNC_REMOVED;
-                msg = msg
-                    .replace('$1', vm.unit.hostname + ' / ' + vm.targetList.title)
-                    .replace('$2', $rootScope.lists[vm.listId].title);
-                toastr.success(msg);
+
+            // open modal dialog
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'rameplayer/playlists/modals/remove-sync-target-modal.html',
+                controller: 'RemoveSyncTargetModalController',
+                controllerAs: 'vm',
+                resolve: {
+                    // deliver 'unitHostname' as parameter to controller
+                    playlist: function() {
+                        return vm.unit.hostname + ' / ' + vm.targetList.title;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(result) {
+                delete vm.unit.syncedLists[vm.listId];
+                $translate(['PLAYLIST_SYNC_REMOVED']).then(function(translations) {
+                    var msg = translations.PLAYLIST_SYNC_REMOVED;
+                    msg = msg
+                        .replace('$1', vm.unit.hostname + ' / ' + vm.targetList.title)
+                        .replace('$2', $rootScope.lists[vm.listId].title);
+                    toastr.success(msg);
+                });
             });
         }
 

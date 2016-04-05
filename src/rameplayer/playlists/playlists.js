@@ -68,7 +68,7 @@
             // open modal dialog
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'rameplayer/playlists/add-stream-modal.html',
+                templateUrl: 'rameplayer/playlists/modals/add-stream-modal.html',
                 controller: 'AddStreamModalController',
                 controllerAs: 'saveAs'
             });
