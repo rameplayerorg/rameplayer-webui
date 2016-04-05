@@ -41,18 +41,23 @@
             if (seconds === undefined) {
                 return '';
             }
+            var prefix = '';
             if (seconds < 0) {
+                prefix = '-';
                 seconds = Math.abs(seconds);
             }
             measure = measure ? measure : seconds;
             seconds = Math.floor(seconds);
+            if (seconds === 0) {
+                prefix = '';
+            }
             if (measure >= 3600) {
-                return digits(seconds, 3600) + ':' +
+                return prefix + digits(seconds, 3600) + ':' +
                     digits(seconds % 3600, 60, true) + ':' +
                     digits(seconds % 60, 1, true);
             }
             else {
-                return digits(seconds % 3600, 60) + ':' +
+                return prefix + digits(seconds % 3600, 60) + ':' +
                     digits(seconds % 60, 1, true);
             }
         }
