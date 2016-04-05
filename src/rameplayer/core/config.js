@@ -222,7 +222,7 @@
             NTP_SERVER_HOSTNAME: 'NTP-palvelimen nimi',
             ADMIN_SETTINGS_NOT_SAVED: 'Järjestelmäasetuksia ei tallennettu.',
             CHECK_INSERTED_VALUES: 'Tarkista syötetyt arvot',
-            INVALID_OPTIONAL_SETTINGS: 'Vapaaehtoisissa asetuksissa epäkelpoja arvoja',
+            INVALID_OPTIONAL_SETTINGS: 'Valinnaisissa asetuksissa epäkelpoja arvoja',
             // settings.js
             OPTION_SAVED: 'Valinta tallennettu',
             OPTION_AUTOPLAY_USB_DESC: 'Automaattinen soitto USB-tikulta',

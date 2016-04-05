@@ -111,10 +111,10 @@
                     invalidFields.push('SUBNET_MASK');
                 } 
                 if (!vm.gatewayIp.valid && !vm.systemSettings.ipDhcpServer) {
-                    invalidFields.push('GATEWAY_IP');
+                    invalidOptionalFields.push('GATEWAY_IP');
                 }
                 if (!vm.dnsServerIp.valid) {
-                    invalidFields.push('DNS_FIRST');
+                    invalidOptionalFields.push('DNS_FIRST');
                 }
                 if (!vm.dnsAlternativeServerIp.valid) {
                     invalidOptionalFields.push('DNS_SECOND');
@@ -236,8 +236,18 @@
             if (vm.manualIpConfig) {
                 vm.systemSettings.ipAddress = vm.deviceIp.value;
                 vm.systemSettings.ipSubnetMask = vm.subnetMask.value;
-                vm.systemSettings.ipDefaultGateway = vm.gatewayIp.value;
-                vm.systemSettings.ipDnsPrimary = vm.dnsServerIp.value;
+                if (vm.gatewayIp.valid){
+                    vm.systemSettings.ipDefaultGateway = vm.gatewayIp.value;
+                } else {
+                    // optional
+                    vm.systemSettings.ipDefaultGateway = undefined;
+                }
+                if (vm.dnsServerIp.valid) {
+                    vm.systemSettings.ipDnsPrimary = vm.dnsServerIp.value;
+                } else {
+                    // optional
+                    vm.systemSettings.ipDnsPrimary = undefined;
+                }
                 if (vm.dnsAlternativeServerIp.valid) {
                     vm.systemSettings.ipDnsSecondary = vm.dnsAlternativeServerIp.value;
                 } else {
