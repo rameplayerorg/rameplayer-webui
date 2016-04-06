@@ -236,7 +236,7 @@
             if (vm.manualIpConfig) {
                 vm.systemSettings.ipAddress = vm.deviceIp.value;
                 vm.systemSettings.ipSubnetMask = vm.subnetMask.value;
-                if (vm.gatewayIp.valid){
+                if (vm.gatewayIp.valid) {
                     vm.systemSettings.ipDefaultGateway = vm.gatewayIp.value;
                 } else {
                     // optional
