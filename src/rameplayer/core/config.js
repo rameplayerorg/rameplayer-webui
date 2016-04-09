@@ -185,6 +185,7 @@
             'Admin Settings': 'Järjestelmäasetukset',
             'Video output resolution': 'Videon resoluutio',
             'Audio port': 'Äänilähtö',
+            'HDMI and analog audio outputs are not synchronized with each other': 'HDMI- ja analoginen äänilähtö eivät ole keskenään synkronoituja', // jshint ignore:line
             rameAnalogOnly: 'Analoginen',
             rameHdmiOnly: 'HDMI',
             rameHdmiAndAnalog: 'Molemmat',

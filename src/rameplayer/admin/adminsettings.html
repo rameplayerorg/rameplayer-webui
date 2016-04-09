@@ -38,6 +38,8 @@
                                 ng-repeat="port in vm.audioPorts"
                                 ng-value="port" translate>{{ port }}</option>
                         </select>
+                        <span ng-show="vm.systemSettings.audioPort === 'rameHdmiAndAnalog'" 
+                            class="help-block text-info" translate>HDMI and analog audio outputs are not synchronized with each other</span>
                     </div>
                 </div>
 
@@ -48,7 +50,7 @@
                             class="form-control" ng-model="vm.deviceName"
                             ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?$/i"
                             ng-minlength="1" ng-maxlength="63" required/>
-                        <span class="text-warning glyphicon glyphicon-alert" 
+                        <span class="help-block text-warning glyphicon glyphicon-alert" 
                             ng-show="!vm.basicsForm.deviceName.$valid || vm.basicsForm.deviceName.$error.required">
                         </span>
                     </div>
