@@ -36,8 +36,13 @@
         "./src/css/volume-slider.css"
     ],
     "js": [
-        "./src/**/*.module.js",
-        "./src/**/*.js"
+        "./src/rameplayer/**/*.module.js",
+        "./src/rameplayer/**/*.js",
+        "!./src/rameplayer/**/*.spec.js"
+    ],
+    "specs": [
+        "./src/rameplayer/**/*.spec.js",
+        "./src/test/**/*.spec.js"
     ],
     "fonts": [
         "./bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2",

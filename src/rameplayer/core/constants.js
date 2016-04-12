@@ -1,6 +1,14 @@
 (function() {
     'use strict';
 
+    if (typeof rameServerConfig === 'undefined') { // jshint ignore:line
+        // default value for rameServerConfig if not defined
+        var rameServerConfig = { // jshint ignore:line
+            basePath: 'stubs/',
+            simulation: true
+        };
+    }
+
     angular
         .module('rameplayer.core')
         // minimum server version, used in dataServiceProvider checkVersion()

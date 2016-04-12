@@ -4,6 +4,7 @@
 
 var gulp = require('gulp');
 var del = require('del');
+var KarmaServer = require('karma').Server;
 var merge = require('merge-stream');
 var paths = require('./gulp.config.json');
 var plugins = require('gulp-load-plugins')();
@@ -22,6 +23,13 @@ gulp.task('analyze', function() {
     var jshint = analyzejshint([].concat(paths.js));
     var jscs = analyzejscs([].concat(paths.js));
     return merge(jshint, jscs);
+});
+
+/**
+ * Run specs once and exit.
+ */
+gulp.task('test', function(done) {
+    startTests(true /* singleRun */, done);
 });
 
 /**
@@ -47,7 +55,7 @@ gulp.task('templatecache', function() {
  * Minify and bundle application JavaScript files
  * @return {Stream}
  */
-gulp.task('js', ['analyze', 'templatecache'], function() {
+gulp.task('js', ['analyze', 'test', 'templatecache'], function() {
     var source = [].concat(paths.js, paths.build + 'templates.js');
     return gulp
         .src(source)
@@ -231,6 +239,21 @@ function analyzejscs(sources) {
     return gulp
         .src(sources)
         .pipe(plugins.jscs('./.jscsrc'));
+}
+
+/**
+ * Start the tests using Karma.
+ * @param {boolean} singleRun - True means run once and return (CI) or keep running (dev)
+ * @param {Function} done - Callback to fire when karma is done
+ * @return {undefined}
+ */
+function startTests(singleRun, done) {
+    new KarmaServer({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: !!singleRun
+    }, function() {
+        done();
+    }).start();
 }
 
 /**
