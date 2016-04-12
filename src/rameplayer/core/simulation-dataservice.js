@@ -112,6 +112,8 @@
         };
 
         var service = {
+            checkVersionUpgrade: checkVersionUpgrade,
+            showNewFwVersionMessage: showNewFwVersionMessage,
             getSettings: getSettings,
             getStatus: getStatus,
             setCursor: setCursor,
@@ -167,6 +169,12 @@
             }
             url += basePath;
             return url;
+        }
+
+        function checkVersionUpgrade() {
+        }
+
+        function showNewFwVersionMessage() {
         }
 
         /**
