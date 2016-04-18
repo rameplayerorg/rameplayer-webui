@@ -1,5 +1,7 @@
 /* jshint -W117, -W030 */
 
+// Test cases
+
 describe('rameplayer.playlists', function() {
     // load module rameplayer
     beforeEach(angular.mock.module('rameplayer'));
