@@ -225,7 +225,8 @@
         function pollStatus(unit) {
             // give list of synced list ids
             dataServices[unit.id].getStatus({
-                lists: getTargetListIds(unit)
+                lists: getTargetListIds(unit),
+                cluster: true
             })
             .then(function(response) {
                 var newStatus = response.data;
