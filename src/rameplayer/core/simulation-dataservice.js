@@ -141,7 +141,8 @@
             getReportConfig: getReportConfig,
             sendReport: sendReport,
             getAudio: getAudio,
-            setVolume: setVolume
+            setVolume: setVolume,
+            reboot: reboot
         };
 
         var delay = 50;
@@ -556,6 +557,13 @@
         }
 
         function setVolume(channel, volume) {
+            return $timeout(function() {
+                return {
+                };
+            }, delay);
+        }
+
+        function reboot() {
             return $timeout(function() {
                 return {
                 };

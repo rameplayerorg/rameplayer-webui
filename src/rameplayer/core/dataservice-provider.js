@@ -101,6 +101,7 @@
             ds.sendReport = sendReport;
             ds.getAudio = getAudio;
             ds.setVolume = setVolume;
+            ds.reboot = reboot;
 
             checkVersionCompatibility();
 
@@ -432,6 +433,10 @@
                 return $http.put(baseUrl + 'audio/' + channel, {
                     volume: parseInt(volume)
                 });
+            }
+
+            function reboot() {
+                return $http.put(baseUrl + 'settings/reboot');
             }
         }
     }
