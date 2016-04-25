@@ -8,12 +8,13 @@
 
     SettingsController.$inject = [
         'logger', '$http', 'dataService', 'clusterService', '$translate', 'uiVersion',
-        'toastr', '$scope', '$localStorage', '$window', '$document', '$uibModal', 'statusService'
+        'toastr', '$scope', '$localStorage', '$window', '$document', '$uibModal', 'statusService',
+        '$location'
     ];
 
     function SettingsController(logger, $http, dataService, clusterService, $translate,
                                 uiVersion, toastr, $scope, $localStorage, $window, $document,
-                                $uibModal, statusService) {
+                                $uibModal, statusService, $location) {
 
         var $injector = angular.injector();
 
@@ -27,6 +28,7 @@
         vm.saveUsbSetting = saveUsbSetting;
         
         vm.windowTitleInfo = 'RamePlayer';
+        vm.locationIp = $location.host();
         var systemSettings = dataService.getSystemSettings();
         systemSettings.$promise.then(function() {
             vm.ipAddress = initIpAddressInfo(systemSettings);
@@ -51,13 +53,16 @@
             var adr = systemSettings.ipAddress;
             vm.windowTitleInfo = ' - ' + vm.windowTitleInfo;
             //$log.debug(' wintit:' + vm.windowTitleInfo);
-            if (adr) {
-                vm.windowTitleInfo = adr + vm.windowTitleInfo; 
-            }
-            else {
+            if (!adr) {
                 adr = '0.0.0.0';
-                vm.windowTitleInfo = '0.0.0.0' + vm.windowTitleInfo;
             }
+            
+            if (adr !== vm.locationIp) {
+                vm.windowTitleInfo = vm.locationIp + vm.windowTitleInfo;
+            } else {
+                vm.windowTitleInfo = adr + vm.windowTitleInfo;
+            }
+            
             $document[0].title = vm.windowTitleInfo;
             return adr;
         }

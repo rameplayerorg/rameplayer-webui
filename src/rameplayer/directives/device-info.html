@@ -3,7 +3,12 @@
     <span style="float: left; padding: 2px;" ng-cloak>
         {{ ::infovm.hostname }}
         <br>
-        {{ ::infovm.ipAddress }}
+        <span ng-class="{'text-warning': infovm.locationIp !== infovm.ipAddress }">
+        {{ ::infovm.locationIp }}
+        </span>
+        <span ng-show="infovm.locationIp !== infovm.ipAddress" style="text-decoration: line-through;">
+            {{ ::infovm.ipAddress }}
+        </span>
     </span>
     <span style="float: right; padding: 2px;" uib-dropdown>
         <img alt="Rame Logo" src="images/logo_fading_black_h40.gif" uib-dropdown-toggle>
