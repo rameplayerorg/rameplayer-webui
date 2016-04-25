@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <button id="play" type="button" class="btn btn-default" ng-class="{ 'btn-primary': vm.playerStatus.state !== 'playing' && vm.playerStatus.state !== 'buffering', 'btn-warning': vm.playerStatus.state === 'playing' || vm.playerStatus.state === 'buffering' }" ng-click="vm.togglePlay()" ng-disabled="vm.selectedMedia === null">
+                <button id="play" type="button" class="btn btn-default" ng-class="{ 'btn-primary': vm.playerStatus.state !== 'playing' && vm.playerStatus.state !== 'buffering', 'btn-warning': vm.playerStatus.state === 'playing' || vm.playerStatus.state === 'buffering' }" ng-click="vm.togglePlay()" ng-disabled="vm.selectedMedia === null || (vm.playerStatus.state === 'stopped' && vm.clusterService.clusterStatus.state === 'mixed')">
                     <span class="glyphicon" ng-class="{ 'glyphicon-play': vm.playerStatus.state !== 'playing' && vm.playerStatus.state !== 'buffering', 'glyphicon-pause': vm.playerStatus.state === 'playing' || vm.playerStatus.state === 'buffering' }"></span>
                 </button>
                 <div class="player-controls">
