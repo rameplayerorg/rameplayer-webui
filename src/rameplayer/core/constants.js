@@ -1,16 +1,10 @@
 (function() {
     'use strict';
 
-    if (typeof rameServerConfig === 'undefined') { // jshint ignore:line
-        // default value for rameServerConfig if not defined
-        var rameServerConfig = { // jshint ignore:line
-            basePath: 'stubs/',
-            simulation: true
-        };
-    }
+    var module = angular
+        .module('rameplayer.core');
 
-    angular
-        .module('rameplayer.core')
+    module
         // minimum server version, used in dataServiceProvider checkVersion()
         .constant('minServerVersion', '0.7.0')
         .constant('ItemTypes', {
@@ -23,6 +17,17 @@
             ROOT: 'root',
             DEFAULT_PLAYLIST: 'default'
         })
-        .constant('reportServerEntry', 'http://dev.rameplayer.org/reports/config.php')
-        .constant('serverConfig', rameServerConfig); // jshint ignore:line
+        .constant('reportServerEntry', 'http://dev.rameplayer.org/reports/config.php');
+
+    if (typeof rameServerConfig !== 'undefined') {
+        module.constant('serverConfig', rameServerConfig);
+    }
+    else {
+        // default value if rameServerConfig variable is missing
+        module.constant('serverConfig', {
+            basePath: 'stubs/',
+            simulation: true
+        });
+    }
+
 })();
