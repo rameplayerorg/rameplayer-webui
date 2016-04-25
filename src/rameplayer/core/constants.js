@@ -19,8 +19,9 @@
         })
         .constant('reportServerEntry', 'http://dev.rameplayer.org/reports/config.php');
 
+    // rameServerConfig
     if (typeof rameServerConfig !== 'undefined') {
-        module.constant('serverConfig', rameServerConfig);
+        module.constant('serverConfig', rameServerConfig); // jshint ignore:line
     }
     else {
         // default value if rameServerConfig variable is missing
