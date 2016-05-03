@@ -42,6 +42,13 @@
             'rame1080p60'
         ];
 
+        vm.videoOutputRotations = [
+            '0',
+            '90',
+            '180',
+            '270'
+        ];
+
         /**
          * @name init
          * @description Initializes variables.

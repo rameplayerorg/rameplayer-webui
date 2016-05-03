@@ -188,7 +188,8 @@
             'Device hardware': 'Laitteen kokoonpanoversio',
             // adminsettings.html
             'Admin Settings': 'Järjestelmäasetukset',
-            'Video output resolution': 'Videon resoluutio',
+            'Video output resolution': 'Videolähdön resoluutio',
+            'Video output rotation': 'Videolähdön rotaatio',
             'Audio port': 'Äänilähtö',
             'HDMI and analog audio outputs are not synchronized with each other': 'HDMI- ja analoginen äänilähtö eivät ole keskenään synkronoituja', // jshint ignore:line
             rameAnalogOnly: 'Analoginen',

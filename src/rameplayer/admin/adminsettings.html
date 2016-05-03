@@ -30,6 +30,17 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="videoOutRot" class="col-sm-3 control-label" translate>Video output rotation</label>
+                    <div class="col-sm-4">
+                        <select id="videoOutRot" ng-model="vm.systemSettings.displayRotation" class="form-control">
+                            <option
+                                ng-repeat="vor in vm.videoOutputRotations"
+                                ng-value="vor" translate>{{ vor }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="audioPort" class="col-sm-3 control-label" translate>
                     Audio port</label>
                     <div class="col-sm-4">
