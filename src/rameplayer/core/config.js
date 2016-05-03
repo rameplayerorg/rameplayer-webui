@@ -162,9 +162,10 @@
             'Save as': 'Tallenna nimellä',
             'Lock': 'Lukitse',
             'Clear': 'Tyhjennä',
+            'Edit Properties': 'Muokkaa ominaisuuksia',
             'Stop synchronizing this playlist': 'Lakkaa synkronoimasta tätä soittolistaa',
             // edit-modal.html
-            'Edit Playlist': 'Muokkaa soittolistaa',
+            'Edit Playlist Properties': 'Muokkaa soittolistan ominaisuuksia',
             // add-stream-modal.html
             'Add Network Stream': 'Lisää verkosta tuleva syöte',
             'URL': 'URL-osoite',

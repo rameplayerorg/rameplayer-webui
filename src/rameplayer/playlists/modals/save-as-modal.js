@@ -6,15 +6,15 @@
         .controller('SaveAsModalController', SaveAsModalController);
 
     SaveAsModalController.$inject = ['$rootScope', '$timeout', '$log', '$uibModalInstance',
-        'ListIds', 'ItemTypes'];
+        'ListIds', 'ItemTypes', 'storageOptions'];
 
     function SaveAsModalController($rootScope, $timeout, $log, $uibModalInstance,
-                                   ListIds, ItemTypes) {
+                                   ListIds, ItemTypes, storageOptions) {
         var vm = this;
 
         vm.playlistTitle = '';
 
-        vm.storageOptions = getStorageOptions();
+        vm.storageOptions = storageOptions;
         vm.storage = vm.storageOptions[0].value;
         vm.save = save;
         vm.cancel = cancel;
@@ -28,26 +28,6 @@
                 $('#newPlaylistTitle').focus();
             }, delay);
         });
-
-        /**
-         * @name getStorageOptions
-         * @description Makes a list of suitable storage options.
-         * Collects all devices under root list.
-         * @return Array
-         */
-        function getStorageOptions() {
-            var options = [];
-            for (var i = 0; i < $rootScope.lists[ListIds.ROOT].items.length; i++) {
-                var item = $rootScope.lists[ListIds.ROOT].items[i];
-                if (item.type === ItemTypes.DEVICE) {
-                    options.push({
-                        value: item.id,
-                        name: $rootScope.lists[item.id].title
-                    });
-                }
-            }
-            return options;
-        }
 
         function save() {
             // validate form

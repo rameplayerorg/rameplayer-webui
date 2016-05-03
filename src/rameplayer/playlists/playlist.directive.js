@@ -1,3 +1,5 @@
+/*jshint maxparams:11 */
+
 (function() {
     'use strict';
 
@@ -67,7 +69,12 @@
                     animation: true,
                     templateUrl: 'rameplayer/playlists/modals/save-as-modal.html',
                     controller: 'SaveAsModalController',
-                    controllerAs: 'saveAs'
+                    controllerAs: 'saveAs',
+                    resolve: {
+                        storageOptions: function() {
+                            return vm.getStorageOptions();
+                        }
+                    }
                 });
 
                 modalInstance.result.then(function(result) {
@@ -93,10 +100,10 @@
     }
 
     PlaylistController.$inject = ['$rootScope', '$scope', 'logger', '$uibModal', 'dataService',
-        'clusterService', 'toastr', '$translate', '$timeout'];
+        'clusterService', 'toastr', '$translate', '$timeout', 'ListIds', 'ItemTypes'];
 
     function PlaylistController($rootScope, $scope, logger, $uibModal, dataService,
-                                clusterService, toastr, $translate, $timeout) {
+                                clusterService, toastr, $translate, $timeout, ListIds, ItemTypes) {
         var vm = this;
         vm.isDropdownOpen = false;
         vm.remove = remove;
@@ -117,6 +124,7 @@
         vm.hoverIndex = null;
         vm.mouseEnterItem = mouseEnterItem;
         vm.mouseLeaveItem = mouseLeaveItem;
+        vm.getStorageOptions = getStorageOptions;
 
         // watch clusterUnits - warning: this is heavy way
         $scope.$watch('vm.clusterUnits', function(newUnits) {
@@ -178,6 +186,9 @@
                 resolve: {
                     listId: function() {
                         return vm.listId;
+                    },
+                    storageOptions: function() {
+                        return vm.getStorageOptions();
                     }
                 }
             });
@@ -240,5 +251,26 @@
         function mouseLeaveItem(index) {
             vm.hoverIndex = null;
         }
+
+        /**
+         * @name getStorageOptions
+         * @description Makes a list of suitable storage options.
+         * Collects all devices under root list.
+         * @return Array
+         */
+        function getStorageOptions() {
+            var options = [];
+            for (var i = 0; i < $rootScope.lists[ListIds.ROOT].items.length; i++) {
+                var item = $rootScope.lists[ListIds.ROOT].items[i];
+                if (item.type === ItemTypes.DEVICE) {
+                    options.push({
+                        value: item.id,
+                        name: $rootScope.lists[item.id].title
+                    });
+                }
+            }
+            return options;
+        }
+
     }
 })();
