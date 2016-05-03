@@ -5,18 +5,26 @@
         .module('rameplayer.playlists')
         .controller('EditModalController', EditModalController);
 
-    EditModalController.$inject = ['$rootScope', '$timeout', '$log', '$uibModalInstance', 'listId', 'storageOptions'];
+    EditModalController.$inject = ['$rootScope', '$timeout', '$log', '$uibModalInstance', 'listId', 'storageOptions', 'playlistIds'];
 
-    function EditModalController($rootScope, $timeout, $log, $uibModalInstance, listId, storageOptions) {
+    function EditModalController($rootScope, $timeout, $log, $uibModalInstance, listId, storageOptions, playlistIds) {
         var vm = this;
 
         var playlist = $rootScope.lists[listId];
         vm.title = playlist.title;
+        vm.titleChanged = titleChanged;
+        var tmpTitle = vm.title;
+        var originalTitle = vm.title;
+
+        var bootTitle = 'boot';
 
         vm.storageOptions = storageOptions;
         vm.storage = vm.storageOptions[0].value;
         vm.save = save;
         vm.cancel = cancel;
+        vm.bootList = (vm.title === bootTitle);
+        vm.bootListChanged = bootListChanged;
+        vm.titleExists = false;
 
         $uibModalInstance.opened.then(function() {
             // focus to input field
@@ -47,6 +55,42 @@
 
         function cancel() {
             $uibModalInstance.dismiss();
+        }
+
+        function titleChanged() {
+            if (vm.title === bootTitle) {
+                vm.bootList = true;
+            }
+            else {
+                vm.bootList = false;
+            }
+            vm.titleExists = titleExists();
+        }
+
+        function bootListChanged() {
+            if (vm.bootList) {
+                tmpTitle = vm.title;
+                vm.title = bootTitle;
+            }
+            else {
+                if (tmpTitle === bootTitle) {
+                    tmpTitle = '';
+                }
+                vm.title = tmpTitle;
+            }
+            vm.titleExists = titleExists();
+        }
+
+        function titleExists() {
+            if (vm.title !== originalTitle) {
+                for (var i = 0; i < playlistIds.length; i++) {
+                    var list = $rootScope.lists[playlistIds[i]];
+                    if (list.title !== originalTitle && list.title === vm.title) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 })();

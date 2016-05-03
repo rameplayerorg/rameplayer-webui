@@ -4,14 +4,24 @@
     </div>
 
     <div class="modal-body">
-        <div class="form-group">
-            <label for="newPlaylistTitle" translate>Name</label>
-            <input type="text" id="newPlaylistTitle" class="form-control" placeholder="Playlist name" ng-model="vm.title" required>
+        <div ng-class="{ 'has-warning': vm.titleExists }">
+            <div class="form-group">
+                <label for="newPlaylistTitle" translate>Name</label>
+                <input type="text" id="newPlaylistTitle" class="form-control" placeholder="Playlist name" ng-model="vm.title" ng-change="vm.titleChanged()" required>
+                <p class="help-block" ng-show="vm.titleExists" translate>
+                    Playlist with this name exists already. This playlist will overwrite existing one!
+                </p>
+            </div>
         </div>
         <div class="form-group">
             <label for="newPlaylistStorage" translate>Storage</label>
             <select id="newPlaylistStorage" class="form-control" name="storage" ng-model="vm.storage" ng-options="storage.value as storage.name for storage in vm.storageOptions">
             </select>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="vm.bootList" ng-change="vm.bootListChanged()"> <span translate>Play this when device starts</span>
+            </label>
         </div>
     </div>
 

@@ -10,8 +10,8 @@
         <uib-tab>
             <tab-heading translate>Playlists</tab-heading>
             <div ng-controller="PlaylistsController as vm">
-                <rame-playlist default="true" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted('default', item, oldIndex, newIndex)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
-                <rame-playlist ng-repeat="listId in vm.playlists" list-id="listId" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted(listId, item, oldIndex, newIndex)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
+                <rame-playlist default="true" list-ids="vm.playlists" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted('default', item, oldIndex, newIndex)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
+                <rame-playlist ng-repeat="listId in vm.playlists" list-id="listId" list-ids="vm.playlists" remove-media="vm.removeMedia(playlist, media)" on-sort="vm.playlistSorted(listId, item, oldIndex, newIndex)" add-stream="vm.addStream(playlist)" on-media-click="vm.selectMedia(media)"></rame-playlist>
             </div>
         </uib-tab>
 

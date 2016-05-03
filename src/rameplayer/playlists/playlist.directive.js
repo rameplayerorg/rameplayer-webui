@@ -20,6 +20,8 @@
             scope: {
                 // get used playlist from attribute
                 listId: '=?',
+                // all playlist ids
+                listIds: '=?',
                 onMediaClick: '&',
                 //removeMedia: '&',
                 onSort: '&',
@@ -73,6 +75,9 @@
                     resolve: {
                         storageOptions: function() {
                             return vm.getStorageOptions();
+                        },
+                        playlistIds: function() {
+                            return vm.listIds;
                         }
                     }
                 });
@@ -189,6 +194,9 @@
                     },
                     storageOptions: function() {
                         return vm.getStorageOptions();
+                    },
+                    playlistIds: function() {
+                        return vm.listIds;
                     }
                 }
             });
