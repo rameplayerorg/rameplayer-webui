@@ -81,7 +81,10 @@
             NEW_ADDED:'Added new',
             NEW_CLUSTER_UNIT_ADDED_DESC: 'New cluster unit added.',
             headphone: 'Headphone',
-            lineout: 'Line out'
+            lineout: 'Line out',
+            // cluster-service.js
+            CLUSTER_UNIT_OFFLINE: 'Cluster unit disconnected',
+            CLUSTER_UNIT_OFFLINE_DESC: 'Connection lost to cluster unit $1.',
         });
         $translateProvider.translations('fi', {
             //'': '',
@@ -282,6 +285,9 @@
             // volume-control.html
             headphone: 'Kuulokkeet',
             lineout: 'Linjalähtö',
+            // cluster-service.js
+            CLUSTER_UNIT_OFFLINE: 'Ei yhteyttä klusteriyksikköön',
+            CLUSTER_UNIT_OFFLINE_DESC: 'Yhteys katkesi klusteriyksikköön $1.',
         });
         $translateProvider.preferredLanguage('en-us');
         $translateProvider.fallbackLanguage('en-us');

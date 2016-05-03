@@ -1,3 +1,6 @@
+/*jshint maxstatements:42 */
+/*jshint maxparams:12 */
+
 /**
  * RamePlayer WebUI
  * Copyright (C) 2016
@@ -18,7 +21,7 @@
 
     clusterService.$inject = ['logger', '$interval', '$localStorage', 'dataService',
         'dataServiceProvider', 'statusService', 'uuid', 'FileSaver', 'Blob',
-        '$pageVisibility'];
+        '$pageVisibility', 'toastr', '$translate'];
 
     /**
      * @namespace ClusterService
@@ -27,7 +30,7 @@
      */
     function clusterService(logger, $interval, $localStorage, dataService,
                             dataServiceProvider, statusService, uuid, FileSaver, Blob,
-                            $pageVisibility) {
+                            $pageVisibility, toastr, $translate) {
         // cluster units are saved to $localStorage
         if ($localStorage.clusterUnits === undefined) {
             $localStorage.clusterUnits = [];
@@ -39,6 +42,9 @@
 
         // status objects for cluster units, not persisted
         var statuses = {};
+
+        // toast objects for cluster unit connections, not persisted
+        var connectionToasts = {};
 
         // for indicating common state for all working units
         // in cluster. 'mixed' if not all in same state
@@ -151,6 +157,7 @@
                 if ($localStorage.clusterUnits[i].id === id) {
                     $localStorage.clusterUnits.splice(i, 1);
                     logger.debug('Unit ' + id + ' removed from cluster');
+                    clearUnitOfflineNotification(id);
                     return true;
                 }
             }
@@ -235,6 +242,10 @@
                 }
                 // save new status only when status changes
                 if (!angular.equals(newStatus, statuses[unit.id])) {
+                    // clear connection error toast, if any
+                    if (newStatus.state !== 'offline' && statuses[unit.id].state === 'offline') {
+                        clearUnitOfflineNotification(unit.id);
+                    }
                     angular.copy(newStatus, statuses[unit.id]);
                     refreshLists(unit, newStatus);
                 }
@@ -245,9 +256,35 @@
                     if (statuses[unit.id] === undefined) {
                         statuses[unit.id] = {};
                     }
+                    // notify about unit going offline
+                    notifyUnitOffline(unit);
                     statuses[unit.id].state = 'offline';
                 }
             });
+        }
+
+        function clearUnitOfflineNotification(unitId) {
+            if (connectionToasts[unitId]) {
+                // close open toastr
+                toastr.clear(connectionToasts[unitId]);
+                delete connectionToasts[unitId];
+            }
+        }
+
+        function notifyUnitOffline(unit) {
+            if (connectionToasts[unit.id] === undefined) {
+                $translate(['CLUSTER_UNIT_OFFLINE', 'CLUSTER_UNIT_OFFLINE_DESC']).then(function(tr) {
+                    var msg = tr.CLUSTER_UNIT_OFFLINE_DESC;
+                    msg = msg.replace('$1', unit.hostname + ' (' + unit.host + ':' + unit.port + ')');
+                    // Sticky toast
+                    connectionToasts[unit.id] = toastr.error(msg, tr.CLUSTER_UNIT_OFFLINE, {
+                        timeOut: 0,
+                        extendedTimeOut: 0,
+                        closeButton: true,
+                        tapToDismiss: false
+                    });
+                });
+            }
         }
 
         /**
