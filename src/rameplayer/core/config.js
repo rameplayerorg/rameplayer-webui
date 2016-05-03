@@ -48,6 +48,8 @@
             // playlist.directive.js
             PLAYLIST_SYNC_REMOVED: 'Playlist $1 is not synchronized to playlist $2 anymore.',
             // statusservice.js
+            CONNECTION_ERROR: 'Connection error',
+            CONNECTION_ERROR_DESC: 'Connection failed to device at $1.',
             RESTART_REQUIRED: 'Restart required',
             RESTART_REQUIRED_DESC: 'Some changes need device to be restarted. Open main player page after reboot.',
             UPDATE_AVAILABLE: 'Update available',
@@ -244,6 +246,8 @@
             FIRMWARE_UPGRADED_DESC: 'Ohjelmistoversio $1 on nyt päivitetty laitteeseen.',
             INCOMPATIBLE_VERSION: 'Palvelimen versio epäyhteensopiva',
             // statusservice.js
+            CONNECTION_ERROR: 'Yhteysvirhe',
+            CONNECTION_ERROR_DESC: 'Ei yhteyttä laitteeseen osoitteessa $1.',
             RESTART_REQUIRED: 'Uudelleenkäynnistys tarvitaan',
             RESTART_REQUIRED_DESC: 'Jotkin muutoksista vaativat laitteen uudelleenkäynnistystä. Palaa sen jälkeen aloitussivulle.', // jshint ignore:line
             UPDATE_AVAILABLE: 'Päivitys saatavilla',

@@ -55,6 +55,9 @@
             updateAvailable: false
         };
 
+        // handle for network error toastr
+        var connectionToast;
+
         dataService.checkVersionUpgrade();
         dataService.showNewFwVersionMessage();
         
@@ -93,6 +96,10 @@
                 }*/
                 // notify only when status changes
                 if (!angular.equals(newStatus, status)) {
+                    // clear connection error toast, if any
+                    if (newStatus.state !== 'offline' && status.state === 'offline') {
+                        hideConnectionError();
+                    }
                     angular.copy(newStatus, status);
                     refreshLists();
                     checkServerNotifications();
@@ -109,8 +116,32 @@
                     status.state = service.states.offline;
                     displayedNotifications.restartRequired = false;
                     displayedNotifications.updateAvailable = false;
+                    showConnectionError();
                 }
             });
+        }
+
+        function showConnectionError() {
+            if (connectionToast === undefined) {
+                $translate(['CONNECTION_ERROR', 'CONNECTION_ERROR_DESC']).then(function(tr) {
+                    var msg = tr.CONNECTION_ERROR_DESC;
+                    msg = msg.replace('$1', serverConfig.host + ':' + serverConfig.port);
+                    // Sticky toast
+                    connectionToast = toastr.error(msg, tr.CONNECTION_ERROR, {
+                        timeOut: 0,
+                        extendedTimeOut: 0,
+                        closeButton: true,
+                        tapToDismiss: false
+                    });
+                });
+            }
+        }
+
+        function hideConnectionError() {
+            if (connectionToast) {
+                toastr.clear(connectionToast);
+                connectionToast = undefined;
+            }
         }
 
         /**
