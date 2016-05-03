@@ -31,6 +31,12 @@
                                     <span translate>Connecting...</span>
                                 </span>
                             </div>
+                            <div ng-show="vm.playerStatus.cluster">
+                                <span class="label label-warning">
+                                    <span translate>This device is in cluster use, controlled by</span>
+                                    {{ vm.playerStatus.cluster.controller }}
+                                </span>
+                            </div>
                         </div>
                     </div>  <!-- #player-small-controls -->
                 </div> <!-- .player-controls -->
