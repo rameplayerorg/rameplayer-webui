@@ -43,10 +43,10 @@
         ];
 
         vm.videoOutputRotations = [
-            '0',
-            '90',
-            '180',
-            '270'
+            { value: 0, name: '0' },
+            { value: 90, name: '90' },
+            { value: 180, name: '180' },
+            { value: 270, name: '270' }
         ];
 
         /**
@@ -55,6 +55,15 @@
          * Called after system settings are fetched from server.
          */
         function init() {
+            vm.selectedVideoOutputRotation = vm.videoOutputRotations[0]; // default
+            for (var a = 0; a < vm.videoOutputRotations.length; ++a) {
+                if (vm.videoOutputRotations[a].value == vm.systemSettings.displayRotation)
+                {
+                    vm.selectedVideoOutputRotation = vm.videoOutputRotations[a];
+                    break;
+                }
+            }
+
             vm.manualIpConfig = !vm.systemSettings.ipDhcpClient;
             vm.deviceName = vm.systemSettings.hostname;
 
@@ -100,7 +109,7 @@
             var valid = true;
             var invalidFields = [];
             var invalidOptionalFields = [];
-            
+
             if (!vm.deviceName) {
                 // Compliance to Internet standard specification RFC 1123
                 // Match against regexp already done using ng-pattern
@@ -238,6 +247,7 @@
         }
         
         function assignSystemSettings() {
+            vm.systemSettings.displayRotation = vm.selectedVideoOutputRotation.value;
             vm.systemSettings.hostname = vm.deviceName;
             vm.systemSettings.ipDhcpClient = !vm.manualIpConfig;
             if (vm.manualIpConfig) {
