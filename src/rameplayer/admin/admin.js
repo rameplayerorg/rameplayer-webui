@@ -43,10 +43,20 @@
         ];
 
         vm.videoOutputRotations = [
-            { value: 0, name: '0' },
-            { value: 90, name: '90' },
-            { value: 180, name: '180' },
-            { value: 270, name: '270' }
+            {
+                value: 0,
+                name: '0'
+            }, {
+                value: 90,
+                name: '90'
+            }, {
+                value: 180,
+                name: '180'
+            },
+            {
+                value: 270,
+                name: '270'
+            }
         ];
 
         /**
@@ -57,7 +67,7 @@
         function init() {
             vm.selectedVideoOutputRotation = vm.videoOutputRotations[0]; // default
             for (var a = 0; a < vm.videoOutputRotations.length; ++a) {
-                if (vm.videoOutputRotations[a].value == vm.systemSettings.displayRotation)
+                if (vm.videoOutputRotations[a].value === vm.systemSettings.displayRotation)
                 {
                     vm.selectedVideoOutputRotation = vm.videoOutputRotations[a];
                     break;
