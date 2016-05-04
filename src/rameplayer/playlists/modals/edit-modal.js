@@ -5,9 +5,11 @@
         .module('rameplayer.playlists')
         .controller('EditModalController', EditModalController);
 
-    EditModalController.$inject = ['$rootScope', '$timeout', '$log', '$uibModalInstance', 'listId', 'storageOptions', 'playlistIds'];
+    EditModalController.$inject = ['$rootScope', '$timeout', '$log', '$uibModalInstance',
+        'listId', 'storageOptions', 'playlistIds', 'ListIds'];
 
-    function EditModalController($rootScope, $timeout, $log, $uibModalInstance, listId, storageOptions, playlistIds) {
+    function EditModalController($rootScope, $timeout, $log, $uibModalInstance,
+                                 listId, storageOptions, playlistIds, ListIds) {
         var vm = this;
 
         var playlist = $rootScope.lists[listId];
@@ -16,7 +18,7 @@
         var tmpTitle = vm.title;
         var originalTitle = vm.title;
 
-        var bootTitle = 'boot';
+        var bootTitle = ListIds.AUTOPLAY;
 
         vm.storageOptions = storageOptions;
         vm.storage = vm.storageOptions[0].value;

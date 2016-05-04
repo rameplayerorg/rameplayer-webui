@@ -151,7 +151,7 @@
             'Name': 'Nimi',
             'Storage': 'Tallennuspaikka',
             'Playlist name': 'Soittolistan nimi',
-            'Playlist with this name exists already. This playlist will overwrite existing one!': 'Soittolistan nimi on jo käytössä. Tämä lista ylikirjoittaa olemassaolevan listan!',
+            'Playlist with this name exists already. This playlist will overwrite existing one!': 'Soittolistan nimi on jo käytössä. Tämä lista ylikirjoittaa olemassaolevan listan!', // jshint ignore:line
             'Play this when device starts': 'Soita tämä lista kun laite käynnistyy',
             // playlist.html
             'Playlist is empty.': 'Soittolista on tyhjä.',

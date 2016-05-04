@@ -23,7 +23,7 @@
         var tmpTitle = vm.title;
         var originalTitle = vm.title;
 
-        var bootTitle = 'boot';
+        var bootTitle = ListIds.AUTOPLAY;
         vm.bootList = (vm.title === bootTitle);
         vm.bootListChanged = bootListChanged;
         vm.titleExists = false;

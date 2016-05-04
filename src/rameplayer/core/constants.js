@@ -15,7 +15,8 @@
         })
         .constant('ListIds', {
             ROOT: 'root',
-            DEFAULT_PLAYLIST: 'default'
+            DEFAULT_PLAYLIST: 'default',
+            AUTOPLAY: 'autoplay', // title, not id
         })
         .constant('reportServerEntry', 'http://dev.rameplayer.org/reports/config.php');
 
