@@ -6,7 +6,7 @@
 
     module
         // minimum server version, used in dataServiceProvider checkVersion()
-        .constant('minServerVersion', '0.7.0')
+        .constant('minServerVersion', '0.8.0')
         .constant('ItemTypes', {
             DEVICE: 'device',
             DIRECTORY: 'directory',
