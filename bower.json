@@ -10,17 +10,17 @@
         "bower_components"
     ],
     "devDependencies": {
-        "angular-mocks": "~1.5.3"
+        "angular-mocks": "~1.5.5"
     },
     "dependencies": {
-        "angular": "~1.5.3",
-        "angular-animate": "~1.5.3",
+        "angular": "~1.5.5",
+        "angular-animate": "~1.5.5",
         "angular-bootstrap": "~0.14.3",
         "angular-file-saver": "~1.1.0",
         "angular-filereader": "~1.0.4",
         "angular-page-visibility": "~0.0.4",
-        "angular-resource": "~1.5.3",
-        "angular-sanitize": "~1.5.3",
+        "angular-resource": "~1.5.5",
+        "angular-sanitize": "~1.5.5",
         "angular-toastr": "~1.6.0",
         "angular-translate": "~2.8.1",
         "angular-ui-router": "~0.2.18",
@@ -31,6 +31,6 @@
         "Sortable": "~1.4.2"
     },
     "resolutions": {
-        "angular": "1.5.3"
+        "angular": "1.5.5"
     }
 }
