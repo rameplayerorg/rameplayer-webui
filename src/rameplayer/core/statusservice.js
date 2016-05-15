@@ -130,7 +130,6 @@
                     connectionToast = toastr.error(msg, tr.CONNECTION_ERROR, {
                         timeOut: 0,
                         extendedTimeOut: 0,
-                        closeButton: true,
                         tapToDismiss: false
                     });
                 });
