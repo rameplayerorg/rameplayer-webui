@@ -1,4 +1,4 @@
-/*jshint maxparams:11 */
+/*jshint maxparams:12 */
 
 (function() {
     'use strict';
@@ -105,10 +105,10 @@
     }
 
     PlaylistController.$inject = ['$rootScope', '$scope', 'logger', '$uibModal', 'dataService',
-        'clusterService', 'toastr', '$translate', '$timeout', 'ListIds', 'ItemTypes'];
+        'clusterService', 'toastr', '$translate', '$timeout', 'ListIds', 'ItemTypes', 'listProvider'];
 
     function PlaylistController($rootScope, $scope, logger, $uibModal, dataService,
-                                clusterService, toastr, $translate, $timeout, ListIds, ItemTypes) {
+                                clusterService, toastr, $translate, $timeout, ListIds, ItemTypes, listProvider) {
         var vm = this;
         vm.isDropdownOpen = false;
         vm.remove = remove;
@@ -206,9 +206,7 @@
                 playlist.title = result.title;
                 playlist.storage = result.storage;
                 logger.debug('Edit playlist', playlist);
-                playlist.$save({
-                    id: vm.listId
-                });
+                playlist.update();
             });
         }
 

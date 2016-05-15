@@ -34,6 +34,10 @@
         function getResource(url) {
             var ListResource = $resource(url, {
                 id: '@id'
+            }, {
+                'update': {
+                    method: 'PUT'
+                }
             });
 
             // add custom functions for list traversing
@@ -77,6 +81,15 @@
                     }
                 }
                 return null;
+            };
+
+            /**
+             * Updates resource using custom PUT method.
+             */
+            ListResource.prototype.update = function() {
+                return ListResource.update({
+                    id: this.id
+                }, this);
             };
 
             return ListResource;
