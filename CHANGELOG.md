@@ -1,7 +1,20 @@
 # Change Log
 
+## [v0.8.1](https://github.com/rameplayerorg/rameplayer-webui/tree/v0.8.1) (2016-05-15)
+[Full Changelog](https://github.com/rameplayerorg/rameplayer-webui/compare/v0.8.0...v0.8.1)
+
+**Closed issues:**
+
+- Continuous refresh loop after firmware upgrade and cluster config [\#27](https://github.com/rameplayerorg/rameplayer-webui/issues/27)
+- Web UI warning when changing volumes if analog audio is disabled [\#26](https://github.com/rameplayerorg/rameplayer-webui/issues/26)
+- More UI clarity for synchronizing cluster playlists [\#25](https://github.com/rameplayerorg/rameplayer-webui/issues/25)
+
 ## [v0.8.0](https://github.com/rameplayerorg/rameplayer-webui/tree/v0.8.0) (2016-05-05)
 [Full Changelog](https://github.com/rameplayerorg/rameplayer-webui/compare/v0.7.5...v0.8.0)
+
+**Closed issues:**
+
+- Missing link to browse back to parent folder [\#32](https://github.com/rameplayerorg/rameplayer-webui/issues/32)
 
 ## [v0.7.5](https://github.com/rameplayerorg/rameplayer-webui/tree/v0.7.5) (2016-05-04)
 [Full Changelog](https://github.com/rameplayerorg/rameplayer-webui/compare/v0.7.4...v0.7.5)
@@ -39,7 +52,6 @@
 **Closed issues:**
 
 - Seek hover time preview not working with IE [\#16](https://github.com/rameplayerorg/rameplayer-webui/issues/16)
-- Support for entering exact seek time [\#15](https://github.com/rameplayerorg/rameplayer-webui/issues/15)
 - web ui logging available for testing/debugging  [\#12](https://github.com/rameplayerorg/rameplayer-webui/issues/12)
 
 ## [v0.5.1](https://github.com/rameplayerorg/rameplayer-webui/tree/v0.5.1) (2016-02-18)
@@ -131,10 +143,6 @@
 
 ## [v0.0.8](https://github.com/rameplayerorg/rameplayer-webui/tree/v0.0.8) (2015-11-17)
 [Full Changelog](https://github.com/rameplayerorg/rameplayer-webui/compare/v0.0.7...v0.0.8)
-
-**Merged pull requests:**
-
-- sync with master [\#2](https://github.com/rameplayerorg/rameplayer-webui/pull/2) ([foilharp](https://github.com/foilharp))
 
 ## [v0.0.7](https://github.com/rameplayerorg/rameplayer-webui/tree/v0.0.7) (2015-11-17)
 [Full Changelog](https://github.com/rameplayerorg/rameplayer-webui/compare/v0.0.6...v0.0.7)
