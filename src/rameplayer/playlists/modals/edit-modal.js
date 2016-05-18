@@ -21,7 +21,7 @@
         var bootTitle = ListIds.AUTOPLAY;
 
         vm.storageOptions = storageOptions;
-        vm.storage = vm.storageOptions[0].value;
+        vm.storage = playlist.storage || vm.storageOptions[0].value;
         vm.save = save;
         vm.cancel = cancel;
         vm.bootList = (vm.title === bootTitle);
