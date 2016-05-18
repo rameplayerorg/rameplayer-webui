@@ -88,6 +88,7 @@
             // player controls
             setCursor: setCursor,
             play: play,
+            playOnRepeat: playOnRepeat,
             pause: pause,
             stop: stop,
             seek: seek,
@@ -336,6 +337,19 @@
                     dataServices[synced.unit.id].play({
                         pos: 0 - synced.unit.delay,
                         itemId: synced.itemId
+                    });
+                }
+            });
+        }
+
+        function playOnRepeat() {
+            dataService.play({ repeat: -1 });
+            runOnSynced(function(synced) {
+                if (synced.itemId) {
+                    dataServices[synced.unit.id].play({
+                        pos: 0 - synced.unit.delay,
+                        itemId: synced.itemId,
+                        repeat: -1
                     });
                 }
             });

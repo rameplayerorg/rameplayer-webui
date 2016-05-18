@@ -347,6 +347,7 @@
              * @param {object} options Options object:
              *                - pos: start position
              *                - itemId: item id to be played, else cursor
+             *                - repeat: -1=play on repeat, continuous loop
              */
             function play(options) {
                 var url = baseUrl + 'player/play';
@@ -356,6 +357,9 @@
                 }
                 if (options && options.itemId) {
                     params.push('id=' + options.itemId);
+                }
+                if (options && options.repeat !== undefined) {
+                    params.push('repeat=' + options.repeat);
                 }
                 if (params.length > 0) {
                     url += '?' + params.join('&');

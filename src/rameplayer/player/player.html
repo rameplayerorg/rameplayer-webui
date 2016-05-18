@@ -8,9 +8,14 @@
                 <div class="player-controls">
                     <rame-time-slider position="vm.timeSlider" duration="vm.playerStatus.duration" on-seek="vm.seek(position)"></rame-time-slider>
                     <div id="player-small-controls">
-                        <button id="stop" type="button" class="btn btn-default btn-xs" title="{{ 'Stop' | translate }}" ng-click="vm.stop()">
-                            <span class="glyphicon glyphicon-stop"></span>
-                        </button>
+                        <div class="player-small-buttons">
+                            <button id="repeat" type="button" class="btn btn-default btn-xs" ng-class="{ 'btn-warning': vm.playerStatus.repeat === -1 }" title="{{ 'Play on repeat' | translate }}" ng-click="vm.playOnRepeat()" ng-disabled="vm.selectedMedia === null || vm.playerStatus.state !== 'stopped' || (vm.playerStatus.state === 'stopped' && vm.clusterService.clusterStatus.state === 'mixed')">
+                                <span class="glyphicon glyphicon-repeat"></span>
+                            </button>
+                            <button id="stop" type="button" class="btn btn-default btn-xs" title="{{ 'Stop' | translate }}" ng-click="vm.stop()">
+                                <span class="glyphicon glyphicon-stop"></span>
+                            </button>
+                        </div>
 
                         <div class="player-info text-center">
                             <div ng-show="vm.cursorItem">

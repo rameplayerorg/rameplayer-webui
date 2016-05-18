@@ -20,6 +20,7 @@
         vm.playerStatus = statusService.status;
         vm.cursorItem = null;
         vm.togglePlay = togglePlay;
+        vm.playOnRepeat = playOnRepeat;
         vm.stop = stop;
         vm.stepForward = stepForward;
         vm.seek = seek;
@@ -59,6 +60,10 @@
 
         function play() {
             clusterService.play();
+        }
+
+        function playOnRepeat() {
+            clusterService.playOnRepeat();
         }
 
         function pause() {
