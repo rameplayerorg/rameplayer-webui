@@ -88,6 +88,8 @@
                     var newPlaylist = {
                         title: result.title,
                         storage: result.storage,
+                        autoPlayNext: result.autoPlayNext,
+                        repeat: (result.autoPlayNext ? -1 : 0),
                         items: []
                     };
                     for (var i = 0; i < $rootScope.lists[vm.listId].items.length; i++) {
@@ -205,6 +207,8 @@
                 var playlist = $rootScope.lists[vm.listId];
                 playlist.title = result.title;
                 playlist.storage = result.storage;
+                playlist.autoPlayNext = result.autoPlayNext;
+                playlist.repeat = result.autoPlayNext ? -1 : 0;
                 logger.debug('Edit playlist', playlist);
                 playlist.update();
             });

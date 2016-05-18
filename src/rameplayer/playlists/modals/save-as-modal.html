@@ -23,6 +23,11 @@
                 <input type="checkbox" ng-model="saveAs.bootList" ng-change="saveAs.bootListChanged()"> <span translate>Play this when device starts</span>
             </label>
         </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="saveAs.autoPlayNext" ng-disabled="saveAs.bootList"> <span translate>Continuous play, repeating all</span>
+            </label>
+        </div>
     </div>
 
     <div class="modal-footer">
