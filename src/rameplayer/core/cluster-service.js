@@ -1,4 +1,4 @@
-/*jshint maxstatements:42 */
+/*jshint maxstatements:43 */
 /*jshint maxparams:12 */
 
 /**
