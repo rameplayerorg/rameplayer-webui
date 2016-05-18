@@ -1,4 +1,4 @@
-/*jshint maxstatements:43 */
+/*jshint maxstatements:44 */
 /*jshint maxparams:12 */
 
 /**
@@ -343,7 +343,9 @@
         }
 
         function playOnRepeat() {
-            dataService.play({ repeat: -1 });
+            dataService.play({
+                repeat: -1
+            });
             runOnSynced(function(synced) {
                 if (synced.itemId) {
                     dataServices[synced.unit.id].play({
