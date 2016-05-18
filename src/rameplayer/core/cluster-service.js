@@ -348,10 +348,14 @@
             });
         }
 
+        /**
+         * @name stop
+         * @description Stops all units in cluster.
+         */
         function stop() {
             dataService.stop();
-            runOnSynced(function(synced) {
-                dataServices[synced.unit.id].stop();
+            runOnAllUnits(function(unit) {
+                dataServices[unit.id].stop();
             });
         }
 
@@ -362,6 +366,22 @@
             });
         }
 
+        /**
+         * @name runOnAllUnits
+         * @description Runs given function on all cluster units.
+         */
+        function runOnAllUnits(func) {
+            for (var i = 0; i < $localStorage.clusterUnits.length; i++) {
+                var unit = $localStorage.clusterUnits[i];
+                func(unit);
+            }
+        }
+
+        /**
+         * @name runOnSynced
+         * @description Runs given function on all cluster units which have
+         * synced with given itemId (or current status cursor item)
+         */
         function runOnSynced(func, itemId) {
             var syncedItems = findSyncedItems(itemId);
             logger.debug('clusterService: syncedItems', syncedItems);
