@@ -186,6 +186,8 @@
             // upgrade-firmware-modal.html
             'Upgrade To': 'Päivitä laitteen ohjelmisto versioon',
             'Upgrade': 'Päivitä',
+            // restart-modal.html
+            'Restart': 'Käynnistä uudelleen',
             // firmware.html
             'Firmware upgrade': 'Laitteen ohjelmistopäivitys',
             'Available firmwares': 'Saatavilla olevat versiot',
@@ -221,6 +223,7 @@
             'Date:': 'Päivämäärä:',
             'Time:': 'Kellonaika:',
             'Factory reset': 'Palauta oletukset',
+            'Restart device': 'Käynnistä laite uudelleen',
             // admin.js
             DEVICE_HOSTNAME: 'Laitteen nimi',
             DEVICE_IP: 'Laitteen IP-osoite',

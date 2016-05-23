@@ -8,10 +8,12 @@
             'AdminController', AdminController);
 
     AdminController.$inject = [
-            'logger', 'dataService', 'toastr', '$rootScope', '$translate', 'statusService'
+            'logger', 'dataService', 'toastr', '$rootScope', '$translate', 'statusService',
+            '$uibModal'
     ];
 
-    function AdminController(logger, dataService, toastr, $rootScope, $translate, statusService) {
+    function AdminController(logger, dataService, toastr, $rootScope, $translate, statusService,
+                             $uibModal) {
         var vm = this;
         vm.systemSettings = dataService.getSystemSettings();
         vm.systemSettings.$promise.then(function() {
@@ -24,6 +26,7 @@
         vm.prefillDhcpOcts = prefillDhcpOcts;
         vm.saveSettings = saveSettings;
         vm.factoryReset = factoryReset;
+        vm.confirmRestart = confirmRestart;
         vm.savingStatus = 'loaded';
         vm.useNtpIp = false;
         vm.useManualTimeConfigs = false;
@@ -341,6 +344,16 @@
                 return (date + ' ' + time);
             }
             return undefined;
+        }
+
+        function confirmRestart() {
+            // open modal dialog
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'rameplayer/admin/restart-modal.html',
+                controller: 'RestartModalController',
+                controllerAs: 'vm',
+            });
         }
     }
 })();
