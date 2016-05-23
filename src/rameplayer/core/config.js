@@ -106,6 +106,8 @@
             INFORMATION:'-tietoja',
             'Firmware version': 'Laiteohjelmisto (Firmware)',
             'Hardware version': 'Laitteisto',
+            // media-list.html
+            'Add Directory To Work list': 'Lisää hakemisto koontilistaan',
             // media-item.html
             'Add to Work list': 'Lisää koontilistaan',
             'Remove': 'Poista',
