@@ -5,10 +5,10 @@
         .module('rameplayer.admin')
         .controller('RestartModalController', RestartModalController);
 
-    RestartModalController.$inject = ['logger', '$timeout', '$uibModalInstance', 'dataService',
+    RestartModalController.$inject = ['logger', '$scope', '$timeout', '$uibModalInstance', 'dataService',
         'statusService', 'toastr', '$window', '$translate'];
 
-    function RestartModalController(logger, $timeout, $uibModalInstance, dataService,
+    function RestartModalController(logger, $scope, $timeout, $uibModalInstance, dataService,
                                     statusService, toastr, $window, $translate) {
         var vm = this;
 

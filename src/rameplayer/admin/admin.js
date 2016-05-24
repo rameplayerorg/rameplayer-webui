@@ -240,7 +240,7 @@
                         }, function(response) {
                             logger.error('Admin setting save failed, response status:' + 
                                     response.status + ' (' + response.statusText + ') data.error:' +
-                                    (response.data ? response.data.error : "(data is null)"));
+                                    (response.data ? response.data.error : ' (data is null)'));
                             logger.debug(response);
                             toastr.clear();
                             toastr.error('Saving admin settings failed.', 'Saving failed', {
