@@ -179,6 +179,7 @@
             'Error: no response': 'Virhe: laite ei vastaa',
             // main.html
             'Playlists': 'Soittolistat',
+            'Help': 'Ohje',
             // upgrade-firmware-modal.html
             'Upgrade To': 'Päivitä laitteen ohjelmisto versioon',
             'Upgrade': 'Päivitä',
