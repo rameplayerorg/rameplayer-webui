@@ -65,6 +65,9 @@
             }, {
                 update: {
                     method: 'PUT'
+                },
+                addArray: {
+                    method: 'POST',
                 }
             });
 
@@ -284,13 +287,28 @@
             }
 
             function addToPlaylist(listId, item) {
-                var newItem = new ListItem({
-                    uri: item.uri
-                });
-                return newItem.$save({
-                    listId: listId,
-                    itemId: ''
-                });
+                if (angular.isArray(item)) {
+                    // add array
+                    var items = [];
+                    for (var i = 0; i < item.length; i++) {
+                        items.push({
+                            uri: item[i].uri
+                        });
+                    }
+                    ListItem.addArray({
+                        listId: listId,
+                        itemId: ''
+                    }, items);
+                } else {
+                    // add single item
+                    var newItem = new ListItem({
+                        uri: item.uri
+                    });
+                    return newItem.$save({
+                        listId: listId,
+                        itemId: ''
+                    });
+                }
             }
 
             function addStreamToPlaylist(listId, item) {

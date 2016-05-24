@@ -3,6 +3,19 @@
         <span ng-switch-when="true">{{ lists[listId].name }}</span>
         <a href="#" ng-click="activateSlide($index)" ng-switch-default>{{ lists[listId].name }}</a>
     </li>
+    <li class="breadcrumb-menu">
+        <span uib-dropdown>
+            <a href uib-dropdown-toggle>
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
+            </a>
+            <ul uib-dropdown-menu class="dropdown-menu-right">
+                <li>
+                    <a href ng-click="addDirToDefault()"><i class="glyphicon glyphicon-plus"></i>
+                        <span translate>Add Directory To Work list</span></a>
+                </li>
+            </ul>
+        </span>
+    </li>
 </ol>
 <div> <!-- carousel -->
     <uib-carousel interval="0" no-wrap="1" template-url="rameplayer/media/carousel/carousel.html">

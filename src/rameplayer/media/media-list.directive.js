@@ -6,10 +6,10 @@
         .directive('rameMediaList', rameMediaList);
 
     rameMediaList.$inject = ['$rootScope', 'statusService', 'dataService', 'clusterService',
-        'listService', 'ListIds', 'logger'];
+        'listService', 'ListIds', 'logger', 'ItemTypes'];
 
     function rameMediaList($rootScope, statusService, dataService, clusterService,
-                           listService, ListIds, logger) {
+                           listService, ListIds, logger, ItemTypes) {
         // Usage:
         //
         // Creates:
@@ -52,6 +52,7 @@
 
             scope.openList = openList;
             scope.activateSlide = activateSlide;
+            scope.addDirToDefault = addDirToDefault;
 
             function selectMedia(item) {
                 if (clusterService.clusterStatus.state === 'stopped') {
@@ -61,6 +62,31 @@
 
             function addToDefault(item) {
                 dataService.addToPlaylist(ListIds.DEFAULT_PLAYLIST, item);
+            }
+
+            /**
+             * Adds all items in active slide to default playlist.
+             */
+            function addDirToDefault() {
+                var i;
+                var listId = null;
+                for (i = 0; i < scope.slides.length; i++) {
+                    if (scope.slides[i].active) {
+                        listId = scope.slides[i].listId;
+                    }
+                }
+                if (listId) {
+                    var items = $rootScope.lists[listId].items;
+                    var addItems = [];
+                    for (i = 0; i < items.length; i++) {
+                        if (items[i].type === ItemTypes.SINGLE) {
+                            addItems.push(items[i]);
+                        }
+                    }
+                    if (addItems.length) {
+                        dataService.addToPlaylist(ListIds.DEFAULT_PLAYLIST, addItems);
+                    }
+                }
             }
 
             function addSlide(listId) {

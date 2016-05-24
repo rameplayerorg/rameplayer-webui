@@ -28,6 +28,14 @@
   padding-bottom: 35px;
 }
 
+.breadcrumb > li.breadcrumb-menu {
+  float: right;
+}
+
+.breadcrumb > li.breadcrumb-menu::before {
+  content: none;
+}
+
 .animated-width {
   -webkit-transition: width 1s;
   transition: 1s width;

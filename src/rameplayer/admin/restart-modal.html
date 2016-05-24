@@ -1,0 +1,16 @@
+<form>
+    <div class="modal-header">
+        <h3 translate>Restart device</h3>
+    </div>
+
+    <div class="modal-body">
+        <uib-progressbar class="progress-striped active" style="margin-top: 20px" value="vm.progress" type="warning">
+            {{ vm.status }}
+        </uib-progressbar>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-warning" type="submit" ng-click="vm.start()" ng-disabled="vm.started" translate>Restart</button>
+        <button class="btn btn-default" type="button" ng-click="vm.cancel()" ng-disabled="vm.started" translate>Cancel</button>
+    </div>
+</form>

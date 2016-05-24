@@ -37,6 +37,10 @@
             }, {
                 'update': {
                     method: 'PUT'
+                },
+                'addArray': {
+                    method: 'POST',
+                    isArray: true
                 }
             });
 

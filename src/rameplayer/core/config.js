@@ -106,6 +106,8 @@
             INFORMATION:'-tietoja',
             'Firmware version': 'Laiteohjelmisto (Firmware)',
             'Hardware version': 'Laitteisto',
+            // media-list.html
+            'Add Directory To Work list': 'Lisää hakemisto koontilistaan',
             // media-item.html
             'Add to Work list': 'Lisää koontilistaan',
             'Remove': 'Poista',
@@ -153,6 +155,7 @@
             'Playlist name': 'Soittolistan nimi',
             'Playlist with this name exists already. This playlist will overwrite existing one!': 'Soittolistan nimi on jo käytössä. Tämä lista ylikirjoittaa olemassaolevan listan!', // jshint ignore:line
             'Play this when device starts': 'Soita tämä lista kun laite käynnistyy',
+            'Continuous play, repeating all': 'Soita peräkkäin ja toista alusta',
             // playlist.html
             'Playlist is empty.': 'Soittolista on tyhjä.',
             'Title': 'Otsikko',
@@ -173,6 +176,7 @@
             'URL': 'URL-osoite',
             // player.html
             'Stop': 'Stop',
+            'Play on repeat': 'Soita toistuvasti',
             'Connection error': 'Yhteysvirhe',
             'Connecting...': 'Yhdistetään...',
             'Jump': 'Hyppää',
@@ -183,6 +187,8 @@
             // upgrade-firmware-modal.html
             'Upgrade To': 'Päivitä laitteen ohjelmisto versioon',
             'Upgrade': 'Päivitä',
+            // restart-modal.html
+            'Restart': 'Käynnistä uudelleen',
             // firmware.html
             'Firmware upgrade': 'Laitteen ohjelmistopäivitys',
             'Available firmwares': 'Saatavilla olevat versiot',
@@ -218,6 +224,7 @@
             'Date:': 'Päivämäärä:',
             'Time:': 'Kellonaika:',
             'Factory reset': 'Palauta oletukset',
+            'Restart device': 'Käynnistä laite uudelleen',
             // admin.js
             DEVICE_HOSTNAME: 'Laitteen nimi',
             DEVICE_IP: 'Laitteen IP-osoite',

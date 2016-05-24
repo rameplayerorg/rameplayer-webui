@@ -132,3 +132,7 @@ body {
   width: 100%;
   visibility: visible;
 }
+
+.restart-button {
+  margin-right: 10px;
+}
