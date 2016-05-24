@@ -132,6 +132,7 @@
             }  
             
             if (vm.manualIpConfig) {
+                //logger.debug(vm.dnsAlternativeServerIp.value + ' ' + vm.systemSettings.ipDnsSecondary);
                 vm.systemSettings.ipDhcpClient = false;
                 if (!vm.deviceIp.valid) {
                     invalidFields.push('DEVICE_IP');
@@ -237,8 +238,9 @@
                             toastr.success('Admin settings saved.', 'Saved');
                             statusService.resetServerNotifications();
                         }, function(response) {
-                            logger.error('Admin setting save failed, response data: ' + 
-                                    response.status + ' ' + response.statusText + ' ' + response.data.error);
+                            logger.error('Admin setting save failed, response status:' + 
+                                    response.status + ' (' + response.statusText + ') data.error:' +
+                                    (response.data ? response.data.error : "(data is null)"));
                             logger.debug(response);
                             toastr.clear();
                             toastr.error('Saving admin settings failed.', 'Saving failed', {
@@ -266,25 +268,25 @@
             if (vm.manualIpConfig) {
                 vm.systemSettings.ipAddress = vm.deviceIp.value;
                 vm.systemSettings.ipSubnetMask = vm.subnetMask.value;
-                if (vm.gatewayIp.valid) {
+                if (vm.gatewayIp && vm.gatewayIp.valid) {
                     vm.systemSettings.ipDefaultGateway = vm.gatewayIp.value;
                 } else {
                     // optional
                     vm.systemSettings.ipDefaultGateway = undefined;
                 }
-                if (vm.dnsServerIp.valid) {
+                if (vm.dnsServerIp && vm.dnsServerIp.valid) {
                     vm.systemSettings.ipDnsPrimary = vm.dnsServerIp.value;
                 } else {
                     // optional
                     vm.systemSettings.ipDnsPrimary = undefined;
                 }
-                if (vm.dnsAlternativeServerIp.valid) {
+                if (vm.dnsAlternativeServerIp && vm.dnsAlternativeServerIp.valid) {
                     vm.systemSettings.ipDnsSecondary = vm.dnsAlternativeServerIp.value;
                 } else {
                     // optional
                     vm.systemSettings.ipDnsSecondary = undefined;
                 }
-                //logger.debug(vm.deviceIp + ' ' + vm.systemSettings.ipAddress);
+                //logger.debug(vm.dnsAlternativeServerIp.value + ' ' + vm.systemSettings.ipDnsSecondary);
                 if (vm.systemSettings.ipDhcpServer) {
                     vm.systemSettings.ipDhcpRangeStart = vm.dhcpServerRangeStartIp.value;
                     vm.systemSettings.ipDhcpRangeEnd = vm.dhcpServerRangeEndIp.value;
