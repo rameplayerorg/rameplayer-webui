@@ -51,5 +51,8 @@
     "images": [
         "./src/images/**/*"
     ],
+    "helpfiles": [
+        "./help/**/*"
+    ],
     "build": "./build/"
 }

@@ -138,6 +138,16 @@ gulp.task('fonts', function() {
 });
 
 /**
+ * Copy help files
+ * @return {Stream}
+ */
+gulp.task('helpfiles', function() {
+    return gulp
+        .src(paths.helpfiles)
+        .pipe(gulp.dest(paths.build + 'help'));
+});
+
+/**
  * Inject all the files into the new index.html
  * @return {Stream}
  */
@@ -192,7 +202,7 @@ gulp.task('inject-version', ['rev-and-inject'], function(cb) {
  * Build the optimized application
  * @return {Stream}
  */
-gulp.task('build', ['inject-version', 'images', 'fonts'], function() {
+gulp.task('build', ['inject-version', 'images', 'fonts', 'helpfiles'], function() {
     return gulp
         .src('')
         .pipe(plugins.notify({
