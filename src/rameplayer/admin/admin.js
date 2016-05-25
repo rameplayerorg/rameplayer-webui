@@ -295,12 +295,14 @@
             
             if (vm.useManualTimeConfigs) {
                 vm.systemSettings.dateAndTimeInUTC = vm.manualDateTime;
-            }
-            else if (vm.useNtpIp) {
-                vm.systemSettings.ntpServerAddress = vm.ntpServerIp;
-            }
-            else {
-                vm.systemSettings.ntpServerAddress = vm.ntpServerAddress;
+                vm.systemSettings.ntpServerAddress = undefined;
+            } else {
+                vm.systemSettings.dateAndTimeInUTC = undefined;
+                if (vm.useNtpIp) {
+                    vm.systemSettings.ntpServerAddress = vm.ntpServerIp;
+                } else {
+                    vm.systemSettings.ntpServerAddress = vm.ntpServerAddress;
+                }
             }
         }
         
