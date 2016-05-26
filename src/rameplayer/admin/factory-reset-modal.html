@@ -1,0 +1,27 @@
+<form>
+    <div class="modal-header">
+        <h3>
+            <i class="glyphicon glyphicon-erase"></i>
+            <span translate>Factory reset</span>
+        </h3>
+    </div>
+
+
+    <div class="modal-body">
+        <p>
+            <span class="label label-warning" translate>Warning</span>
+        </p>
+        <p>
+            <span translate>You will lose all your customized settings! Device will be restarted.</span>
+        </p>
+
+        <uib-progressbar class="progress-striped active" style="margin-top: 20px" value="vm.progress" type="warning">
+            {{ vm.status }}
+        </uib-progressbar>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-warning" type="submit" ng-click="vm.start()" ng-disabled="vm.started" translate>Factory reset</button>
+        <button class="btn btn-default" type="button" ng-click="vm.cancel()" ng-disabled="vm.started" translate>Cancel</button>
+    </div>
+</form>

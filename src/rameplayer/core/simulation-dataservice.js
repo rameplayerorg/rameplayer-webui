@@ -1,6 +1,6 @@
 /*jshint maxparams:12 */
 /*jshint maxcomplexity:9 */
-/*jshint maxstatements:50 */
+/*jshint maxstatements:51 */
 
 /**
  * RamePlayer WebUI
@@ -142,7 +142,8 @@
             sendReport: sendReport,
             getAudio: getAudio,
             setVolume: setVolume,
-            reboot: reboot
+            reboot: reboot,
+            factoryReset: factoryReset
         };
 
         var delay = 50;
@@ -564,6 +565,13 @@
         }
 
         function reboot() {
+            return $timeout(function() {
+                return {
+                };
+            }, delay);
+        }
+
+        function factoryReset() {
             return $timeout(function() {
                 return {
                 };

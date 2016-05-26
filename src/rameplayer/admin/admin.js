@@ -25,7 +25,7 @@
         ];
         vm.prefillDhcpOcts = prefillDhcpOcts;
         vm.saveSettings = saveSettings;
-        vm.factoryReset = factoryReset;
+        vm.confirmFactoryReset = confirmFactoryReset;
         vm.confirmRestart = confirmRestart;
         vm.savingStatus = 'loaded';
         vm.useNtpIp = false;
@@ -306,10 +306,6 @@
             }
         }
         
-        function factoryReset() {
-            toastr.warning('TODO Factory reset');
-        }
-
         function validateIpOrdering(smallerIp, biggerIp) {
             // JS API: JavaScript Numbers are Always 64-bit Floating Point.
             // Bit operators work on 32-bit signed numbers.
@@ -356,6 +352,16 @@
                 animation: true,
                 templateUrl: 'rameplayer/admin/restart-modal.html',
                 controller: 'RestartModalController',
+                controllerAs: 'vm',
+            });
+        }
+
+        function confirmFactoryReset() {
+            // open modal dialog
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'rameplayer/admin/factory-reset-modal.html',
+                controller: 'FactoryResetModalController',
                 controllerAs: 'vm',
             });
         }

@@ -189,6 +189,8 @@
             'Upgrade': 'Päivitä',
             // restart-modal.html
             'Restart': 'Käynnistä uudelleen',
+            // factory-reset-modal.html
+            'You will lose all your customized settings! Device will be restarted.': 'Menetät kaikki muokkaamasi asetukset! Laite käynnistetään uudelleen.', // jshint ignore:line
             // firmware.html
             'Firmware upgrade': 'Laitteen ohjelmistopäivitys',
             'Available firmwares': 'Saatavilla olevat versiot',

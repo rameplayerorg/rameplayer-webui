@@ -1,5 +1,5 @@
 /*jshint maxcomplexity:9 */
-/*jshint maxstatements:82 */
+/*jshint maxstatements:85 */
 /*jshint maxparams:14 */
 
 /**
@@ -105,6 +105,7 @@
             ds.getAudio = getAudio;
             ds.setVolume = setVolume;
             ds.reboot = reboot;
+            ds.factoryReset = factoryReset;
 
             checkVersionCompatibility();
 
@@ -459,6 +460,10 @@
 
             function reboot() {
                 return $http.put(baseUrl + 'settings/reboot');
+            }
+
+            function factoryReset() {
+                return $http.put(baseUrl + 'settings/reset');
             }
         }
     }
