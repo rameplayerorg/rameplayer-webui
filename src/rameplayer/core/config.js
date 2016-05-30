@@ -325,7 +325,7 @@
             newestOnTop : true,
             positionClass : 'toast-top-right', // toast-bottom-center toast-top-right toast-bottom-full-width
             preventDuplicates : false,
-            preventOpenDuplicates : false,
+            preventOpenDuplicates : true,
             target : 'body',
         });
     }

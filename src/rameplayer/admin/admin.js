@@ -243,7 +243,6 @@
                         .$save(function(response) {
                             vm.savingStatus = 'saved';
                             logger.debug('Admin setting save success, response: ', response);
-                            toastr.clear();
                             toastr.success('Admin settings saved.', 'Saved');
                             statusService.resetServerNotifications();
                         }, function(response) {
@@ -251,9 +250,8 @@
                                     response.status + ' (' + response.statusText + ') data.error:' +
                                     (response.data ? response.data.error : ' (data is null)'));
                             logger.debug(response);
-                            toastr.clear();
                             toastr.error('Saving admin settings failed.', 'Saving failed', {
-                                timeOut : 0,
+                                timeOut : 10000,
                                 closeButton : true
                             });
                             statusService.resetServerNotifications();
