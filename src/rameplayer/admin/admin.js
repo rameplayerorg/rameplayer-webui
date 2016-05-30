@@ -1,4 +1,4 @@
-/*jshint maxcomplexity:22 */
+/*jshint maxcomplexity:40 */
 /*jshint maxstatements:54 */
 (function() {
 
@@ -134,45 +134,54 @@
             if (vm.manualIpConfig) {
                 //logger.debug(vm.dnsAlternativeServerIp.value + ' ' + vm.systemSettings.ipDnsSecondary);
                 vm.systemSettings.ipDhcpClient = false;
-                if (!vm.deviceIp.valid) {
+                if (!vm.deviceIp || !vm.deviceIp.valid) {
                     invalidFields.push('DEVICE_IP');
                 }
-                if (!vm.subnetMask.valid) {
+                if (!vm.subnetMask || !vm.subnetMask.valid) {
                     invalidFields.push('SUBNET_MASK');
-                } 
-                if (!vm.gatewayIp.valid && !vm.systemSettings.ipDhcpServer) {
+                }
+                if (!vm.gatewayIp || !vm.gatewayIp.valid) {
                     invalidOptionalFields.push('GATEWAY_IP');
                 }
-                if (!vm.dnsServerIp.valid) {
+                if (!vm.dnsServerIp || !vm.dnsServerIp.valid) {
                     invalidOptionalFields.push('DNS_FIRST');
                 }
-                if (!vm.dnsAlternativeServerIp.valid) {
+                if (!vm.dnsAlternativeServerIp || !vm.dnsAlternativeServerIp.valid) {
                     invalidOptionalFields.push('DNS_SECOND');
                 }
                 if (vm.systemSettings.ipDhcpServer) {
                     var octets;
-                    if (!vm.dhcpServerRangeStartIp.valid) {
-                        invalidFields.push('DHCP_RANGE_START');
-                    }
-                    else {
-                        octets = vm.dhcpServerRangeStartIp.value.split('.');
-                        if (octets[3] === '0') {
+                    if (vm.dhcpServerRangeStartIp) {
+                        if (!vm.dhcpServerRangeStartIp.valid) {
                             invalidFields.push('DHCP_RANGE_START');
                         }
+                        else {
+                            octets = vm.dhcpServerRangeStartIp.value.split('.');
+                            if (octets[3] === '0') {
+                                invalidFields.push('DHCP_RANGE_START');
+                            }
+                        }
+                    } else {
+                        invalidFields.push('DHCP_RANGE_START');
                     }
-
-                    if (!vm.dhcpServerRangeEndIp.valid) {
-                        invalidFields.push('DHCP_RANGE_END');
-                    }
-                    else {
-                        octets = vm.dhcpServerRangeEndIp.value.split('.');
-                        if (octets[3] === '255') {
+                    if (vm.dhcpServerRangeEndIp) {
+                        if (!vm.dhcpServerRangeEndIp.valid) {
                             invalidFields.push('DHCP_RANGE_END');
                         }
+                        else {
+                            octets = vm.dhcpServerRangeEndIp.value.split('.');
+                            if (octets[3] === '255') {
+                                invalidFields.push('DHCP_RANGE_END');
+                            }
+                        }
+                    } else {
+                        invalidFields.push('DHCP_RANGE_END');
                     }
-                    if (!validateIpOrdering(vm.dhcpServerRangeStartIp.value, vm.dhcpServerRangeEndIp.value)) {
-                        invalidFields.push('DHCP_RANGE_DEF');
-                    }                    
+                    if (vm.dhcpServerRangeStartIp && vm.dhcpServerRangeEndIp) {
+                        if (!validateIpOrdering(vm.dhcpServerRangeStartIp.value, vm.dhcpServerRangeEndIp.value)) {
+                            invalidFields.push('DHCP_RANGE_DEF');
+                        }
+                    }
                 }
             }
             
@@ -262,12 +271,18 @@
         }
         
         function assignSystemSettings() {
-            vm.systemSettings.displayRotation = vm.selectedVideoOutputRotation.value;
+            if (vm.selectedVideoOutputRotation) {
+                vm.systemSettings.displayRotation = vm.selectedVideoOutputRotation.value;
+            }
             vm.systemSettings.hostname = vm.deviceName;
             vm.systemSettings.ipDhcpClient = !vm.manualIpConfig;
             if (vm.manualIpConfig) {
-                vm.systemSettings.ipAddress = vm.deviceIp.value;
-                vm.systemSettings.ipSubnetMask = vm.subnetMask.value;
+                if (vm.deviceIp) {
+                    vm.systemSettings.ipAddress = vm.deviceIp.value;
+                }
+                if (vm.subnetMask) {
+                    vm.systemSettings.ipSubnetMask = vm.subnetMask.value;
+                }
                 if (vm.gatewayIp && vm.gatewayIp.valid) {
                     vm.systemSettings.ipDefaultGateway = vm.gatewayIp.value;
                 } else {
@@ -287,9 +302,11 @@
                     vm.systemSettings.ipDnsSecondary = undefined;
                 }
                 //logger.debug(vm.dnsAlternativeServerIp.value + ' ' + vm.systemSettings.ipDnsSecondary);
-                if (vm.systemSettings.ipDhcpServer) {
-                    vm.systemSettings.ipDhcpRangeStart = vm.dhcpServerRangeStartIp.value;
-                    vm.systemSettings.ipDhcpRangeEnd = vm.dhcpServerRangeEndIp.value;
+                if (vm.systemSettings.ipDhcpServer && vm.dhcpServerRangeStartIp && vm.dhcpServerRangeEndIp) {
+                    if (vm.dhcpServerRangeStartIp.valid && vm.dhcpServerRangeEndIp.valid) {
+                        vm.systemSettings.ipDhcpRangeStart = vm.dhcpServerRangeStartIp.value;
+                        vm.systemSettings.ipDhcpRangeEnd = vm.dhcpServerRangeEndIp.value;
+                    }
                 }
             }
             
@@ -307,6 +324,9 @@
         }
         
         function validateIpOrdering(smallerIp, biggerIp) {
+            if (!smallerIp || !biggerIp) {
+                return false;
+            }
             // JS API: JavaScript Numbers are Always 64-bit Floating Point.
             // Bit operators work on 32-bit signed numbers.
             // Any numeric operand in the operation is converted into a 32-bit number.
@@ -326,10 +346,12 @@
         }
         
         function prefillDhcpOcts() {
-            var octets = vm.deviceIp.value ? vm.deviceIp.value.split('.') : ['', '', '', ''];
-            var ip = octets[0] + '.' + octets[1] + '.' + octets[2] + '.';
-            vm.dhcpServerRangeStartIp.value = ip;
-            vm.dhcpServerRangeEndIp.value = ip;
+            if (vm.deviceIp) {
+                var octets = vm.deviceIp.value ? vm.deviceIp.value.split('.') : ['', '', '', ''];
+                var ip = octets[0] + '.' + octets[1] + '.' + octets[2] + '.';
+                vm.dhcpServerRangeStartIp.value = ip;
+                vm.dhcpServerRangeEndIp.value = ip;
+            }
         }
         
         function manualTimeConfig() {
