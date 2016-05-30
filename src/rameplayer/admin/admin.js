@@ -140,13 +140,13 @@
                 if (!vm.subnetMask || !vm.subnetMask.valid) {
                     invalidFields.push('SUBNET_MASK');
                 }
-                if (!vm.gatewayIp || !vm.gatewayIp.valid) {
+                if (!vm.gatewayIp || (!vm.gatewayIp.valid && vm.gatewayIp.value != undefined)) {
                     invalidOptionalFields.push('GATEWAY_IP');
                 }
-                if (!vm.dnsServerIp || !vm.dnsServerIp.valid) {
+                if (!vm.dnsServerIp || (!vm.dnsServerIp.valid && vm.dnsServerIp.value != undefined)) {
                     invalidOptionalFields.push('DNS_FIRST');
                 }
-                if (!vm.dnsAlternativeServerIp || !vm.dnsAlternativeServerIp.valid) {
+                if (!vm.dnsAlternativeServerIp || (!vm.dnsAlternativeServerIp.valid && vm.dnsAlternativeServerIp.value != undefined)) {
                     invalidOptionalFields.push('DNS_SECOND');
                 }
                 if (vm.systemSettings.ipDhcpServer) {
