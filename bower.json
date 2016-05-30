@@ -21,7 +21,7 @@
         "angular-page-visibility": "~0.0.4",
         "angular-resource": "~1.5.5",
         "angular-sanitize": "~1.5.5",
-        "angular-toastr": "~1.6.0",
+        "angular-toastr": "~1.7.0",
         "angular-translate": "~2.8.1",
         "angular-ui-router": "~0.2.18",
         "angular-uuid-generator": "1.0.1",
