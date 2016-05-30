@@ -20,8 +20,8 @@
 
 <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">    
-        <div class="container">            
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed"
                     data-toggle="collapse" data-target="#navbar"
@@ -30,7 +30,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>                                
+                </button>
                 <a class="navbar-brand" href="#">Rame Help</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
@@ -52,16 +52,19 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
+                                <a href="#player">Player usage</a>
+                            </li>
+                            <li>
+                                <a href="#playlists">Playlists</a>
+                            </li>
+                            <li>
                                 <a href="#cluster">Cluster
-                                    configurations</a>
+                                    configuration</a>
                             </li>
                             <li>
                                 <a href="#admin">Admin settings</a>
                             </li>
-                            <li>
-                                <a href="#player">Player usage</a>
-                            </li>
-                            <!-- 
+                            <!--
                             <li role="separator" class="divider"></li>
                             <li class="dropdown-header">Cluster</li>
                             <li>
@@ -81,159 +84,58 @@
 
     <div class="container" role="main">
         <div class="row">
-        <h1 class="blog-header">Rame Player Manual &amp; Help</h1>
-            <div class="blog-main">                
-                <div class="blog-post target" id="cluster">                                        
+        <h1 class="blog-header">RamePlayer Manual &amp; Help</h1>
+            <div class="blog-main">
+
+                <div class="blog-post target" id="player">
+                    <h2 class="blog-post-title">Player Usage</h2>
+                    <p>TODO</p>
+                </div>
+                <!-- /.blog-post -->
+
+                <div class="blog-post target" id="playlists">
+                    <h2 class="blog-post-title">Playlists</h2>
+                    <p>TODO</p>
+                </div>
+                <!-- /.blog-post -->
+
+                <div class="blog-post target" id="cluster">
                     <h2 class="blog-post-title">Configuring Cluster</h2>
                     <p class="blog-post-meta">
-                        Rame Player Version &ge; 0.8.0
+                        RamePlayer Version &ge; 0.8.0
                     </p>
-                    <p>Loluctus, nisi erat porttitor ligula,
-                        eget lacinia odio sem nec elit. Morbi leo risus,
-                        porta ac consectetur ac, vestibulum at eros.</p>                        
-                    <img alt="Cluster configuration 01" src="img/cluster/helpimg_cluster_01.png">                    
+                    <p>To set up Cluster for use in RamePlayer, first go to the web UI of the Main Player unit.<br>
+Go to Settings (the spanner icon)
+and in the Cluster settings, press the "Add Unit" button</p>
+                    <img alt="Cluster configuration 01" src="img/cluster/helpimg_cluster_01.png">
+                    <p><br>
+Write IP addresses of other RamePlayers to the IP Address field, default port is 8000. Use a delay of 10 seconds for Backup players.
+
+Press "+Add" to add the player to the cluster.
+
+Insert all players to the cluster except the Main player.</p>
+<img alt="Cluster Configuration 02" src="img/cluster/helpimg_cluster_02.png">
+<p><br>Cluster of 2 players ready (main player and one backup player with a 10 second delay).
+                    </p>
+                    <h2>Creating playlists for cluster use</h2>
                     <p>
-                        Cum sociis natoque penatibus et magnis <a
-                            href="#">dis parturient montes</a>, nascetur
-                        ridiculus mus. Aenean eu leo quam. Pellentesque
-                        ornare sem lacinia quam venenatis vestibulum.
-                        Sed posuere consectetur est at lobortis. Cras
-                        mattis consectetur purus sit amet fermentum.
-                    </p>
-                    <blockquote>
-                        <p>
-                            Curabitur blandit tempus porttitor. <strong>Nullam
-                                quis risus eget urna mollis</strong> ornare vel
-                            eu leo. Nullam id dolor id nibh ultricies
-                            vehicula ut id elit.
-                        </p>
-                    </blockquote>
-                    <p>
-                        Etiam porta <em>sem malesuada magna</em> mollis
-                        euismod. Cras mattis consectetur purus sit amet
-                        fermentum. Aenean lacinia bibendum nulla sed
-                        consectetur.
-                    </p>
-                    <h2>Heading</h2>
-                    <p>Vivamus sagittis lacus vel augue laoreet
-                        rutrum faucibus dolor auctor. Duis mollis, est
-                        non commodo luctus, nisi erat porttitor ligula,
-                        eget lacinia odio sem nec elit. Morbi leo risus,
-                        porta ac consectetur ac, vestibulum at eros.</p>
-                    <h3>Sub-heading</h3>
-                    <p>Cum sociis natoque penatibus et magnis dis
-                        parturient montes, nascetur ridiculus mus.</p>
-                    <pre>
-                        <code>Example code block</code>
-                    </pre>
-                    <p>Aenean lacinia bibendum nulla sed
-                        consectetur. Etiam porta sem malesuada magna
-                        mollis euismod. Fusce dapibus, tellus ac cursus
-                        commodo, tortor mauris condimentum nibh, ut
-                        fermentum massa.</p>
-                    <h3>Sub-heading</h3>
-                    <p>Cum sociis natoque penatibus et magnis dis
-                        parturient montes, nascetur ridiculus mus.
-                        Aenean lacinia bibendum nulla sed consectetur.
-                        Etiam porta sem malesuada magna mollis euismod.
-                        <hr>
-                        Fusce dapibus, tellus ac cursus commodo, tortor
-                        mauris condimentum nibh, ut fermentum massa
-                        justo sit amet risus.</p>
-                    <ul>
-                        <li>Praesent commodo cursus magna, vel
-                            scelerisque nisl consectetur et.</li>
-                        <li>Donec id elit non mi porta gravida at
-                            eget metus.</li>
-                        <li>Nulla vitae elit libero, a pharetra
-                            augue.</li>
-                    </ul>
-                    <p>Donec ullamcorper nulla non metus auctor
-                        fringilla. Nulla vitae elit libero, a pharetra
-                        augue.</p>
-                    <ol>
-                        <li>Vestibulum id ligula porta felis
-                            euismod semper.</li>
-                        <li>Cum sociis natoque penatibus et magnis
-                            dis parturient montes, nascetur ridiculus
-                            mus.</li>
-                        <li>Maecenas sed diam eget risus varius
-                            blandit sit amet non magna.</li>
-                    </ol>
-                    <p>Cras mattis consectetur purus sit amet
-                        fermentum. Sed posuere consectetur est at
-                        lobortis.</p>
-                </div>
+
+</p>
+                    <h3>Creating playlists for players</h3>
+                    <p>Every player should have their playlist set up ready in their language, see playlist help for more info(link?)</p>
+<h3>Sync playlists</h3>
+<p>To control a cluster of players, the playlists must be synced to start together:<br> 1. From the saved playlist of the Main player: press the settings button on the right hand corner and select "Sync"<br>2. Select the correct player and playlist to use<br>3. Repeat for every additional player in the cluster<br><br>Remember that all of the playlist sync settings have to be done from the Main Player unit</p>
+                    <h3>Use</h3>
+                    <p>To use the cluster, use only WebUI of Main player</p>
+                    </div>
                 <!-- /.blog-post -->
 
                 <div class="blog-post target" id="admin">
-                    <h2 class="blog-post-title">Admin settings</h2>
-                    <p class="blog-post-meta">
-                        Rame Player Version &ge; 0.8.0
-                    </p>
-
-                    <p>
-                        Cum sociis natoque penatibus et magnis <a
-                            href="#">dis parturient montes</a>, nascetur
-                        ridiculus mus. Aenean eu leo quam. Pellentesque
-                        ornare sem lacinia quam venenatis vestibulum.
-                        Sed posuere consectetur est at lobortis. Cras
-                        mattis consectetur purus sit amet fermentum.
-                    </p>
-                    <blockquote>
-                        <p>
-                            Curabitur blandit tempus porttitor. <strong>Nullam
-                                quis risus eget urna mollis</strong> ornare vel
-                            eu leo. Nullam id dolor id nibh ultricies
-                            vehicula ut id elit.
-                        </p>
-                    </blockquote>
-                    <p>
-                        Etiam porta <em>sem malesuada magna</em> mollis
-                        euismod. Cras mattis consectetur purus sit amet
-                        fermentum. Aenean lacinia bibendum nulla sed
-                        consectetur.
-                    </p>
-                    <p>Vivamus sagittis lacus vel augue laoreet
-                        rutrum faucibus dolor auctor. Duis mollis, est
-                        non commodo luctus, nisi erat porttitor ligula,
-                        eget lacinia odio sem nec elit. Morbi leo risus,
-                        porta ac consectetur ac, vestibulum at eros.</p>
+                    <h2 class="blog-post-title">Admin Settings</h2>
+                    <p>TODO</p>
                 </div>
                 <!-- /.blog-post -->
 
-                <div class="blog-post target" id="player">
-                    <h2 class="blog-post-title">Player</h2>
-                    <p class="blog-post-meta">
-                        Rame Player Version &ge; 0.8
-                    </p>
-
-                    <p>Cum sociis natoque penatibus et magnis dis
-                        parturient montes, nascetur ridiculus mus.
-                        Aenean lacinia bibendum nulla sed consectetur.
-                        Etiam porta sem malesuada magna mollis euismod.
-                        Fusce dapibus, tellus ac cursus commodo, tortor
-                        mauris condimentum nibh, ut fermentum massa
-                        justo sit amet risus.</p>
-                    <ul>
-                        <li>Praesent commodo cursus magna, vel
-                            scelerisque nisl consectetur et.</li>
-                        <li>Donec id elit non mi porta gravida at
-                            eget metus.</li>
-                        <li>Nulla vitae elit libero, a pharetra
-                            augue.</li>
-                    </ul>
-                    <p>
-                        Etiam porta <em>sem malesuada magna</em> mollis
-                        euismod. Cras mattis consectetur purus sit amet
-                        fermentum. Aenean lacinia bibendum nulla sed
-                        consectetur.
-                    </p>
-                    <p>Donec ullamcorper nulla non metus auctor
-                        fringilla. Nulla vitae elit libero, a pharetra
-                        augue.</p>
-                </div>
-                <!-- /.blog-post -->
 
             </div>
             <!-- /.blog-main -->
@@ -251,7 +153,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!-- endinject -->
-    
+
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 </body>
