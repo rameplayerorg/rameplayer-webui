@@ -6,7 +6,7 @@
     </div>
     <div class="panel-body">
         <div class="row center-block" >
-        <form name="upgradeForm">
+        <form name="upgradeForm" ng-show="vm.upgradesAvailable.firmwares.length > 0">
             <div class="form-horizontal">
                 <div class="form-group">
                     <label for="upgradesAvailable"
@@ -31,10 +31,15 @@
             </div>
         </form>
         </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <span translate>Could not load list of firmwares available for upgrade.</span>
+            </div>
+        </div>
         <div class="row" ng-controller="RameVersionController as vvm">
             <div class="col-sm-12">
                 <ul class="list-unstyled">
-                    <li>                
+                    <li ng-show="vm.upgradesAvailable.firmwares.length > 0">
                         <span translate>Latest stable firmware version</span>: 
                         {{ !vm.upgradeLatestStable 
                             ? ('Only development versions available' | translate ) 

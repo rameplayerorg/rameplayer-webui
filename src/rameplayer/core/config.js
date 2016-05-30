@@ -195,6 +195,7 @@
             'Firmware upgrade': 'Laitteen ohjelmistopäivitys',
             'Available firmwares': 'Saatavilla olevat versiot',
             'Latest stable firmware version': 'Viimeisin vakaa ohjelmistoversio',
+            'Could not load list of firmwares available for upgrade.': 'Listaa saatavilla olevista ohjelmistoversioista ei voitu ladata.', // jshint ignore:line
             'Only development versions available': 'Vain kehitysversioita saatavilla',
             'Current firmware': 'Laitteen ohjelmistoversio nyt',
             'Device hardware': 'Laitteen kokoonpanoversio',
