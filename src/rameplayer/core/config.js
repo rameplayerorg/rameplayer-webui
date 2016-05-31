@@ -220,7 +220,7 @@
             'DHCP range start': 'DHCP arvojen alku',
             'DHCP range end': 'DHCP arvojen loppu',
             'Time Configurations': 'Aika-asetukset',
-            'Device time': 'Laitteen aika',
+            'Device time (UTC)': 'Laitteen aika (UTC)',
             'NTP server': 'NTP-palvelin',
             'Use IP address': 'Aseta IP-osoitteella',
             'Configure date and time manually': 'Aseta päivämäärä ja aika käsin',
