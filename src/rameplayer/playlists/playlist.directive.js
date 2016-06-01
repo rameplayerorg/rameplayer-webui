@@ -44,15 +44,18 @@
             vm.sortableOptions = {
                 group: 'source',
                 handle: '.sorting-handle',
+                filter: '.sortable-ignored',
                 animation: 150,
                 onSort: function(evt) {
-                    // triggered after sorting
-                    vm.onSort({
-                        id: vm.listId,
-                        item: evt.model,
-                        oldIndex: evt.oldIndex,
-                        newIndex: evt.newIndex
-                    });
+                    if (evt.model) {
+                        // triggered after sorting
+                        vm.onSort({
+                            id: vm.listId,
+                            item: evt.model,
+                            oldIndex: evt.oldIndex,
+                            newIndex: evt.newIndex
+                        });
+                    }
                 },
                 onRemove: function(evt) {
                     logger.info('Remove from playlist', vm.listId, evt.model);

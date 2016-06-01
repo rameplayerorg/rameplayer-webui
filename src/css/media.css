@@ -95,6 +95,17 @@ ul.media-list-sortable {
   text-overflow: ellipsis;
 }
 
+.empty-playlist-holder {
+  position: absolute;
+  z-index: 10;
+  margin-top: 5px;
+}
+
+.media-list-sortable {
+  min-height: 25px;
+  z-index: 11;
+}
+
 .media-list-sortable .sorting-handle {
   cursor: ns-resize;
 }

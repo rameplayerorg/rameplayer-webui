@@ -52,15 +52,14 @@
                     </span>
                 </uib-accordion-heading>
 
-                <div ng-if="!vm.lists[vm.listId].items.length" translate>Playlist is empty.</div>
-
-                <div class="media-list" ng-class="{'media-list-sync': vm.sync.isOn }" ng-if="vm.lists[vm.listId].items.length">
-                    <div class="row hidden-xs media-list-header">
+                <div class="media-list" ng-class="{'media-list-sync': vm.sync.isOn }">
+                    <div class="row hidden-xs media-list-header" ng-if="vm.lists[vm.listId].items.length">
                         <div class="col-sm-4" translate>Name</div>
                         <div class="col-sm-4" translate>Title</div>
                         <div class="col-sm-1 text-right" translate>Length</div>
                         <div class="col-sm-3" ng-if="!vm.sync.isOn" translate>Date</div>
                     </div>
+                    <div ng-if="!vm.lists[vm.listId].items.length" class="empty-playlist-holder" translate>Playlist is empty.</div>
                     <ul class="source-media-list media-list-sortable" ng-sortable="vm.sortableOptions">
                         <li ng-repeat="mediaItem in vm.lists[vm.listId].items">
                             <rame-media-item media="mediaItem" remove="vm.removeMedia(mediaItem)" on-click="vm.onMediaClick({ media: mediaItem })" hide-date="vm.sync.isOn" ng-mouseenter="vm.mouseEnterItem($index)" ng-mouseleave="vm.mouseLeaveItem($index)" sync-highlight="$index === vm.hoverIndex"></rame-media-item>
