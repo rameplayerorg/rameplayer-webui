@@ -34,8 +34,8 @@
     </div>
 
     <div class="modal-footer" ng-if="vm.isOnline">
-        <button class="btn btn-primary" type="submit" ng-click="vm.send()" translate>Send</button>
         <button class="btn btn-default" type="button" ng-click="vm.cancel()" translate>Cancel</button>
+        <button class="btn btn-primary" type="submit" ng-click="vm.send()" translate>Send</button>
     </div>
 
     <div class="modal-footer" ng-if="!vm.isOnline">
