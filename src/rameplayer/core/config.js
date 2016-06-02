@@ -311,6 +311,230 @@
             CLUSTER_UNIT_OFFLINE: 'Ei yhteyttä klusteriyksikköön',
             CLUSTER_UNIT_OFFLINE_DESC: 'Yhteys katkesi klusteriyksikköön $1.',
         });
+        $translateProvider.translations('ru', {
+            //'': '',
+            // settings.html
+            'User Settings': 'Настройки пользователя',
+            'Automatically play files from USB': 'Автоматически проигрывать файлы из USB',
+            'Language of the user interface': 'Язык пользовательского интерфейса',
+            'Cluster': 'Кластер',
+            'Import Configuration': 'Импорт конфигурации',
+            'Export Configuration': 'Экспорт конфигурации',
+            'Units': 'Устройства',
+            'IP address': 'IP адрес',
+            'Port': 'Порт',
+            'Play Delay (sec)': 'Задержка проигрывания (сек)',
+            'Add': 'Добавить',
+            'Hostname': 'Имя узла',
+            INFORMATION:' информация',
+            'Firmware version': 'Версия прошивки',
+            'Hardware version': 'Версия аппаратуры',
+            // media-list.html
+            'Add Directory To Work list': 'Добавить папку в рабочий список',
+            // media-item.html
+            'Add to Work list': 'Добавить врабочий список',
+            'Remove': 'Удалить',
+            'Move to': 'Перенести в',
+            // report-problem-modal.html
+            'Add Unit': 'Добавить ',
+            'Report a Problem': 'Сообщить о проблеме',
+            'Checking Internet connection': 'Проверяется соединение с интернетом',
+            'Describe the problem': 'Опишите проблему',
+            'Email': 'Адрес электронной почты',
+            'Include logs': 'Добавить файлы журнала',
+            'Send': 'Отправить',
+            'Cancel': 'Отменить',
+            'Close': 'Закрыть',
+            'Reporter': 'Имя заполнившего',
+            'download log': 'сохранить файл журнала',
+            'Could not connect to the report server.': 'Не удалось подключится к серверу.',
+            'Please': 'Пожалуйста,',
+            'and send it to support@rameplayer.org and describe the problem in the email message.': // jshint ignore:line
+                'и отправте на support@rameplayer.org с описанием ошибки в сообщении.', // jshint ignore:line
+            // remove-unit-modal.html
+            'Are You Sure?': 'Вы уверены?',
+            'Do you really want to remove cluster unit': 'Вы действительно хотите удалить устройство из кластера',
+            // import-cluster-modal.html
+            'Import Cluster Configuration': 'Инмпортировать конфигурацию кластера',
+            'Cluster Configuration File': 'Файл конфигурации кластера',
+            'Select a file containing cluster configuration data and click Import. Note: import will override any existing configuration.': // jshint ignore:line
+                'Выберите файл, содержащий данные конфигурации кластера. Заметка: импорт файла заменит текущую конфигурацию.', // jshint ignore:line
+            'Import': 'Импортировать',
+            // cluster-unit.html
+            'Hostname unresolved': 'Имя узла не распознано',
+            'Save': 'Сонранить',
+            'Edit': 'Редактировать',
+            'Remove unit': 'Удалить устройство',
+            // sync-modal.html
+            'Select Playlist To Synchronize With': 'Выберите список проигрывания для синхронизации',
+            'Cluster Unit': 'Кластерное устройство',
+            'Playlist': 'Список проигрывания',
+            'Open': 'Открыть',
+            // save-as-modal.html
+            'Save Playlist As': 'Сохранить список проигрывания как',
+            'Save Playlist': 'Сохранить список проигрывания',
+            'Name': 'Название',
+            'Storage': 'Хранилище',
+            'Playlist name': 'Название списка проигрывания',
+            'Playlist with this name exists already. This playlist will overwrite existing one!': 'Список проигрывания с таким названием уже существует. Ранее сохраненный список проигрывания будет заменен этим списком!', // jshint ignore:line
+            'Play this when device starts': 'Проигрывать при включении устройства',
+            'Continuous play, repeating all': 'Непрерывное воспроизведение с повтором всего списка',
+            // playlist.html
+            'Playlist is empty.': 'Список пустой.',
+            'Title': 'Название',
+            'Length': 'Длина',
+            'Date': 'Дата',
+            'Default': 'По умолчанию',
+            'Synchronize': 'Синхронизировать',
+            'Add Stream': 'Добавить видеопоток',
+            'Save as': 'Сохранить как',
+            'Lock': 'Фиксировать',
+            'Clear': 'Очистить',
+            'Edit Properties': 'Редактировать параметры',
+            'Stop synchronizing this playlist': 'Прекратить синхронизирование этого списка проигрывания',
+            // edit-modal.html
+            'Edit Playlist Properties': 'Редактирование параметров списка проигрывания',
+            // add-stream-modal.html
+            'Add Network Stream': 'Добавление адреса видеопотока',
+            'URL': 'Адрес (URL)',
+            // player.html
+            'Stop': 'Остановить',
+            'Play on repeat': 'Soita toistuvasti',
+            'Connection error': 'Ошибка соединения',
+            'Connecting...': 'Соединяется...',
+            'Jump': 'Hyppää',
+            'Error: no response': 'Ошибка: нет ответа',
+            // main.html
+            'Playlists': 'Списки проигрывания',
+            'Help': 'Помощь',
+            // upgrade-firmware-modal.html
+            'Upgrade To': 'Обновить до',
+            'Upgrade': 'Обновить',
+            // restart-modal.html
+            'Restart': 'Перезагрузить',
+            // factory-reset-modal.html
+            'You will lose all your customized settings! Device will be restarted.': 'Все установленные параметры будут потеряны! Устройство будет перезагружено.', // jshint ignore:line
+            // firmware.html
+            'Firmware upgrade': 'Обновление прошивки',
+            'Available firmwares': 'Доступные версии прошивки',
+            'Latest stable firmware version': 'Последняя стабильная версия прошивки',
+            'Could not load list of firmwares available for upgrade.': 'Не удалось загрузить список версий прошивки, доступных для обновления.', // jshint ignore:line
+            'Only development versions available': 'Доступны только разрабатываемые версии',
+            'Current firmware': 'Текущая версия прошивки',
+            'Device hardware': 'Аппаратура устройства',
+            // adminsettings.html
+            'Admin Settings': 'Административные настройки',
+            'Video output resolution': 'Разрешение видео',
+            'Video output rotation': 'Ротация видео',
+            'Audio port': 'Аудио выход',
+            'Audio port': 'Аудио выход',
+            'HDMI and analog audio outputs are not synchronized with each other': 'Выходы HDMI и аналоговый не синхронизированы между собой', // jshint ignore:line
+            rameAnalogOnly: 'Аналоговый',
+            rameHdmiOnly: 'HDMI',
+            rameHdmiAndAnalog: 'Оба',
+            'Device name': 'Название устройства',
+            'Device IP': 'IP-адрес устройства',
+            'Subnet mask': 'Маска подсети',
+            'Gateway IP': 'IP-адрес сетевого шлюза',
+            'DNS, preferred': 'DNS, основной',
+            'DNS, alternative': 'DNS, альтернативный',
+            'IP Configurations': 'IP-конигурация',
+            'Configure networking manually': 'Ручная установка IP-конигурации',
+            'Use as DHCP server': 'Использовать как DHCP-сервер',
+            'DHCP range start': 'Начало диапазона DHCP',
+            'DHCP range end': 'Конец диапазона DHCP',
+            'Time Configurations': 'Конфигурация времени',
+            'Device time (UTC)': 'Время устройства (UTC)',
+            'NTP server': 'NTP-сервер',
+            'Use IP address': 'Использовать IP-адрес',
+            'Configure date and time manually': 'Ручная установка даты и времени',
+            'Date:': 'Дата:',
+            'Time:': 'Время:',
+            'Factory reset': 'Заводские настройки',
+            'Restart device': 'Перезагрузить устройство',
+            // admin.js
+            DEVICE_HOSTNAME: 'Название узла устройства',
+            DEVICE_IP: 'IP-адрес устройства',
+            SUBNET_MASK: 'Маска подсети',
+            GATEWAY_IP: 'IP-адрес сетевого шлюза',
+            DNS_FIRST: 'DNS, основной',
+            DNS_SECOND: 'DNS, альтернативный',
+            DHCP_RANGE_START: 'Начало диапазона DHCP',
+            DHCP_RANGE_END: 'Конец диапазона DHCP',
+            DHCP_RANGE_DEF: 'Установка диапазона DHCP',
+            MANUAL_DATE: 'Ручная дата',
+            MANUAL_TIME: 'Ручное время',
+            NTP_SERVER_HOSTNAME: 'Название узла NTP-сервера',
+            ADMIN_SETTINGS_NOT_SAVED: 'Административные настройки не сохранены.',
+            CHECK_INSERTED_VALUES: 'Проверьте введенные данные',
+            INVALID_OPTIONAL_SETTINGS: 'Необязательные настройки возможно имеют неверные значения',
+            // settings.js
+            OPTION_SAVED: 'Параметр сохранен',
+            OPTION_AUTOPLAY_USB_DESC: 'Параметр автоматического проигрывания USB',
+            OPTION_ENABLED: 'вкл.',
+            OPTION_DISABLED: 'выкл.',
+            OPTION_SAVE_FAILED: 'Сохранение параметра неуспешно',
+            OPTION_AUTOPLAY_USB_FAILED_DESC: 'Сохранение праметра автоматического проигрывания USB неуспешно.',
+            LANGUAGE_SAVED: 'Язык сохранен.',
+            INVALID_CLUSTER_SETTINGS_DESC: 'IP-адрес нового устройства',
+            INVALID_SETTINGS: 'Неверные параметры',
+            NEW_ADDED:'Добавлено',
+            NEW_CLUSTER_UNIT_ADDED_DESC: 'Добавлено новое устройство кластера.',
+            // dataservice-provider.js
+            FIRMWARE_UPGRADED: 'Прошивка обновлена',
+            FIRMWARE_UPGRADED_DESC: 'Прошивка обновлена до версии $1.',
+            INCOMPATIBLE_VERSION: 'Несовместимая версия',
+            // statusservice.js
+            CONNECTION_ERROR: 'Ошибка соединения',
+            CONNECTION_ERROR_DESC: 'Не удалось соединится с устройством $1.',
+            RESTART_REQUIRED: 'Требуется перезагрузка',
+            RESTART_REQUIRED_DESC: 'Изменения требуют перезагрузку устройства. После перезагрузки откройте основную страницу устройства.', // jshint ignore:line
+            UPDATE_AVAILABLE: 'Доступно обновление',
+            // playlist.directive.js
+            UPDATE_AVAILABLE_DESC: 'Доступна более новая версия ПО.',
+            PLAYLIST_SYNC_REMOVED: 'Soittolistat $1 ja $2 eivät ole enää synkronoituna.',
+            //cluster-unit.directive.js
+            CLUSTER: 'Кластер',
+            UNIT_SETTINGS_UPDATED_DESC: 'Настройки устройства обновлены.',
+            UNIT_REMOVED_DESC: 'Устройство удалено.',
+            IP_ADDRESS_INVALID_DESC: 'Неверный IP-адрес.',
+            CLUSTER_UNIT_SETTINGS: 'Настройка устройства кластера',
+            // upgrade-firmware-modal.js
+            FIRMWARE_UPGRADE_FAILED_DESC: 'Обновление прошивки не удалось.',
+            UPGRADE_FAILED: 'Обновление не удалось',
+            // save-settings-modal.html
+            'Save settings': 'Сохранить настройки',
+            'Device will be restarted after saving settings.': 'После сохранения настроек устройство будет перезагружено.', // jshint ignore:line
+            // report-problem.js
+            REPORT_NOT_SENT: 'Сообщение не отправлено',
+            SENDING_REPORT_FAILED_DESC: 'Отправка сообщения не удалось.',
+            LOADING_LOGS_FAILED_DESC: 'Не удалось загрузить файлы журнала с сервера.',
+            LOADING_LOGS_ERROR: 'Ошибка при загрузке файлов журнала',
+            REPORT_SENT: 'Сообщение отправлено',
+            REPORT_SENT_SUCCESS_DESC: 'Спасибо вам за сообщение!',
+            // import-cluster-modal.js
+            CLUSTER_CONFIG_IMPORTED: 'Конфигурация кластера импортирована',
+            CLUSTER_CONFIG_IMPORTED_SUCCESS_DESC: 'Конфигурация кластера успешно импортирована.',
+            // rame-version-details.html
+            //Translations for info fields not used
+            //for sake of consistency in debugging
+            'Backend version': 'Версия бэкенда (Backend)',
+            'Hardware add-on info': 'Версия дополнения аппарата (Hw add-on)',
+            'Hardware config': 'Параметры аппарата (Hw cfg)',
+            'Web UI version': 'Версия веб-интерфейса',
+            'Details': 'Детали',
+            'Software version': 'Версия ПО',
+            'UI version': 'Версия UI',
+            // volumes.html
+            'Volumes': 'Уровни звука',
+            'Volume settings are unavailable when audio out is set to:': 'Установка уровня звука недоступна, если выран аудио выход:', // jshint ignore:line
+            // volume-control.html
+            headphone: 'Наушники',
+            lineout: 'Линейный выход',
+            // cluster-service.js
+            CLUSTER_UNIT_OFFLINE: 'Кластерное устройство отсоединено',
+            CLUSTER_UNIT_OFFLINE_DESC: 'Потеряно соединение к кластерному устройству $1.',
+        });
         $translateProvider.preferredLanguage('en-us');
         $translateProvider.fallbackLanguage('en-us');
         // http://angular-translate.github.io/docs/#/guide/19_security
