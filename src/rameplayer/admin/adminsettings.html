@@ -344,15 +344,10 @@
                     <span translate>Factory reset</span>
                 </button>
             </div>
-            <div class="pull-right">
-                <button type="button" class="btn btn-default restart-button" ng-click="vm.confirmRestart()">
-                    <i class="glyphicon glyphicon-refresh" aria-hidden="true"></i>
-                    <span translate>Restart device</span>
-                </button>
-            </div>
         </div>
     </div>
     <div ng-include="'rameplayer/admin/volumes.html'"></div>
     <div ng-include="'rameplayer/admin/firmware.html'" ng-cloak></div>
+    <div ng-include="'rameplayer/admin/restart-panel.html'" ng-cloak></div>
     <div ng-include="'rameplayer/admin/rame-version-details.html'" ng-cloak></div>
 </div>
