@@ -427,7 +427,6 @@
             'Video output resolution': 'Разрешение видео',
             'Video output rotation': 'Ротация видео',
             'Audio port': 'Аудио выход',
-            'Audio port': 'Аудио выход',
             'HDMI and analog audio outputs are not synchronized with each other': 'Выходы HDMI и аналоговый не синхронизированы между собой', // jshint ignore:line
             rameAnalogOnly: 'Аналоговый',
             rameHdmiOnly: 'HDMI',
