@@ -27,37 +27,24 @@
             vm.started = true;
 
             systemSettings
-                    .$save(function(response) {
-                        vm.savingStatus = 'saved';
-                        logger.debug('Admin setting save success, response: ', response);
-                        toastr.success('Admin settings saved.', 'Saved');
-                        statusService.resetServerNotifications();
-                    }, function(response) {
-                        logger.error('Admin setting save failed, response status:' + 
-                                response.status + ' (' + response.statusText + ') data.error:' +
-                                (response.data ? response.data.error : ' (data is null)'));
-                        logger.debug(response);
-                        toastr.error('Saving admin settings failed.', 'Saving failed', {
-                            timeOut : 10000,
-                            closeButton : true
-                        });
-                        statusService.resetServerNotifications();
-                        //throw new Error(response.status + ' ' + response.statusText, response.data.error); 
-                    });
-
-
-
-
-/*
-            dataService.factoryReset()
-                .then(function(response) {
-                    // restart started
+                .$save(function(response) {
+                    logger.debug('Admin setting save success, response: ', response);
+                    toastr.success('Admin settings saved.', 'Saved');
+                    statusService.resetServerNotifications();
                     followStatus();
-                },
-                function(errorResponse) {
-                    logger.error('Restart failed', errorResponse);
+                }, function(response) {
+                    logger.error('Admin setting save failed, response status:' +
+                            response.status + ' (' + response.statusText + ') data.error:' +
+                            (response.data ? response.data.error : ' (data is null)'));
+                    logger.debug(response);
+                    toastr.error('Saving admin settings failed.', 'Saving failed', {
+                        timeOut : 10000,
+                        closeButton : true
+                    });
+                    statusService.resetServerNotifications();
+                    vm.started = false;
+                    $uibModalInstance.dismiss();
                 });
-               */
         }
 
         function followStatus() {
