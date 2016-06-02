@@ -39,7 +39,9 @@
                             <div ng-show="vm.playerStatus.cluster">
                                 <span class="label label-warning">
                                     <span translate>This device is in cluster use, controlled by</span>
-                                    {{ vm.playerStatus.cluster.controller }}
+                                    <span ng-repeat="controller in vm.playerStatus.cluster.controller">
+                                        {{ controller }}<span ng-show="!$last">, </span>
+                                    </span>
                                 </span>
                             </div>
                         </div>
