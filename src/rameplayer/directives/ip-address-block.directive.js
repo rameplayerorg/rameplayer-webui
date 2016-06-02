@@ -40,13 +40,14 @@
                     scope.octets[2] + '.' +
                     scope.octets[3];
 
-                if (scope.value === "...")
+                if (scope.value === '...')
                 {
                     scope.value = undefined;
                     scope.isValid = false;
                 }
-                else
+                else {
                     scope.isValid = validate(scope.value);
+                }
             });
         }
 
