@@ -82,12 +82,7 @@
             });
         }
 
-        function playlistSorted(playlist, item, oldIndex, newIndex) {
-            var afterId = null;
-            if (newIndex > 0) {
-                var prev = $rootScope.lists[playlist].items[newIndex - 1];
-                afterId = prev.id;
-            }
+        function playlistSorted(playlist, item, afterId) {
             dataService.movePlaylistItem(playlist, item, afterId);
         }
     }

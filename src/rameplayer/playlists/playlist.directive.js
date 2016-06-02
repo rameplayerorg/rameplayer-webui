@@ -46,14 +46,14 @@
                 handle: '.sorting-handle',
                 filter: '.sortable-ignored',
                 animation: 150,
-                onSort: function(evt) {
+                onUpdate: function(evt) {
+                    logger.info('Item moved in playlist', vm.listId, evt);
                     if (evt.model) {
                         // triggered after sorting
                         vm.onSort({
                             id: vm.listId,
                             item: evt.model,
-                            oldIndex: evt.oldIndex,
-                            newIndex: evt.newIndex
+                            afterId: indexToAfterId(evt.newIndex)
                         });
                     }
                 },
@@ -62,8 +62,8 @@
                     vm.removeMedia(evt.model);
                 },
                 onAdd: function(evt) {
-                    logger.info('Add to playlist', vm.listId, evt.model);
-                    vm.addMedia(evt.model);
+                    logger.info('Add to playlist', vm.listId, evt.model, evt.oldIndex, evt.newIndex);
+                    vm.addMedia(evt.model, indexToAfterId(evt.newIndex));
                 }
             };
             vm.saveAs = saveAs;
@@ -105,6 +105,16 @@
                     logger.debug('New playlist', newPlaylist);
                     dataService.createPlaylist(newPlaylist);
                 });
+            }
+
+            /**
+             * Converts index from Sortable lib to afterId param
+             */
+            function indexToAfterId(index) {
+                if (index > 0) {
+                    return $rootScope.lists[vm.listId].items[index - 1].id;
+                }
+                return null;
             }
         }
     }
@@ -178,8 +188,8 @@
             dataService.clearPlaylist(vm.listId);
         }
 
-        function addMedia(media) {
-            dataService.addToPlaylist(vm.listId, media);
+        function addMedia(media, afterId) {
+            dataService.addToPlaylist(vm.listId, media, afterId);
         }
 
         function removeMedia(media) {

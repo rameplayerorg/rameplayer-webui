@@ -287,7 +287,7 @@
                 });
             }
 
-            function addToPlaylist(listId, item) {
+            function addToPlaylist(listId, item, afterId) {
                 if (angular.isArray(item)) {
                     // add array
                     var items = [];
@@ -303,7 +303,8 @@
                 } else {
                     // add single item
                     var newItem = new ListItem({
-                        uri: item.uri
+                        uri: item.uri,
+                        afterId: afterId
                     });
                     return newItem.$save({
                         listId: listId,
