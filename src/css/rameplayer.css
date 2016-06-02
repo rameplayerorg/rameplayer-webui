@@ -132,3 +132,7 @@ body {
   width: 100%;
   visibility: visible;
 }
+
+.rame-logo {
+  cursor: pointer;
+}
