@@ -240,24 +240,7 @@
             
             if (valid) {
                 assignSystemSettings();
-                vm.systemSettings
-                        .$save(function(response) {
-                            vm.savingStatus = 'saved';
-                            logger.debug('Admin setting save success, response: ', response);
-                            toastr.success('Admin settings saved.', 'Saved');
-                            statusService.resetServerNotifications();
-                        }, function(response) {
-                            logger.error('Admin setting save failed, response status:' + 
-                                    response.status + ' (' + response.statusText + ') data.error:' +
-                                    (response.data ? response.data.error : ' (data is null)'));
-                            logger.debug(response);
-                            toastr.error('Saving admin settings failed.', 'Saving failed', {
-                                timeOut : 10000,
-                                closeButton : true
-                            });
-                            statusService.resetServerNotifications();
-                            //throw new Error(response.status + ' ' + response.statusText, response.data.error); 
-                        });
+                confirmSaveSettings();
             }
             else {
                 $translate(['CHECK_INSERTED_VALUES', 'ADMIN_SETTINGS_NOT_SAVED'])
@@ -365,6 +348,21 @@
                 return (date + ' ' + time);
             }
             return undefined;
+        }
+
+        function confirmSaveSettings() {
+            // open modal dialog
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'rameplayer/admin/save-settings-modal.html',
+                controller: 'SaveSettingsModalController',
+                controllerAs: 'vm',
+                resolve: {
+                    systemSettings: function() {
+                        return vm.systemSettings;
+                    }
+                }
+            });
         }
 
         function confirmRestart() {

@@ -278,6 +278,9 @@
             // upgrade-firmware-modal.js
             FIRMWARE_UPGRADE_FAILED_DESC: 'Firmware upgrade failed to ',
             UPGRADE_FAILED: 'Upgrade Failed',
+            // save-settings-modal.html
+            'Save settings': 'Tallenna asetukset',
+            'Device will be restarted after saving settings.': 'Laite käynnistetään uudelleen, kun asetukset on tallennetu.', // jshint ignore:line
             // report-problem.js
             REPORT_NOT_SENT: 'Raporttia ei lähetetty',
             SENDING_REPORT_FAILED_DESC: 'Raportin lähettäminen epäonnistui.',
