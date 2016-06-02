@@ -58,11 +58,13 @@
                                 <a href="#playlists">Playlists</a>
                             </li>
                             <li>
-                                <a href="#cluster">Cluster
-                                    configuration</a>
+                                <a href="#cluster">Cluster</a>
                             </li>
                             <li>
                                 <a href="#admin">Admin settings</a>
+                            </li>
+                            <li>
+                                <a href="#hardware">Hardware</a>
                             </li>
                             <!--
                             <li role="separator" class="divider"></li>
@@ -87,70 +89,145 @@
         <h1 class="blog-header">RamePlayer Manual &amp; Help</h1>
             <div class="blog-main">
 
+<hr><!--------------------------------------------------------------------------->
+
                 <div class="blog-post target" id="player">
                     <h2 class="blog-post-title">Player Usage</h2>
-                    <p>You can see the WebUI access IP-address from the LCD screen of the player. Connect to it from any computer connected to the same network. Load up the required files into an USB-drive and insert it into the USB-port. You will see a tab in the WebUI for the USB drive. Pick the files you need into a Work list by pressing the button next to the file and press 
-"+Add to work list".
-<br><br>Go to Playlist tab and save the playlist by selecting "Save as" from the drop down menu next to the Work List title. Select files from the saved playlist and press play/pause/stop to use. You can also skip by pressing somewhere along the timeline.</p>
+                    <p>You can access WebUI of the player by entering IP address visible on the LCD screen of the player. Connect to it from any computer connected to the same network.</p>
+                    <p>Add all required media files into an USB-drive and insert it into the USB-port of the device. You will see a tab in the WebUI for the USB drive.</p>
+                    <p>Select a file by clicking or tapping on it and wait for a small moment for the highlight cursor to update.</p>
+<img alt="Select video" class="img-responsive" src="img/player/select_video.png">
+<br>
+<p>Press Play button to start playing of the video. After that you can use pause/stop buttons or seek by moving circular thumb icon on the timeline.</p>
+<img alt="Play video" class="img-responsive" src="img/player/play_video.png">
+<br>
+<p>You can also play using the loop button, in which case the player will keep looping the same video.</p>
+<img alt="Loop video" class="img-responsive" src="img/player/loop_video.png">
                 </div>
                 <!-- /.blog-post -->
+
+<hr><!--------------------------------------------------------------------------->
 
                 <div class="blog-post target" id="playlists">
                     <h2 class="blog-post-title">Playlists</h2>
                     <p>You can add files into the Work list from an USB-drive by going into the USB-drive tab and then from the wanted file, click "+Add to Work List" from the dropdown menu.</p>
+                    <p>You can alternatively also use top-level dropdown menu (sda1 bar in example image), and add all files in current folder by selecting "+ Add Directory to Work list".</p>
 
-<img alt="add to work list" src="img/cluster/helpimg_playlist_01.png">
+<img alt="Add to work list" class="img-responsive" src="img/player/helpimg_playlist_01.png">
 
 <p><br>From the Playlist Tab you can save the Work list from the dropdown menu by selecting "Save as". </p>
 
-<img alt="Save as" src="img/cluster/helpimg_playlist_02.png"><p>
+<img alt="Save as" class="img-responsive" src="img/player/helpimg_playlist_02.png"><p>
 
+<p>Enter name and storage location for the playlist, and enable available options if needed.</p>
+
+<img alt="Save as" class="img-responsive" src="img/player/save_playlist.png"><p>
+
+<br>
 <h4>Adding Streams</h4>
 
-<p>You can also choose to add Streams into the work list from the dropdown menu by selecting "Add stream".</p><img alt="stream" src="img/cluster/helpimg_stream_01.png"><p>Insert the address of the stream into the URL field and name the stream. Select the stream from the playlist and press play to watch stream.</p>
+<p>You can also choose to add Streams into the work list from the dropdown menu by selecting "Add stream".</p>
+<img alt="stream" class="img-responsive" src="img/player/worklist_context_addstream.png">
+<p>Insert the address of the stream into the URL field and name the stream. Select the stream from the playlist and press play to watch stream.</p>
+<img alt="stream" class="img-responsive" src="img/player/helpimg_stream_01.png">
+
 
                 </div>
                 <!-- /.blog-post -->
 
+<hr><!--------------------------------------------------------------------------->
                 <div class="blog-post target" id="cluster">
                     <h2 class="blog-post-title">Configuring Cluster</h2>
-                    <p class="blog-post-meta">
-                        RamePlayer Version &ge; 0.8.0
-                    </p>
+                    <!--<p class="blog-post-meta">RamePlayer Version &ge; 0.8.0</p>-->
                     <p>To set up Cluster for use in RamePlayer, first go to the web UI of the Main Player unit.<br>
 Go to Settings (the spanner icon)
 and in the Cluster settings, press the "Add Unit" button</p>
-                    <img alt="Cluster configuration 01" src="img/cluster/helpimg_cluster_01.png">
+                    <img alt="Cluster configuration 01" class="img-responsive" src="img/cluster/helpimg_cluster_01.png">
                     <p><br>
 Write IP addresses of other RamePlayers to the IP Address field, default port is 8000. Use a delay of 10 seconds for Backup players.
 
 <br>Press "+Add" to add the player to the cluster.
 
 Insert all players to the cluster except the Main player.</p>
-<img alt="Cluster Configuration 02" src="img/cluster/helpimg_cluster_02.png">
+<img alt="Cluster Configuration 02" class="img-responsive" src="img/cluster/helpimg_cluster_02.png">
 <p>Cluster of 2 players ready (main player and one backup player with a 10 second delay).
                     </p><br>
-                    <h2>Synchronizing playlists</h2><br>
-                    <h3>Creating playlists for players</h3>
-                    <p>Every player should have their playlist set up ready in their language, see <B>Player usage</b> for more help with playlist</p><br><img alt="Playlist ready and saved" src="img/cluster/helpimg_cluster_03.png">
+                    <h3>Synchronizing Playlists for Cluster</h3><br>
+                    <h4>Creating playlists for players</h4>
+                    <p>Every player should have their playlist set up ready in their language, see <B>Player usage</b> for more help with playlists.</p><br><img alt="Playlist ready and saved" class="img-responsive" src="img/cluster/helpimg_cluster_03.png">
 <p>Playlist saved as "English" is ready for synchronizing.</p>
 <br><br>
-<h3>Sync playlists</h3>
-<p>To control a cluster of players, the playlists must be synced to start together:<br><br>1. From the saved playlist of the Main player: press the settings button on the right hand corner and select "Synchronize"</p><img alt="finding synchronize" src="img/cluster/helpimg_cluster_04.png"><p><br>2. Select the correct player and playlist to use</p><img alt="choosing the playlist" src="img/cluster/helpimg_cluster_05.png"><p><br>3. Repeat for every additional player in the cluster<br><br>Remember that all of the playlist sync settings have to be done from the Main Player unit</p>
-                    <h3>Use</h3>
-                    <p>To use the cluster, use only WebUI of Main player</p>
+
+<h4>Synchronizing Playlists</h4>
+<p>To control a cluster of players, the playlists must be synchronized to start together:</p>
+<p>1. From the saved playlist of the Main player: press the settings button on the right hand corner and select "Synchronize"</p>
+<img alt="Finding synchronize" class="img-responsive" src="img/cluster/helpimg_cluster_04.png">
+<p><br>2. Select the correct player and playlist to use</p>
+<img alt="Choosing the playlist" class="img-responsive" src="img/cluster/helpimg_cluster_05.png">
+<p><br>3. Repeat for every additional player and playlist in the cluster.<br><br>Remember that all of the playlist sync settings have to be done from the Main Player unit.</p>
+<br>
+                    <h3>Cluster Use</h3>
+                    <p>To use the cluster, keep the the WebUI of Main player open.</p>
+                    <p>Note that the cluster "exists" only in the browser - the cluster setup is not saved to any of the players.</p>
+                    <p>Below is an example image of two-unit cluster in use, with a "backup player" playing using 10 second delay.</p>
+<img alt="Cluster playing" class="img-responsive" src="img/cluster/helpimg_cluster_06.png">
+<br>
+                    <h4>Cluster With Varying Playlists</h4>
+                    <p>You might use a cluster with different playlist in each player.
+                    For example, one player might have media files in different language,
+                    but only a few of the files available instead of all of them.
+                    When synchronizing a player with such playlist, empty "&mdash;" entries will be added to
+                    end of the synchronized playlist to match playlist lengths.
+                    Drag using the menu handles on the right to re-order the items as needed
+                    (including empty entries). Make sure that media file is in matching position
+                    and empty entries are in the correct places.</p>
+                    <p>Below is an example image of three-unit cluster, where one of the players have a playlist
+                    containing only two items. The synchronized playlist is already sorted in the image.<br>
+<img alt="Varying cluster playlists" class="img-responsive" src="img/cluster/helpimg_cluster_07.png">
                     </div>
                 <!-- /.blog-post -->
 
+<hr><!--------------------------------------------------------------------------->
                 <div class="blog-post target" id="admin">
                     <h2 class="blog-post-title">Admin Settings</h2>
-                    <p>TODO</p>
+                    <p>(Work In Progress)</p>
+                    <ul>
+                    <li>Video output resolution (resolution and framerate)
+                    <li>Video output rotation (degrees)
+                    <li>Audio port (analog with headphones, HDMI only, or both &mdash; volume settings are only for analog.)
+                    <li>Device name
+                    <li>IP configuration - DHCP is used unless manual settings are used
+                        <ul>
+                        <li>IP and subnet mask are mandatory
+                        <li>Gateway and DNS are optional
+                        <li>Player can also function as a DHCP server allocating IPs to other devices from a given range. Be careful to have only one DHCP server in the network!
+                        </ul>
+                    </ul>
+                    <li>NTP server (for synchronizing time if the player is connected to the internet)
+                    <li>Date and time can be set manually (NTP will override time if it is in use)
+                    <br><br>
+                    <li>Save settings - may need a restart
+                    <li>Factory reset - to restore all default settings. Not recommended unless "really necessary"! After Factory reset, the player will need to re-detect available hardware components and boot twice, with the startup taking longer than usual.
+                    <br><br>
+                    <li>Volumes - Available with Analog audio.
+                    <br><br>
+                    <li>Firmware upgrade. Downgrading is not recommended (may lead to non-functioning device).
+                    <br><br>
+                    <li>Restart device - performs a "soft reboot". You can do a hard reboot by switching off the player from power switch and back on after a moment.
+                    <br><br>
+                    <li>Firmware version, hardware info, details about software version and hardware add-on info & configuration.
                 </div>
                 <!-- /.blog-post -->
-              <div class="blog-post target" id="connecting">
-              <h2>Connecting to other hardware</h2>
-<h1 class="blog-post-title">Connecting to ATEM mixers</h2>
-               <p>To connect Rameplayer with ATEM mixers, you should change RamePlayer resolution to 720p / 50hz. To do that go to Settings-->Admin Settings</p><img alt="admin settings" src="img/cluster/helpimg_ATEM_01.png"><p>Change the Video output resolution from AUTO to 720p / 50hz</p><img alt="choosing720p50hz" src="img/cluster/helpimg_ATEM_02.png"><p><br><br>Save the settings and boot the RamePlayer. You might need to remove the HDMI cable from the ATEM mixer and reattach it for ATEM to recognize the changes.</p> 
+                
+<hr><!--------------------------------------------------------------------------->
+              <div class="blog-post target" id="hardware">
+<h2 class="blog-post-title">Connecting To Other Hardware</h2>
+              <h4>Connecting to ATEM mixers</h4>
+               <p>To connect Rameplayer with ATEM mixers, you should change RamePlayer resolution to 720p / 50Hz. To do that go to Settings-->Admin Settings</p>
+               <img alt="Admin settings" class="img-responsive" src="img/misc/helpimg_ATEM_01.png">
+               <p>Change the Video output resolution from AUTO to 720p / 50hz</p>
+               <img alt="Choosing 720p50Hz" class="img-responsive" src="img/misc/helpimg_ATEM_02.png">
+               <p><br><br>Save the settings and boot the RamePlayer. You might need to remove the HDMI cable from the ATEM mixer and reattach it for ATEM to recognize the changes.</p> 
 </div>
                 <!-- /.blog-post -->
 
