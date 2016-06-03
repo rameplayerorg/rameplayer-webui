@@ -332,7 +332,7 @@
             // media-list.html
             'Add Directory To Work list': 'Добавить папку в рабочий список',
             // media-item.html
-            'Add to Work list': 'Добавить врабочий список',
+            'Add to Work list': 'Добавить в рабочий список',
             'Remove': 'Удалить',
             'Move to': 'Перенести в',
             // report-problem-modal.html
@@ -362,7 +362,7 @@
             'Import': 'Импортировать',
             // cluster-unit.html
             'Hostname unresolved': 'Имя узла не распознано',
-            'Save': 'Сонранить',
+            'Save': 'Сохранить',
             'Edit': 'Редактировать',
             'Remove unit': 'Удалить устройство',
             // sync-modal.html
@@ -373,7 +373,7 @@
             // save-as-modal.html
             'Save Playlist As': 'Сохранить список проигрывания как',
             'Save Playlist': 'Сохранить список проигрывания',
-            'Name': 'Название',
+            'Name': 'Файл',
             'Storage': 'Хранилище',
             'Playlist name': 'Название списка проигрывания',
             'Playlist with this name exists already. This playlist will overwrite existing one!': 'Список проигрывания с таким названием уже существует. Ранее сохраненный список проигрывания будет заменен этим списком!', // jshint ignore:line
@@ -384,7 +384,7 @@
             'Title': 'Название',
             'Length': 'Длина',
             'Date': 'Дата',
-            'Default': 'По умолчанию',
+            'Default': 'Стандартный',
             'Synchronize': 'Синхронизировать',
             'Add Stream': 'Добавить видеопоток',
             'Save as': 'Сохранить как',
