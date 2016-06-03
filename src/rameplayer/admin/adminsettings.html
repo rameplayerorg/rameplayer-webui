@@ -235,11 +235,11 @@
                                         name="ntpHostname"
                                         id="ntpHostname"
                                         class="form-control"
-                                        ng-model="vm.ntpServerAddress"
-                                        ng-disabled="vm.useManualTimeConfigs || vm.useNtpIp"
+                                        ng-model="vm.ntpServerAddress"                                        
                                         ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?(\.[a-z\d]([a-z\d\-]{0,61}[a-z\d])?)*$/i"
                                         ng-minlength="1"
                                         ng-maxlength="253" />
+                                        <!-- ng-disabled="vm.useManualTimeConfigs || vm.useNtpIp" -->
                                     <span
                                         class="text-warning glyphicon glyphicon-alert"
                                         ng-show="!vm.ntpForm.ntpHostname.$valid">
@@ -283,7 +283,7 @@
                                     <input type="checkbox"
                                         ng-click="vm.manualTimeConfig"
                                         ng-model="vm.useManualTimeConfigs">
-                                    <span translate>Configure date and time manually</span>
+                                    <span translate>Set date and time manually</span>
                                 </label>
                                 <div class="row center-block">
                                     <div class="form-horizontal">
