@@ -191,21 +191,22 @@ Insert all players to the cluster except the Main player.</p>
 <hr><!--------------------------------------------------------------------------->
                 <div class="blog-post target" id="admin">
                     <h2 class="blog-post-title">Admin Settings</h2>
-                    <ul>
-                    <li><strong>Video output resolution</strong>
+                    <br><strong>Video output resolution</strong>
                         <ul>
                         <li>Automatic via HDMI handshake (default)
                         <li>Manually selected (resolution and framerate)
                         </ul>
-                    <li><strong>Video output rotation</strong> (0 / 90 / 180 / 270 degrees, default=0)
-                    <li><strong>Audio port</strong>
+                    <strong>Video output rotation</strong>
+                    <br>0 / 90 / 180 / 270 degrees. Default=0.
+                    <br><strong>Audio port</strong>
                         <ul>
                         <li>Analog
                         <li>HDMI only (no volume settings; no audio output to headphones)
                         <li>Both
                         </ul>
-                    <li><strong>Device name</strong> (hostname). Only letters &amp; numbers allowed (no "special characters").
-                    <li><strong>IP configuration</strong>
+                    <strong>Device name</strong> (hostname).
+                    <br>Only letters &amp; numbers allowed (no "special characters").
+                    <br><strong>IP configuration</strong>
                         <ul>
                         <p>By default RamePlayer configures IP settings using DHCP.</p>
                         <p>Alternatively IP settings can be configured manually:</p>
@@ -214,35 +215,34 @@ Insert all players to the cluster except the Main player.</p>
                         <li>Use as DHCP server (optional): RamePlayer can also function as a DHCP server, handing out IPs to other devices in same network, using the given DHCP IP range.
                         <p>Be careful with defining the range so that it does not overlap with any devices having statically configured IP. Also make sure you have only a single DHCP server in the network!</p>
                         </ul>
-                    <li><strong>Time configuration</strong>
+                    <strong>Time configuration</strong>
                         <ul>
                         <p>Note: For now, RamePlayer is always set to "Europe/Helsinki" timezone and the mini LCD screen will show time using that timezone. However, the WebUI shows player's current time in UTC.</p>
                         <li>NTP server &mdash; Player is automatically synchronized to correct time if NTP server is configured and the player is connected to the internet.
                         <li>If device is not connected to internet, you can also manually set date &amp; time (using UTC time).
                         <p>Note that if NTP server is defined, the automatic time synchronization will override any manually given time when player is connected to the internet.</p>
                         </ul>
-                    <li><strong>Save settings</strong> &mdash; Settings are typically applied after a restart.
-                    <li><strong>Factory reset</strong> &mdash; Restores all default settings and deletes internally stored data.
-                    Factory resetting is not recommended unless it is necessary!
+                    <strong>Save settings</strong> &mdash; Settings are typically applied after a restart.
+                    <br><strong>Factory reset</strong> &mdash; Restores all default settings and deletes internally stored data.
+                    <br>Factory resetting is not recommended unless it is necessary!
                     <p>After Factory reset, the player will need to re-detect available hardware components and it will restart twice.
                     Player startup will take longer than usual.
                     You may want to additionally hard reboot (power off and on again) afterwards.</p>
-                    <li><strong>Volumes</strong> &mdash; Available when analog audio port setting is enabled.
+                    
+                    <strong>Volumes</strong> &mdash; Available when analog audio port setting is enabled.
                     Volume selection must be expanded first, to minimize possibility of changing the volume by mistake.
                         <ul>
                         <li>Line out volume &ndash; Range: 0...110%
                         <li>Headphone volume &ndash; Range: 0...100%. Can also be adjusted using the rotary of local UI (seen in WebUI only with page reload).
                         </ul>
-                    <li><strong>Firmware upgrade</strong>
-                        <ul>
-                        Requires connection to the internet.
+                    <strong>Firmware upgrade</strong>
+                        <br>Requires connection to the internet.
                         Select one of the available firmwares, press Upgrade and wait until RamePlayer reboots automatically.
                         <p>Note that downgrading to older firmware is not recommended
                         (may lead to non-functioning device, especially when downgrading more than a minor patch level).</p>
-                        </ul>
-                    <li><strong>Restart device</strong> &mdash; Performs a "soft reboot".
+                    <strong>Restart device</strong> &mdash; Performs a "soft reboot".
                         <p>You can do a hard reboot by switching off the player from power switch and back on after a moment.</p>
-                    <li><strong>RamePlayer Information</strong>
+                    <strong>RamePlayer Information</strong>
                         <ul>
                         <li>Firmware version &ndash; RamePlayer software
                         <li>Hardware &ndash; Type and revision
@@ -253,7 +253,6 @@ Insert all players to the cluster except the Main player.</p>
                             <li>Hardware config &ndash; ID info as hexadecimal bitmask number and as list of component ids (id/cids = activated on boot, id/eeprom_cids = defined in eeprom), hardware chassis version.
                             </ul>
                         </ul>
-                    </ul>
                 </div>
                 <!-- /.blog-post -->
                 
