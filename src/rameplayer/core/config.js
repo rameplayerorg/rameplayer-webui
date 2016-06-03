@@ -399,10 +399,10 @@
             'URL': 'Адрес (URL)',
             // player.html
             'Stop': 'Остановить',
-            'Play on repeat': 'Soita toistuvasti',
+            'Play on repeat': 'Повторить воспроизведение',
             'Connection error': 'Ошибка соединения',
             'Connecting...': 'Соединяется...',
-            'Jump': 'Hyppää',
+            'Jump': 'Перемотать',
             'Error: no response': 'Ошибка: нет ответа',
             // main.html
             'Playlists': 'Списки проигрывания',
@@ -491,7 +491,7 @@
             UPDATE_AVAILABLE: 'Доступно обновление',
             // playlist.directive.js
             UPDATE_AVAILABLE_DESC: 'Доступна более новая версия ПО.',
-            PLAYLIST_SYNC_REMOVED: 'Soittolistat $1 ja $2 eivät ole enää synkronoituna.',
+            PLAYLIST_SYNC_REMOVED: 'Список проигрывания $1 больше не синхронизирован со списком $2.',
             //cluster-unit.directive.js
             CLUSTER: 'Кластер',
             UNIT_SETTINGS_UPDATED_DESC: 'Настройки устройства обновлены.',
