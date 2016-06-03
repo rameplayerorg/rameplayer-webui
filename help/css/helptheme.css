@@ -56,6 +56,12 @@ h6, .h6 {
   color: #333;
 }
 
+/*
+ * Keywords
+ */
+.key {
+  font-weight: bold;
+}
 
 /*
  * Override Bootstrap's default container.
