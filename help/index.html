@@ -223,17 +223,26 @@ Insert all players to the cluster except the Main player.</p>
 <hr><!--------------------------------------------------------------------------->
               <div class="blog-post target" id="hardware">
 <h2 class="blog-post-title">Connecting To Other Hardware</h2>
-              <h4>Connecting to ATEM mixers</h4>
-              <p>To connect Rameplayer with ATEM mixers, you should change RamePlayer resolution to 720p / 50Hz. To do that go to <span class="key">Settings</span> &rarr; <span class="key">Admin Settings</span></p>
+<br>
+              <h4>Connecting to ATEM video mixers</h4>
+              <p>Verify what mode ATEM mixer is configured to use (720p or 1080p).
+              Set RamePlayer to use the same mode. (See images below.)
+              If ATEM is in 720p mode, it will still report being 1080p capable
+              in HDMI handshake, so RamePlayer will send image in wrong format
+              if it is using Auto video output resolution.</p>
+              <p>After saving settings, you have to
+              hard reboot the RamePlayer (power off, wait a little while, power on again).</p>
+              <p>Additionally you may need to detach HDMI cable from RamePlayer before
+              turning it on, reattach the cable back after RamePlayer is running.</p>
+              <p>The above steps are needed so that new settings are correctly between
+              ATEM and RamePlayer.</p>
+              <p>If any problems persist, try using 720p 50 Hz setting in both ATEM and RamePlayer.
+              To use that mode in RamePlayer, go to <span class="key">Settings</span> &rarr; <span class="key">Admin Settings</span>:</p>
                <img alt="Admin settings" class="img-responsive" src="img/misc/helpimg_ATEM_01.png">
-               <p>Change the Video output resolution from AUTO to 720p / 50hz</p>
+               <p>Change the Video output resolution from "Auto" to "720p 50 Hz":</p>
                <img alt="Choosing 720p50Hz" class="img-responsive" src="img/misc/helpimg_ATEM_02.png">
-               <p><br><br>Save the settings and boot the RamePlayer. You might need to remove the HDMI cable from the ATEM mixer and reattach it for ATEM to recognize the changes.</p> 
 </div>
                 <!-- /.blog-post -->
-
-
-
 
             </div>
             <!-- /.blog-main -->
