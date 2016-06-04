@@ -223,7 +223,7 @@
             'Device time (UTC)': 'Laitteen aika (UTC)',
             'NTP server': 'NTP-palvelin',
             'Use IP address': 'Aseta IP-osoitteella',
-            'Configure date and time manually': 'Aseta päivämäärä ja aika käsin',
+            'Set date and time manually': 'Aseta päivämäärä ja aika käsin',
             'Date:': 'Päivämäärä:',
             'Time:': 'Kellonaika:',
             'Factory reset': 'Palauta oletukset',
