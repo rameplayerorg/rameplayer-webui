@@ -11,6 +11,7 @@
     function translation($translateProvider) {
         $translateProvider.translations('en-us', {
             VERSION: 'Version',
+            HELP_LINK: '/help/en-us/',
             INFORMATION: 'Information',
             // playlist.html
             'Default': 'Work list',
@@ -313,6 +314,7 @@
         });
         $translateProvider.translations('ru', {
             //'': '',
+            HELP_LINK: '/help/ru/',
             // settings.html
             'User Settings': 'Настройки пользователя',
             'Automatically play files from USB': 'Автоматически проигрывать файлы из USB',
