@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+<link rel="icon" type="image/png" href="../img/favicon.png">
+
+<title>Rame Help</title>
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap-theme.min.css" rel="stylesheet">
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link href="../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+<link href="../css/helptheme.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Rame Help</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <!-- <li class="active">
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#about">About</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Contact</a>
+                    </li> -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"
+                            data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                            Topics <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#player">Player usage</a>
+                            </li>
+                            <li>
+                                <a href="#playlists">Playlists</a>
+                            </li>
+                            <li>
+                                <a href="#cluster">Cluster</a>
+                            </li>
+                            <li>
+                                <a href="#admin">Admin settings</a>
+                            </li>
+                            <li>
+                                <a href="#hardware">Hardware</a>
+                            </li>
+                            <!--
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Cluster</li>
+                            <li>
+                                <a href="#">Configuring Cluster</a>
+                            </li>
+                            <li>
+                                <a href="#">One more separated link</a>
+                            </li> -->
+                        </ul>
+                    </li>
+                </ul>
+                <img alt="Rame Logo" src="../img/logo_fading_black_h40.gif" class="pull-right" style="padding: 3px;">
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <div class="container" role="main">
+        <div class="row">
+        <div class="col-md-12">
+        <h1 class="blog-header">RamePlayer Manual &amp; Help</h1>
+            <div class="blog-main">
+
+<hr><!--------------------------------------------------------------------------->
+
+                <div class="blog-post target" id="player">
+                    <h2 class="blog-post-title">Player Usage</h2>
+                    <p>You can access WebUI of the player by entering IP address visible on the LCD screen of the player. Connect to it from any computer connected to the same network.</p>
+                    <p>Add all required media files into an USB drive and insert it into the USB port of the device. You will see a tab in the WebUI for the USB drive.</p>
+                    <p>Select a file by clicking or tapping on it and wait for a small moment for the highlight cursor to update.</p>
+<img alt="Select video" class="img-responsive" src="img/player/select_video.png">
+<br>
+<p>Press <span class="key">Play</span> button to start playing of the video. After that you can use <span class="key">pause</span> / <span class="key">stop</span> buttons or seek by moving circular thumb icon on the timeline.</p>
+<img alt="Play video" class="img-responsive" src="img/player/play_video.png">
+<br>
+<p>You can also play using the <span class="key">loop</span> button, in which case the player will keep looping the same video.</p>
+<img alt="Loop video" class="img-responsive" src="img/player/loop_video.png">
+                </div>
+                <!-- /.blog-post -->
+
+<hr><!--------------------------------------------------------------------------->
+
+                <div class="blog-post target" id="playlists">
+                    <h2 class="blog-post-title">Playlists</h2>
+                    <p>You can add files into the Work list from an USB drive by going into the USB drive tab and then from the wanted file, click <span class="key">+ Add to Work List</span> from the dropdown menu.</p>
+                    <p>You can alternatively also use top level dropdown menu (sda1 bar in example image), and add all files in current folder by selecting <span class="key">+ Add Directory to Work list</span>.</p>
+
+<img alt="Add to work list" class="img-responsive" src="img/player/helpimg_playlist_01.png">
+
+<p><br>From the <span class="key">Playlist</span> tab you can save the <span class="key">Work list</span> from the dropdown menu by selecting <span class="key">Save as</span>. </p>
+
+<img alt="Save as" class="img-responsive" src="img/player/helpimg_playlist_02.png"><p>
+
+<p>Enter name and storage location for the playlist, and enable available options if needed.</p>
+
+<img alt="Save as" class="img-responsive" src="img/player/save_playlist.png"><p>
+
+<br>
+<h4>Adding Streams</h4>
+
+<p>You can also choose to add Streams into the work list from the dropdown menu by selecting <span class="key">Add stream</span>.</p>
+<img alt="stream" class="img-responsive" src="img/player/worklist_context_addstream.png">
+<p>Insert the address of the stream into the <span class="key">URL</span> field and name the stream. Select the stream from the playlist and press <span class="key">Play</span> to watch stream.</p>
+<img alt="stream" class="img-responsive" src="img/player/helpimg_stream_01.png">
+
+
+                </div>
+                <!-- /.blog-post -->
+
+<hr><!--------------------------------------------------------------------------->
+                <div class="blog-post target" id="cluster">
+                    <h2 class="blog-post-title">Configuring Cluster</h2>
+                    <!--<p class="blog-post-meta">RamePlayer Version &ge; 0.8.0</p>-->
+                    <p>To set up Cluster for use in RamePlayer, first go to the web UI of the Main Player unit.<br>
+                    Go to <span class="key">Settings</span> (the spanner icon)
+                    and in the Cluster settings, press the <span class="key">Add Unit</span> button</p>
+                    <img alt="Cluster configuration 01" class="img-responsive" src="img/cluster/helpimg_cluster_01.png">
+                    <p><br>
+                    Write IP addresses of other RamePlayers to the <span class="key">IP Address</span> field, default port is 8000. Use a delay of 10 seconds for Backup players.
+
+                    <br>Press <span class="key">+ Add</span> to add the player to the cluster.
+
+Insert all players to the cluster except the Main player.</p>
+<img alt="Cluster Configuration 02" class="img-responsive" src="img/cluster/helpimg_cluster_02.png">
+<p>Cluster of 2 players ready (main player and one backup player with a 10 second delay).
+                    </p><br>
+                    <h3>Synchronizing Playlists for Cluster</h3><br>
+                    <h4>Creating playlists for players</h4>
+                    <p>Every player should have their playlist set up ready in their language, see <b>Player usage</b> for more help with playlists.</p><br><img alt="Playlist ready and saved" class="img-responsive" src="img/cluster/helpimg_cluster_03.png">
+<p>Playlist saved as "English" is ready for synchronizing.</p>
+<br><br>
+
+<h4>Synchronizing Playlists</h4>
+<p>To control a cluster of players, the playlists must be synchronized to start together:</p>
+<p>1. From the saved playlist of the Main player: press the settings button on the right hand corner and select <span class="key">Synchronize</span></p>
+<img alt="Finding synchronize" class="img-responsive" src="img/cluster/helpimg_cluster_04.png">
+<p><br>2. Select the correct player and playlist to use</p>
+<img alt="Choosing the playlist" class="img-responsive" src="img/cluster/helpimg_cluster_05.png">
+<p><br>3. Repeat for every additional player and playlist in the cluster.<br><br>Remember that all of the playlist sync settings have to be done from the Main Player unit.</p>
+<br>
+                    <h3>Cluster Use</h3>
+                    <p>To use the cluster, keep the the WebUI of Main player open.</p>
+                    <p>Note that the cluster "exists" only in the browser - the cluster setup is not saved to any of the players.</p>
+                    <p>Below is an example image of two-unit cluster in use, with a "backup player" playing using 10 second delay.</p>
+<img alt="Cluster playing" class="img-responsive" src="img/cluster/helpimg_cluster_06.png">
+<br>
+                    <h4>Cluster With Varying Playlists</h4>
+                    <p>You might use a cluster with different playlist in each player.
+                    For example, one player might have media files in different language,
+                    but only a few of the files available instead of all of them.
+                    When synchronizing a player with such playlist, empty "&mdash;" entries will be added to
+                    end of the synchronized playlist to match playlist lengths.
+                    Drag using the menu handles on the right to re-order the items as needed
+                    (including empty entries). Make sure that media file is in matching position
+                    and empty entries are in the correct places.</p>
+                    <p>Below is an example image of three-unit cluster, where one of the players have a playlist
+                    containing only two items. The synchronized playlist is already sorted in the image.<br>
+<img alt="Varying cluster playlists" class="img-responsive" src="img/cluster/helpimg_cluster_07.png">
+                    </div>
+                <!-- /.blog-post -->
+
+<hr><!--------------------------------------------------------------------------->
+                <div class="blog-post target" id="admin">
+                    <h2 class="blog-post-title">Admin Settings</h2>
+                    <br><strong>Video output resolution</strong>
+                        <ul>
+                        <li>Automatic via HDMI handshake (default)
+                        <li>Manually selected (resolution and framerate)
+                        </ul>
+                    <strong>Video output rotation</strong>
+                    <br>0 / 90 / 180 / 270 degrees. Default=0.
+                    <br><strong>Audio port</strong>
+                        <ul>
+                        <li>Analog
+                        <li>HDMI only (no volume settings; no audio output to headphones)
+                        <li>Both
+                        </ul>
+                    <strong>Device name</strong> (hostname).
+                    <br>Only letters &amp; numbers allowed (no "special characters").
+                    <br><strong>IP configuration</strong>
+                        <ul>
+                        <p>By default RamePlayer configures IP settings using DHCP.</p>
+                        <p>Alternatively IP settings can be configured manually:</p>
+                        <li>Device IP and subnet mask are mandatory
+                        <li>Gateway IP and DNS are optional (but required for internet connectivity)
+                        <li>Use as DHCP server (optional): RamePlayer can also function as a DHCP server, handing out IPs to other devices in same network, using the given DHCP IP range.
+                        <p>Be careful with defining the range so that it does not overlap with any devices having statically configured IP. Also make sure you have only a single DHCP server in the network!</p>
+                        </ul>
+                    <strong>Time configuration</strong>
+                        <ul>
+                        <p>Note: For now, RamePlayer is always set to "Europe/Helsinki" timezone and the mini LCD screen will show time using that timezone. However, the WebUI shows player's current time in UTC.</p>
+                        <li>NTP server &mdash; Player is automatically synchronized to correct time if NTP server is configured and the player is connected to the internet.
+                        <li>If device is not connected to internet, you can also manually set date &amp; time (using UTC time).
+                        <p>Note that if NTP server is defined, the automatic time synchronization will override any manually given time when player is connected to the internet.</p>
+                        </ul>
+                    <strong>Save settings</strong> &mdash; Settings are typically applied after a restart.
+                    <br><strong>Factory reset</strong> &mdash; Restores all default settings and deletes internally stored data.
+                    <br>Factory resetting is not recommended unless it is necessary!
+                    <p>After Factory reset, the player will need to re-detect available hardware components and it will restart twice.
+                    Player startup will take longer than usual.
+                    You may want to additionally hard reboot (power off and on again) afterwards.</p>
+                    
+                    <strong>Volumes</strong> &mdash; Available when analog audio port setting is enabled.
+                    Volume selection must be expanded first, to minimize possibility of changing the volume by mistake.
+                        <ul>
+                        <li>Line out volume &ndash; Range: 0...110%
+                        <li>Headphone volume &ndash; Range: 0...100%. Can also be adjusted using the rotary of local UI (seen in WebUI only with page reload).
+                        </ul>
+                    <strong>Firmware upgrade</strong>
+                        <br>Requires connection to the internet.
+                        Select one of the available firmwares, press Upgrade and wait until RamePlayer reboots automatically.
+                        <p>Note that downgrading to older firmware is not recommended
+                        (may lead to non-functioning device, especially when downgrading more than a minor patch level).</p>
+                    <strong>Restart device</strong> &mdash; Performs a "soft reboot".
+                        <p>You can do a hard reboot by switching off the player from power switch and back on after a moment.</p>
+                    <strong>RamePlayer Information</strong>
+                        <ul>
+                        <li>Firmware version &ndash; RamePlayer software
+                        <li>Hardware &ndash; Type and revision
+                        <li>Details
+                            <ul>
+                            <li>WebUI and Backend version &ndash; internal version info
+                            <li>Hardware add-on info &ndash; type, product id, product version and UUID (if any).
+                            <li>Hardware config &ndash; ID info as hexadecimal bitmask number and as list of component ids (id/cids = activated on boot, id/eeprom_cids = defined in eeprom), hardware chassis version.
+                            </ul>
+                        </ul>
+                </div>
+                <!-- /.blog-post -->
+                
+<hr><!--------------------------------------------------------------------------->
+              <div class="blog-post target" id="hardware">
+<h2 class="blog-post-title">Connecting To Other Hardware</h2>
+<br>
+              <h4>Connecting to ATEM video mixers</h4>
+              <p>Verify what mode ATEM mixer is configured to use (720p or 1080p).
+              Set RamePlayer to use the same mode. (See images below.)
+              If ATEM is in 720p mode, it will still report being 1080p capable
+              in HDMI handshake, so RamePlayer will send image in wrong format
+              if it is using Auto video output resolution.</p>
+              <p>After saving settings, you have to
+              hard reboot the RamePlayer (power off, wait a little while, power on again).</p>
+              <p>Additionally you may need to detach HDMI cable from RamePlayer before
+              turning it on, reattach the cable back after RamePlayer is running.</p>
+              <p>The above steps are needed so that new settings are correctly between
+              ATEM and RamePlayer.</p>
+              <p>If any problems persist, try using 720p 50 Hz setting in both ATEM and RamePlayer.
+              To use that mode in RamePlayer, go to <span class="key">Settings</span> &rarr; <span class="key">Admin Settings</span>:</p>
+               <img alt="Admin settings" class="img-responsive" src="img/misc/helpimg_ATEM_01.png">
+               <p>Change the Video output resolution from "Auto" to "720p 50 Hz":</p>
+               <img alt="Choosing 720p50Hz" class="img-responsive" src="img/misc/helpimg_ATEM_02.png">
+</div>
+                <!-- /.blog-post -->
+
+            </div>
+            <!-- /.blog-main -->
+
+        </div> <!-- .col -->
+        </div> <!-- .row -->
+
+    </div>
+    <!-- /.container -->
+
+    <footer class="footer">
+        <p class="text-center"> <a href="#">Back to top</a> </p>
+    </footer>
+
+    <!-- inject-vendor:js -->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- endinject -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>
