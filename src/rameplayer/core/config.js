@@ -336,9 +336,9 @@
             // media-item.html
             'Add to Work list': 'Добавить в рабочий список',
             'Remove': 'Удалить',
-            'Move to': 'Перенести в',
+            'Move to': 'переместить в',
             // report-problem-modal.html
-            'Add Unit': 'Добавить ',
+            'Add Unit': 'Добавить устройство ',
             'Report a Problem': 'Сообщить о проблеме',
             'Checking Internet connection': 'Проверяется соединение с интернетом',
             'Describe the problem': 'Опишите проблему',
@@ -348,7 +348,7 @@
             'Cancel': 'Отменить',
             'Close': 'Закрыть',
             'Reporter': 'Имя заполнившего',
-            'download log': 'сохранить файл журнала',
+            'download log': 'скачать файл журнала',
             'Could not connect to the report server.': 'Не удалось подключится к серверу.',
             'Please': 'Пожалуйста,',
             'and send it to support@rameplayer.org and describe the problem in the email message.': // jshint ignore:line
@@ -379,21 +379,21 @@
             'Storage': 'Хранилище',
             'Playlist name': 'Название списка проигрывания',
             'Playlist with this name exists already. This playlist will overwrite existing one!': 'Список проигрывания с таким названием уже существует. Ранее сохраненный список проигрывания будет заменен этим списком!', // jshint ignore:line
-            'Play this when device starts': 'Проигрывать при включении устройства',
+            'Play this when device starts': 'Проигрывать это при включении устройства',
             'Continuous play, repeating all': 'Непрерывное воспроизведение с повтором всего списка',
             // playlist.html
             'Playlist is empty.': 'Список пустой.',
             'Title': 'Название',
             'Length': 'Длина',
             'Date': 'Дата',
-            'Default': 'Стандартный',
+            'Default': 'по умолчанию',
             'Synchronize': 'Синхронизировать',
             'Add Stream': 'Добавить видеопоток',
             'Save as': 'Сохранить как',
-            'Lock': 'Фиксировать',
+            'Lock': 'закрепить',
             'Clear': 'Очистить',
             'Edit Properties': 'Редактировать параметры',
-            'Stop synchronizing this playlist': 'Прекратить синхронизирование этого списка проигрывания',
+            'Stop synchronizing this playlist': 'остановить синхронизирование этого списка проигрывания',
             // edit-modal.html
             'Edit Playlist Properties': 'Редактирование параметров списка проигрывания',
             // add-stream-modal.html
@@ -425,11 +425,11 @@
             'Current firmware': 'Текущая версия прошивки',
             'Device hardware': 'Аппаратура устройства',
             // adminsettings.html
-            'Admin Settings': 'Административные настройки',
+            'Admin Settings': 'настройки администратора',
             'Video output resolution': 'Разрешение видео',
-            'Video output rotation': 'Ротация видео',
+            'Video output rotation': 'поворот видео',
             'Audio port': 'Аудио выход',
-            'HDMI and analog audio outputs are not synchronized with each other': 'Выходы HDMI и аналоговый не синхронизированы между собой', // jshint ignore:line
+            'HDMI and analog audio outputs are not synchronized with each other': 'Выходы HDMI и аналоговый выход звука не синхронизированы между собой', // jshint ignore:line
             rameAnalogOnly: 'Аналоговый',
             rameHdmiOnly: 'HDMI',
             rameHdmiAndAnalog: 'Оба',
@@ -439,8 +439,8 @@
             'Gateway IP': 'IP-адрес сетевого шлюза',
             'DNS, preferred': 'DNS, основной',
             'DNS, alternative': 'DNS, альтернативный',
-            'IP Configurations': 'IP-конигурация',
-            'Configure networking manually': 'Ручная установка IP-конигурации',
+            'IP Configurations': 'IP-конфигурация',
+            'Configure networking manually': 'Ручная настройка сети',
             'Use as DHCP server': 'Использовать как DHCP-сервер',
             'DHCP range start': 'Начало диапазона DHCP',
             'DHCP range end': 'Конец диапазона DHCP',
@@ -463,24 +463,24 @@
             DHCP_RANGE_START: 'Начало диапазона DHCP',
             DHCP_RANGE_END: 'Конец диапазона DHCP',
             DHCP_RANGE_DEF: 'Установка диапазона DHCP',
-            MANUAL_DATE: 'Ручная дата',
-            MANUAL_TIME: 'Ручное время',
+            MANUAL_DATE: 'дата вручную',
+            MANUAL_TIME: 'время вручную',
             NTP_SERVER_HOSTNAME: 'Название узла NTP-сервера',
-            ADMIN_SETTINGS_NOT_SAVED: 'Административные настройки не сохранены.',
+            ADMIN_SETTINGS_NOT_SAVED: 'настройки администратора не сохранены.',
             CHECK_INSERTED_VALUES: 'Проверьте введенные данные',
-            INVALID_OPTIONAL_SETTINGS: 'Необязательные настройки возможно имеют неверные значения',
+            INVALID_OPTIONAL_SETTINGS: 'дополнительные настройки возможно имеют неверные значения',
             // settings.js
             OPTION_SAVED: 'Параметр сохранен',
             OPTION_AUTOPLAY_USB_DESC: 'Параметр автоматического проигрывания USB',
             OPTION_ENABLED: 'вкл.',
             OPTION_DISABLED: 'выкл.',
-            OPTION_SAVE_FAILED: 'Сохранение параметра неуспешно',
-            OPTION_AUTOPLAY_USB_FAILED_DESC: 'Сохранение праметра автоматического проигрывания USB неуспешно.',
+            OPTION_SAVE_FAILED: 'ошибка Сохранения параметра',
+            OPTION_AUTOPLAY_USB_FAILED_DESC: 'ошибка Сохранения параметра автоматического проигрывания USB.',
             LANGUAGE_SAVED: 'Язык сохранен.',
             INVALID_CLUSTER_SETTINGS_DESC: 'IP-адрес нового устройства',
             INVALID_SETTINGS: 'Неверные параметры',
             NEW_ADDED:'Добавлено',
-            NEW_CLUSTER_UNIT_ADDED_DESC: 'Добавлено новое устройство кластера.',
+            NEW_CLUSTER_UNIT_ADDED_DESC: 'Добавлено новое устройство в кластер.',
             // dataservice-provider.js
             FIRMWARE_UPGRADED: 'Прошивка обновлена',
             FIRMWARE_UPGRADED_DESC: 'Прошивка обновлена до версии $1.',
@@ -499,20 +499,20 @@
             UNIT_SETTINGS_UPDATED_DESC: 'Настройки устройства обновлены.',
             UNIT_REMOVED_DESC: 'Устройство удалено.',
             IP_ADDRESS_INVALID_DESC: 'Неверный IP-адрес.',
-            CLUSTER_UNIT_SETTINGS: 'Настройка устройства кластера',
+            CLUSTER_UNIT_SETTINGS: 'Настройки устройства кластера',
             // upgrade-firmware-modal.js
-            FIRMWARE_UPGRADE_FAILED_DESC: 'Обновление прошивки не удалось.',
-            UPGRADE_FAILED: 'Обновление не удалось',
+            FIRMWARE_UPGRADE_FAILED_DESC: 'ошибка Обновления прошивки.',
+            UPGRADE_FAILED: 'ошибка Обновления',
             // save-settings-modal.html
             'Save settings': 'Сохранить настройки',
             'Device will be restarted after saving settings.': 'После сохранения настроек устройство будет перезагружено.', // jshint ignore:line
             // report-problem.js
-            REPORT_NOT_SENT: 'Сообщение не отправлено',
-            SENDING_REPORT_FAILED_DESC: 'Отправка сообщения не удалось.',
+            REPORT_NOT_SENT: 'отчет не отправлен',
+            SENDING_REPORT_FAILED_DESC: 'ошибка отправки отчета.',
             LOADING_LOGS_FAILED_DESC: 'Не удалось загрузить файлы журнала с сервера.',
             LOADING_LOGS_ERROR: 'Ошибка при загрузке файлов журнала',
-            REPORT_SENT: 'Сообщение отправлено',
-            REPORT_SENT_SUCCESS_DESC: 'Спасибо вам за сообщение!',
+            REPORT_SENT: 'отчет отправлен',
+            REPORT_SENT_SUCCESS_DESC: 'Спасибо вам за отчет!',
             // import-cluster-modal.js
             CLUSTER_CONFIG_IMPORTED: 'Конфигурация кластера импортирована',
             CLUSTER_CONFIG_IMPORTED_SUCCESS_DESC: 'Конфигурация кластера успешно импортирована.',
@@ -520,15 +520,15 @@
             //Translations for info fields not used
             //for sake of consistency in debugging
             'Backend version': 'Версия бэкенда (Backend)',
-            'Hardware add-on info': 'Версия дополнения аппарата (Hw add-on)',
-            'Hardware config': 'Параметры аппарата (Hw cfg)',
+            'Hardware add-on info': 'Версия дополнения оборудования (Hw add-on)',
+            'Hardware config': 'Параметры оборудования (Hw cfg)',
             'Web UI version': 'Версия веб-интерфейса',
             'Details': 'Детали',
             'Software version': 'Версия ПО',
             'UI version': 'Версия UI',
             // volumes.html
             'Volumes': 'Уровни звука',
-            'Volume settings are unavailable when audio out is set to:': 'Установка уровня звука недоступна, если выран аудио выход:', // jshint ignore:line
+            'Volume settings are unavailable when audio out is set to:': 'настройки уровня звука недоступны, если выбран аудио выход в:', // jshint ignore:line
             // volume-control.html
             headphone: 'Наушники',
             lineout: 'Линейный выход',
