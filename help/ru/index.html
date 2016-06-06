@@ -8,7 +8,7 @@
 
 <link rel="icon" type="image/png" href="../img/favicon.png">
 
-<title>Rame Help</title>
+<title>Rame помощь</title>
 
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/bootstrap-theme.min.css" rel="stylesheet">
@@ -26,12 +26,12 @@
                 <button type="button" class="navbar-toggle collapsed"
                     data-toggle="collapse" data-target="#navbar"
                     aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
+                    <span class="sr-only">Переключить навигацию</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Rame Help</a>
+                <a class="navbar-brand" href="#">Rame помощь</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -48,23 +48,23 @@
                         <a href="#" class="dropdown-toggle"
                             data-toggle="dropdown" role="button"
                             aria-haspopup="true" aria-expanded="false">
-                            Topics <span class="caret"></span>
+                            Темы<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#player">Player usage</a>
+                                <a href="#player">Использование плеера</a>
                             </li>
                             <li>
-                                <a href="#playlists">Playlists</a>
+                                <a href="#playlists">Списки проигрывания</a>
                             </li>
                             <li>
-                                <a href="#cluster">Cluster</a>
+                                <a href="#cluster">Кластер</a>
                             </li>
                             <li>
-                                <a href="#admin">Admin settings</a>
+                                <a href="#admin">Администраторские настройки</a>
                             </li>
                             <li>
-                                <a href="#hardware">Hardware</a>
+                                <a href="#hardware">Аппаратура</a>
                             </li>
                             <!--
                             <li role="separator" class="divider"></li>
@@ -87,50 +87,49 @@
     <div class="container" role="main">
         <div class="row">
         <div class="col-md-12">
-        <h1 class="blog-header">RamePlayer Manual &amp; Help</h1>
+        <h1 class="blog-header">RamePlayer инструкция и помощь</h1>
             <div class="blog-main">
 
 <hr><!--------------------------------------------------------------------------->
 
                 <div class="blog-post target" id="player">
-                    <h2 class="blog-post-title">Player Usage</h2>
-                    <p>You can access WebUI of the player by entering IP address visible on the LCD screen of the player. Connect to it from any computer connected to the same network.</p>
-                    <p>Add all required media files into an USB drive and insert it into the USB port of the device. You will see a tab in the WebUI for the USB drive.</p>
-                    <p>Select a file by clicking or tapping on it and wait for a small moment for the highlight cursor to update.</p>
-<img alt="Select video" class="img-responsive" src="img/player/select_video.png">
+                    <h2 class="blog-post-title">Использование плеера</h2>
+                    <p>Вы можете открыть веб-интерфейс управления устройством, введя IP-адрес, отображаемый на LCD экране устройства. Подключитесь к нему из любого компютера, принадлежащего к той же сети.</p>
+                    <p>Поставьте все необходимые медиа-файлы на USB носитель и вставьте его в USB порт устройства. В веб-интерфейсе будет показан раздел USB носителя.</p>
+                    <p>Чтобы выбрать файл, нажмите на него и подождите, пока он станет отмечен как активный.</p>
+<img alt="Выбрать видео" class="img-responsive" src="img/player/select_video.png">
 <br>
-<p>Press <span class="key">Play</span> button to start playing of the video. After that you can use <span class="key">pause</span> / <span class="key">stop</span> buttons or seek by moving circular thumb icon on the timeline.</p>
-<img alt="Play video" class="img-responsive" src="img/player/play_video.png">
+<p>Нажмите на кнопку <span class="key">Проигрывать</span>, чтобы начать воспроизведение видео. Потом вы можете использовать кнопки <span class="key">Пауза</span> / <span class="key">Остановить</span> или перемотать с помощью круглого идентификатора позиции на линии времени.</p>
+<img alt="Воспроизвести видео" class="img-responsive" src="img/player/play_video.png">
 <br>
-<p>You can also play using the <span class="key">loop</span> button, in which case the player will keep looping the same video.</p>
-<img alt="Loop video" class="img-responsive" src="img/player/loop_video.png">
+<p>Вы также можете начать воспроизведение кнопкой <span class="key">Повтор</span>, и в этом случае плеер будет повторять тот же самый видео.</p>
+<img alt="Повторять видео" class="img-responsive" src="img/player/loop_video.png">
                 </div>
                 <!-- /.blog-post -->
-
 <hr><!--------------------------------------------------------------------------->
 
                 <div class="blog-post target" id="playlists">
-                    <h2 class="blog-post-title">Playlists</h2>
-                    <p>You can add files into the Work list from an USB drive by going into the USB drive tab and then from the wanted file, click <span class="key">+ Add to Work List</span> from the dropdown menu.</p>
-                    <p>You can alternatively also use top level dropdown menu (sda1 bar in example image), and add all files in current folder by selecting <span class="key">+ Add Directory to Work list</span>.</p>
+                    <h2 class="blog-post-title">Списки проигрывания</h2>
+                    <p>Вы можете добавить файлы в Стандартный список проигрывания из USB хранилища, открыв раздел USB, выбрав нужный файл и в выпадающем списке нажав <span class="key">+ Добавить в рабочий список</span>.</p>
+                    <p>Также вы можете использовать выпадающий список, чтобы добавить все файлы из папки, нажав <span class="key">+ Добавить папку в рабочий список</span>.</p>
 
-<img alt="Add to work list" class="img-responsive" src="img/player/helpimg_playlist_01.png">
+<img alt="Добавить в рабочий список" class="img-responsive" src="img/player/helpimg_playlist_01.png">
 
-<p><br>From the <span class="key">Playlist</span> tab you can save the <span class="key">Work list</span> from the dropdown menu by selecting <span class="key">Save as</span>. </p>
+<p><br>В разделе <span class="key">Списки проигрывания</span> вы можете сохранить <span class="key">Стандартный</span> рабочий список, выбрав в выпадающем списке <span class="key">Сохранить как</span>.</p>
 
-<img alt="Save as" class="img-responsive" src="img/player/helpimg_playlist_02.png"><p>
+<img alt="Сохранить как" class="img-responsive" src="img/player/helpimg_playlist_02.png"><p>
 
-<p>Enter name and storage location for the playlist, and enable available options if needed.</p>
+<p>Введите название списка, выберите место сохранения и, если необходимо, отметьте доступные параметры.</p>
 
-<img alt="Save as" class="img-responsive" src="img/player/save_playlist.png"><p>
+<img alt="Сохранить как" class="img-responsive" src="img/player/save_playlist.png"><p>
 
 <br>
-<h4>Adding Streams</h4>
+<h4>Добавление видеопотоков</h4>
 
-<p>You can also choose to add Streams into the work list from the dropdown menu by selecting <span class="key">Add stream</span>.</p>
-<img alt="stream" class="img-responsive" src="img/player/worklist_context_addstream.png">
-<p>Insert the address of the stream into the <span class="key">URL</span> field and name the stream. Select the stream from the playlist and press <span class="key">Play</span> to watch stream.</p>
-<img alt="stream" class="img-responsive" src="img/player/helpimg_stream_01.png">
+<p>Вы можете добавить видеопотоки в рабочий список, в выпадающем списке выбрав <span class="key">Добавить видеопоток</span>.</p>
+<img alt="Видеопоток" class="img-responsive" src="img/player/worklist_context_addstream.png">
+<p>Введите адрес видеопотока в поле <span class="key">Адрес (URL)</span> и введите имя потока. Выберите видеопоток в списке проигрывания и нажмите на <span class="key">Проигрывать</span>, чтобы посмотреть видеопоток.</p>
+<img alt="Видеопоток" class="img-responsive" src="img/player/helpimg_stream_01.png">
 
 
                 </div>
@@ -138,119 +137,119 @@
 
 <hr><!--------------------------------------------------------------------------->
                 <div class="blog-post target" id="cluster">
-                    <h2 class="blog-post-title">Configuring Cluster</h2>
+                    <h2 class="blog-post-title">Конфигурация кластера</h2>
                     <!--<p class="blog-post-meta">RamePlayer Version &ge; 0.8.0</p>-->
-                    <p>To set up Cluster for use in RamePlayer, first go to the web UI of the Main Player unit.<br>
-                    Go to <span class="key">Settings</span> (the spanner icon)
-                    and in the Cluster settings, press the <span class="key">Add Unit</span> button</p>
-                    <img alt="Cluster configuration 01" class="img-responsive" src="img/cluster/helpimg_cluster_01.png">
+                    <p>Чтобы настроить RamePlayer для использования в кластерном режиме, сперва откройте веб-интерфейс основного устройства.<br>
+                    Откройте раздел <span class="key">Настройки</span> (значок гаечного ключа)
+                    и под заглавием Кластер нажмите на кнопку <span class="key">Добавить</span>.</p>
+                    <img alt="Конфигурация кластера 01" class="img-responsive" src="img/cluster/helpimg_cluster_01.png">
                     <p><br>
-                    Write IP addresses of other RamePlayers to the <span class="key">IP Address</span> field, default port is 8000. Use a delay of 10 seconds for Backup players.
+                    Впишите адреса других RamePlayer устройств в поле <span class="key">IP адрес</span>, по умолчанию установлен порт 8000. Для резервных устройств установите задержку проигрывания на 10 секунд.
 
-                    <br>Press <span class="key">+ Add</span> to add the player to the cluster.
+                    <br>Нажмите на <span class="key">+ Добавить</span>, чтобы добавить устройство в кластер.
 
-Insert all players to the cluster except the Main player.</p>
-<img alt="Cluster Configuration 02" class="img-responsive" src="img/cluster/helpimg_cluster_02.png">
-<p>Cluster of 2 players ready (main player and one backup player with a 10 second delay).
+В кластер нужно добавлять все устройства, кроме основного.</p>
+<img alt="Конфигурация кластера 02" class="img-responsive" src="img/cluster/helpimg_cluster_02.png">
+<p>Готовый кластер из 2 устройств (основное устройство и резервное устройство с задержкой на 10 секунд).
                     </p><br>
-                    <h3>Synchronizing Playlists for Cluster</h3><br>
-                    <h4>Creating playlists for players</h4>
-                    <p>Every player should have their playlist set up ready in their language, see <b>Player usage</b> for more help with playlists.</p><br><img alt="Playlist ready and saved" class="img-responsive" src="img/cluster/helpimg_cluster_03.png">
-<p>Playlist saved as "English" is ready for synchronizing.</p>
+                    <h3>Синхронизация списков проигрывания для кластера</h3><br>
+                    <h4>Создание списков проигрывания для устройств</h4>
+                    <p>На каждом устройстве должны быть подготовлены списки проигрывания на соответствующем языке, см. <b>Списки проигрывания</b> для более подробного описания работы со списками.</p><br><img alt="Подготовленный и сохраненный список проигрывания" class="img-responsive" src="img/cluster/helpimg_cluster_03.png">
+<p>Список с названием "Русский" готов к синхронизированию.</p>
 <br><br>
 
-<h4>Synchronizing Playlists</h4>
-<p>To control a cluster of players, the playlists must be synchronized to start together:</p>
-<p>1. From the saved playlist of the Main player: press the settings button on the right hand corner and select <span class="key">Synchronize</span></p>
-<img alt="Finding synchronize" class="img-responsive" src="img/cluster/helpimg_cluster_04.png">
-<p><br>2. Select the correct player and playlist to use</p>
-<img alt="Choosing the playlist" class="img-responsive" src="img/cluster/helpimg_cluster_05.png">
-<p><br>3. Repeat for every additional player and playlist in the cluster.<br><br>Remember that all of the playlist sync settings have to be done from the Main Player unit.</p>
+<h4>Синхронизация списков проигрывания</h4>
+<p>Чтобы контролировать кластер устройств, списки проигрывания должны быть синхронизированы для совместного использования:</p>
+<p>1. В сохраненном списке проигрывания на основном устройстве: нажмите на кнопку настройки в правом угле и выберите <span class="key">Синхронизировать</span></p>
+<img alt="Возможность синхронизации" class="img-responsive" src="img/cluster/helpimg_cluster_04.png">
+<p><br>2. Выберите нужное устройство и список проигрывания, который синхронизировать</p>
+<img alt="Выбор списка проигрывания" class="img-responsive" src="img/cluster/helpimg_cluster_05.png">
+<p><br>3. Повторите действия для каждого устройства и списка проигрывания.<br><br>Помните, что все параметры синхронизации списков проигрывания нужно настраивать на основном устройстве.</p>
 <br>
-                    <h3>Cluster Use</h3>
-                    <p>To use the cluster, keep the the WebUI of Main player open.</p>
-                    <p>Note that the cluster "exists" only in the browser - the cluster setup is not saved to any of the players.</p>
-                    <p>Below is an example image of two-unit cluster in use, with a "backup player" playing using 10 second delay.</p>
-<img alt="Cluster playing" class="img-responsive" src="img/cluster/helpimg_cluster_06.png">
+                    <h3>Работа в режиме кластера</h3>
+                    <p>Чтобы работать в режиме кластера, держите открытым веб-интерфейс основного устройства.</p>
+                    <p>Заметьте, что кластер "существует" лишь в браузере - настройки кластера не сохраняются ни в одном устройстве.</p>
+                    <p>Ниже приведен пример кластера из двух устройств, где "резервное устройство" использует 10-секундную задержку.</p>
+<img alt="Проигрывание в кластере" class="img-responsive" src="img/cluster/helpimg_cluster_06.png">
 <br>
-                    <h4>Cluster With Varying Playlists</h4>
-                    <p>You might use a cluster with different playlist in each player.
-                    For example, one player might have media files in different language,
-                    but only a few of the files available instead of all of them.
-                    When synchronizing a player with such playlist, empty "&mdash;" entries will be added to
-                    end of the synchronized playlist to match playlist lengths.
-                    Drag using the menu handles on the right to re-order the items as needed
-                    (including empty entries). Make sure that media file is in matching position
-                    and empty entries are in the correct places.</p>
-                    <p>Below is an example image of three-unit cluster, where one of the players have a playlist
-                    containing only two items. The synchronized playlist is already sorted in the image.<br>
-<img alt="Varying cluster playlists" class="img-responsive" src="img/cluster/helpimg_cluster_07.png">
+                    <h4>Кластер с отличающимися списками проигрывания</h4>
+                    <p>Можно использовать кластер с разными списками проигрывания на каждом устройстве.
+                    Например, на одном устройстве файлы на другом языке,
+                    а на этом языке доступны лишь некоторые из всех файлов.
+                    При синхронизации с устройством, имеющим такой список, пустые "&mdash;" записи будут добавлены
+                    в конец синхронизированного списка проигрывания, чтобы длина списков совпадала.
+                    Перетаскиваете записи, придерживая значок выпадающего списка справа, чтобы поменять их очередность
+                    (включая пустые записи). Убедитесь, что файлы находятся на верных позициях
+                    и пустые записи в правильных местах.</p>
+                    <p>Ниже приведен пример кластера из трех устройств, где на одном устройстве в списке проигрывания
+                     лишь две записи. В примере список уже сортирован.<br>
+<img alt="Отличающиеся списки проигрывания в кластере" class="img-responsive" src="img/cluster/helpimg_cluster_07.png">
                     </div>
                 <!-- /.blog-post -->
 
 <hr><!--------------------------------------------------------------------------->
                 <div class="blog-post target" id="admin">
-                    <h2 class="blog-post-title">Admin Settings</h2>
-                    <br><strong>Video output resolution</strong>
+                    <h2 class="blog-post-title">Администраторские настройки</h2>
+                    <br><strong>Разрешение видео</strong>
                         <ul>
-                        <li>Automatic via HDMI handshake (default)
-                        <li>Manually selected (resolution and framerate)
+                        <li>Автоматическое, с помощью HDMI подтверждения (по умолчанию)
+                        <li>Вручную (разрешение и частота кадров)
                         </ul>
-                    <strong>Video output rotation</strong>
-                    <br>0 / 90 / 180 / 270 degrees. Default=0.
-                    <br><strong>Audio port</strong>
+                    <strong>Ротация видео</strong>
+                    <br>0 / 90 / 180 / 270 градусов. По умолчанию - 0.
+                    <br><strong>Аудио выход</strong>
                         <ul>
-                        <li>Analog
-                        <li>HDMI only (no volume settings; no audio output to headphones)
-                        <li>Both
+                        <li>Аналоговый
+                        <li>только HDMI (без контроля уровня звука; без звука на наушники)
+                        <li>Оба
                         </ul>
-                    <strong>Device name</strong> (hostname).
-                    <br>Only letters &amp; numbers allowed (no "special characters").
-                    <br><strong>IP configuration</strong>
+                    <strong>Название устройства</strong> (имя узла).
+                    <br>Разрешены только буквы латинского алфавита и цифры (не используя "специальных знаков").
+                    <br><strong>IP-конфигурация</strong>
                         <ul>
-                        <p>By default RamePlayer configures IP settings using DHCP.</p>
-                        <p>Alternatively IP settings can be configured manually:</p>
-                        <li>Device IP and subnet mask are mandatory
-                        <li>Gateway IP and DNS are optional (but required for internet connectivity)
-                        <li>Use as DHCP server (optional): RamePlayer can also function as a DHCP server, handing out IPs to other devices in same network, using the given DHCP IP range.
-                        <p>Be careful with defining the range so that it does not overlap with any devices having statically configured IP. Also make sure you have only a single DHCP server in the network!</p>
+                        <p>По умолчанию RamePlayer получает IP настройки из DHCP-сервера.</p>
+                        <p>Также доступна ручная конфигурация IP настроек:</p>
+                        <li>IP-адрес устройства и маска подсети заполняются обязательно
+                        <li>IP-адрес сетевого шлюза и DNS не обязательны (но требуются для связи с интернетом)
+                        <li>Использовать как DHCP-сервер (не обязательно): RamePlayer может действовать как DHCP-сервер, присваивая IP-адреса другим устройствам в той же сети, используя указанный диапазон IP-адресов.
+                        <p>Будьте осторожны, указывая диапазон, чтобы адреса не пересекались с устройствами, имеющими статические IP-адреса. Также убедитесь, что в сети настроен лишь один DHCP-сервер!</p>
                         </ul>
-                    <strong>Time configuration</strong>
+                    <strong>Конфигурация времени</strong>
                         <ul>
-                        <p>Note: For now, RamePlayer is always set to "Europe/Helsinki" timezone and the mini LCD screen will show time using that timezone. However, the WebUI shows player's current time in UTC.</p>
-                        <li>NTP server &mdash; Player is automatically synchronized to correct time if NTP server is configured and the player is connected to the internet.
-                        <li>If device is not connected to internet, you can also manually set date &amp; time (using UTC time).
-                        <p>Note that if NTP server is defined, the automatic time synchronization will override any manually given time when player is connected to the internet.</p>
+                        <p>Замечание: Сейчас RamePlayer всегда настроен на зону времени "Europe/Helsinki", и на мини-LCD экране время будет показано, используя эту зону времени. Однако веб-интерфейс показывает текущее время устройства в зоне UTC.</p>
+                        <li>NTP-сервер &mdash; устройство автоматически синхронизирует время, если указан NTP-сервер и устройству доступен интернет.
+                        <li>Если устройство не подключено к интернету, вы можете вручную установить дату и время (используя зону времени UTC).
+                        <p>Следует отметить, что при подключении к интернету устройства с указанным NTP-сервером автоматическая синхронизация времени перепишет вручную установленное время.</p>
                         </ul>
-                    <strong>Save settings</strong> &mdash; Settings are typically applied after a restart.
-                    <br><strong>Factory reset</strong> &mdash; Restores all default settings and deletes internally stored data.
-                    <br>Factory resetting is not recommended unless it is necessary!
-                    <p>After Factory reset, the player will need to re-detect available hardware components and it will restart twice.
-                    Player startup will take longer than usual.
-                    You may want to additionally hard reboot (power off and on again) afterwards.</p>
+                    <strong>Сохранить настройки</strong> &mdash; обычно новые настройки применяются после перезагрузки устройства.
+                    <br><strong>Заводские настройки</strong> &mdash; восстанавливаются изначальные значения всех настроек и удаляются данные из внутреннего хранилища.
+                    <br>Восстановление заводских настроек не рекомендуется, кроме крайней необходимости!
+                    <p>После восстановления заводских настроек устройству потребуется заново определить доступные компоненты аппаратуры, и оно будет перезагружаться  дважды.
+                    Включение устройства займет дольше обычного.
+                    Иногда после этого желательно еще сделать полную перезагрузку (выключить и включить устройство).</p>
                     
-                    <strong>Volumes</strong> &mdash; Available when analog audio port setting is enabled.
-                    Volume selection must be expanded first, to minimize possibility of changing the volume by mistake.
+                    <strong>Уровни звука</strong> &mdash; доступно, если выбран аналоговый аудио выход.
+                    Сперва требуется развернуть соответствующий регулятор уровня, чтобы снизить вероятность случайного изменения уровней.
                         <ul>
-                        <li>Line out volume &ndash; Range: 0...110%
-                        <li>Headphone volume &ndash; Range: 0...100%. Can also be adjusted using the rotary of local UI (seen in WebUI only with page reload).
+                        <li>Линейный выход &ndash; Диапазон: 0...110%
+                        <li>Наушники &ndash; Диапазон: 0...100%. Также меняется регулятором на устройстве (в веб-интерфейсе изменения отображаются после обновления страницы).
                         </ul>
-                    <strong>Firmware upgrade</strong>
-                        <br>Requires connection to the internet.
-                        Select one of the available firmwares, press Upgrade and wait until RamePlayer reboots automatically.
-                        <p>Note that downgrading to older firmware is not recommended
-                        (may lead to non-functioning device, especially when downgrading more than a minor patch level).</p>
-                    <strong>Restart device</strong> &mdash; Performs a "soft reboot".
-                        <p>You can do a hard reboot by switching off the player from power switch and back on after a moment.</p>
-                    <strong>RamePlayer Information</strong>
+                    <strong>Обновление прошивки</strong>
+                        <br>Требуется подключение к интернету.
+                        Выберите одну из доступных версий прошивки, нажмите Обновить и ждите, пока RamePlayer автоматически перезагрузится.
+                        <p>Важно заметить, что обновление на более старую версию прошивки не рекомендуется
+                        (может привести к неработоспособному устройству, особенно если отличие версии не в рамках меньшего уровня версии).</p>
+                    <strong>Перезагрузить устройство</strong> &mdash; выполняет перезагрузку ПО.
+                        <p>Вы можете совершить аппаратную перезагрузку, выключив устройство и через некоторое время опять включив.</p>
+                    <strong>RamePlayer информация</strong>
                         <ul>
-                        <li>Firmware version &ndash; RamePlayer software
-                        <li>Hardware &ndash; Type and revision
-                        <li>Details
+                        <li>Версия прошивки &ndash; RamePlayer ПО
+                        <li>Версия аппаратуры &ndash; Тип и номер конфигурации
+                        <li>Детали
                             <ul>
-                            <li>WebUI and Backend version &ndash; internal version info
-                            <li>Hardware add-on info &ndash; type, product id, product version and UUID (if any).
-                            <li>Hardware config &ndash; ID info as hexadecimal bitmask number and as list of component ids (id/cids = activated on boot, id/eeprom_cids = defined in eeprom), hardware chassis version.
+                            <li>Версия веб-интерфейса и версия бэкенда (Backend) &ndash; информация о версиях разработки
+                            <li>Версия дополнения аппарата (Hw add-on) &ndash; тип, идентификатор продукта, версия продукта и UUID (если есть).
+                            <li>Параметры аппарата (Hw cfg) &ndash; идентифицирующая информация как битовая маска в шестнадцатеричной записи: список идентификаторов компонентов (id/cids = активированы при включении, id/eeprom_cids = установлены в eeprom), версия аппаратной основы.
                             </ul>
                         </ul>
                 </div>
@@ -258,25 +257,26 @@ Insert all players to the cluster except the Main player.</p>
                 
 <hr><!--------------------------------------------------------------------------->
               <div class="blog-post target" id="hardware">
-<h2 class="blog-post-title">Connecting To Other Hardware</h2>
+<h2 class="blog-post-title">Соединение с другой аппаратурой</h2>
 <br>
-              <h4>Connecting to ATEM video mixers</h4>
-              <p>Verify what mode ATEM mixer is configured to use (720p or 1080p).
-              Set RamePlayer to use the same mode. (See images below.)
-              If ATEM is in 720p mode, it will still report being 1080p capable
-              in HDMI handshake, so RamePlayer will send image in wrong format
-              if it is using Auto video output resolution.</p>
-              <p>After saving settings, you have to
-              hard reboot the RamePlayer (power off, wait a little while, power on again).</p>
-              <p>Additionally you may need to detach HDMI cable from RamePlayer before
-              turning it on, reattach the cable back after RamePlayer is running.</p>
-              <p>The above steps are needed so that new settings are correctly between
-              ATEM and RamePlayer.</p>
-              <p>If any problems persist, try using 720p 50 Hz setting in both ATEM and RamePlayer.
-              To use that mode in RamePlayer, go to <span class="key">Settings</span> &rarr; <span class="key">Admin Settings</span>:</p>
-               <img alt="Admin settings" class="img-responsive" src="img/misc/helpimg_ATEM_01.png">
-               <p>Change the Video output resolution from "Auto" to "720p 50 Hz":</p>
-               <img alt="Choosing 720p50Hz" class="img-responsive" src="img/misc/helpimg_ATEM_02.png">
+              <h4>Подключение к ATEM видео микшеру</h4>
+              <p>Проверьте, который режим сконфигурирован использовать ATEM микшер (720p или 1080p).
+              Установите тот же режим в RamePlayer. (См. примеры ниже.)
+              Если ATEM в режиме 720p, он все-таки в автоматическом HDMI подтверждении
+              будет сообщать о возможности использовать 1080p,
+              поэтому RamePlayer будет посылать изображение в неверном формате,
+              если настроено автоматическое видео разрешение.</p>
+              <p>После сохранения настроек нужно сделать аппаратурную перезагрузку RamePlayer
+              (выключить и через некоторое время опять включить).</p>
+              <p>Также может потребоваться отсоединить HDMI провод от RamePlayer перед включением
+              и присоединить провод после включения RamePlayer.</p>
+              <p>Вышеуказанные шаги нужно выполнить, чтобы настройки были верными между
+              ATEM и RamePlayer.</p>
+              <p>Если проблемы не удалось устранить, попробуйте использовать режим 720p 50 Hz как в ATEM, так и в RamePlayer.
+              Чтобы включить этот режим в RamePlayer, откройте <span class="key">Настройки</span> &rarr; <span class="key">Административные настройки</span>:</p>
+               <img alt="Администраторские настройки" class="img-responsive" src="img/misc/helpimg_ATEM_01.png">
+               <p>Поменяйте Разрешение видео с "Auto" на "720p 50 Hz":</p>
+               <img alt="Выбрать 720p50Hz" class="img-responsive" src="img/misc/helpimg_ATEM_02.png">
 </div>
                 <!-- /.blog-post -->
 
@@ -290,7 +290,7 @@ Insert all players to the cluster except the Main player.</p>
     <!-- /.container -->
 
     <footer class="footer">
-        <p class="text-center"> <a href="#">Back to top</a> </p>
+        <p class="text-center"> <a href="#">Вернутся на верх</a> </p>
     </footer>
 
     <!-- inject-vendor:js -->
