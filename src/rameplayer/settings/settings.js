@@ -24,7 +24,11 @@
         vm.languageId = initLanguage();
         vm.saveLanguageSettings = saveLanguageSettings;
 
-        vm.userSettings = dataService.getSettings();
+        var userSettings = dataService.getSettings();
+        userSettings.$promise.then(function() {
+            vm.autoplayUsb = userSettings.autoplayUsb;
+            //logger.debug('settings user ' + userSettings);
+        });        
         vm.saveUsbSetting = saveUsbSetting;
         
         vm.windowTitleInfo = 'RamePlayer';
@@ -117,19 +121,19 @@
         }
 
         function saveUsbSetting() {
-            vm.userSettings.$save(function() {
-                toastr.clear();
+            userSettings.autoplayUsb = vm.autoplayUsb;            
+            userSettings.$save(function(response) {
+                //logger.info(response);
                 $translate(['OPTION_SAVED', 'OPTION_AUTOPLAY_USB_DESC', 'OPTION_ENABLED', 'OPTION_DISABLED'])
                     .then(function(translations) {
                         toastr.success(translations.OPTION_AUTOPLAY_USB_DESC + ' ' + 
-                                (vm.userSettings.autoplayUsb ? 
+                                (vm.autoplayUsb ? 
                                         translations.OPTION_ENABLED : 
                                         translations.OPTION_DISABLED) + 
                                 '.', translations.OPTION_SAVED);
                     });
                 statusService.resetServerNotifications();
             }, function() {
-                toastr.clear();
                 $translate(['OPTION_SAVE_FAILED', 'OPTION_AUTOPLAY_USB_FAILED_DESC'])
                     .then(function(translations) {
                         toastr.error(translations.OPTION_AUTOPLAY_USB_FAILED_DESC, translations.OPTION_SAVE_FAILED, {

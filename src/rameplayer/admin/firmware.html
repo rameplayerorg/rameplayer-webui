@@ -31,7 +31,7 @@
             </div>
         </form>
         </div>
-        <div class="row">
+        <div class="row" ng-show="!vm.upgradesAvailable.firmwares.length">
             <div class="col-sm-12">
                 <span translate>Could not load list of firmwares available for upgrade.</span>
             </div>
