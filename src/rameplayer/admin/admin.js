@@ -68,6 +68,8 @@
          * Called after system settings are fetched from server.
          */
         function init() {
+            logger.debug('System settings fetched for init', vm.systemSettings);
+
             vm.selectedVideoOutputRotation = vm.videoOutputRotations[0]; // default
             for (var a = 0; a < vm.videoOutputRotations.length; ++a) {
                 if (vm.videoOutputRotations[a].value === vm.systemSettings.displayRotation)
@@ -303,6 +305,8 @@
                     vm.systemSettings.ntpServerAddress = vm.ntpServerAddress;
                 }
             }
+            
+            logger.debug('System settings after assigned for save', vm.systemSettings);
         }
         
         function validateIpOrdering(smallerIp, biggerIp) {
