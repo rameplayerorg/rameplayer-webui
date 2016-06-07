@@ -248,6 +248,7 @@
                             logger.debug('Admin setting save success, response: ', response);
                             toastr.success('Admin settings saved.', 'Saved');
                             statusService.resetServerNotifications();
+                            init();
                         }, function(response) {
                             logger.error('Admin setting save failed, response status:' + 
                                     response.status + ' (' + response.statusText + ') data.error:' +
