@@ -500,9 +500,6 @@
             // upgrade-firmware-modal.js
             FIRMWARE_UPGRADE_FAILED_DESC: 'Ошибка обновления прошивки.',
             UPGRADE_FAILED: 'Ошибка обновления',
-            // save-settings-modal.html
-            'Save settings': 'Сохранить настройки',
-            'Device will be restarted after saving settings.': 'После сохранения настроек устройство будет перезагружено.', // jshint ignore:line
             // report-problem.js
             REPORT_NOT_SENT: 'Отчет не отправлен',
             SENDING_REPORT_FAILED_DESC: 'Ошибка отправки отчета.',
