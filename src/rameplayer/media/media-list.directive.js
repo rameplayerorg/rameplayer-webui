@@ -43,7 +43,6 @@
 
             scope.breadcrumbs = [];
             $rootScope.lists[scope.listId].$promise.then(function(list) {
-                scope.breadCrumbsEnabled = $rootScope.lists[scope.listId].hasChildLists();
                 scope.breadcrumbs.push(scope.listId);
             });
 
