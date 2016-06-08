@@ -340,13 +340,12 @@
             var small = smallerOcts[0] * 16777216 +
                 smallerOcts[1] * 65536 + 
                 smallerOcts[2] * 256 +
-                smallerOcts[3]; 
+                smallerOcts[3] * 1;
             var big = biggerOcts[0] * 16777216 +
                 biggerOcts[1] * 65536 +
                 biggerOcts[2] * 256 +
-                biggerOcts[3];
-            
-            return small <= big; 
+                biggerOcts[3] * 1;
+            return small <= big;
         }
         
         function prefillDhcpOcts() {
