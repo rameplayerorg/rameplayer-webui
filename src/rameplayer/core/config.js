@@ -333,7 +333,7 @@
             // media-item.html
             'Add to Work list': 'Добавить в рабочий список',
             'Remove': 'Удалить',
-            'Move to': 'переместить в',
+            'Move to': 'Переместить в',
             // report-problem-modal.html
             'Add Unit': 'Добавить устройство ',
             'Report a Problem': 'Сообщить о проблеме',
@@ -345,7 +345,7 @@
             'Cancel': 'Отменить',
             'Close': 'Закрыть',
             'Reporter': 'Имя заполнившего',
-            'download log': 'скачать файл журнала',
+            'download log': 'скачайте файл журнала',
             'Could not connect to the report server.': 'Не удалось подключится к серверу.',
             'Please': 'Пожалуйста,',
             'and send it to support@rameplayer.org and describe the problem in the email message.': // jshint ignore:line
@@ -383,14 +383,14 @@
             'Title': 'Название',
             'Length': 'Длина',
             'Date': 'Дата',
-            'Default': 'по умолчанию',
+            'Default': 'Рабочий список',
             'Synchronize': 'Синхронизировать',
             'Add Stream': 'Добавить видеопоток',
             'Save as': 'Сохранить как',
-            'Lock': 'закрепить',
+            'Lock': 'Закрепить',
             'Clear': 'Очистить',
             'Edit Properties': 'Редактировать параметры',
-            'Stop synchronizing this playlist': 'остановить синхронизирование этого списка проигрывания',
+            'Stop synchronizing this playlist': 'Остановить синхронизирование этого списка проигрывания',
             // edit-modal.html
             'Edit Playlist Properties': 'Редактирование параметров списка проигрывания',
             // add-stream-modal.html
@@ -422,9 +422,9 @@
             'Current firmware': 'Текущая версия прошивки',
             'Device hardware': 'Аппаратура устройства',
             // adminsettings.html
-            'Admin Settings': 'настройки администратора',
+            'Admin Settings': 'Настройки администратора',
             'Video output resolution': 'Разрешение видео',
-            'Video output rotation': 'поворот видео',
+            'Video output rotation': 'Поворот видео',
             'Audio port': 'Аудио выход',
             'HDMI and analog audio outputs are not synchronized with each other': 'Выходы HDMI и аналоговый выход звука не синхронизированы между собой', // jshint ignore:line
             rameAnalogOnly: 'Аналоговый',
@@ -463,16 +463,16 @@
             MANUAL_DATE: 'дата вручную',
             MANUAL_TIME: 'время вручную',
             NTP_SERVER_HOSTNAME: 'Название узла NTP-сервера',
-            ADMIN_SETTINGS_NOT_SAVED: 'настройки администратора не сохранены.',
+            ADMIN_SETTINGS_NOT_SAVED: 'Настройки администратора не сохранены.',
             CHECK_INSERTED_VALUES: 'Проверьте введенные данные',
-            INVALID_OPTIONAL_SETTINGS: 'дополнительные настройки возможно имеют неверные значения',
+            INVALID_OPTIONAL_SETTINGS: 'Дополнительные настройки возможно имеют неверные значения',
             // settings.js
             OPTION_SAVED: 'Параметр сохранен',
             OPTION_AUTOPLAY_USB_DESC: 'Параметр автоматического проигрывания USB',
             OPTION_ENABLED: 'вкл.',
             OPTION_DISABLED: 'выкл.',
-            OPTION_SAVE_FAILED: 'ошибка Сохранения параметра',
-            OPTION_AUTOPLAY_USB_FAILED_DESC: 'ошибка Сохранения параметра автоматического проигрывания USB.',
+            OPTION_SAVE_FAILED: 'Ошибка сохранения параметра',
+            OPTION_AUTOPLAY_USB_FAILED_DESC: 'Ошибка сохранения параметра автоматического проигрывания USB.',
             LANGUAGE_SAVED: 'Язык сохранен.',
             INVALID_CLUSTER_SETTINGS_DESC: 'IP-адрес нового устройства',
             INVALID_SETTINGS: 'Неверные параметры',
@@ -498,17 +498,17 @@
             IP_ADDRESS_INVALID_DESC: 'Неверный IP-адрес.',
             CLUSTER_UNIT_SETTINGS: 'Настройки устройства кластера',
             // upgrade-firmware-modal.js
-            FIRMWARE_UPGRADE_FAILED_DESC: 'ошибка Обновления прошивки.',
-            UPGRADE_FAILED: 'ошибка Обновления',
+            FIRMWARE_UPGRADE_FAILED_DESC: 'Ошибка обновления прошивки.',
+            UPGRADE_FAILED: 'Ошибка обновления',
             // save-settings-modal.html
             'Save settings': 'Сохранить настройки',
             'Device will be restarted after saving settings.': 'После сохранения настроек устройство будет перезагружено.', // jshint ignore:line
             // report-problem.js
-            REPORT_NOT_SENT: 'отчет не отправлен',
-            SENDING_REPORT_FAILED_DESC: 'ошибка отправки отчета.',
+            REPORT_NOT_SENT: 'Отчет не отправлен',
+            SENDING_REPORT_FAILED_DESC: 'Ошибка отправки отчета.',
             LOADING_LOGS_FAILED_DESC: 'Не удалось загрузить файлы журнала с сервера.',
             LOADING_LOGS_ERROR: 'Ошибка при загрузке файлов журнала',
-            REPORT_SENT: 'отчет отправлен',
+            REPORT_SENT: 'Отчет отправлен',
             REPORT_SENT_SUCCESS_DESC: 'Спасибо вам за отчет!',
             // import-cluster-modal.js
             CLUSTER_CONFIG_IMPORTED: 'Конфигурация кластера импортирована',
@@ -525,7 +525,7 @@
             'UI version': 'Версия UI',
             // volumes.html
             'Volumes': 'Уровни звука',
-            'Volume settings are unavailable when audio out is set to:': 'настройки уровня звука недоступны, если выбран аудио выход в:', // jshint ignore:line
+            'Volume settings are unavailable when audio out is set to:': 'Настройки уровня звука недоступны, если выбран аудио выход в:', // jshint ignore:line
             // volume-control.html
             headphone: 'Наушники',
             lineout: 'Линейный выход',
