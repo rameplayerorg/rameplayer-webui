@@ -69,6 +69,7 @@
             'audioPort': 'rameAnalogOnly',
             'ipDhcpClient': true,
             'resolution': 'rameAutodetect',
+            'compositeVideo': 'PAL',
             '$save': function(func) {
                 $log.info('Saving system settings');
                 func();

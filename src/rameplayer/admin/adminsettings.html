@@ -39,6 +39,17 @@
                         </select>
                     </div>
                 </div>
+                
+                <div class="form-group">
+                    <label for="compositeVideo" class="col-sm-3 control-label" translate>Composite video</label>
+                    <div class="col-sm-4">
+                        <select id="compositeVideo" ng-model="vm.systemSettings.compositeVideo" class="form-control">
+                            <option
+                                ng-repeat="compv in vm.compositeVideoTypes"
+                                ng-value="compv">{{ compv }}</option>
+                        </select>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="audioPort" class="col-sm-3 control-label" translate>

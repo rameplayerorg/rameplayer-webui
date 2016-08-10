@@ -34,6 +34,10 @@
         vm.manualDateTime = null;
         vm.dateUserInput = null;
         vm.timeUserInput = null;
+        
+        vm.compositeVideoTypes = [
+                         'PAL', 'NTSC'
+        ];
 
         vm.videoOutputResolutions = [
             'rameAutodetect',
