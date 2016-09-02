@@ -34,10 +34,6 @@
         vm.manualDateTime = null;
         vm.dateUserInput = null;
         vm.timeUserInput = null;
-        
-        vm.compositeVideoTypes = [
-                         'PAL', 'NTSC'
-        ];
 
         vm.videoOutputResolutions = [
             'rameAutodetect',
@@ -46,7 +42,9 @@
             'rame1080i50',
             'rame1080i60',
             'rame1080p50',
-            'rame1080p60'
+            'rame1080p60',
+            'rameAnalogPAL',
+            'rameAnalogNTSC'
         ];
 
         vm.videoOutputRotations = [

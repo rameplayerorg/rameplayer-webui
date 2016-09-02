@@ -15,7 +15,6 @@
             INFORMATION: 'Information',
             // playlist.html
             'Default': 'Work list',
-
             // admin.js
             rameAnalogOnly: 'Analog',
             rameHdmiOnly: 'HDMI',
@@ -27,6 +26,8 @@
             rame1080i60: '1080i 60 Hz',
             rame1080p50: '1080p 50 Hz',
             rame1080p60: '1080p 60 Hz',
+            rameAnalogPAL: 'Analog PAL',
+            rameAnalogNTSC: 'Analog NTSC',
             DEVICE_HOSTNAME: 'Device hostname',
             DEVICE_IP: 'Device IP',
             SUBNET_MASK: 'Subnet mask',
@@ -231,6 +232,9 @@
             'Factory reset': 'Palauta oletukset',
             'Restart device': 'Käynnistä laite uudelleen',
             // admin.js
+            rameAutodetect: 'Automaattinen',
+            rameAnalogPAL: 'Analoginen PAL',
+            rameAnalogNTSC: 'Analoginen NTSC',
             DEVICE_HOSTNAME: 'Laitteen nimi',
             DEVICE_IP: 'Laitteen IP-osoite',
             SUBNET_MASK: 'Aliverkon peite',

@@ -1,95 +1,259 @@
-<div class="container">
-    <div ng-controller="AdminController as vm" class="panel panel-default">
-        <div class="panel-heading">
-            <ul class="list-inline">
-                <li>
-                    <h4 translate>Admin Settings</h4>
-                </li>
-                <li class="pull-right">                    
-                    <button type="button"
-                        class="btn btn-default btn-sm" ui-sref="main">
-                         RamePlayer
-                        <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
-                    </button>
-                </li>
-            </ul>
-        </div>
-        <div class="panel-body">
-            <rame-device-info></rame-device-info>
-            <form name="vm.basicsForm">
-            <div class="form-horizontal">
-                <div class="form-group">
-                    <label for="videoResOut" class="col-sm-3 control-label" translate>Video output resolution</label>
-                    <div class="col-sm-4">
-                        <select id="videoResOut" ng-model="vm.systemSettings.resolution" class="form-control">
-                            <option
-                                ng-repeat="vor in vm.videoOutputResolutions"
-                                ng-value="vor" translate>{{ vor }}</option>
-                        </select>
-                    </div>
+<div ng-controller="AdminController as vm" class="panel panel-default">
+    <div class="panel-heading">
+        <ul class="list-inline">
+            <li>
+                <h4 translate>Admin Settings</h4>
+            </li>
+            <li class="pull-right">                    
+                <button type="button"
+                    class="btn btn-default btn-sm" ui-sref="main">
+                     RamePlayer
+                    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="panel-body">
+        <rame-device-info></rame-device-info>
+        <form name="vm.basicsForm">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label for="videoResOut" class="col-sm-3 control-label" translate>Video output resolution</label>
+                <div class="col-sm-4">
+                    <select id="videoResOut" ng-model="vm.systemSettings.resolution" class="form-control">
+                        <option
+                            ng-repeat="vor in vm.videoOutputResolutions"
+                            ng-value="vor" translate>{{ vor }}</option>
+                    </select>
                 </div>
-
-                <div class="form-group">
-                    <label for="videoOutRot" class="col-sm-3 control-label" translate>Video output rotation</label>
-                    <div class="col-sm-4">
-                        <select id="videoOutRot"
-                                ng-options="vor.name for vor in vm.videoOutputRotations track by vor.value"
-                                ng-model="vm.selectedVideoOutputRotation"
-                                class="form-control">
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="compositeVideo" class="col-sm-3 control-label" translate>Composite video</label>
-                    <div class="col-sm-4">
-                        <select id="compositeVideo" ng-model="vm.systemSettings.compositeVideo" class="form-control">
-                            <option
-                                ng-repeat="compv in vm.compositeVideoTypes"
-                                ng-value="compv">{{ compv }}</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="audioPort" class="col-sm-3 control-label" translate>
-                    Audio port</label>
-                    <div class="col-sm-4">
-                        <select id="audioPort" ng-model="vm.systemSettings.audioPort" class="form-control">
-                            <option
-                                ng-repeat="port in vm.audioPorts"
-                                ng-value="port" translate>{{ port }}</option>
-                        </select>
-                        <span ng-show="vm.systemSettings.audioPort === 'rameHdmiAndAnalog'" 
-                            class="help-block text-info" translate>HDMI and analog audio outputs are not synchronized with each other</span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="deviceName" class="col-sm-3 control-label" translate>Device name</label>
-                    <div class="col-sm-9">
-                        <input type="text" name="deviceName" id="deviceName"
-                            class="form-control" ng-model="vm.deviceName"
-                            ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?$/i"
-                            ng-minlength="1" ng-maxlength="63" required/>
-                        <span class="help-block text-warning glyphicon glyphicon-alert" 
-                            ng-show="!vm.basicsForm.deviceName.$valid || vm.basicsForm.deviceName.$error.required">
-                        </span>
-                    </div>
-                </div>
-            </div> <!-- .form-horizontal -->
-            </form> <!-- basicsForm -->
+            </div>
 
             <div class="form-group">
-                <label for="ipConfigurations" translate>IP Configurations</label>
-                <div class="list-group" id="ipConfigurations">
+                <label for="videoOutRot" class="col-sm-3 control-label" translate>Video output rotation</label>
+                <div class="col-sm-4">
+                    <select id="videoOutRot"
+                            ng-options="vor.name for vor in vm.videoOutputRotations track by vor.value"
+                            ng-model="vm.selectedVideoOutputRotation"
+                            class="form-control">
+                    </select>
+                </div>
+            </div>                
+
+            <div class="form-group">
+                <label for="audioPort" class="col-sm-3 control-label" translate>
+                Audio port</label>
+                <div class="col-sm-4">
+                    <select id="audioPort" ng-model="vm.systemSettings.audioPort" class="form-control">
+                        <option
+                            ng-repeat="port in vm.audioPorts"
+                            ng-value="port" translate>{{ port }}</option>
+                    </select>
+                    <span ng-show="vm.systemSettings.audioPort === 'rameHdmiAndAnalog'" 
+                        class="help-block text-info" translate>HDMI and analog audio outputs are not synchronized with each other</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="deviceName" class="col-sm-3 control-label" translate>Device name</label>
+                <div class="col-sm-9">
+                    <input type="text" name="deviceName" id="deviceName"
+                        class="form-control" ng-model="vm.deviceName"
+                        ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?$/i"
+                        ng-minlength="1" ng-maxlength="63" required/>
+                    <span class="help-block text-warning glyphicon glyphicon-alert" 
+                        ng-show="!vm.basicsForm.deviceName.$valid || vm.basicsForm.deviceName.$error.required">
+                    </span>
+                </div>
+            </div>
+        </div> <!-- .form-horizontal -->
+        </form> <!-- basicsForm -->
+
+        <div class="form-group">
+            <label for="ipConfigurations" translate>IP Configurations</label>
+            <div class="list-group" id="ipConfigurations">
+                <div class="list-group-item">
+                    <div class="row checkbox center-block">
+                        <label>
+                            <input type="checkbox"
+                                ng-model="vm.manualIpConfig">
+                            <span translate>
+                                Configure networking manually
+                            </span>
+                        </label>
+                    </div>
+                    <div class="row center-block">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" translate>
+                                    Device IP
+                                </label>
+                                <div class="col-sm-9">
+                                    <rame-ip-address-block
+                                        aria-label="DeviceIP"
+                                        disabilify="!vm.manualIpConfig"
+                                        value="vm.deviceIp.value"
+                                        is-valid="vm.deviceIp.valid">
+                                    </rame-ip-address-block>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row center-block">
+                         <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" translate>
+                                    Subnet mask
+                                </label>
+                                <div class="col-sm-9">
+                                    <rame-ip-address-block
+                                        aria-label="subnetMask"
+                                        disabilify="!vm.manualIpConfig"
+                                        value="vm.subnetMask.value"
+                                        is-valid="vm.subnetMask.valid">
+                                    </rame-ip-address-block>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row center-block">
+                         <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" translate>
+                                    Gateway IP
+                                </label>
+                                <div class="col-sm-9">
+                                    <rame-ip-address-block
+                                        aria-label="subnetMask"
+                                        disabilify="!vm.manualIpConfig"
+                                        value="vm.gatewayIp.value"
+                                        is-valid="vm.gatewayIp.valid">
+                                    </rame-ip-address-block>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row center-block">
+                         <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" translate>
+                                    DNS, preferred
+                                </label>
+                                <div class="col-sm-9">
+                                    <rame-ip-address-block
+                                        aria-label="DNSIPpreferred"
+                                        disabilify="!vm.manualIpConfig"
+                                        value="vm.dnsServerIp.value"
+                                        is-valid="vm.dnsServerIp.valid">
+                                    </rame-ip-address-block>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row center-block">
+                         <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" translate>
+                                    DNS, alternative
+                                </label>
+                                <div class="col-sm-9">
+                                    <rame-ip-address-block
+                                        aria-label="DNSIPalternative"
+                                        disabilify="!vm.manualIpConfig"
+                                        value="vm.dnsAlternativeServerIp.value"
+                                        is-valid="vm.dnsAlternativeServerIp.valid">
+                                    </rame-ip-address-block>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row checkbox center-block">
+                        <label class="col-sm-7 col-sm-offset-1">
+                            <input type="checkbox"
+                                ng-model="vm.systemSettings.ipDhcpServer"
+                                ng-disabled="!vm.manualIpConfig"
+                                ng-click="vm.prefillDhcpOcts()">
+                            <span translate>
+                                Use as DHCP server
+                            </span>
+                        </label>
+                    </div>
+                    <div class="row center-block">
+                         <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-3 col-sm-offset-1 control-label" translate>
+                                    DHCP range start
+                                </label>
+                                <div class="col-sm-8">
+                                    <rame-ip-address-block
+                                        aria-label="DHCPRangeStart"
+                                        disabilify="!vm.manualIpConfig || !vm.systemSettings.ipDhcpServer"
+                                        value="vm.dhcpServerRangeStartIp.value"
+                                        is-valid="vm.dhcpServerRangeStartIp.valid">
+                                    </rame-ip-address-block>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row center-block">
+                         <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-3 col-sm-offset-1 control-label" translate>
+                                    DHCP range end
+                                </label>
+                                <div class="col-sm-8">
+                                    <rame-ip-address-block
+                                        aria-label="DHCPRangeEnd"
+                                        disabilify="!vm.manualIpConfig || !vm.systemSettings.ipDhcpServer"
+                                        value="vm.dhcpServerRangeEndIp.value"
+                                        is-valid="vm.dhcpServerRangeEndIp.valid">
+                                    </rame-ip-address-block>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- .row -->
+                </div> <!-- .list-group-item -->
+            </div> <!-- .list-group -->
+        </div> <!-- .form-group -->
+        <div class="form-group">
+        <form name="vm.ntpForm">
+            <div>
+                <label for="ntpConfigurations" translate>Time Configurations</label> 
+                <div class="pull-right">
+                    <em class="text-info"><span translate>Device time (UTC)</span>:
+                    &nbsp;{{ !vm.timeInitially ? '--:--:--' : vm.timeInitially }}</em>
+                </div>
+            </div>                        
+            <div class="list-group" id="ntpConfigurations">
                     <div class="list-group-item">
+                        <div class="form-group row">
+                            <label for="ntpHostname"
+                                class="col-sm-3 control-label"
+                                translate>NTP server</label>
+                            <div class="col-sm-9">
+                                <input type="text"
+                                    name="ntpHostname"
+                                    id="ntpHostname"
+                                    class="form-control"
+                                    ng-model="vm.ntpServerAddress"                                        
+                                    ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?(\.[a-z\d]([a-z\d\-]{0,61}[a-z\d])?)*$/i"
+                                    ng-minlength="1"
+                                    ng-maxlength="253" />
+                                    <!-- ng-disabled="vm.useManualTimeConfigs || vm.useNtpIp" -->
+                                <span
+                                    class="text-warning glyphicon glyphicon-alert"
+                                    ng-show="!vm.ntpForm.ntpHostname.$valid">
+                                </span>
+                            </div>
+                        </div>
+                        <!-- 
+                    <div class="form-group">
                         <div class="row checkbox center-block">
-                            <label>
+                            <label class="col-sm-7 col-sm-offset-1">
                                 <input type="checkbox"
-                                    ng-model="vm.manualIpConfig">
+                                    ng-model="vm.useNtpIp"
+                                    ng-disabled="vm.useManualTimeConfigs">
                                 <span translate>
-                                    Configure networking manually
+                                    Use IP address
                                 </span>
                             </label>
                         </div>
@@ -97,268 +261,88 @@
                             <div class="form-horizontal">
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" translate>
-                                        Device IP
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <rame-ip-address-block
-                                            aria-label="DeviceIP"
-                                            disabilify="!vm.manualIpConfig"
-                                            value="vm.deviceIp.value"
-                                            is-valid="vm.deviceIp.valid">
-                                        </rame-ip-address-block>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row center-block">
-                             <div class="form-horizontal">
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label" translate>
-                                        Subnet mask
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <rame-ip-address-block
-                                            aria-label="subnetMask"
-                                            disabilify="!vm.manualIpConfig"
-                                            value="vm.subnetMask.value"
-                                            is-valid="vm.subnetMask.valid">
-                                        </rame-ip-address-block>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row center-block">
-                             <div class="form-horizontal">
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label" translate>
-                                        Gateway IP
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <rame-ip-address-block
-                                            aria-label="subnetMask"
-                                            disabilify="!vm.manualIpConfig"
-                                            value="vm.gatewayIp.value"
-                                            is-valid="vm.gatewayIp.valid">
-                                        </rame-ip-address-block>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row center-block">
-                             <div class="form-horizontal">
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label" translate>
-                                        DNS, preferred
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <rame-ip-address-block
-                                            aria-label="DNSIPpreferred"
-                                            disabilify="!vm.manualIpConfig"
-                                            value="vm.dnsServerIp.value"
-                                            is-valid="vm.dnsServerIp.valid">
-                                        </rame-ip-address-block>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row center-block">
-                             <div class="form-horizontal">
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label" translate>
-                                        DNS, alternative
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <rame-ip-address-block
-                                            aria-label="DNSIPalternative"
-                                            disabilify="!vm.manualIpConfig"
-                                            value="vm.dnsAlternativeServerIp.value"
-                                            is-valid="vm.dnsAlternativeServerIp.valid">
-                                        </rame-ip-address-block>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row checkbox center-block">
-                            <label class="col-sm-7 col-sm-offset-1">
-                                <input type="checkbox"
-                                    ng-model="vm.systemSettings.ipDhcpServer"
-                                    ng-disabled="!vm.manualIpConfig"
-                                    ng-click="vm.prefillDhcpOcts()">
-                                <span translate>
-                                    Use as DHCP server
-                                </span>
-                            </label>
-                        </div>
-                        <div class="row center-block">
-                             <div class="form-horizontal">
-                                <div class="form-group">
-                                    <label class="col-sm-3 col-sm-offset-1 control-label" translate>
-                                        DHCP range start
+                                        NTP Server IP
                                     </label>
                                     <div class="col-sm-8">
                                         <rame-ip-address-block
-                                            aria-label="DHCPRangeStart"
-                                            disabilify="!vm.manualIpConfig || !vm.systemSettings.ipDhcpServer"
-                                            value="vm.dhcpServerRangeStartIp.value"
-                                            is-valid="vm.dhcpServerRangeStartIp.valid">
+                                            aria-label="NTPserverIP"
+                                            disabilify="!vm.useNtpIp || vm.useManualTimeConfigs"
+                                            value="vm.ntpServerIp.value"
+                                            is-valid="vm.ntpServerIp.valid">
                                         </rame-ip-address-block>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row center-block">
-                             <div class="form-horizontal">
-                                <div class="form-group">
-                                    <label class="col-sm-3 col-sm-offset-1 control-label" translate>
-                                        DHCP range end
-                                    </label>
-                                    <div class="col-sm-8">
-                                        <rame-ip-address-block
-                                            aria-label="DHCPRangeEnd"
-                                            disabilify="!vm.manualIpConfig || !vm.systemSettings.ipDhcpServer"
-                                            value="vm.dhcpServerRangeEndIp.value"
-                                            is-valid="vm.dhcpServerRangeEndIp.valid">
-                                        </rame-ip-address-block>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> <!-- .row -->
-                    </div> <!-- .list-group-item -->
-                </div> <!-- .list-group -->
-            </div> <!-- .form-group -->
-            <div class="form-group">
-            <form name="vm.ntpForm">
-                <div>
-                    <label for="ntpConfigurations" translate>Time Configurations</label> 
-                    <div class="pull-right">
-                        <em class="text-info"><span translate>Device time (UTC)</span>:
-                        &nbsp;{{ !vm.timeInitially ? '--:--:--' : vm.timeInitially }}</em>
                     </div>
-                </div>                        
-                <div class="list-group" id="ntpConfigurations">
-                        <div class="list-group-item">
-                            <div class="form-group row">
-                                <label for="ntpHostname"
-                                    class="col-sm-3 control-label"
-                                    translate>NTP server</label>
-                                <div class="col-sm-9">
-                                    <input type="text"
-                                        name="ntpHostname"
-                                        id="ntpHostname"
-                                        class="form-control"
-                                        ng-model="vm.ntpServerAddress"                                        
-                                        ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?(\.[a-z\d]([a-z\d\-]{0,61}[a-z\d])?)*$/i"
-                                        ng-minlength="1"
-                                        ng-maxlength="253" />
-                                        <!-- ng-disabled="vm.useManualTimeConfigs || vm.useNtpIp" -->
-                                    <span
-                                        class="text-warning glyphicon glyphicon-alert"
-                                        ng-show="!vm.ntpForm.ntpHostname.$valid">
-                                    </span>
-                                </div>
-                            </div>
-                            <!-- 
-                        <div class="form-group">
-                            <div class="row checkbox center-block">
-                                <label class="col-sm-7 col-sm-offset-1">
-                                    <input type="checkbox"
-                                        ng-model="vm.useNtpIp"
-                                        ng-disabled="vm.useManualTimeConfigs">
-                                    <span translate>
-                                        Use IP address
-                                    </span>
-                                </label>
-                            </div>
+                     -->
+                        <div
+                            class="row checkbox form-group center-block">
+                            <label class="col-sm-3 control-label">
+                                <input type="checkbox"
+                                    ng-click="vm.manualTimeConfig"
+                                    ng-model="vm.useManualTimeConfigs">
+                                <span translate>Set date and time manually</span>
+                            </label>
                             <div class="row center-block">
                                 <div class="form-horizontal">
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label" translate>
-                                            NTP Server IP
-                                        </label>
-                                        <div class="col-sm-8">
-                                            <rame-ip-address-block
-                                                aria-label="NTPserverIP"
-                                                disabilify="!vm.useNtpIp || vm.useManualTimeConfigs"
-                                                value="vm.ntpServerIp.value"
-                                                is-valid="vm.ntpServerIp.valid">
-                                            </rame-ip-address-block>
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="dateInput">
+                                                <span translate>Date:</span>
+                                                <em class="text-muted">yyyy-MM-dd</em>
+                                                <span class="text-warning glyphicon glyphicon-alert" 
+                                                    ng-show="!vm.ntpForm.dateInput.$valid">
+                                                </span>
+                                            </label>
+                                            <input type="text" class="form-control"
+                                                id="dateInput" name="dateInput"                                                    
+                                                ng-model="vm.dateUserInput"
+                                                ng-disabled="!vm.useManualTimeConfigs"
+                                                placeholder="yyyy-MM-dd"
+                                                ng-pattern="/^\d\d\d\d-((0\d)|(1(0|1|2)))-(((0|1|2)\d)|(3(0|1)))$/" />                                                
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                         -->
-                            <div
-                                class="row checkbox form-group center-block">
-                                <label class="col-sm-3 control-label">
-                                    <input type="checkbox"
-                                        ng-click="vm.manualTimeConfig"
-                                        ng-model="vm.useManualTimeConfigs">
-                                    <span translate>Set date and time manually</span>
-                                </label>
-                                <div class="row center-block">
-                                    <div class="form-horizontal">
-                                        <div class="form-group">
-                                            <div class="col-sm-4">
-                                                <label class="control-label" for="dateInput">
-                                                    <span translate>Date:</span>
-                                                    <em class="text-muted">yyyy-MM-dd</em>
-                                                    <span class="text-warning glyphicon glyphicon-alert" 
-                                                        ng-show="!vm.ntpForm.dateInput.$valid">
-                                                    </span>
-                                                </label>
-                                                <input type="text" class="form-control"
-                                                    id="dateInput" name="dateInput"                                                    
-                                                    ng-model="vm.dateUserInput"
-                                                    ng-disabled="!vm.useManualTimeConfigs"
-                                                    placeholder="yyyy-MM-dd"
-                                                    ng-pattern="/^\d\d\d\d-((0\d)|(1(0|1|2)))-(((0|1|2)\d)|(3(0|1)))$/" />                                                
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <label class="control-label" for="timeInput">
-                                                    <span translate>Time:</span>
-                                                    <em class="text-muted">HH:mm:ss</em>
-                                                    <span class="text-warning glyphicon glyphicon-alert" 
-                                                        ng-show="!vm.ntpForm.timeInput.$valid">
-                                                    </span>
-                                                </label>
-                                                <input type="text" class="form-control"
-                                                    id="timeInput" name="timeInput"
-                                                    ng-model="vm.timeUserInput"
-                                                    ng-disabled="!vm.useManualTimeConfigs"
-                                                    placeholder="HH:mm:ss"
-                                                    ng-pattern="/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5]?[0-9](:[0-5]?[0-9])?$/" />                                                
-                                            </div>
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="timeInput">
+                                                <span translate>Time:</span>
+                                                <em class="text-muted">HH:mm:ss</em>
+                                                <span class="text-warning glyphicon glyphicon-alert" 
+                                                    ng-show="!vm.ntpForm.timeInput.$valid">
+                                                </span>
+                                            </label>
+                                            <input type="text" class="form-control"
+                                                id="timeInput" name="timeInput"
+                                                ng-model="vm.timeUserInput"
+                                                ng-disabled="!vm.useManualTimeConfigs"
+                                                placeholder="HH:mm:ss"
+                                                ng-pattern="/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5]?[0-9](:[0-5]?[0-9])?$/" />                                                
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-            </form>
-            </div>
-        </div> <!-- .panel-body -->
+                </div>
+        </form>
+        </div>
+    </div> <!-- .panel-body -->
 
-        <div class="panel-footer">
-            <button type="button" class="btn btn-default"
-                ng-click="vm.saveSettings()">
-                <span class="glyphicon"
-                    ng-class="{ 'glyphicon-floppy-disk': vm.savingStatus !== 'saved', 'glyphicon-floppy-saved': vm.savingStatus === 'saved' }"
-                    aria-hidden="true"></span>
-                <span translate>Save</span>
+    <div class="panel-footer">
+        <button type="button" class="btn btn-default"
+            ng-click="vm.saveSettings()">
+            <span class="glyphicon"
+                ng-class="{ 'glyphicon-floppy-disk': vm.savingStatus !== 'saved', 'glyphicon-floppy-saved': vm.savingStatus === 'saved' }"
+                aria-hidden="true"></span>
+            <span translate>Save</span>
+        </button>
+        <div class="pull-right">
+            <button type="button"
+                class="btn btn-default"
+                ng-click="vm.confirmFactoryReset()">
+                <i class="glyphicon glyphicon-erase" aria-hidden="true"></i>
+                <span translate>Factory reset</span>
             </button>
-            <div class="pull-right">
-                <button type="button"
-                    class="btn btn-default"
-                    ng-click="vm.confirmFactoryReset()">
-                    <i class="glyphicon glyphicon-erase" aria-hidden="true"></i>
-                    <span translate>Factory reset</span>
-                </button>
-            </div>
         </div>
     </div>
-    <div ng-include="'rameplayer/admin/volumes.html'"></div>
-    <div ng-include="'rameplayer/admin/firmware.html'" ng-cloak></div>
-    <div ng-include="'rameplayer/admin/restart-panel.html'" ng-cloak></div>
-    <div ng-include="'rameplayer/admin/rame-version-details.html'" ng-cloak></div>
 </div>
+
