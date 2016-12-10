@@ -25,6 +25,8 @@
 
         function start() {
             vm.started = true;
+            // server status is now needed for polling even though page is not visible
+            vm.statusService.setVisibilityDetection(false);
             dataService.reboot()
                 .then(function(response) {
                     // restart started

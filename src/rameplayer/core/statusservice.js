@@ -46,7 +46,8 @@
             },
             status: status,
             error: error,
-            resetServerNotifications: resetServerNotifications
+            resetServerNotifications: resetServerNotifications,
+            setVisibilityDetection: setVisibilityDetection
         };
 
         var forceNotificationCheck = false;
@@ -62,6 +63,9 @@
         dataService.showNewFwVersionMessage();
         
         var pollerHandler = startStatusPoller();
+
+        var visibilityDetectionEnabled;
+        setVisibilityDetection(true);
         $pageVisibility.$on('pageFocused', pageFocused);
         $pageVisibility.$on('pageBlurred', pageBlurred);
 
@@ -213,17 +217,22 @@
         }
 
         function pageFocused() {
-            if (!pollerHandler) {
+            if (visibilityDetectionEnabled && !pollerHandler) {
                 $log.debug('page visible, start status polling');
                 pollerHandler = startStatusPoller();
             }
         }
 
         function pageBlurred() {
-            if (pollerHandler) {
+            if (visibilityDetectionEnabled && pollerHandler) {
                 $log.debug('page not visible, stop status polling');
                 stopStatusPoller();
             }
+        }
+
+        function setVisibilityDetection(enabled) {
+            $log.debug('set visibility detection', enabled);
+            visibilityDetectionEnabled = enabled;
         }
     }
 })();

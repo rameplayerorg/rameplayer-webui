@@ -26,6 +26,8 @@
 
         function start() {
             vm.started = true;
+            // server status is now needed for polling even though page is not visible
+            vm.statusService.setVisibilityDetection(false);
             dataService.upgradeFirmware(vm.upgradeSelection.uri)
                 .then(function(response) {
                     // upgrade started
