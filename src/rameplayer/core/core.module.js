@@ -11,7 +11,7 @@
         'ngResource',
         'ng-sortable',
         'angular-page-visibility',
-        'angular-uuid-generator',
+        'angular-uuid',
         'ngStorage'
     ]);
 })();

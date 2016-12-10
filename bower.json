@@ -24,7 +24,7 @@
     "angular-toastr": "1.7.0",
     "angular-translate": "2.8.1",
     "angular-ui-router": "0.2.18",
-    "angular-uuid-generator": "1.0.1",
+    "angular-uuids": "0.0.4",
     "bootstrap": "3.3.6",
     "bootstrap-toggle": "2.2.2",
     "ngstorage": "0.3.10",

@@ -26,7 +26,7 @@ module.exports = function(config) {
       './bower_components/angular-toastr/dist/angular-toastr.js',
       './bower_components/angular-translate/angular-translate.js',
       './bower_components/angular-ui-router/release/angular-ui-router.js',
-      './bower_components/angular-uuid-generator/angular-uuid-generator.js',
+      './bower_components/angular-uuids/angular-uuid.js',
       './bower_components/angular-resource/angular-resource.js',
       './bower_components/angular-sanitize/angular-sanitize.js',
       './bower_components/Sortable/Sortable.js',

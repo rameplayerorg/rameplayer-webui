@@ -16,7 +16,7 @@
         "./bower_components/angular-toastr/dist/angular-toastr.tpls.min.js",
         "./bower_components/angular-translate/angular-translate.min.js",
         "./bower_components/angular-ui-router/release/angular-ui-router.min.js",
-        "./bower_components/angular-uuid-generator/angular-uuid-generator.js",
+        "./bower_components/angular-uuids/angular-uuid.js",
         "./bower_components/bootstrap-toggle/js/bootstrap-toggle.min.js",
         "./bower_components/Sortable/Sortable.min.js",
         "./bower_components/Sortable/ng-sortable.js",
