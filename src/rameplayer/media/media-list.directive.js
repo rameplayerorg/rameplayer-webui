@@ -6,10 +6,10 @@
         .directive('rameMediaList', rameMediaList);
 
     rameMediaList.$inject = ['$rootScope', 'statusService', 'dataService', 'clusterService',
-        'listService', 'ListIds', 'logger', 'ItemTypes'];
+        'listService', 'ListIds', 'logger', 'ItemTypes', '$uibModal'];
 
     function rameMediaList($rootScope, statusService, dataService, clusterService,
-                           listService, ListIds, logger, ItemTypes) {
+                           listService, ListIds, logger, ItemTypes, $uibModal) {
         // Usage:
         //
         // Creates:
@@ -48,6 +48,7 @@
 
             scope.selectMedia = selectMedia;
             scope.addToDefault = addToDefault;
+            scope.openDropboxModal = openDropboxModal;
 
             scope.openList = openList;
             scope.activateSlide = activateSlide;
@@ -144,6 +145,28 @@
             function activateSlide(index) {
                 scope.slides[index].active = true;
                 scope.breadcrumbs = scope.breadcrumbs.slice(0, index + 1);
+            }
+
+            function openDropboxModal() {
+                var listId = null;
+                for (var i = 0; i < scope.slides.length; i++) {
+                    if (scope.slides[i].active) {
+                        listId = scope.slides[i].listId;
+                    }
+                }
+                if (listId) {
+                    var modalInstance = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'rameplayer/dropbox/dropbox-modal.html',
+                        controller: 'DropboxModalController',
+                        controllerAs: 'vm',
+                        resolve: {
+                            listId: function() {
+                                return listId;
+                            }
+                        }
+                    });
+                }
             }
         }
     }

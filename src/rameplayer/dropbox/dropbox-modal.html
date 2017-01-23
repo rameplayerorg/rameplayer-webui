@@ -1,0 +1,17 @@
+<form>
+    <div class="modal-header">
+        <h3><span translate>Dropbox</span></h3>
+    </div>
+
+    <div class="modal-body">
+        <div>
+            <a ng-href="http://www.dropbox.com/1/oauth2/authorize?response_type=code&client_id={{ vm.appKey }}&redirect_uri={{ vm.redirectUri }}&state={{ vm.fwdState }}" target="_blank" class="btn btn-success">
+                <i class="glyphicon glyphicon-new-window"></i>
+                <span translate>Connect</span></a>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" ng-click="vm.close()" translate>Close</button>
+    </div>
+</form>

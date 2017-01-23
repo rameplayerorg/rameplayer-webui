@@ -8,7 +8,8 @@
         'rameplayer.media',
         'rameplayer.playlists',
         'rameplayer.player',
-        'rameplayer.settings'
+        'rameplayer.settings',
+        'rameplayer.dropbox'
     ]);
 
 })();
