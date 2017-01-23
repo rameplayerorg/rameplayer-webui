@@ -1,4 +1,4 @@
-/*jshint maxstatements:44 */
+/*jshint maxstatements:45 */
 /*jshint maxparams:12 */
 
 /**
@@ -79,6 +79,7 @@
             units: $localStorage.clusterUnits,
             getUnit: getUnit,
             statuses: statuses,
+            clearUnits: clearUnits,
             addUnit: addUnit,
             updateUnit: updateUnit,
             removeUnit: removeUnit,
@@ -118,6 +119,10 @@
             }
             // not found
             return null;
+        }
+
+        function clearUnits() {
+            $localStorage.clusterUnits.length = 0;
         }
 
         function addUnit(address, port, delay) {

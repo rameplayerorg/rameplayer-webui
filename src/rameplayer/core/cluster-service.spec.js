@@ -14,6 +14,10 @@ describe('rameplayer.clusterService', function() {
         });
     });
 
+    afterEach(function() {
+        clusterService.clearUnits();
+    });
+
     describe('ClusterService', function() {
         it('should be created successfully', function() {
             expect(clusterService).to.be.defined;
@@ -34,6 +38,7 @@ describe('rameplayer.clusterService', function() {
             var delay = 1;
 
             // add 3 units
+            clusterService.clearUnits();
             clusterService.addUnit('192.168.0.100', 8001, 0);
             var unitId = clusterService.addUnit(address, port, delay);
             clusterService.addUnit('192.168.0.102', 8002, 3);
