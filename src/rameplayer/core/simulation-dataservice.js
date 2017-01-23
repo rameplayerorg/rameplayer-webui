@@ -1,6 +1,6 @@
 /*jshint maxparams:12 */
 /*jshint maxcomplexity:9 */
-/*jshint maxstatements:51 */
+/*jshint maxstatements:52 */
 
 /**
  * RamePlayer WebUI
@@ -144,7 +144,8 @@
             getAudio: getAudio,
             setVolume: setVolume,
             reboot: reboot,
-            factoryReset: factoryReset
+            factoryReset: factoryReset,
+            getUploadUrl: getUploadUrl
         };
 
         var delay = 50;
@@ -577,6 +578,10 @@
                 return {
                 };
             }, delay);
+        }
+
+        function getUploadUrl(listId) {
+            return '';
         }
     }
 })();

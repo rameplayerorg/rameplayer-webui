@@ -1,0 +1,41 @@
+<form>
+    <div class="modal-header">
+        <h3 translate>Upload Files</h3>
+    </div>
+
+    <div class="modal-body file-drop-zone" nv-file-drop uploader="vm.uploader" options="{ url: '{{ vm.uploadUrl }}' }" nv-file-over over-class="file-drop-zone-over">
+        <div class="row" ng-repeat="item in vm.uploader.queue">
+            <div class="col-sm-5">
+                {{ item.file.name }}
+            </div>
+            <div class="col-sm-3">
+                {{ item.file.size/1024/1024|number:2 }} MB
+            </div>
+            <div class="col-sm-2">
+                <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+            </div>
+            <div class="col-sm-2 text-right">
+                <a href ng-click="item.remove()" title="Remove from queue" class="text-danger">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </div>
+        </div>
+
+        <div style="margin-top: 10px">
+            <p>Drop files here or select them manually.</p>
+            <input nv-file-select uploader="vm.uploader" multiple type="file" options="{ url: '{{ vm.uploadUrl }}' }" style="color: #c8c8c8;">
+        </div>
+
+        <!-- progress bar -->
+        <uib-progressbar class="progress-striped" ng-class="{ 'active': vm.uploader.isUploading }" value="vm.uploader.progress" type="warning" style="margin-top: 10px">
+            <span ng-show="vm.uploader.progress">{{ vm.uploader.progress }}%</span>
+        </uib-progressbar>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" ng-click="vm.cancel()" translate>Cancel</button>
+        <button class="btn btn-primary" type="submit" ng-click="vm.startUpload()" translate ng-disabled="vm.uploader.isUploading">Upload</button>
+    </div>
+</form>
