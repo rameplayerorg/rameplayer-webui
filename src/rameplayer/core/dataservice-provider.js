@@ -1,5 +1,5 @@
 /*jshint maxcomplexity:9 */
-/*jshint maxstatements:86 */
+/*jshint maxstatements:90 */
 /*jshint maxparams:14 */
 
 /**
@@ -106,7 +106,9 @@
             ds.setVolume = setVolume;
             ds.reboot = reboot;
             ds.factoryReset = factoryReset;
+            ds.getDropboxAuth = getDropboxAuth;
             ds.getDropboxAuthUrl = getDropboxAuthUrl;
+            ds.removeDropboxAuth = removeDropboxAuth;
 
             checkVersionCompatibility();
 
@@ -470,6 +472,14 @@
 
             function getDropboxAuthUrl(listId) {
                 return baseUrl + 'dropbox/auth/' + listId;
+            }
+
+            function getDropboxAuth(listId) {
+                return $http.get(getDropboxAuthUrl(listId));
+            }
+
+            function removeDropboxAuth(listId) {
+                return $http.delete(getDropboxAuthUrl(listId));
             }
         }
     }

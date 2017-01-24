@@ -4,10 +4,23 @@
     </div>
 
     <div class="modal-body">
-        <div>
-            <a ng-href="http://www.dropbox.com/1/oauth2/authorize?response_type=code&client_id={{ vm.appKey }}&redirect_uri={{ vm.redirectUri }}&state={{ vm.fwdState }}" target="_blank" class="btn btn-success">
+        <div ng-show="vm.account">
+            <p>
+                <span translate>This directory is connected to Dropbox account:</span><br>
+                <strong>{{ vm.account.name.display_name }} &lt;{{ vm.account.email }}&gt;</strong>
+            </p>
+            <a href class="btn btn-danger" ng-click="vm.revoke()">
+                <i class="glyphicon glyphicon-ban-circle"></i>
+                <span translate>Revoke</span></a>
+        </div>
+        <div ng-show="!vm.account && !vm.pollerHandler">
+            <p translate>By connecting this directory to your Dropbox account you can copy media files to this directory.</p>
+            <a ng-href="http://www.dropbox.com/1/oauth2/authorize?response_type=code&client_id={{ vm.appKey }}&redirect_uri={{ vm.redirectUri }}&state={{ vm.fwdState }}" target="_blank" class="btn btn-success" ng-click="vm.startPolling()">
                 <i class="glyphicon glyphicon-new-window"></i>
                 <span translate>Connect</span></a>
+        </div>
+        <div ng-show="vm.pollerHandler">
+            <p translate>Authenticating, please wait...</p>
         </div>
     </div>
 
