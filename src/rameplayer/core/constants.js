@@ -19,7 +19,7 @@
             AUTOPLAY: 'autoplay', // title, not id
         })
         .constant('Dropbox', {
-            APP_KEY: 'unj321rqjuege28',
+            APP_KEY: 'u48dnctwy4k06ld',
             REDIRECT_URI: 'https://broker.rameplayer.org/dropbox/'
         })
         .constant('reportServerEntry', 'http://dev.rameplayer.org/reports/config.php');
