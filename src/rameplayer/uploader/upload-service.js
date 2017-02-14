@@ -42,6 +42,20 @@
                 // upload files as binary
                 disableMultipart: true,
             });
+
+            // allow only media files
+            uploader.filters.push({
+                name: 'medias',
+                fn: function(item) {
+                    // check mime type, must be video or image
+                    var t = item.type.substr(0, 6);
+                    var allow = (t === 'video/' || t === 'image/');
+                    if (!allow) {
+                        logger.debug('Upload file rejected by filter', item);
+                    }
+                    return allow;
+                }
+            });
             uploader.onAfterAddingFile = onAfterAddingFile;
             uploader.onAfterAddingAll = onAfterAddingAll;
         }
@@ -51,9 +65,8 @@
         }
 
         function onAfterAddingFile(fileItem) {
-            // append filename to url
-            var name = encodeURIComponent(fileItem.file.name);
-            fileItem.url += '&name=' + name;
+            // send filename in request headers
+            fileItem.headers['Upload-Filename'] = fileItem.file.name;
         }
 
         function onAfterAddingAll(addedItems) {

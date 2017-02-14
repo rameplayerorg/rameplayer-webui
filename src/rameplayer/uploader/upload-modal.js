@@ -37,6 +37,7 @@
                 }
             }
             if (allSuccess) {
+                vm.uploader.clearQueue();
                 $uibModalInstance.close();
             }
         }

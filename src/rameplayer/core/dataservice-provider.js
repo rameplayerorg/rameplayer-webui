@@ -469,7 +469,7 @@
             }
 
             function getUploadUrl(listId) {
-                return baseUrl + 'upload?id=' + listId;
+                return baseUrl + 'upload/' + listId;
             }
         }
     }
