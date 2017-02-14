@@ -17,6 +17,7 @@
     "angular-animate": "1.5.6",
     "angular-bootstrap": "0.14.3",
     "angular-file-saver": "1.1.1",
+    "angular-file-upload": "2.4.1",
     "angular-filereader": "1.0.4",
     "angular-page-visibility": "0.0.4",
     "angular-resource": "1.5.6",

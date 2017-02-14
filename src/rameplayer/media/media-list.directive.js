@@ -6,10 +6,10 @@
         .directive('rameMediaList', rameMediaList);
 
     rameMediaList.$inject = ['$rootScope', 'statusService', 'dataService', 'clusterService',
-        'listService', 'ListIds', 'logger', 'ItemTypes'];
+        'listService', 'ListIds', 'logger', 'ItemTypes', 'uploadService', '$uibModal'];
 
     function rameMediaList($rootScope, statusService, dataService, clusterService,
-                           listService, ListIds, logger, ItemTypes) {
+                           listService, ListIds, logger, ItemTypes, uploadService, $uibModal) {
         // Usage:
         //
         // Creates:
@@ -53,6 +53,10 @@
             scope.activateSlide = activateSlide;
             scope.addDirToDefault = addDirToDefault;
 
+            // file uploader
+            scope.uploader = uploadService.getUploader();
+            scope.openUploadModal = openUploadModal;
+
             function selectMedia(item) {
                 if (clusterService.clusterStatus.state === 'stopped') {
                     clusterService.setCursor(item.id);
@@ -67,17 +71,11 @@
              * Adds all items in active slide to default playlist.
              */
             function addDirToDefault() {
-                var i;
-                var listId = null;
-                for (i = 0; i < scope.slides.length; i++) {
-                    if (scope.slides[i].active) {
-                        listId = scope.slides[i].listId;
-                    }
-                }
+                var listId = getActiveListId();
                 if (listId) {
                     var items = $rootScope.lists[listId].items;
                     var addItems = [];
-                    for (i = 0; i < items.length; i++) {
+                    for (var i = 0; i < items.length; i++) {
                         if (items[i].type === ItemTypes.SINGLE) {
                             addItems.push(items[i]);
                         }
@@ -144,6 +142,19 @@
             function activateSlide(index) {
                 scope.slides[index].active = true;
                 scope.breadcrumbs = scope.breadcrumbs.slice(0, index + 1);
+            }
+
+            function getActiveListId() {
+                for (var i = 0; i < scope.slides.length; i++) {
+                    if (scope.slides[i].active) {
+                        return scope.slides[i].listId;
+                    }
+                }
+                return null;
+            }
+
+            function openUploadModal() {
+                uploadService.openModal(getActiveListId());
             }
         }
     }

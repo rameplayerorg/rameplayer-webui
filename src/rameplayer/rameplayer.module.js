@@ -6,6 +6,7 @@
         'rameplayer.core',
         'rameplayer.directives',
         'rameplayer.media',
+        'rameplayer.uploader',
         'rameplayer.playlists',
         'rameplayer.player',
         'rameplayer.settings'

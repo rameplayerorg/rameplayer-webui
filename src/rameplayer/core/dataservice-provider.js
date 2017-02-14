@@ -1,5 +1,5 @@
 /*jshint maxcomplexity:9 */
-/*jshint maxstatements:85 */
+/*jshint maxstatements:86 */
 /*jshint maxparams:14 */
 
 /**
@@ -106,6 +106,7 @@
             ds.setVolume = setVolume;
             ds.reboot = reboot;
             ds.factoryReset = factoryReset;
+            ds.getUploadUrl = getUploadUrl;
 
             checkVersionCompatibility();
 
@@ -465,6 +466,10 @@
 
             function factoryReset() {
                 return $http.put(baseUrl + 'settings/reset');
+            }
+
+            function getUploadUrl(listId) {
+                return baseUrl + 'upload/' + listId;
             }
         }
     }
