@@ -20,6 +20,7 @@ module.exports = function(config) {
       './bower_components/angular-animate/angular-animate.js',
       './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       './bower_components/angular-file-saver/dist/angular-file-saver.bundle.js',
+      './bower_components/angular-file-upload/dist/angular-file-upload.min.js',
       './bower_components/angular-filereader/angular-filereader.js',
       './bower_components/angular-mocks/angular-mocks.js',
       './bower_components/angular-page-visibility/dist/page_visibility.js',

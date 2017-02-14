@@ -12,6 +12,7 @@
         'ng-sortable',
         'angular-page-visibility',
         'angular-uuid',
-        'ngStorage'
+        'ngStorage',
+        'angularFileUpload'
     ]);
 })();

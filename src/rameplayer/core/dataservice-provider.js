@@ -1,5 +1,5 @@
 /*jshint maxcomplexity:9 */
-/*jshint maxstatements:90 */
+/*jshint maxstatements:100 */
 /*jshint maxparams:14 */
 
 /**
@@ -109,6 +109,7 @@
             ds.getDropboxAuth = getDropboxAuth;
             ds.getDropboxAuthUrl = getDropboxAuthUrl;
             ds.removeDropboxAuth = removeDropboxAuth;
+            ds.getUploadUrl = getUploadUrl;
 
             checkVersionCompatibility();
 
@@ -480,6 +481,10 @@
 
             function removeDropboxAuth(listId) {
                 return $http.delete(getDropboxAuthUrl(listId));
+            }
+
+            function getUploadUrl(listId) {
+                return baseUrl + 'upload/' + listId;
             }
         }
     }

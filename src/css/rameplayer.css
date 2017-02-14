@@ -136,3 +136,11 @@ body {
 .rame-logo {
   cursor: pointer;
 }
+
+.file-drop-zone {
+  border: dashed 3px transparent;
+}
+
+.file-drop-zone-over {
+  border: dashed 3px gray;
+}
