@@ -12,14 +12,12 @@
                                     dataService, listId, Dropbox, $interval) {
         var vm = this;
         vm.account = null;
-        vm.appKey = Dropbox.APP_KEY;
-        vm.redirectUri = $window.encodeURIComponent(Dropbox.REDIRECT_URI);
-        // information to be forwarded to authentication broker
-        vm.fwdState = $window.encodeURIComponent('rame;' + dataService.getDropboxAuthUrl(listId));
-        
+        vm.ready = false;
+        vm.dropboxPath = '/RamePlayer';
+
+        vm.connect = connect;
         vm.close = closeModal;
         vm.revoke = revoke;
-        vm.startPolling = startPolling;
         init();
 
         function init() {
@@ -37,6 +35,7 @@
         function getAccountInfo() {
             dataService.getDropboxAuth(listId)
                 .then(function(response) {
+                    vm.ready = true;
                     if (response.data.account) {
                         vm.account = response.data.account;
                         stopPolling();
@@ -46,6 +45,21 @@
                         logger.debug('No Dropbox authentication for', listId);
                     }
                 });
+        }
+
+        function connect() {
+            var url = 'http://www.dropbox.com/1/oauth2/authorize?response_type=code&client_id=';
+            url += Dropbox.APP_KEY;
+            url += '&redirect_uri=';
+            url += $window.encodeURIComponent(Dropbox.REDIRECT_URI);
+            url += '&state=';
+            // this data will be forwarded to Dropbox.REDIRECT_URI
+            var fwdState = 'rame;' + dataService.getDropboxAuthUrl(listId) + ';';
+            fwdState += vm.dropboxPath;
+            url += $window.encodeURIComponent(fwdState);
+            // open link in new window
+            $window.open(url, '_blank');
+            startPolling();
         }
 
         function closeModal() {

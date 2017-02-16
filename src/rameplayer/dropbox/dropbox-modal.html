@@ -4,18 +4,26 @@
     </div>
 
     <div class="modal-body">
-        <div ng-show="vm.account">
+        <div ng-show="!vm.ready">
+            <h4 translate>Loading...</h4>
+        </div>
+        <div ng-show="vm.ready && vm.account">
             <p>
                 <span translate>This directory is connected to Dropbox account:</span><br>
                 <strong>{{ vm.account.name.display_name }} &lt;{{ vm.account.email }}&gt;</strong>
             </p>
             <a href class="btn btn-danger" ng-click="vm.revoke()">
-                <i class="glyphicon glyphicon-ban-circle"></i>
-                <span translate>Revoke</span></a>
+                <i class="glyphicon glyphicon-remove"></i>
+                <span translate>Disconnect</span></a>
         </div>
-        <div ng-show="!vm.account && !vm.pollerHandler">
-            <p translate>By connecting this directory to your Dropbox account you can copy media files to this directory.</p>
-            <a ng-href="http://www.dropbox.com/1/oauth2/authorize?response_type=code&client_id={{ vm.appKey }}&redirect_uri={{ vm.redirectUri }}&state={{ vm.fwdState }}" target="_blank" class="btn btn-success" ng-click="vm.startPolling()">
+        <div ng-show="vm.ready && !vm.account && !vm.pollerHandler">
+            <p translate>When you connect your Dropbox here, content of Dropbox path will be automatically downloaded to this directory.</p>
+            <div class="form-group">
+                <label for="dropbox-path" translate>Dropbox Path</label>
+                <input type="text" class="form-control" ng-model="vm.dropboxPath" placeholder="/RamePlayer" id="dropbox-path">
+                <p class="help-block" translate>Path in your Dropbox which will be downloaded. Leave empty to download all.</p>
+            </div>
+            <a href target="_blank" class="btn btn-success" ng-click="vm.connect()">
                 <i class="glyphicon glyphicon-new-window"></i>
                 <span translate>Connect</span></a>
         </div>
