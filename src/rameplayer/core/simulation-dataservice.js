@@ -1,6 +1,6 @@
 /*jshint maxparams:12 */
 /*jshint maxcomplexity:9 */
-/*jshint maxstatements:52 */
+/*jshint maxstatements:55 */
 
 /**
  * RamePlayer WebUI
@@ -66,6 +66,7 @@
         var Settings = $resource(baseUrl + 'settings.json');
         var List = listProvider.getResource(baseUrl + 'lists/:id.json');
         var SystemSettings = {
+            'timezone': 'Eupore/Soumi',
             'audioPort': 'rameAnalogOnly',
             'ipDhcpClient': true,
             'resolution': 'rameAutodetect',
@@ -76,6 +77,11 @@
             },
             // empty promise
             '$promise': $q.when()
+        };
+        var Timezones = {
+            'timezones' : [
+            'Africa/Abidjan', 'Africa/Accra'
+            ]
         };
         var FirmwareUpgradesAvailable =
             {
@@ -116,6 +122,7 @@
             checkVersionUpgrade: checkVersionUpgrade,
             showNewFwVersionMessage: showNewFwVersionMessage,
             getSettings: getSettings,
+            getTimezones: getTimezones,
             getStatus: getStatus,
             setCursor: setCursor,
             getList: getList,
@@ -458,6 +465,10 @@
 
         function getSystemSettings() {
             return SystemSettings;
+        }
+        
+        function getTimezones() {
+            return Timezones;
         }
         
         function getFirmwareUpgradesAvailable() {

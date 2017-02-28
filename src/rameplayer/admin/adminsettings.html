@@ -245,6 +245,18 @@
                                 </span>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 control-label" for="timeZone" 
+                                translate>Timezone</label>
+                                <!-- <em class="text-muted">{{vm.systemSettings.timezone}}</em> -->
+                            <div class="col-sm-9">
+                                <select id="timeZone" name="timeZone"
+                                    ng-options="zone for zone in vm.timezones"
+                                    ng-model="vm.systemSettings.timezone"
+                                    class="form-control">
+                                </select>
+                            </div>
+                        </div>
                         <!-- 
                     <div class="form-group">
                         <div class="row checkbox center-block">
@@ -276,8 +288,7 @@
                         </div>
                     </div>
                      -->
-                        <div
-                            class="row checkbox form-group center-block">
+                        <div class="row checkbox form-group center-block">
                             <label class="col-sm-3 control-label">
                                 <input type="checkbox"
                                     ng-click="vm.manualTimeConfig"
