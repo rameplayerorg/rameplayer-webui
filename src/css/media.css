@@ -67,6 +67,15 @@ ul.media-list-sortable {
   background-color: rgb(58, 63, 68);
 }
 
+.media-list-item.chapter {
+  color: #b0b0b0;
+}
+
+/* chapter indentation */
+.media-list-item.chapter .media-list-item-field-name {
+  padding-left: 35px;
+}
+
 .media-list-item-hamburger {
   position: absolute;
   right: 15px;

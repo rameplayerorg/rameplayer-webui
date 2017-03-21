@@ -17,13 +17,15 @@
             restrict: 'E',
             scope: {
                 'media': '=', // take media from attribute
+                'list': '=',
                 'onClick': '&',
                 'onOpenList': '&',
                 'remove': '&',
                 'addToDefault': '&',
                 'moveTo': '&',
                 'hideDate': '=',
-                'syncHighlight': '='
+                'syncHighlight': '=',
+                'showChapters': '=',
             },
             templateUrl: 'rameplayer/media/media-item.html',
             controller: ItemController,
@@ -57,6 +59,20 @@
     function ItemController() {
         var vm = this;
         vm.isDropdownOpen = false;
+        vm.chaptersCollapsed = true;
+        vm.chapters = findChapters();
+
+        function findChapters() {
+            var chapters = [];
+            if (vm.list !== undefined) {
+                for (var i = 0; i < vm.list.items.length; i++) {
+                    if (vm.list.items[i].chapterParentId === vm.media.id) {
+                        chapters.push(vm.list.items[i]);
+                    }
+                }
+            }
+            return chapters;
+        }
     }
 
 })();
