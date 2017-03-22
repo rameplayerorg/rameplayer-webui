@@ -35,7 +35,7 @@
                     <div class="col-sm-1 text-right" translate>Length</div>
                     <div class="col-sm-3" translate>Date</div>
                 </div>
-                <rame-media-item ng-repeat="item in lists[slide.listId].items" media="item" on-click="selectMedia(item)" add-to-default="addToDefault(item)" on-open-list="openList(item)"></rame-media-item>
+                <rame-media-item ng-repeat="item in lists[slide.listId].items | rameNonChapterItems" media="item" list="lists[slide.listId]" on-click="selectMedia(item)" add-to-default="addToDefault(item)" on-open-list="openList(item)" show-chapters="true"></rame-media-item>
             </div>
         </uib-slide>
     </uib-carousel>

@@ -5,4 +5,8 @@
     </div>
     <div class="time-slider-handle-target">
     </div>
+    <div ng-repeat="chapter in vm.cursorItem.chapters">
+        <div class="time-slider-chapter-marker" ng-style="{left: (chapter.pos / vm.cursorItem.duration * 100) + '%' }">
+        </div>
+    </div>
 </div>

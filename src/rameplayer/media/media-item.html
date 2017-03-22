@@ -1,7 +1,18 @@
-<div class="row media-list-item" ng-class="{ selected: vm.media.id === vm.playerStatus.cursor.id && vm.playerStatus.state !== 'playing' && vm.playerStatus.state !== 'buffering', paused: vm.media.id === vm.playerStatus.cursor.id && vm.playerStatus.state === 'paused', locked: vm.media.id === vm.playerStatus.cursor.id && (vm.playerStatus.state === 'playing' || vm.playerStatus.state === 'buffering'), 'sync-highlighted': vm.syncHighlight }" ng-click="vm.itemClick($event)">
-    <div class="col-sm-4 media-list-item-field ellipsis">
+<div class="row media-list-item" ng-class="{ selected: vm.media.id === vm.playerStatus.cursor.id && vm.playerStatus.state !== 'playing' && vm.playerStatus.state !== 'buffering', paused: vm.media.id === vm.playerStatus.cursor.id && vm.playerStatus.state === 'paused', locked: vm.media.id === vm.playerStatus.cursor.id && (vm.playerStatus.state === 'playing' || vm.playerStatus.state === 'buffering'), 'sync-highlighted': vm.syncHighlight, 'chapter': vm.media.type === 'chapter' }" ng-click="vm.itemClick($event)">
+    <div class="col-sm-4 media-list-item-field media-list-item-field-name ellipsis">
         <span class="glyphicon glyphicon-folder-close" ng-if="vm.media.type === 'directory'"></span>
-        {{ vm.media.name }}
+
+        <!-- toggle chapters open -->
+        <a href ng-if="vm.showChapters && vm.media.chapters" ng-click="vm.chaptersCollapsed = !vm.chaptersCollapsed; $event.stopPropagation();">
+            <span class="glyphicon" ng-class="{'glyphicon-chevron-down': vm.chaptersCollapsed, 'glyphicon-chevron-up': !vm.chaptersCollapsed}"></span></a>
+
+        <span ng-if="vm.showChapters && vm.media.type === 'chapter'">
+            <span translate>Chapter</span> {{ vm.media.chapterId }}
+        </span>
+
+        <span ng-if="!vm.showChapters || vm.media.type !== 'chapter'">
+            {{ vm.media.name }}
+        </span>
     </div>
     <div class="col-sm-4 media-list-item-field ellipsis">
         {{ vm.media.title }}
@@ -35,4 +46,8 @@
             </span>
          </span>
     </div>
+</div>
+
+<div uib-collapse="vm.chaptersCollapsed" ng-if="vm.showChapters && vm.media.chapters">
+    <rame-media-item ng-repeat="item in vm.chapters" media="item" on-click="vm.onClick({ item: item })" add-to-default="vm.addToDefault({ item: item })" on-open-list="vm.onOpenList({ item: item })" hide-date="true" show-chapters="true"></rame-media-item>
 </div>

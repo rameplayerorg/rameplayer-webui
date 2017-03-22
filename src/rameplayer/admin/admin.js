@@ -34,6 +34,7 @@
         vm.manualDateTime = null;
         vm.dateUserInput = null;
         vm.timeUserInput = null;
+        vm.timezones = dataService.getTimezones().timezones;
 
         vm.videoOutputResolutions = [
             'rameAutodetect',
