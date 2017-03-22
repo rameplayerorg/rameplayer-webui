@@ -33,10 +33,10 @@
         }
     }
 
-    TimeSliderController.$inject = ['$scope', '$log', '$interval', '$filter', 'statusService',
+    TimeSliderController.$inject = ['$rootScope', '$scope', '$log', '$interval', '$filter', 'statusService',
         '$pageVisibility'];
 
-    function TimeSliderController($scope, $log, $interval, $filter, statusService,
+    function TimeSliderController($rootScope, $scope, $log, $interval, $filter, statusService,
                                   $pageVisibility) {
         var vm = this;
         var seeking = false;
@@ -53,9 +53,23 @@
         vm.showMousePos = showMousePos;
         vm.hideMousePos = hideMousePos;
         vm.playerStatus = statusService.status;
+        vm.cursorItem = null;
 
         $scope.$watchGroup(['vm.position', 'vm.duration'], function() {
             updatePercentage();
+        });
+
+        $scope.$watchCollection('vm.playerStatus', function() {
+            // update vm.cursorItem only when it's changed
+            if (vm.playerStatus.cursor && vm.playerStatus.cursor.id) {
+                if (!vm.cursorItem || vm.playerStatus.cursor.id !== vm.cursorItem.id) {
+                    vm.cursorItem = findCursorItem(statusService.status.cursor);
+                    $log.debug(vm.cursorItem);
+                }
+            }
+            else {
+                vm.cursorItem = null;
+            }
         });
 
         // stop seeking also when mouse button gets up elsewhere
@@ -206,6 +220,19 @@
             // jump without transition to correct place when page
             // is visible again
             vm.percentage = null;
+        }
+
+        function findCursorItem(cursor) {
+            var id = cursor.parentId;
+            if ($rootScope.lists[id] && $rootScope.lists[id].items) {
+                for (var i = 0; i < $rootScope.lists[id].items.length; i++) {
+                    if (cursor.id === $rootScope.lists[id].items[i].id) {
+                        return $rootScope.lists[id].items[i];
+                    }
+                }
+            }
+            // not found
+            return null;
         }
     }
 })();

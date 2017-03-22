@@ -3,7 +3,7 @@
         <span class="glyphicon glyphicon-folder-close" ng-if="vm.media.type === 'directory'"></span>
 
         <!-- toggle chapters open -->
-        <a href ng-if="vm.showChapters && vm.media.chapterCount" ng-click="vm.chaptersCollapsed = !vm.chaptersCollapsed; $event.stopPropagation();">
+        <a href ng-if="vm.showChapters && vm.media.chapters" ng-click="vm.chaptersCollapsed = !vm.chaptersCollapsed; $event.stopPropagation();">
             <span class="glyphicon" ng-class="{'glyphicon-chevron-down': vm.chaptersCollapsed, 'glyphicon-chevron-up': !vm.chaptersCollapsed}"></span></a>
 
         <span ng-if="vm.showChapters && vm.media.type === 'chapter'">
@@ -48,6 +48,6 @@
     </div>
 </div>
 
-<div uib-collapse="vm.chaptersCollapsed" ng-if="vm.showChapters && vm.media.chapterCount">
+<div uib-collapse="vm.chaptersCollapsed" ng-if="vm.showChapters && vm.media.chapters">
     <rame-media-item ng-repeat="item in vm.chapters" media="item" on-click="vm.onClick({ item: item })" add-to-default="vm.addToDefault({ item: item })" on-open-list="vm.onOpenList({ item: item })" hide-date="true" show-chapters="true"></rame-media-item>
 </div>
