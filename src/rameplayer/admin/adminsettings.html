@@ -246,12 +246,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 control-label" for="timeZone" 
+                            <label class="col-sm-3 control-label" for="timezone"
                                 translate>Timezone</label>
-                                <!-- <em class="text-muted">{{vm.systemSettings.timezone}}</em> -->
                             <div class="col-sm-9">
-                                <select id="timeZone" name="timeZone"
-                                    ng-options="zone for zone in vm.timezones"
+                                <select id="timezone" name="timezone"
+                                    ng-options="zone for zone in vm.systemSettings.timezones"
                                     ng-model="vm.systemSettings.timezone"
                                     class="form-control">
                                 </select>

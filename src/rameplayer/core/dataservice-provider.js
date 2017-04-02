@@ -56,7 +56,6 @@
             var baseUrl = getBaseUrl();
             var Settings = $resource(baseUrl + 'settings/user/');
             var SystemSettings = $resource(baseUrl + 'settings/system/');
-            var Timezones = $resource(baseUrl + 'settings/timezones/');
             var FirmwareUpgrade = $resource(baseUrl + 'upgrade/');
             var List = listProvider.getResource(baseUrl + 'lists/:id');
             var listItemUrl = baseUrl + 'lists/:listId/items/:itemId';
@@ -111,7 +110,6 @@
             ds.getDropboxAuthUrl = getDropboxAuthUrl;
             ds.removeDropboxAuth = removeDropboxAuth;
             ds.getUploadUrl = getUploadUrl;
-            ds.getTimezones = getTimezones;
 
             checkVersionCompatibility();
 
@@ -267,10 +265,6 @@
                 return SystemSettings.get();
             }
             
-            function getTimezones() {
-                return Timezones.get();
-            }
-
             function getFirmwareUpgradesAvailable() {
                 return FirmwareUpgrade.get();
             }
