@@ -92,7 +92,7 @@
         }
 
         function downloadLogs() {
-            dataService.getLog().then(function(response) {
+            dataService.getServerLog().then(function(response) {
                 var log = response.data;
                 var blob = new Blob([log], {
                     type: 'application/json;charset=utf-8'
