@@ -54,6 +54,18 @@
             </div>
 
             <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="vm.systemSettings.audioMono">
+                            <span translate>Mono audio</span>
+                        </label>
+                        <p class="help-block" translate>Converts analog audio to mono. Works only with the Cirrus audio board.</p>
+                    </div> <!-- .checkbox -->
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label for="deviceName" class="col-sm-3 control-label" translate>Device name</label>
                 <div class="col-sm-9">
                     <input type="text" name="deviceName" id="deviceName"
