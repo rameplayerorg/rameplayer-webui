@@ -6,10 +6,12 @@
         .controller('PlayerController', PlayerController);
 
     PlayerController.$inject = ['$rootScope', '$scope', '$log', '$timeout', 'statusService',
-        'dataService', 'clusterService'];
+        'dataService', 'clusterService', '$document'];
 
-    function PlayerController($rootScope, $scope, $log, $timeout, statusService, dataService, clusterService) {
+    function PlayerController($rootScope, $scope, $log, $timeout, statusService,
+                              dataService, clusterService, $document) {
         var vm = this;
+        var keyDown = false;
 
         $(function() {
             $('[data-toggle="tooltip"]').tooltip();
@@ -47,6 +49,36 @@
                 vm.cursorItem = null;
             }
         });
+
+        bindShortcuts();
+
+        function bindShortcuts() {
+            // use keyDown flag to prevent multiple
+            // events when pressing key down long time
+            $document.on('keydown', function(e) {
+                if (e.key === 'F8' && !keyDown) {
+                    keyDown = true;
+                    e.preventDefault();
+                    togglePlay();
+                }
+                else if (e.key === 'F9' && !keyDown) {
+                    keyDown = true;
+                    e.preventDefault();
+                    playOnRepeat();
+                }
+                else if (e.key === 'F10' && !keyDown) {
+                    keyDown = true;
+                    e.preventDefault();
+                    stop();
+                }
+            });
+
+            $document.on('keyup', function(e) {
+                if (e.key === 'F8' || e.key === 'F9' || e.key === 'F10') {
+                    keyDown = false;
+                }
+            });
+        }
 
         function togglePlay() {
             if (vm.playerStatus.state === statusService.states.playing ||

@@ -2,17 +2,17 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <button id="play" type="button" class="btn btn-default" ng-class="{ 'btn-primary': vm.playerStatus.state !== 'playing' && vm.playerStatus.state !== 'buffering', 'btn-warning': vm.playerStatus.state === 'playing' || vm.playerStatus.state === 'buffering' }" ng-click="vm.togglePlay()" ng-disabled="vm.selectedMedia === null || (vm.playerStatus.state === 'stopped' && vm.clusterService.clusterStatus.state === 'mixed')">
+                <button id="play" type="button" class="btn btn-default" ng-class="{ 'btn-primary': vm.playerStatus.state !== 'playing' && vm.playerStatus.state !== 'buffering', 'btn-warning': vm.playerStatus.state === 'playing' || vm.playerStatus.state === 'buffering' }" ng-click="vm.togglePlay()" ng-disabled="vm.selectedMedia === null || (vm.playerStatus.state === 'stopped' && vm.clusterService.clusterStatus.state === 'mixed')" title="{{ 'Play / Pause (F8)' | translate }}">
                     <span class="glyphicon" ng-class="{ 'glyphicon-play': vm.playerStatus.state !== 'playing' && vm.playerStatus.state !== 'buffering', 'glyphicon-pause': vm.playerStatus.state === 'playing' || vm.playerStatus.state === 'buffering' }"></span>
                 </button>
                 <div class="player-controls">
                     <rame-time-slider position="vm.timeSlider" duration="vm.playerStatus.duration" on-seek="vm.seek(position)"></rame-time-slider>
                     <div id="player-small-controls">
                         <div class="player-small-buttons">
-                            <button id="repeat" type="button" class="btn btn-default btn-xs" ng-class="{ 'btn-warning': vm.playerStatus.repeat === -1 }" title="{{ 'Play on repeat' | translate }}" ng-click="vm.playOnRepeat()" ng-disabled="vm.selectedMedia === null || vm.playerStatus.state !== 'stopped' || (vm.playerStatus.state === 'stopped' && vm.clusterService.clusterStatus.state === 'mixed')">
+                            <button id="repeat" type="button" class="btn btn-default btn-xs" ng-class="{ 'btn-warning': vm.playerStatus.repeat === -1 }" title="{{ 'Play on repeat (F9)' | translate }}" ng-click="vm.playOnRepeat()" ng-disabled="vm.selectedMedia === null || vm.playerStatus.state !== 'stopped' || (vm.playerStatus.state === 'stopped' && vm.clusterService.clusterStatus.state === 'mixed')">
                                 <span class="glyphicon glyphicon-repeat"></span>
                             </button>
-                            <button id="stop" type="button" class="btn btn-default btn-xs" title="{{ 'Stop' | translate }}" ng-click="vm.stop()">
+                            <button id="stop" type="button" class="btn btn-default btn-xs" title="{{ 'Stop (F10)' | translate }}" ng-click="vm.stop()">
                                 <span class="glyphicon glyphicon-stop"></span>
                             </button>
                         </div>
