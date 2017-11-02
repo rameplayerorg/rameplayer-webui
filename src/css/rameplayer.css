@@ -144,3 +144,7 @@ body {
 .file-drop-zone-over {
   border: dashed 3px gray;
 }
+
+.streaming-settings .panel-title {
+  padding: 7px;
+}

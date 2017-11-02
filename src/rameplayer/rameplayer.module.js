@@ -10,6 +10,7 @@
         'rameplayer.playlists',
         'rameplayer.player',
         'rameplayer.settings',
+        'rameplayer.recorder',
         'rameplayer.dropbox'
     ]);
 

@@ -1,0 +1,129 @@
+<div class="row">
+    <div class="col-md-12">
+
+        <div id="streaming-common-settings" class="panel panel-default streaming-settings">
+
+            <div class="panel-heading">
+
+                <h3 class="panel-title">
+                    <i class="glyphicon glyphicon-wrench"></i>
+                    <span translate>Settings</span>
+                </h3>
+
+            </div>
+            <div class="panel-body form-horizontal">
+
+                <div class="form-group">
+                    <label for="streaming-video-input" class="col-sm-2 control-label" translate>Video Input</label>
+                    <div class="col-sm-4">
+                        <select name="language" ng-model="$ctrl.config.input"
+                            id="streaming-video-input" class="form-control"
+                            ng-disabled="$ctrl.statusService.status.recorder.running">
+                            <option value="component" translate>Component</option>
+                            <option value="composite" translate>Composite</option>
+                            <option value="hdmi" translate>HDMI</option>
+                            <option value="s-video" translate>S-Video</option>
+                            <option value="sdi" translate>SDI</option>
+                            <option value="0" translate>Input #0</option>
+                            <option value="1" translate>Input #1</option>
+                            <option value="2" translate>Input #2</option>
+                            <option value="3" translate>Input #3</option>
+                            <option value="4" translate>Input #4</option>
+                        </select>
+                    </div>
+                </div> <!-- .form-group -->
+
+                <div class="form-group">
+                    <label for="streaming-bitrate" class="col-sm-2 control-label" translate>Bitrate (kbps)</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" id="streaming-bitrate" ng-model="$ctrl.config.bitrate" placeholder="3000" ng-disabled="$ctrl.statusService.status.recorder.running">
+                    </div>
+                </div> <!-- .form-group -->
+
+            </div>
+
+        </div> <!-- .panel -->
+
+        <div id="recorder-settings" class="panel panel-default streaming-settings">
+
+            <div class="panel-heading">
+                <span class="pull-right">
+                    <toggle ng-model="$ctrl.config.recorderEnabled" onstyle="btn-danger" ng-disabled="$ctrl.statusService.status.recorder.running"></toggle>
+                </span>
+
+                <h3 class="panel-title text-danger">
+                    <i class="glyphicon glyphicon-hdd"></i>
+                    <span translate>Recorder</span>
+                </h3>
+            </div>
+            <div class="panel-body form-horizontal">
+                <div class="form-group">
+                    <label for="streaming-target" class="col-sm-2 control-label" translate>Target File</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="streaming-target" ng-model="$ctrl.config.recordingPath" placeholder="/media/sda1/recording.mp4" ng-disabled="$ctrl.statusService.status.recorder.running">
+                    </div>
+                </div> <!-- .form-group -->
+
+            </div>
+
+        </div> <!-- .panel -->
+
+
+        <div id="streaming-server-settings" class="panel panel-default streaming-settings">
+            
+            <div class="panel-heading">
+                <span class="pull-right">
+                    <toggle ng-model="$ctrl.config.streamingEnabled" onstyle="btn-warning" ng-disabled="$ctrl.statusService.status.recorder.running"></toggle>
+                </span>
+
+                <h3 class="panel-title text-warning">
+                    <i class="glyphicon glyphicon-globe"></i>
+                    <span translate>Streaming Server</span>
+
+                </h3>
+
+            </div>
+            <div class="panel-body">
+
+                <label class="col-sm-2 control-label" translate>Streams</label>
+
+                <div class="col-sm-10">
+                    <div class="radio" style="margin-top: 0;">
+                        <label>
+                            <input type="radio" name="streaming-channels" value="1" ng-model="$ctrl.config.streamNum" ng-disabled="$ctrl.statusService.status.recorder.running">
+                            <p>
+                               One stream<br>
+                               rtmp://192.168.0.6/rame/program
+                            </p>
+
+                        </label>
+                    </div>
+
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="streaming-channels" value="2" ng-model="$ctrl.config.streamNum" ng-disabled="$ctrl.statusService.status.recorder.running">
+                            <p>
+                                Audio left and right in separate streams<br>
+                                rtmp://192.168.0.6/rame/audio1<br>
+                                rtmp://192.168.0.6/rame/audio2
+                            </p>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+        </div> <!-- .panel -->
+
+        <button ng-show="!$ctrl.statusService.status.recorder.running" id="start-btn" type="button" class="btn btn-lg btn-primary pull-right" ng-click="$ctrl.start()" ng-disabled="!$ctrl.config.recorderEnabled && !$ctrl.config.streamingEnabled">
+            <i class="glyphicon glyphicon-chevron-right"></i>
+            <span translate>Start</span>
+        </button>
+
+        <button ng-show="$ctrl.statusService.status.recorder.running" id="start-btn" type="button" class="btn btn-lg pull-right" ng-click="$ctrl.stop()" ng-class="{'btn-danger': $ctrl.statusService.status.recorder.recording && !$ctrl.statusService.status.recorder.streaming, 'btn-warning': !$ctrl.statusService.status.recorder.recording && $ctrl.statusService.status.recorder.streaming, 'btn-primary': $ctrl.statusService.status.recorder.recording && $ctrl.statusService.status.recorder.streaming }">
+            <i class="glyphicon glyphicon-stop"></i>
+            <span translate>Stop</span>
+        </button>
+
+    </div> <!-- .col -->
+</div> <!-- .row -->

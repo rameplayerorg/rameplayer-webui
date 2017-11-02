@@ -30,6 +30,8 @@ module.exports = function(config) {
       './bower_components/angular-uuids/angular-uuid.js',
       './bower_components/angular-resource/angular-resource.js',
       './bower_components/angular-sanitize/angular-sanitize.js',
+      './bower_components/angular-sanitize/angular-sanitize.js',
+      './bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min.js',
       './bower_components/Sortable/Sortable.js',
       './bower_components/Sortable/ng-sortable.js',
       './bower_components/ngstorage/ngStorage.js',

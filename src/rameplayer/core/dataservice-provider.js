@@ -110,6 +110,9 @@
             ds.getDropboxAuthUrl = getDropboxAuthUrl;
             ds.removeDropboxAuth = removeDropboxAuth;
             ds.getUploadUrl = getUploadUrl;
+            ds.getRecorderConfig = getRecorderConfig;
+            ds.startRecorderServices = startRecorderServices;
+            ds.stopRecorderServices = stopRecorderServices;
 
             checkVersionCompatibility();
 
@@ -485,6 +488,18 @@
 
             function getUploadUrl(listId) {
                 return baseUrl + 'upload/' + listId;
+            }
+
+            function getRecorderConfig() {
+                return $http.get(baseUrl + 'recorder/config');
+            }
+
+            function startRecorderServices(config) {
+                return $http.put(baseUrl + 'recorder/start', config);
+            }
+
+            function stopRecorderServices(config) {
+                return $http.get(baseUrl + 'recorder/stop');
             }
         }
     }
