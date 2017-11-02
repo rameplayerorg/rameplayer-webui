@@ -92,8 +92,8 @@
                         <label>
                             <input type="radio" name="streaming-channels" value="1" ng-model="$ctrl.config.streamNum" ng-disabled="$ctrl.statusService.status.recorder.running">
                             <p>
-                               One stream<br>
-                               rtmp://192.168.0.6/rame/program
+                                <span translate>One stream</span><br>
+                                rtmp://{{ $ctrl.locationHost }}/rame/program
                             </p>
 
                         </label>
@@ -103,9 +103,9 @@
                         <label>
                             <input type="radio" name="streaming-channels" value="2" ng-model="$ctrl.config.streamNum" ng-disabled="$ctrl.statusService.status.recorder.running">
                             <p>
-                                Audio left and right in separate streams<br>
-                                rtmp://192.168.0.6/rame/audio1<br>
-                                rtmp://192.168.0.6/rame/audio2
+                                <span translate>Separate streams for audio left and right</span><br>
+                                rtmp://{{ $ctrl.locationHost }}/rame/audio1<br>
+                                rtmp://{{ $ctrl.locationHost }}/rame/audio2
                             </p>
                         </label>
                     </div>

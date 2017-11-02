@@ -1,5 +1,3 @@
-/*jshint maxparams:12 */
-
 (function() {
     'use strict';
 
@@ -10,11 +8,12 @@
             controller: Controller
         });
 
-    Controller.$inject = ['$rootScope', 'logger', '$uibModal', 'dataService', 'statusService'];
+    Controller.$inject = ['logger', 'dataService', 'statusService', 'toastr', '$translate', '$location'];
 
-    function Controller($rootScope, logger, $uibModal, dataService, statusService) {
+    function Controller(logger, dataService, statusService, toastr, $translate, $location) {
         var ctrl = this;
         ctrl.config = {
+            // default values
             streamingEnabled: true,
             recorderEnabled: false,
             input: 'hdmi',
@@ -23,12 +22,19 @@
             streamNum: '1',
         };
 
+        ctrl.locationHost = $location.host();
         ctrl.statusService = statusService;
         ctrl.start = start;
         ctrl.stop = stop;
         init();
 
         function init() {
+            dataService.getRecorderConfig()
+                .then(function(response) {
+                    if (response.data) {
+                        ctrl.config = response.data;
+                    }
+                });
         }
 
         function start() {
@@ -38,18 +44,38 @@
                 ctrl.config.bitrate = 0;
             }
 
-            logger.log('start', ctrl.config);
             dataService.startRecorderServices(ctrl.config)
                 .then(function(response) {
-                    logger.debug('START response', response);
+                    $translate(['STREAMING_STARTED', 'RECORDING_STARTED', 'RECORDING_AND_STREAMING_STARTED'])
+                        .then(function(translations) {
+                            if (ctrl.config.recorderEnabled && ctrl.config.streamingEnabled) {
+                                toastr.success(ctrl.config.recordingPath, translations.RECORDING_AND_STREAMING_STARTED);
+                            }
+                            else if (ctrl.config.recorderEnabled) {
+                                toastr.success(ctrl.config.recordingPath, translations.RECORDING_STARTED);
+                            }
+                            else if (ctrl.config.streamingEnabled) {
+                                toastr.success(translations.STREAMING_STARTED);
+                            }
+                        });
                 });
         }
 
         function stop() {
-            logger.log('stop', ctrl.config);
             dataService.stopRecorderServices()
                 .then(function(response) {
-                    logger.debug('STOP response', response);
+                    $translate(['STREAMING_STOPPED', 'RECORDING_STOPPED', 'RECORDING_AND_STREAMING_STOPPED'])
+                        .then(function(translations) {
+                            if (ctrl.config.recorderEnabled && ctrl.config.streamingEnabled) {
+                                toastr.success(ctrl.config.recordingPath, translations.RECORDING_AND_STREAMING_STOPPED);
+                            }
+                            else if (ctrl.config.recorderEnabled) {
+                                toastr.success(ctrl.config.recordingPath, translations.RECORDING_STOPPED);
+                            }
+                            else if (ctrl.config.streamingEnabled) {
+                                toastr.success(translations.STREAMING_STOPPED);
+                            }
+                        });
                 });
         }
     }

@@ -89,6 +89,13 @@
             // cluster-service.js
             CLUSTER_UNIT_OFFLINE: 'Cluster unit disconnected',
             CLUSTER_UNIT_OFFLINE_DESC: 'Connection lost to cluster unit $1.',
+            // recorder.component.js
+            STREAMING_STARTED: 'Streaming service started',
+            STREAMING_STOPPED: 'Streaming service stopped',
+            RECORDING_STARTED: 'Recording started',
+            RECORDING_STOPPED: 'Recording stopped',
+            RECORDING_AND_STREAMING_STARTED: 'Streaming service and recording started',
+            RECORDING_AND_STREAMING_STOPPED: 'Streaming service and recording stopped',
         });
         $translateProvider.translations('fi', {
             //'': '',
@@ -313,6 +320,13 @@
             // cluster-service.js
             CLUSTER_UNIT_OFFLINE: 'Ei yhteyttä klusteriyksikköön',
             CLUSTER_UNIT_OFFLINE_DESC: 'Yhteys katkesi klusteriyksikköön $1.',
+            // recorder.component.js
+            STREAMING_STARTED: 'Suoratoistopalvelu käynnistetty',
+            STREAMING_STOPPED: 'Suoratoistopalvelu pysäytetty',
+            RECORDING_STARTED: 'Tallennus käynnistetty',
+            RECORDING_STOPPED: 'Tallennus pysäytetty',
+            RECORDING_AND_STREAMING_STARTED: 'Tallennus ja suoratoistopalvelu käynnistetty',
+            RECORDING_AND_STREAMING_STOPPED: 'Tallennus ja suoratoistopalvelu pysäytetty',
         });
         $translateProvider.translations('ru', {
             //'': '',
