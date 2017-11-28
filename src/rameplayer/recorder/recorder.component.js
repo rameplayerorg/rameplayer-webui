@@ -12,16 +12,8 @@
 
     function Controller(logger, dataService, statusService, toastr, $translate, $location) {
         var ctrl = this;
-        ctrl.config = {
-            // default values
-            streamingEnabled: true,
-            recorderEnabled: false,
-            input: 'hdmi',
-            bitrate: 3000,
-            recordingPath: '/media/sda1/recording.mp4',
-            streamNum: '1',
-        };
-
+        ctrl.config = {};
+        ctrl.avgVideoBitrateChanged = avgVideoBitrateChanged;
         ctrl.locationHost = $location.host();
         ctrl.statusService = statusService;
         ctrl.start = start;
@@ -35,6 +27,12 @@
                         ctrl.config = response.data;
                     }
                 });
+        }
+
+        function avgVideoBitrateChanged() {
+            var value = parseInt(ctrl.config.avgVideoBitrate);
+            // add 100 kbps for max value
+            ctrl.config.maxVideoBitrate = value + 100;
         }
 
         function start() {
