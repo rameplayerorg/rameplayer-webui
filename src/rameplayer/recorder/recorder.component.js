@@ -32,16 +32,10 @@
         function avgVideoBitrateChanged() {
             var value = parseInt(ctrl.config.avgVideoBitrate);
             // add 100 kbps for max value
-            ctrl.config.maxVideoBitrate = value + 100;
+            ctrl.config.maxVideoBitrate = '' + (value + 100);
         }
 
         function start() {
-            // convert bitrate to int
-            ctrl.config.bitrate = parseInt(ctrl.config.bitrate);
-            if (isNaN(ctrl.config.bitrate)) {
-                ctrl.config.bitrate = 0;
-            }
-
             dataService.startRecorderServices(ctrl.config)
                 .then(function(response) {
                     $translate(['STREAMING_STARTED', 'RECORDING_STARTED', 'RECORDING_AND_STREAMING_STARTED'])
@@ -56,6 +50,10 @@
                                 toastr.success(translations.STREAMING_STARTED);
                             }
                         });
+                },
+                function(response) {
+                    logger.error('Recorder error', response);
+                    toastr.error(response.data.error, 'Recorder Error');
                 });
         }
 
