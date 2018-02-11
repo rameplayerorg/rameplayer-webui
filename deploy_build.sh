@@ -16,6 +16,6 @@ if [ -z "$1" ]; then
 fi
 
 IP=$1
-rsync -avz build/* root@$IP:/usr/share/rameplayer-webui/www ; ssh root@$IP 'cd /usr/share/rameplayer-webui ; rc-service httpd restart'
+rsync -avz build/* root@$IP:/usr/share/rameplayer-webui/www ; ssh root@$IP 'cd /usr/share/rameplayer-webui ; rc-service nginx restart'
 
 echo "Open http://$IP/"
