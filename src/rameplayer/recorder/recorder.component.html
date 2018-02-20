@@ -171,7 +171,7 @@
                 <div class="col-sm-9">
                     <div class="radio" style="margin-top: 0;">
                         <label>
-                            <input type="radio" name="streaming-channels" value="1" ng-model="$ctrl.config.streamNum" ng-disabled="$ctrl.statusService.status.recorder.running">
+                            <input type="radio" name="streaming-channels" value="1" ng-model="$ctrl.config.streamMode" ng-disabled="$ctrl.statusService.status.recorder.running">
                             <p>
                                 <span translate>One stream</span><br>
                                 rtmp://{{ $ctrl.locationHost }}/rame/program
@@ -182,7 +182,7 @@
 
                     <div class="radio">
                         <label>
-                            <input type="radio" name="streaming-channels" value="2" ng-model="$ctrl.config.streamNum" ng-disabled="$ctrl.statusService.status.recorder.running">
+                            <input type="radio" name="streaming-channels" value="2" ng-model="$ctrl.config.streamMode" ng-disabled="$ctrl.statusService.status.recorder.running">
                             <p>
                                 <span translate>Separate streams for audio left and right</span><br>
                                 rtmp://{{ $ctrl.locationHost }}/rame/audio1<br>
