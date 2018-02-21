@@ -144,8 +144,8 @@
                         <input type="text" class="form-control" id="streaming-target" ng-model="$ctrl.config.recordingPath" placeholder="/media/sda1/recording.mp4" ng-disabled="$ctrl.statusService.status.recorder.running" ng-change="$ctrl.recPathChanged()">
                         <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="$ctrl.validRecPath"></span>
                         <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="!$ctrl.validRecPath"></span>
-                        <span class="help-block" ng-show="$ctrl.errorRecFileExists" translate>File already exists. Please select another filename.</span>
-                        <span class="help-block" ng-show="$ctrl.errorRecNoDir" translate>Directory does not exist. Please select another directory for recording.</span>
+                        <span class="help-block" ng-show="$ctrl.errorRecFileExists" translate>File already exists. Please choose another filename.</span>
+                        <span class="help-block" ng-show="$ctrl.errorRecNoDir" translate>Directory does not exist. Please choose another directory for recording.</span>
                         <span class="help-block" ng-show="$ctrl.validRecPath && $ctrl.freeSpace"><span translate>Free space:</span> {{ $ctrl.freeSpace | rameByteSize }}</span>
                     </div>
                 </div> <!-- .form-group -->
@@ -206,9 +206,10 @@
             <span translate>Start</span>
         </button>
 
-        <button ng-show="$ctrl.statusService.status.recorder.running" id="start-btn" type="button" class="btn btn-lg pull-right" ng-click="$ctrl.stop()" ng-class="{'btn-danger': $ctrl.statusService.status.recorder.recording && !$ctrl.statusService.status.recorder.streaming, 'btn-warning': !$ctrl.statusService.status.recorder.recording && $ctrl.statusService.status.recorder.streaming, 'btn-primary': $ctrl.statusService.status.recorder.recording && $ctrl.statusService.status.recorder.streaming }">
+        <button ng-show="$ctrl.statusService.status.recorder.running" id="start-btn" type="button" class="btn btn-lg pull-right" ng-click="$ctrl.stop()" ng-class="{'btn-danger': $ctrl.statusService.status.recorder.recording && !$ctrl.statusService.status.recorder.streaming, 'btn-warning': !$ctrl.statusService.status.recorder.recording && $ctrl.statusService.status.recorder.streaming, 'btn-primary': $ctrl.statusService.status.recorder.recording && $ctrl.statusService.status.recorder.streaming }" ng-disabled="$ctrl.stopping">
             <i class="glyphicon glyphicon-stop"></i>
-            <span translate>Stop</span>
+            <span ng-show="!$ctrl.stopping" translate>Stop</span>
+            <span ng-show="$ctrl.stopping" translate>Stopping...</span>
         </button>
 
     </div> <!-- .col -->

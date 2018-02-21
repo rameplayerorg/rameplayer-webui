@@ -19,6 +19,7 @@
         ctrl.start = start;
         ctrl.stop = stop;
         ctrl.recPathChanged = recPathChanged;
+        ctrl.stopping = false;
         init();
 
         function init() {
@@ -26,7 +27,9 @@
                 .then(function(response) {
                     if (response.data) {
                         ctrl.config = response.data;
-                        validateRecordingPath();
+                        if (!ctrl.statusService.status.recorder.running) {
+                            validateRecordingPath();
+                        }
                     }
                 });
         }
@@ -38,6 +41,7 @@
         }
 
         function start() {
+            ctrl.stopping = false;
             dataService.startRecorderServices(ctrl.config)
                 .then(function(response) {
                     $translate(['STREAMING_STARTED', 'RECORDING_STARTED', 'RECORDING_AND_STREAMING_STARTED'])
@@ -60,6 +64,7 @@
         }
 
         function stop() {
+            ctrl.stopping = true;
             dataService.stopRecorderServices()
                 .then(function(response) {
                     $translate(['STREAMING_STOPPED', 'RECORDING_STOPPED', 'RECORDING_AND_STREAMING_STOPPED'])
@@ -73,6 +78,7 @@
                             else if (ctrl.config.streamingEnabled) {
                                 toastr.success(translations.STREAMING_STOPPED);
                             }
+                            recPathChanged();
                         });
                 });
         }
