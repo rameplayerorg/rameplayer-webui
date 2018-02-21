@@ -138,10 +138,15 @@
                 </h3>
             </div>
             <div class="panel-body form-horizontal" uib-collapse="!$ctrl.config.recorderEnabled">
-                <div class="form-group">
+              <div class="form-group has-feedback" ng-class="{'has-error': !$ctrl.validRecPath }">
                     <label for="streaming-target" class="col-sm-3 control-label" translate>Target File</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="streaming-target" ng-model="$ctrl.config.recordingPath" placeholder="/media/sda1/recording.mp4" ng-disabled="$ctrl.statusService.status.recorder.running">
+                        <input type="text" class="form-control" id="streaming-target" ng-model="$ctrl.config.recordingPath" placeholder="/media/sda1/recording.mp4" ng-disabled="$ctrl.statusService.status.recorder.running" ng-change="$ctrl.recPathChanged()">
+                        <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="$ctrl.validRecPath"></span>
+                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="!$ctrl.validRecPath"></span>
+                        <span class="help-block" ng-show="$ctrl.errorRecFileExists" translate>File already exists. Please select another filename.</span>
+                        <span class="help-block" ng-show="$ctrl.errorRecNoDir" translate>Directory does not exist. Please select another directory for recording.</span>
+                        <span class="help-block" ng-show="$ctrl.validRecPath && $ctrl.freeSpace"><span translate>Free space:</span> {{ $ctrl.freeSpace | rameByteSize }}</span>
                     </div>
                 </div> <!-- .form-group -->
 

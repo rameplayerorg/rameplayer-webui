@@ -8,9 +8,9 @@
             controller: Controller
         });
 
-    Controller.$inject = ['logger', 'dataService', 'statusService', 'toastr', '$translate', '$location'];
+    Controller.$inject = ['logger', 'dataService', 'statusService', 'toastr', '$translate', '$location', '$timeout'];
 
-    function Controller(logger, dataService, statusService, toastr, $translate, $location) {
+    function Controller(logger, dataService, statusService, toastr, $translate, $location, $timeout) {
         var ctrl = this;
         ctrl.config = {};
         ctrl.avgVideoBitrateChanged = avgVideoBitrateChanged;
@@ -18,6 +18,7 @@
         ctrl.statusService = statusService;
         ctrl.start = start;
         ctrl.stop = stop;
+        ctrl.recPathChanged = recPathChanged;
         init();
 
         function init() {
@@ -25,6 +26,7 @@
                 .then(function(response) {
                     if (response.data) {
                         ctrl.config = response.data;
+                        validateRecordingPath();
                     }
                 });
         }
@@ -72,6 +74,35 @@
                                 toastr.success(translations.STREAMING_STOPPED);
                             }
                         });
+                });
+        }
+
+        function recPathChanged() {
+            var delay = 500;
+            if (ctrl.recPathPromise) {
+                // cancel previous
+                $timeout.cancel(ctrl.recPathPromise);
+                ctrl.recPathPromise = null;
+            }
+            ctrl.recPathPromise = $timeout(function() {
+                validateRecordingPath();
+            }, delay);
+        }
+
+        function validateRecordingPath() {
+            dataService.getDiskStatus(ctrl.config.recordingPath)
+                .then(function(response) {
+                    ctrl.errorRecFileExists = !!response.data.file;
+                    ctrl.errorRecNoDir = !response.data.dir;
+                    ctrl.validRecPath = !ctrl.errorRecFileExists && !ctrl.errorRecNoDir;
+                    ctrl.freeSpace = (response.data.space) ? response.data.space.available : undefined;
+                },
+                function(response) {
+                    logger.debug('Error with disk status: ', response.data);
+                    ctrl.validRecPath = false;
+                    ctrl.errorRecFileExists = false;
+                    ctrl.errorRecNoDir = false;
+                    ctrl.freeSpace = undefined;
                 });
         }
     }

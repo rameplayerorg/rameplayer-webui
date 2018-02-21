@@ -113,6 +113,7 @@
             ds.getRecorderConfig = getRecorderConfig;
             ds.startRecorderServices = startRecorderServices;
             ds.stopRecorderServices = stopRecorderServices;
+            ds.getDiskStatus = getDiskStatus;
 
             checkVersionCompatibility();
 
@@ -500,6 +501,12 @@
 
             function stopRecorderServices(config) {
                 return $http.get(baseUrl + 'recorder/stop');
+            }
+
+            function getDiskStatus(path) {
+                return $http.put(baseUrl + 'disk/status', {
+                    path: path
+                });
             }
         }
     }
