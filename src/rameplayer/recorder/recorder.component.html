@@ -195,9 +195,40 @@
                             </p>
                         </label>
                     </div>
-                </div>
 
-            </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="streaming-channels" value="extServer" ng-model="$ctrl.config.streamMode" ng-disabled="$ctrl.statusService.status.recorder.running">
+                            <p>
+                                <span translate>External server<br>
+                            </p>
+                        </label>
+
+                        <div style="margin-left: 20px; margin-bottom: 10px;">
+                           <input type="text" ng-model="$ctrl.config.streamServer" class="form-control" placeholder="rtmp://example.com/stream">
+                        </div>
+                    </div>
+
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="streaming-channels" value="custom" ng-model="$ctrl.config.streamMode" ng-disabled="$ctrl.statusService.status.recorder.running">
+                            <p>
+                                <span translate>Advanced: Custom options<br>
+                            </p>
+                        </label>
+
+                        <div style="margin-left: 20px; margin-bottom: 10px;">
+                            <input type="text" ng-model="$ctrl.config.customParams" class="form-control" placeholder="-f flv -codec:a libmp3lame -b:a 128k -codec:v copy rtmp://a.rtmp.youtube.com/live2/secret-key">
+                            <span class="help-block">
+                              <span translate>FFmpeg output options, see</span>
+                              <a target="_blank" href="https://trac.ffmpeg.org/wiki/StreamingGuide">FFmpeg Streaming Guide</a>
+                            </span>
+                        </div>
+                    </div>
+
+                </div> <!-- .col -->
+
+            </div> <!-- .panel-body -->
 
         </div> <!-- .panel -->
 
