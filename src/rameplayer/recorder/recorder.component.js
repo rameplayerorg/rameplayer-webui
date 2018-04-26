@@ -8,9 +8,13 @@
             controller: Controller
         });
 
-    Controller.$inject = ['logger', 'dataService', 'statusService', 'toastr', '$translate', '$location', '$timeout'];
+    Controller.$inject = ['logger', 'dataService', 'statusService', 'toastr',
+        '$translate', '$location', '$timeout', '$interval'];
 
-    function Controller(logger, dataService, statusService, toastr, $translate, $location, $timeout) {
+    function Controller(logger, dataService, statusService, toastr, $translate, $location, $timeout, $interval) {
+        var statusInterval = 10000;
+        var pollerHandler = null;
+
         var ctrl = this;
         ctrl.config = {};
         ctrl.avgVideoBitrateChanged = avgVideoBitrateChanged;
@@ -27,11 +31,26 @@
                 .then(function(response) {
                     if (response.data) {
                         ctrl.config = response.data;
-                        if (!ctrl.statusService.status.recorder.running) {
+                        if (ctrl.statusService.status.recorder.running) {
+                            pollerHandler = startRecStatusPoller();
+                        }
+                        else {
                             validateRecordingPath();
                         }
                     }
                 });
+        }
+
+        function startRecStatusPoller() {
+            logger.debug('Starting rec status poller()');
+            return $interval(validateRecordingPath, statusInterval);
+        }
+
+        function stopRecStatusPoller() {
+            if (pollerHandler) {
+                $interval.cancel(pollerHandler);
+                pollerHandler = null;
+            }
         }
 
         function avgVideoBitrateChanged() {
@@ -56,6 +75,10 @@
                                 toastr.success(translations.STREAMING_STARTED);
                             }
                         });
+
+                    if (ctrl.config.recorderEnabled) {
+                        pollerHandler = startRecStatusPoller();
+                    }
                 },
                 function(response) {
                     logger.error('Recorder error', response);
@@ -80,6 +103,8 @@
                             }
                             recPathChanged();
                         });
+
+                    stopRecStatusPoller();
                 });
         }
 
@@ -98,10 +123,18 @@
         function validateRecordingPath() {
             dataService.getDiskStatus(ctrl.config.recordingPath)
                 .then(function(response) {
-                    ctrl.errorRecFileExists = !!response.data.file;
-                    ctrl.errorRecNoDir = !response.data.dir;
-                    ctrl.validRecPath = !ctrl.errorRecFileExists && !ctrl.errorRecNoDir;
+                    if (ctrl.statusService.status.recorder.running) {
+                        ctrl.errorRecFileExists = !!response.data.file;
+                        ctrl.errorRecNoDir = !response.data.dir;
+                        ctrl.validRecPath = !ctrl.errorRecFileExists && !ctrl.errorRecNoDir;
+                    }
+                    else {
+                        ctrl.errorRecFileExists = false;
+                        ctrl.errorRecNoDir = false;
+                        ctrl.validRecPath = true;
+                    }
                     ctrl.freeSpace = (response.data.space) ? response.data.space.available : undefined;
+                    calcTimeLeft();
                 },
                 function(response) {
                     logger.debug('Error with disk status: ', response.data);
@@ -110,6 +143,12 @@
                     ctrl.errorRecNoDir = false;
                     ctrl.freeSpace = undefined;
                 });
+        }
+
+        function calcTimeLeft() {
+            var bytesPerSec = ((parseInt(ctrl.config.avgVideoBitrate) || 0) +
+                               (parseInt(ctrl.config.audioBitrate) || 0)) * 1000 / 8;
+            ctrl.recTimeLeft = ctrl.freeSpace * 1024 / bytesPerSec / 60; // mins left
         }
     }
 
