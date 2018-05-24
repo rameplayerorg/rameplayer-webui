@@ -150,9 +150,13 @@
             var bytesPerSec = ((parseInt(ctrl.config.avgVideoBitrate) || 0) +
                                (parseInt(ctrl.config.audioBitrate) || 0)) * 1000 / 8;
             if (bytesPerSec > 0)
+            {
                 ctrl.recTimeLeft = ctrl.freeSpace * 1024 / bytesPerSec / 60; // mins left
+            }
             else
+            {
                 ctrl.recTimeLeft = 0;
+            }
         }
     }
 
