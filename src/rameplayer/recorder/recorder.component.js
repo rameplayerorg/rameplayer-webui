@@ -125,14 +125,14 @@
             dataService.getDiskStatus(ctrl.config.recordingPath)
                 .then(function(response) {
                     if (ctrl.statusService.status.recorder.running) {
-                        ctrl.errorRecFileExists = !!response.data.file;
-                        ctrl.errorRecNoDir = !response.data.dir;
-                        ctrl.validRecPath = !ctrl.errorRecFileExists && !ctrl.errorRecNoDir;
-                    }
-                    else {
                         ctrl.errorRecFileExists = false;
                         ctrl.errorRecNoDir = false;
                         ctrl.validRecPath = true;
+                    }
+                    else {
+                        ctrl.errorRecFileExists = !!response.data.file;
+                        ctrl.errorRecNoDir = !response.data.dir;
+                        ctrl.validRecPath = !ctrl.errorRecFileExists && !ctrl.errorRecNoDir;
                     }
                     ctrl.freeSpace = (response.data.space) ? response.data.space.available : undefined;
                     calcTimeLeft();
@@ -147,8 +147,10 @@
         }
 
         function calcTimeLeft() {
-            var bytesPerSec = ((parseInt(ctrl.config.avgVideoBitrate) || 0) +
-                               (parseInt(ctrl.config.audioBitrate) || 0)) * 1000 / 8;
+            var videoBitRate = parseInt(ctrl.config.avgVideoBitrate) || 0;
+            var audioBitRate = parseInt(ctrl.config.audioBitrate) || (videoBitRate > 0 ? 250 : 0); // use a guess when reasonable
+            var conservativeFudgeFactor = 1.05;
+            var bytesPerSec = parseInt(conservativeFudgeFactor * (videoBitRate + audioBitRate)) * 1000 / 8;
             if (bytesPerSec > 0)
             {
                 ctrl.recTimeLeft = ctrl.freeSpace * 1024 / bytesPerSec / 60; // mins left
