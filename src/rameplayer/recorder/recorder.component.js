@@ -158,8 +158,7 @@
             {
                 var usableSpace = ctrl.freeSpace;
                 ctrl.recTimeNote = '';
-                console.log(ctrl.fsType);
-                if (typeof ctrl.fsType === 'string' && ctrl.fsType == 'vfat')
+                if (typeof ctrl.fsType === 'string' && ctrl.fsType === 'vfat')
                 {
                     var almost4KGB = 4 * 1000 * 1024;
                     if (usableSpace > almost4KGB)

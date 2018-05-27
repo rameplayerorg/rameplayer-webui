@@ -114,6 +114,7 @@
             ds.startRecorderServices = startRecorderServices;
             ds.stopRecorderServices = stopRecorderServices;
             ds.getDiskStatus = getDiskStatus;
+            ds.safelyRemoveMedia = safelyRemoveMedia;
 
             checkVersionCompatibility();
 
@@ -367,6 +368,12 @@
                 return ListItem.delete({
                     listId: id,
                     itemId: ''
+                });
+            }
+
+            function safelyRemoveMedia(dev) {
+                return $http.put(baseUrl + 'disk/umount', {
+                    dev: dev
                 });
             }
 

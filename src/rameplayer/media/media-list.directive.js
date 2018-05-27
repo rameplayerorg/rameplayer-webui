@@ -49,6 +49,7 @@
             scope.selectMedia = selectMedia;
             scope.addToDefault = addToDefault;
             scope.openDropboxModal = openDropboxModal;
+            scope.safelyRemoveMedia = safelyRemoveMedia;
 
             scope.openList = openList;
             scope.activateSlide = activateSlide;
@@ -160,6 +161,10 @@
                         }
                     });
                 }
+            }
+
+            function safelyRemoveMedia() {
+                dataService.safelyRemoveMedia(scope.lists[scope.listId].name);
             }
 
             function getActiveListId() {

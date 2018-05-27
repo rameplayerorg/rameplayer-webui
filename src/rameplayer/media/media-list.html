@@ -8,6 +8,7 @@
             <a href uib-dropdown-toggle>
                 <span class="glyphicon glyphicon-menu-hamburger"></span>
             </a>
+
             <ul uib-dropdown-menu class="dropdown-menu-right">
                 <li>
                     <a href ng-click="addDirToDefault()"><i class="glyphicon glyphicon-plus"></i>
@@ -20,6 +21,11 @@
                 <li>
                    <a href ng-click="openDropboxModal()">
                         <span translate>Dropbox</span>&hellip;</a>
+                </li>
+                <li>
+                    <a href ng-click="safelyRemoveMedia()">
+                        <i class="glyphicon glyphicon-eject"></i>
+                        <span translate>Safely Remove USB Drive</span></a>
                 </li>
             </ul>
         </span>
