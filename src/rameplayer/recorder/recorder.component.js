@@ -135,6 +135,7 @@
                         ctrl.validRecPath = !ctrl.errorRecFileExists && !ctrl.errorRecNoDir;
                     }
                     ctrl.freeSpace = (response.data.space) ? response.data.space.available : undefined;
+                    ctrl.fsType = (response.data.space) ? response.data.space.type : undefined;
                     calcTimeLeft();
                 },
                 function(response) {
@@ -143,21 +144,40 @@
                     ctrl.errorRecFileExists = false;
                     ctrl.errorRecNoDir = false;
                     ctrl.freeSpace = undefined;
+                    ctrl.fsType = undefined;
                 });
         }
 
         function calcTimeLeft() {
             var videoBitRate = parseInt(ctrl.config.avgVideoBitrate) || 0;
-            var audioBitRate = parseInt(ctrl.config.audioBitrate) || (videoBitRate > 0 ? 250 : 0); // use a guess when reasonable
+            // use a guess when reasonable:
+            var audioBitRate = parseInt(ctrl.config.audioBitrate) || (videoBitRate > 0 ? 250 : 0);
             var conservativeFudgeFactor = 1.05;
             var bytesPerSec = parseInt(conservativeFudgeFactor * (videoBitRate + audioBitRate)) * 1000 / 8;
             if (bytesPerSec > 0)
             {
-                ctrl.recTimeLeft = ctrl.freeSpace * 1024 / bytesPerSec / 60; // mins left
+                var usableSpace = ctrl.freeSpace;
+                ctrl.recTimeNote = '';
+                console.log(ctrl.fsType);
+                if (typeof ctrl.fsType === 'string' && ctrl.fsType == 'vfat')
+                {
+                    var almost4KGB = 4 * 1000 * 1024;
+                    if (usableSpace > almost4KGB)
+                    {
+                        usableSpace = almost4KGB;
+                        ctrl.recTimeNote = 'Max 4GB in FAT-fs: ';
+                    }
+                }
+                ctrl.recTimeLeft = usableSpace * 1024 / bytesPerSec / 60; // mins left
+                if (ctrl.recTimeLeft > 1)
+                {
+                    ctrl.recTimeNote += '~';
+                }
             }
             else
             {
                 ctrl.recTimeLeft = 0;
+                ctrl.recTimeNote = '';
             }
         }
     }

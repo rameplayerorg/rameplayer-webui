@@ -146,7 +146,7 @@
                         <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="!$ctrl.validRecPath"></span>
                         <span class="help-block" ng-show="$ctrl.errorRecFileExists" translate>File already exists. Please choose another filename.</span>
                         <span class="help-block" ng-show="$ctrl.errorRecNoDir" translate>Directory does not exist. Please choose another directory for recording.</span>
-                        <span class="help-block" ng-show="$ctrl.validRecPath && $ctrl.freeSpace"><span translate>Free space:</span> {{ $ctrl.freeSpace | rameByteSize }} (~{{ $ctrl.recTimeLeft | rameTimeLeft }})</span>
+                        <span class="help-block" ng-show="$ctrl.validRecPath && $ctrl.freeSpace"><span translate>Free space:</span> {{ $ctrl.freeSpace | rameByteSize }} ({{ $ctrl.recTimeNote }}{{ $ctrl.recTimeLeft | rameTimeLeft }})</span>
                     </div>
                 </div> <!-- .form-group -->
 
