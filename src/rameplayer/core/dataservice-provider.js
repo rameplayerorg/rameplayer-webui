@@ -374,6 +374,13 @@
             function safelyRemoveMedia(dev) {
                 return $http.put(baseUrl + 'disk/umount', {
                     dev: dev
+                }).then(function(response) {
+                    toastr.success("Media " + name + " removed");
+                }, function(response) {
+                    if (response.data && response.data.error)
+                    {
+                        toastr.error(response.data.error);
+                    }
                 });
             }
 
