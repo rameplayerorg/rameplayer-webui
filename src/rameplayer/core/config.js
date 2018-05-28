@@ -118,7 +118,7 @@
             'Hardware version': 'Laitteisto',
             // media-list.html
             'Add Directory To Work list': 'Lisää hakemisto koontilistaan',
-            'Upload Files…': 'Lataa tiedostoja soittimeen…',
+            'Upload Files…': 'Lataa tiedostoja kansioon…',
             'Safely Remove USB Drive': 'Poista USB-asema turvallisesti',
             // media-item.html
             'Add to Work list': 'Lisää koontilistaan',
