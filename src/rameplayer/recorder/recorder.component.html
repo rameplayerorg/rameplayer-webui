@@ -138,7 +138,7 @@
                 </h3>
             </div>
             <div class="panel-body form-horizontal" uib-collapse="!$ctrl.config.recorderEnabled">
-              <div class="form-group has-feedback" ng-class="{'has-error': $ctrl.hasRecBlockingError }">
+                <div class="form-group has-feedback" ng-class="{'has-error': $ctrl.hasRecBlockingError }">
                     <label for="streaming-target" class="col-sm-3 control-label" translate>Target File</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="streaming-target" ng-model="$ctrl.config.recordingPath" placeholder="/media/sda1/recording.ts" ng-disabled="$ctrl.statusService.status.recorder.running" ng-change="$ctrl.recPathChanged()">
@@ -150,6 +150,8 @@
                         <span class="help-block" ng-show="$ctrl.validRecPath && 0==$ctrl.freeSpace" translate>Disk full!</span>
                     </div>
                 </div> <!-- .form-group -->
+
+                <span class="help-block" ng-show="$ctrl.fsType=='exfat' || $ctrl.fsType=='ntfs'" translate>Remember to "Safely Remove USB Drive" afterwards (needed for exFAT/NTFS file systems).</span>
 
             </div>
 

@@ -6,7 +6,7 @@
     <li class="breadcrumb-menu">
         <span uib-dropdown>
 
-            <span class="glyphicon glyphicon-eject" ng-show="lists[listId].saferemove"></span>
+            <span ng-show="lists[listId].saferemove"><strong>‼</strong>&nbsp;</span>
 
             <a href uib-dropdown-toggle>
                 <span class="glyphicon glyphicon-menu-hamburger"></span>
@@ -27,7 +27,7 @@
                 </li>
                 <li ng-show="lists[listId].saferemove">
                     <a href ng-click="safelyRemoveMedia()">
-                        <i class="glyphicon glyphicon-floppy-remove"></i>
+                        <i class="glyphicon glyphicon-eject"></i>
                         <span translate>Safely Remove USB Drive</span></a>
                 </li>
             </ul>
