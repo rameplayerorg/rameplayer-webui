@@ -47,6 +47,7 @@
             INCOMPATIBLE_VERSION: 'Incompatible Server Version',
             FIRMWARE_UPGRADED: 'Firmware upgraded',
             FIRMWARE_UPGRADED_DESC: 'Firmware version $1 is now installed.',
+            MEDIA_SAFELY_REMOVED: 'Media removed safely. ($1)',
             // playlist.directive.js
             PLAYLIST_SYNC_REMOVED: 'Playlist $1 is not synchronized to playlist $2 anymore.',
             // statusservice.js
@@ -117,6 +118,8 @@
             'Hardware version': 'Laitteisto',
             // media-list.html
             'Add Directory To Work list': 'Lisää hakemisto koontilistaan',
+            'Upload Files…': 'Lataa tiedostoja soittimeen…',
+            'Safely Remove USB Drive': 'Poista USB-asema turvallisesti',
             // media-item.html
             'Add to Work list': 'Lisää koontilistaan',
             'Remove': 'Poista',
@@ -273,6 +276,7 @@
             FIRMWARE_UPGRADED: 'Ohjelmisto päivitetty',
             FIRMWARE_UPGRADED_DESC: 'Ohjelmistoversio $1 on nyt päivitetty laitteeseen.',
             INCOMPATIBLE_VERSION: 'Palvelimen versio epäyhteensopiva',
+            MEDIA_SAFELY_REMOVED: 'Asema poistettu turvallisesti. ($1)',
             // statusservice.js
             CONNECTION_ERROR: 'Yhteysvirhe',
             CONNECTION_ERROR_DESC: 'Ei yhteyttä laitteeseen osoitteessa $1.',

@@ -375,7 +375,10 @@
                 return $http.put(baseUrl + 'disk/umount', {
                     dev: dev
                 }).then(function(response) {
-                    toastr.success("Media " + name + " removed");
+                    $translate(['MEDIA_SAFELY_REMOVED']).then(function(translations) {
+                        toastr.success(translations.MEDIA_SAFELY_REMOVED
+                                       .replace('$1', dev));
+                    });
                 }, function(response) {
                     if (response.data && response.data.error)
                     {
