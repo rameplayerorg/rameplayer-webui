@@ -5,6 +5,9 @@
     </li>
     <li class="breadcrumb-menu">
         <span uib-dropdown>
+
+            <span class="glyphicon glyphicon-eject" ng-show="lists[listId].saferemove"></span>
+
             <a href uib-dropdown-toggle>
                 <span class="glyphicon glyphicon-menu-hamburger"></span>
             </a>
@@ -19,12 +22,12 @@
                         <span translate>Upload Files&hellip;</span></a>
                 </li>
                 <li>
-                   <a href ng-click="openDropboxModal()">
+                   <a href ng-click="openDropboxModal()"><i class="glyphicon glyphicon-cloud-download"></i>
                         <span translate>Dropbox</span>&hellip;</a>
                 </li>
-                <li>
+                <li ng-show="lists[listId].saferemove">
                     <a href ng-click="safelyRemoveMedia()">
-                        <i class="glyphicon glyphicon-eject"></i>
+                        <i class="glyphicon glyphicon-floppy-remove"></i>
                         <span translate>Safely Remove USB Drive</span></a>
                 </li>
             </ul>
