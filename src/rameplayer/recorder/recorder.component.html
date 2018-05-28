@@ -138,7 +138,7 @@
                 </h3>
             </div>
             <div class="panel-body form-horizontal" uib-collapse="!$ctrl.config.recorderEnabled">
-              <div class="form-group has-feedback" ng-class="{'has-error': !$ctrl.validRecPath }">
+              <div class="form-group has-feedback" ng-class="{'has-error': $ctrl.hasRecBlockingError }">
                     <label for="streaming-target" class="col-sm-3 control-label" translate>Target File</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="streaming-target" ng-model="$ctrl.config.recordingPath" placeholder="/media/sda1/recording.ts" ng-disabled="$ctrl.statusService.status.recorder.running" ng-change="$ctrl.recPathChanged()">
@@ -147,6 +147,7 @@
                         <span class="help-block" ng-show="$ctrl.errorRecFileExists" translate>File already exists. Please choose another filename.</span>
                         <span class="help-block" ng-show="$ctrl.errorRecNoDir" translate>Directory does not exist. Please choose another directory for recording.</span>
                         <span class="help-block" ng-show="$ctrl.validRecPath && $ctrl.freeSpace"><span translate>Free space:</span> {{ $ctrl.freeSpace | rameByteSize }} ({{ $ctrl.recTimeNote }}{{ $ctrl.recTimeLeft | rameTimeLeft }})</span>
+                        <span class="help-block" ng-show="$ctrl.validRecPath && 0==$ctrl.freeSpace" translate>Disk full!</span>
                     </div>
                 </div> <!-- .form-group -->
 
@@ -232,7 +233,7 @@
 
         </div> <!-- .panel -->
 
-        <button ng-show="!$ctrl.statusService.status.recorder.running" id="start-btn" type="button" class="btn btn-lg btn-primary pull-right" ng-click="$ctrl.start()" ng-disabled="!$ctrl.config.recorderEnabled && !$ctrl.config.streamingEnabled">
+        <button ng-show="!$ctrl.statusService.status.recorder.running" id="start-btn" type="button" class="btn btn-lg btn-primary pull-right" ng-click="$ctrl.start()" ng-disabled="(!$ctrl.config.recorderEnabled || $ctrl.hasRecBlockingError) && !$ctrl.config.streamingEnabled">
             <i class="glyphicon glyphicon-chevron-right"></i>
             <span translate>Start</span>
         </button>

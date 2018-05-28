@@ -136,6 +136,11 @@
                     }
                     ctrl.freeSpace = (response.data.space) ? response.data.space.available : undefined;
                     ctrl.fsType = (response.data.space) ? response.data.space.type : undefined;
+                    ctrl.hasRecBlockingError = !ctrl.validRecPath;
+                    if (ctrl.freeSpace !== undefined && ctrl.freeSpace === 0)
+                    {
+                        ctrl.hasRecBlockingError = true;
+                    }
                     calcTimeLeft();
                 },
                 function(response) {
@@ -145,6 +150,7 @@
                     ctrl.errorRecNoDir = false;
                     ctrl.freeSpace = undefined;
                     ctrl.fsType = undefined;
+                    ctrl.hasRecBlockingError = true;
                 });
         }
 
