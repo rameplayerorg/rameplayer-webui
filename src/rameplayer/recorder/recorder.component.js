@@ -12,7 +12,7 @@
         '$translate', '$location', '$timeout', '$interval'];
 
     function Controller(logger, dataService, statusService, toastr, $translate, $location, $timeout, $interval) {
-        var statusInterval = 10000;
+        var statusInterval = 4000;
         var pollerHandler = null;
 
         var ctrl = this;
@@ -42,6 +42,7 @@
         }
 
         function startRecStatusPoller() {
+            stopRecStatusPoller();
             logger.debug('Starting rec status poller()');
             return $interval(validateRecordingPath, statusInterval);
         }
@@ -61,7 +62,10 @@
         }
 
         function start() {
+            ctrl.statusInfo = '...';
             ctrl.stopping = false;
+            ctrl.recWarning = ctrl.prevRecWarning = null;
+            ctrl.recError = ctrl.prevRecError = null;
             dataService.startRecorderServices(ctrl.config)
                 .then(function(response) {
                     $translate(['STREAMING_STARTED', 'RECORDING_STARTED', 'RECORDING_AND_STREAMING_STARTED'])
@@ -77,9 +81,12 @@
                             }
                         });
 
-                    if (ctrl.config.recorderEnabled) {
-                        pollerHandler = startRecStatusPoller();
-                    }
+                    //if (ctrl.config.recorderEnabled) {
+                    // always start this - we don't need the disk
+                    // space info, but for now we get the other
+                    // status info from there (needs some cleaning up)
+                    pollerHandler = startRecStatusPoller();
+                    //}
                 },
                 function(response) {
                     logger.error('Recorder error', response);
@@ -121,18 +128,43 @@
             }, delay);
         }
 
+        // should rename or split this
         function validateRecordingPath() {
             dataService.getDiskStatus(ctrl.config.recordingPath)
                 .then(function(response) {
+                    ctrl.recWarning = response.data.warn;
+                    ctrl.recError = response.data.error;
+                    if (ctrl.prevRecWarning !== ctrl.recWarning &&
+                        ctrl.recWarning && ctrl.recWarning.length > 0)
+                    {
+                        toastr.warning(ctrl.recWarning, 'Warning', {
+                            timeOut: 0, tapToDismiss: true
+                        });
+                        ctrl.prevRecWarning = ctrl.recWarning;
+                    }
+                    if (ctrl.prevRecError !== ctrl.recError &&
+                        ctrl.recError && ctrl.recError.length > 0)
+                    {
+                        toastr.error(ctrl.recError, 'Error', {
+                            timeOut: 0, tapToDismiss: false, closeButton: true
+                        });
+                        ctrl.prevRecError = ctrl.recError;
+                    }
+
                     if (ctrl.statusService.status.recorder.running) {
                         ctrl.errorRecFileExists = false;
                         ctrl.errorRecNoDir = false;
                         ctrl.validRecPath = true;
+                        ctrl.statusInfo = response.data.info;
+                    }
+                    else if (ctrl.statusService.status.recorder.stopping) {
+                        ctrl.statusInfo = response.data.info;
                     }
                     else {
                         ctrl.errorRecFileExists = !!response.data.file;
                         ctrl.errorRecNoDir = !response.data.dir;
                         ctrl.validRecPath = !ctrl.errorRecFileExists && !ctrl.errorRecNoDir;
+                        ctrl.statusInfo = null;
                     }
                     ctrl.freeSpace = (response.data.space) ? response.data.space.available : undefined;
                     ctrl.fsType = (response.data.space) ? response.data.space.type : undefined;

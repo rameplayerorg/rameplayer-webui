@@ -235,6 +235,8 @@
 
         </div> <!-- .panel -->
 
+        <span style="font-family: monospace; background-color: #226" ng-show="$ctrl.statusService.status.recorder.running">&gt; {{ $ctrl.statusInfo }}</span>
+
         <button ng-show="!$ctrl.statusService.status.recorder.running" id="start-btn" type="button" class="btn btn-lg btn-primary pull-right" ng-click="$ctrl.start()" ng-disabled="(!$ctrl.config.recorderEnabled || $ctrl.hasRecBlockingError) && !$ctrl.config.streamingEnabled">
             <i class="glyphicon glyphicon-chevron-right"></i>
             <span translate>Start</span>
