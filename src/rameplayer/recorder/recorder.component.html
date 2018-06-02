@@ -203,7 +203,7 @@
                         <label>
                             <input type="radio" name="streaming-channels" value="extServer" ng-model="$ctrl.config.streamMode" ng-disabled="$ctrl.statusService.status.recorder.running">
                             <p>
-                                <span translate>External server<br>
+                                <span translate>External server</span><br>
                             </p>
                         </label>
 
@@ -216,7 +216,7 @@
                         <label>
                             <input type="radio" name="streaming-channels" value="custom" ng-model="$ctrl.config.streamMode" ng-disabled="$ctrl.statusService.status.recorder.running">
                             <p>
-                                <span translate>Advanced: Custom options<br>
+                                <span translate>Advanced: Custom options</span><br>
                             </p>
                         </label>
 
@@ -235,18 +235,25 @@
 
         </div> <!-- .panel -->
 
-        <span style="font-family: monospace; background-color: #226" ng-show="$ctrl.statusService.status.recorder.running">&gt; {{ $ctrl.statusInfo }}</span>
+        <div class="row">
+            <div class="well well-sm col-md-10 pull-left">
+                <span translate>Recorder status</span>: <span translate style="font-family: monospace; background-color: #226" ng-show="!$ctrl.statusService.status.recorder.running">Recorder not running</span>
+                <br ng-show="$ctrl.statusService.status.recorder.running">	        	
+                <span style="font-family: monospace; background-color: #226" ng-show="$ctrl.statusService.status.recorder.running">&gt; {{ $ctrl.statusInfo }}</span>
+            </div>
+            <div class="col-md-2">
+                <button ng-show="!$ctrl.statusService.status.recorder.running" id="start-btn" type="button" class="btn btn-lg btn-primary pull-right" ng-click="$ctrl.start()" ng-disabled="(!$ctrl.config.recorderEnabled || $ctrl.hasRecBlockingError) && !$ctrl.config.streamingEnabled">
+                    <i class="glyphicon glyphicon-chevron-right"></i>
+                    <span translate>Start</span>
+                </button>
 
-        <button ng-show="!$ctrl.statusService.status.recorder.running" id="start-btn" type="button" class="btn btn-lg btn-primary pull-right" ng-click="$ctrl.start()" ng-disabled="(!$ctrl.config.recorderEnabled || $ctrl.hasRecBlockingError) && !$ctrl.config.streamingEnabled">
-            <i class="glyphicon glyphicon-chevron-right"></i>
-            <span translate>Start</span>
-        </button>
-
-        <button ng-show="$ctrl.statusService.status.recorder.running" id="start-btn" type="button" class="btn btn-lg pull-right" ng-click="$ctrl.stop()" ng-class="{'btn-danger': $ctrl.statusService.status.recorder.recording && !$ctrl.statusService.status.recorder.streaming, 'btn-warning': !$ctrl.statusService.status.recorder.recording && $ctrl.statusService.status.recorder.streaming, 'btn-primary': $ctrl.statusService.status.recorder.recording && $ctrl.statusService.status.recorder.streaming }" ng-disabled="$ctrl.stopping">
-            <i class="glyphicon glyphicon-stop"></i>
-            <span ng-show="!$ctrl.stopping" translate>Stop</span>
-            <span ng-show="$ctrl.stopping" translate>Stopping...</span>
-        </button>
+                <button ng-show="$ctrl.statusService.status.recorder.running" id="start-btn" type="button" class="btn btn-lg pull-right" ng-click="$ctrl.stop()" ng-class="{'btn-danger': $ctrl.statusService.status.recorder.recording && !$ctrl.statusService.status.recorder.streaming, 'btn-warning': !$ctrl.statusService.status.recorder.recording && $ctrl.statusService.status.recorder.streaming, 'btn-primary': $ctrl.statusService.status.recorder.recording && $ctrl.statusService.status.recorder.streaming }" ng-disabled="$ctrl.stopping">
+                    <i class="glyphicon glyphicon-stop"></i>
+                    <span ng-show="!$ctrl.stopping" translate>Stop</span>
+                    <span ng-show="$ctrl.stopping" translate>Stopping...</span>
+                </button>
+            </div>
+        </div>
 
     </div> <!-- .col -->
 </div> <!-- .row -->
