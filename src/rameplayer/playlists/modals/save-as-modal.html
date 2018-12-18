@@ -20,12 +20,20 @@
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox" ng-model="saveAs.bootList" ng-change="saveAs.bootListChanged()"> <span translate>Play this when device starts</span>
+                <input type="checkbox" ng-model="saveAs.bootList" ng-change="saveAs.bootListChanged()"> 
+                <span translate>Play this when device starts</span>
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox" ng-model="saveAs.autoPlayNext" ng-disabled="saveAs.bootList"> <span translate>Continuous play, repeating all</span>
+                <input type="checkbox" ng-model="saveAs.autoPlayNext" ng-disabled="saveAs.bootList" ng-change="saveAs.autoPlayChanged()"> 
+                <span translate>Continuous play, repeating all</span>
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="saveAs.shufflePlay" ng-disabled="saveAs.autoPlayNext !== true">
+                <span translate>Randomize continuous play order</span>
             </label>
         </div>
     </div>

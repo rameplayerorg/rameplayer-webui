@@ -5,10 +5,10 @@
         .module('rameplayer.playlists')
         .controller('EditModalController', EditModalController);
 
-    EditModalController.$inject = ['$rootScope', '$timeout', '$log', '$uibModalInstance',
+    EditModalController.$inject = ['$rootScope', '$timeout', '$log', '$uibModalInstance', 'logger',
         'listId', 'storageOptions', 'playlistIds', 'ListIds'];
 
-    function EditModalController($rootScope, $timeout, $log, $uibModalInstance,
+    function EditModalController($rootScope, $timeout, $log, $uibModalInstance, logger,
                                  listId, storageOptions, playlistIds, ListIds) {
         var vm = this;
 
@@ -26,8 +26,11 @@
         vm.cancel = cancel;
         vm.bootList = (vm.title === bootTitle);
         vm.bootListChanged = bootListChanged;
+        vm.autoPlayChanged = autoPlayChanged;
         vm.titleExists = false;
         vm.autoPlayNext = (!!playlist.autoPlayNext); // convert to boolean
+        vm.shufflePlay = playlist.shufflePlay;
+        //logger.debug('Playlist shuffleplay for modal; ', vm.shufflePlay);
 
         $uibModalInstance.opened.then(function() {
             // focus to input field
@@ -52,7 +55,8 @@
                 $uibModalInstance.close({
                     title: vm.title,
                     storage: vm.storage,
-                    autoPlayNext: vm.autoPlayNext
+                    autoPlayNext: vm.autoPlayNext,
+                    shufflePlay: vm.shufflePlay,
                 });
             }
         }
@@ -83,8 +87,15 @@
                 }
                 vm.title = tmpTitle;
                 vm.autoPlayNext = false;
+                vm.shufflePlay = false;
             }
             vm.titleExists = titleExists();
+        }
+        
+        function autoPlayChanged() {
+            if (vm.shufflePlay && !vm.autoPlayNext) {
+                vm.shufflePlay = false;
+            }
         }
 
         function titleExists() {

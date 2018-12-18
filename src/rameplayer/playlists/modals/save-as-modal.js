@@ -26,8 +26,10 @@
         var bootTitle = ListIds.AUTOPLAY;
         vm.bootList = (vm.title === bootTitle);
         vm.bootListChanged = bootListChanged;
+        vm.autoPlayChanged = autoPlayChanged;
         vm.titleExists = false;
         vm.autoPlayNext = false;
+        vm.shufflePlay = false;
 
         $uibModalInstance.opened.then(function() {
             // focus to input field
@@ -52,7 +54,8 @@
                 $uibModalInstance.close({
                     title: vm.title,
                     storage: vm.storage,
-                    autoPlayNext: vm.autoPlayNext
+                    autoPlayNext: vm.autoPlayNext,
+                    shufflePlay: vm.shufflePlay
                 });
             }
         }
@@ -83,8 +86,15 @@
                 }
                 vm.title = tmpTitle;
                 vm.autoPlayNext = false;
+                vm.shufflePlay = false;
             }
             vm.titleExists = titleExists();
+        }
+        
+        function autoPlayChanged() {
+            if (vm.shufflePlay && !vm.autoPlayNext) {
+                vm.shufflePlay = false;
+            }
         }
 
         function titleExists() {

@@ -15,18 +15,28 @@
         </div>
         <div class="form-group">
             <label for="newPlaylistStorage" translate>Storage</label>
-            <select id="newPlaylistStorage" class="form-control" name="storage" ng-model="vm.storage" ng-options="storage.value as storage.name for storage in vm.storageOptions">
+            <select id="newPlaylistStorage" class="form-control" name="storage" 
+                    ng-model="vm.storage" ng-options="storage.value as storage.name for storage in vm.storageOptions">
             </select>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" ng-model="vm.bootList" ng-change="vm.bootListChanged()"> <span translate>Play this when device starts</span>
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" ng-model="vm.autoPlayNext" ng-disabled="vm.bootList"> <span translate>Continuous play, repeating all</span>
-            </label>
+        
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="vm.bootList" ng-change="vm.bootListChanged()">
+                    <span translate>Play this when device starts</span>
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="vm.autoPlayNext" ng-disabled="vm.bootList" ng-change="vm.autoPlayChanged()">
+                    <span translate>Continuous play, repeating all</span>
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="vm.shufflePlay" ng-disabled="vm.autoPlayNext !== true">
+                    <span translate>Randomize continuous play order</span>
+                </label>
+            </div>
         </div>
     </div>
 

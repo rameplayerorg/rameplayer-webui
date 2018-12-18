@@ -93,6 +93,7 @@
                         storage: result.storage,
                         autoPlayNext: result.autoPlayNext,
                         repeat: (result.autoPlayNext ? -1 : 0),
+                        shufflePlay: result.shufflePlay, 
                         items: []
                     };
                     for (var i = 0; i < $rootScope.lists[vm.listId].items.length; i++) {
@@ -222,6 +223,7 @@
                 playlist.storage = result.storage;
                 playlist.autoPlayNext = result.autoPlayNext;
                 playlist.repeat = result.autoPlayNext ? -1 : 0;
+                playlist.shufflePlay = result.shufflePlay;
                 logger.debug('Edit playlist', playlist);
                 playlist.update();
             });
