@@ -1,6 +1,6 @@
 <rame-device-info></rame-device-info>
 
-<div class="container" ng-controller="MediaController as vmmc" ng-cloak ng-class="{'cluster-stopped': vmmc.clusterService.clusterStatus.state === 'stopped' }">
+<div class="container-fluid" ng-controller="MediaController as vmmc" ng-cloak ng-class="{'cluster-stopped': vmmc.clusterService.clusterStatus.state === 'stopped' }">
     <uib-tabset type="pills">
         <uib-tab ng-repeat="listId in vmmc.rootChildren">
             <tab-heading translate>{{ vmmc.lists[listId].title }}</tab-heading>
