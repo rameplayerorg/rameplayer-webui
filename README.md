@@ -12,7 +12,7 @@ Angular Web UI for RamePlayer
 - On OSX you can alleviate the need to run as sudo by [following these instructions](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md)
 - Open terminal
 - Type `npm install bower gulp`
-- For building you need: `npm install chai del gulp-angular-templatecache gulp-load-plugins gulp-autoprefixer gulp-bytediff gulp-concat gulp-filter gulp-inject gulp-jscs gulp-jshint gulp-cssnano gulp-htmlmin gulp-notify gulp-ng-annotate gulp-rev gulp-rev-replace gulp-task-listing gulp-uglify karma karma-chai karma-mocha karma-phantomjs-launcher karma-sinon jshint jshint-stylish merge-stream phantomjs phantomjs-prebuilt sinon`
+- For building you need: `npm install chai del gulp-angular-templatecache gulp-load-plugins gulp-autoprefixer gulp-bytediff gulp-concat gulp-filter gulp-inject gulp-jscs gulp-jshint gulp-cssnano gulp-htmlmin gulp-notify gulp-ng-annotate gulp-rev gulp-rev-replace gulp-task-listing gulp-uglify karma karma-chai karma-mocha karma-phantomjs-launcher karma-sinon jshint jshint-stylish merge-stream phantomjs phantomjs-prebuilt sinon natives`
 
 ## Installing Node.js and Bower Packages
 - Open terminal
