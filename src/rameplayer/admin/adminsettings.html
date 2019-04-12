@@ -240,14 +240,14 @@
                         <div class="form-group row">
                             <label for="ntpHostname"
                                 class="col-sm-3 control-label"
-                                translate>NTP server</label>
+                                translate>NTP servers</label>
                             <div class="col-sm-9">
                                 <input type="text"
                                     name="ntpHostname"
                                     id="ntpHostname"
                                     class="form-control"
-                                    ng-model="vm.ntpServerAddress"                                        
-                                    ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?(\.[a-z\d]([a-z\d\-]{0,61}[a-z\d])?)*$/i"
+                                    ng-model="vm.ntpServerAddress"
+                                    ng-pattern="/^[a-z\d]([a-z\d\-]{0,61}[a-z\d])?((\.|,)[a-z\d]([a-z\d\-]{0,61}[a-z\d])?)*$/i"
                                     ng-minlength="1"
                                     ng-maxlength="253" />
                                     <!-- ng-disabled="vm.useManualTimeConfigs || vm.useNtpIp" -->
@@ -304,7 +304,7 @@
                                 <input type="checkbox"
                                     ng-click="vm.manualTimeConfig"
                                     ng-model="vm.useManualTimeConfigs">
-                                <span translate>Set date and time manually</span>
+                                <span translate>Set date and time manually (UTC)</span>
                             </label>
                             <div class="row center-block">
                                 <div class="form-horizontal">
