@@ -30,6 +30,15 @@
         vm.titleExists = false;
         vm.autoPlayNext = false;
         vm.shufflePlay = false;
+        vm.scheduledList = false;
+        vm.scheduledOnMon = false;
+        vm.scheduledOnTue = false;
+        vm.scheduledOnWed = false;
+        vm.scheduledOnThu = false;
+        vm.scheduledOnFri = false;
+        vm.scheduledOnSat = false;
+        vm.scheduledOnSun = false;
+        vm.timeUserInput = null;
 
         $uibModalInstance.opened.then(function() {
             // focus to input field

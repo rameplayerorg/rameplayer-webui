@@ -1,4 +1,4 @@
-<form>
+<form name="savelist">
     <div class="modal-header">
         <h3><span translate>Save Playlist</span></h3>
     </div>
@@ -35,6 +35,65 @@
                 <input type="checkbox" ng-model="saveAs.shufflePlay" ng-disabled="saveAs.autoPlayNext !== true">
                 <span translate>Randomize continuous play order</span>
             </label>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="saveAs.scheduledList" ng-disabled="saveAs.bootList" ng-change="saveAs.scheduledListChanged()"> 
+                    <span translate>Play list on scheduled time</span>
+                </label>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-1">
+                        <div class="row">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" ng-model="saveAs.scheduledOnMon" ng-disabled="!saveAs.scheduledList">
+                                <span translate>Mon</span>
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" ng-model="saveAs.scheduledOnTue" ng-disabled="!saveAs.scheduledList">
+                                <span translate>Tue</span>
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" ng-model="saveAs.scheduledOnWed" ng-disabled="!saveAs.scheduledList">
+                                <span translate>Wed</span>
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" ng-model="saveAs.scheduledOnThu" ng-disabled="!saveAs.scheduledList">
+                                <span translate>Thu</span>
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" ng-model="saveAs.scheduledOnFri" ng-disabled="!saveAs.scheduledList">
+                                <span translate>Fri</span>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" ng-model="saveAs.scheduledOnSat" ng-disabled="!saveAs.scheduledList">
+                                <span translate>Sat</span>
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" ng-model="saveAs.scheduledOnSun" ng-disabled="!saveAs.scheduledList">
+                                <span translate>Sun</span>
+                            </label>
+                        </div>
+                </div>
+                <div class="col-sm-4">
+                    <label class="control-label" for="timeInput">
+                        <span translate>Time:</span>
+                        <em class="text-muted">HH:mm:ss</em>
+                        <span class="text-warning glyphicon glyphicon-alert" 
+                            ng-show="!savelist.timeInput.$valid">
+                        </span>
+                    </label>
+                    <input type="text" class="form-control"
+                        id="timeInput" name="timeInput"
+                        ng-model="saveAs.timeUserInput"
+                        ng-disabled="!saveAs.scheduledList"
+                        placeholder="HH:mm:ss"
+                        ng-pattern="/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5]?[0-9](:[0-5]?[0-9])?$/" />
+                </div>
+                </div>
+            </div>
         </div>
     </div>
 
