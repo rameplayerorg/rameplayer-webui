@@ -1,4 +1,4 @@
-<form>
+<form name="editlist">
     <div class="modal-header">
         <h3 translate>Edit Playlist Properties</h3>
     </div>
@@ -36,6 +36,79 @@
                     <input type="checkbox" ng-model="vm.shufflePlay" ng-disabled="vm.autoPlayNext !== true">
                     <span translate>Randomize continuous play order</span>
                 </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="vm.scheduledList" ng-disabled="vm.bootList"> 
+                    <span translate>Start playing this list on scheduled time and day of week</span>
+                </label>
+                <div class="row">
+                    <div class="col-sm-4 col-sm-offset-1">
+                        <label class="control-label" for="timeInput">
+                            <span translate>Time:</span>
+                            <em class="text-muted">HH:mm[:ss]</em>
+                            <span class="text-warning glyphicon glyphicon-alert" 
+                                ng-show="!editlist.timeInput.$valid">
+                            </span>
+                        </label>
+                        <input type="text" class="form-control"
+                            id="timeInput" name="timeInput"
+                            ng-model="vm.timeUserInput"
+                            ng-disabled="!vm.scheduledList"
+                            placeholder="HH:mm:ss"
+                            ng-pattern="/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5]?[0-9](:[0-5]?[0-9])?$/" />
+                    </div>
+                    <div class="col-sm-6 col-sm-offset-1">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" ng-model="vm.scheduledOnMon" ng-disabled="!vm.scheduledList">
+                                    <span translate>Mon</span>
+                                </label>
+                            </div>
+                            <div class="col-sm-1 col-sm-offset-1">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" ng-model="vm.scheduledOnTue" ng-disabled="!vm.scheduledList">
+                                    <span translate>Tue</span>
+                                </label>
+                            </div>
+                            <div class="col-sm-1 col-sm-offset-1">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" ng-model="vm.scheduledOnWed" ng-disabled="!vm.scheduledList">
+                                    <span translate>Wed</span>
+                                </label>
+                            </div>
+                            <div class="col-sm-1 col-sm-offset-1">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" ng-model="vm.scheduledOnThu" ng-disabled="!vm.scheduledList">
+                                    <span translate>Thu</span>
+                                </label>
+                            </div>
+                            <div class="col-sm-1 col-sm-offset-1">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" ng-model="vm.scheduledOnFri" ng-disabled="!vm.scheduledList">
+                                    <span translate>Fri</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" ng-model="vm.scheduledOnSat" ng-disabled="!vm.scheduledList">
+                                    <span translate>Sat</span>
+                                </label>
+                            </div>
+                            <div class="col-sm-1 col-sm-offset-1">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" ng-model="vm.scheduledOnSun" ng-disabled="!vm.scheduledList">
+                                    <span translate>Sun</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

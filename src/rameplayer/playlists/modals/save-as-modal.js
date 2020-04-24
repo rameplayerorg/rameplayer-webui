@@ -64,7 +64,16 @@
                     title: vm.title,
                     storage: vm.storage,
                     autoPlayNext: vm.autoPlayNext,
-                    shufflePlay: vm.shufflePlay
+                    shufflePlay: vm.shufflePlay,
+                    scheduled: vm.scheduledList,
+                    scheduledOnMon: vm.scheduledOnMon, 
+                    scheduledOnTue: vm.scheduledOnTue,
+                    scheduledOnWed: vm.scheduledOnWed,
+                    scheduledOnThu: vm.scheduledOnThu,
+                    scheduledOnFri: vm.scheduledOnFri,
+                    scheduledOnSat: vm.scheduledOnSat,
+                    scheduledOnSun: vm.scheduledOnSun,
+                    scheduledTime: vm.timeUserInput,
                 });
             }
         }
@@ -88,6 +97,7 @@
                 tmpTitle = vm.title;
                 vm.title = bootTitle;
                 vm.autoPlayNext = true;
+                vm.scheduledList = false;
             }
             else {
                 if (tmpTitle === bootTitle) {

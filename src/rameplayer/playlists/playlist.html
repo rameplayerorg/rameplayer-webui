@@ -8,6 +8,20 @@
                         <span ng-switch-default>{{ vm.lists[vm.listId].title }}</span>
                     </span>
                     <span class="pull-right">
+                        <!-- scheduled play time -->
+                        <span ng-show="vm.lists[vm.listId].scheduled">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                            <span ng-show="vm.lists[vm.listId].scheduledOnMon" translate>Mon</span>
+                            <span ng-show="vm.lists[vm.listId].scheduledOnTue" translate>Tue</span>
+                            <span ng-show="vm.lists[vm.listId].scheduledOnWed" translate>Wed</span>
+                            <span ng-show="vm.lists[vm.listId].scheduledOnThu" translate>Thu</span>
+                            <span ng-show="vm.lists[vm.listId].scheduledOnFri" translate>Fri</span>
+                            <span ng-show="vm.lists[vm.listId].scheduledOnSat" translate>Sat</span>
+                            <span ng-show="vm.lists[vm.listId].scheduledOnSun" translate>Sun</span>&nbsp;
+                            <i class="glyphicon glyphicon-time"></i>
+                            {{ vm.lists[vm.listId].scheduledTime }}&nbsp;&nbsp;
+                        </span>
+                        
                         <!-- existing synchronizations -->
                         <span ng-repeat="unit in vm.sync.units" class="media-list-sync-icon" ng-style="{ 'color': unit.color }">
                             <i class="glyphicon glyphicon-refresh"></i>
