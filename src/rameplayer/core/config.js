@@ -292,6 +292,7 @@
             'Play this when device starts': 'Soita tämä lista kun laite käynnistyy',
             'Continuous play, repeating all': 'Soita peräkkäin ja toista alusta',
             'Randomize continuous play order': 'Soita peräkkäin satunnaisessa järjestyksessä',
+            'Start playing this list on scheduled time and day of week': 'Aloita listan soitto ajastettuna kellonaikana ja viikonpäivänä', // jshint ignore:line
             // playlist.html
             'Playlist is empty.': 'Soittolista on tyhjä.',
             'Title': 'Otsikko',
@@ -305,6 +306,13 @@
             'Clear': 'Tyhjennä',
             'Edit Properties': 'Muokkaa ominaisuuksia',
             'Stop synchronizing this playlist': 'Lakkaa synkronoimasta tätä soittolistaa',
+            'Mon': 'Ma',
+            'Tue': 'Ti',
+            'Wed': 'Ke',
+            'Thu': 'To',
+            'Fri': 'Pe',
+            'Sat': 'La',
+            'Sun': 'Su',
             // edit-modal.html
             'Edit Playlist Properties': 'Muokkaa soittolistan ominaisuuksia',
             // add-stream-modal.html

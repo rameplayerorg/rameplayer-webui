@@ -31,6 +31,17 @@
         vm.autoPlayNext = (!!playlist.autoPlayNext); // convert to boolean
         vm.shufflePlay = playlist.shufflePlay;
         //logger.debug('Playlist shuffleplay for modal; ', vm.shufflePlay);
+        //logger.debug('Playlist bootlist for modal; ', vm.bootlist);
+        vm.scheduledList = (!!playlist.scheduled);
+        vm.scheduledOnMon = (!!playlist.scheduledOnMon);
+        vm.scheduledOnTue = (!!playlist.scheduledOnTue);
+        vm.scheduledOnWed = (!!playlist.scheduledOnWed);
+        vm.scheduledOnThu = (!!playlist.scheduledOnThu);
+        vm.scheduledOnFri = (!!playlist.scheduledOnFri);
+        vm.scheduledOnSat = (!!playlist.scheduledOnSat);
+        vm.scheduledOnSun = (!!playlist.scheduledOnSun);
+        vm.timeUserInput = playlist.scheduledTime;
+        //logger.debug('Playlist scheduledTime for modal; ', vm.timeUserInput);
 
         $uibModalInstance.opened.then(function() {
             // focus to input field
@@ -57,6 +68,15 @@
                     storage: vm.storage,
                     autoPlayNext: vm.autoPlayNext,
                     shufflePlay: vm.shufflePlay,
+                    scheduled: vm.scheduledList,
+                    scheduledOnMon: vm.scheduledOnMon,
+                    scheduledOnTue: vm.scheduledOnTue,
+                    scheduledOnWed: vm.scheduledOnWed,
+                    scheduledOnThu: vm.scheduledOnThu,
+                    scheduledOnFri: vm.scheduledOnFri,
+                    scheduledOnSat: vm.scheduledOnSat,
+                    scheduledOnSun: vm.scheduledOnSun,
+                    scheduledTime: vm.timeUserInput,
                 });
             }
         }
@@ -80,6 +100,7 @@
                 tmpTitle = vm.title;
                 vm.title = bootTitle;
                 vm.autoPlayNext = true;
+                vm.scheduledList = false;
             }
             else {
                 if (tmpTitle === bootTitle) {
