@@ -2,10 +2,11 @@ language: node_js
 node_js:
 - '4.1'
 before_script:
-- npm install -g bower@1.8.8 gulp@4.0.2 del@4.1.1 gulp-angular-templatecache@3.0.0 gulp-autoprefixer@6.1.0 gulp-bytediff@1.0.0
-  gulp-concat@2.6.1 gulp-filter@5.1.0 gulp-inject@5.0.2 gulp-jscs@ gulp-jshint@2.1.0 gulp-cssnano@2.1.3 gulp-htmlmin@5.0.1
-  gulp-notify@3.2.0 gulp-ng-annotate@2.1.0 gulp-rev@9.0.0 gulp-rev-replace@0.4.4 gulp-task-listing@1.1.0 gulp-uglify@3.0.2
-  jshint@2.10.2 jshint-stylish@2.2.1 merge-stream@1.0.1
+- npm install -g bower@1.8.8 gulp@4.0.2 del@4.1.1 gulp-angular-templatecache@3.0.0
+  gulp-autoprefixer@6.1.0 gulp-bytediff@1.0.0 gulp-concat@2.6.1 gulp-filter@5.1.0
+  gulp-inject@5.0.2 gulp-jscs@ gulp-jshint@2.1.0 gulp-cssnano@2.1.3 gulp-htmlmin@5.0.1
+  gulp-notify@3.2.0 gulp-ng-annotate@2.1.0 gulp-rev@9.0.0 gulp-rev-replace@0.4.4 gulp-task-listing@1.1.0
+  gulp-uglify@3.0.2 jshint@2.10.2 jshint-stylish@2.2.1 merge-stream@1.0.1
 script:
 - npm install
 - bower install
@@ -22,9 +23,10 @@ notifications:
 deploy:
   provider: releases
   api_key:
-    secure: BeBy0Om4Md9JinUlV023JygGS4ymQwvhGsE6KCgfhi+UScblcqRLbJulJIshiFwuQRYwhyEoHvF6lAlqyHz5kJaqwl8Gb/CiFYjDwLncwr/Tw0xrSl6WbKfcmqameppEYjCqLozAu7/HuDbc3Dc355qqbRMLAU1S3Q9xTLkUuN4wSf6ePzbj0AQjwaTzvHOtPLT7wuUto7K/fAzwfwSNWQ8ahShW1DZWxdouQ7zuMcg6gdHjlDS2BfvwWIcRcQ2epo8ThQAPFFUl7eQwxbJCZV1kJ2+oJw37AE/t7n2et3OT8JLMWmK88/cKJnJe+n61Wo5bEGFDE/XjfDofrLG1vcl9MpRE5bnnM2aJGeFg/yOH5WWtnTGBRvLNbx6FoJcYi3BTnzJWdGl/1GJJH59R1/XrYcjht7iD7b8sSAk34XdDITcnFzPVdfkEpiPhRNi4eN1xdmGRcKeXFdXczIpbdj3Y5OgKbZgKr4e8bQZCC2Q3EVPkRFjDgLge8Ji2HwAH1NzW57yBOVphJslbuEChuF4OjHvYgyR1euim7947pq7hN8bn4HGSd6/A3A/tg2OgVER3nUgIFkliqWFBAihopeQBjMG6ee2OVcq7Otwy2ocZkQj+aetNOCrAm101abNtQDQ8nwH5Rh+YsaHhGW7rCdJ2G9UeHdu33311+z2vi5M=
+    secure: 0oiv2qc+qvqQV81gUQ+tY1VFLriH/syFn0U9+5+946neEW6tH7rzMpzma15Oe4VcJMBe7X0TQbWF4H5BqZnI7KHKDMGzCrN4JAnDPeNMG8WG5znPiHBKfoKYTz+FgjIH72HMemnpjoyYReKcooskHcR99CinaiJeRYi9ltoHl0rNxoxjtN+As1O0dN6ixPlZbctahCdMJk506q/t59IEH1leezXVLClwaE3erct30HMFgcoNmM5kIo5FvqclzZHoof15wqlBjiuP5PjwqnPgRI+KmESTKGjzLlz38AsQCNq0d24wHjVJG7BoOnMBo7uxDrBKgiNjnoftQ8VuPjMhUQ/A89we5Vsz1CriZg+Cp+w/98qdUkwQ2uj+Yl4E2vJlpbkjgIGwiVe3z6a7p+5wX5vJA3bWisDOS5kL1h8Em6Xx7XVyVd7PuNJTwagJ1RtIqJ7HZPdSbU0xlwwceZ9V2Zy35Vn4MEIk+2uuq/wEizxh16IKPEt0KfgSBUqfKiY/wkfWhi+tp5tjJB/JxEyfbVk3BSgPFZzNGtrMhtbwmflxPvtSgX5Mlcf/pi8VrVDyw1It0SVbani92tCTOyIVVBqvTmw/RL+7o5HmTh/63F2oOuxqP2JbuZKrxPewHE1fxRTtVXxmw3evPe61bH6cCL6ZH47pTVEhMo1GRTt/QeY=
   file: rameplayer-webui-build.tar.gz
   skip_cleanup: true
   on:
     tags: true
     all_branches: true
+    repo: rameplayerorg/rameplayer-webui
