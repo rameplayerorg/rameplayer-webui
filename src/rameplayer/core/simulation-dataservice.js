@@ -317,6 +317,11 @@
                     title: playlist.title,
                     refreshed: date.getTime(),
                     type: 'playlist',
+                    autoPlayNext: playlist.autoPlayNext,
+                    shufflePlay: playlist.shufflePlay,
+                    scheduled: playlist.scheduled,
+                    scheduledMonSun: playlist.scheduledMonSun,
+                    scheduledTime: playlist.scheduledTime,
                     items: []
                 };
                 for (var i = 0; i < playlist.items.length; i++) {
