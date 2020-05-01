@@ -1,3 +1,4 @@
+/*jshint bitwise: false*/
 (function() {
     'use strict';
 
@@ -38,7 +39,8 @@
         vm.scheduledOnFri = false;
         vm.scheduledOnSat = false;
         vm.scheduledOnSun = false;
-        vm.timeUserInput = null;
+        vm.timeUserInput = '';
+        vm.getSecondsFromMidnight = getSecondsFromMidnight;
 
         $uibModalInstance.opened.then(function() {
             // focus to input field
@@ -66,14 +68,11 @@
                     autoPlayNext: vm.autoPlayNext,
                     shufflePlay: vm.shufflePlay,
                     scheduled: vm.scheduledList,
-                    scheduledOnMon: vm.scheduledOnMon, 
-                    scheduledOnTue: vm.scheduledOnTue,
-                    scheduledOnWed: vm.scheduledOnWed,
-                    scheduledOnThu: vm.scheduledOnThu,
-                    scheduledOnFri: vm.scheduledOnFri,
-                    scheduledOnSat: vm.scheduledOnSat,
-                    scheduledOnSun: vm.scheduledOnSun,
-                    scheduledTime: vm.timeUserInput,
+                    scheduledMonSun : [vm.scheduledOnMon, vm.scheduledOnTue,
+                            vm.scheduledOnWed, vm.scheduledOnThu,
+                            vm.scheduledOnFri, vm.scheduledOnSat,
+                            vm.scheduledOnSun],
+                    scheduledTime: vm.getSecondsFromMidnight(),
                 });
             }
         }
@@ -126,6 +125,21 @@
                 }
             }
             return false;
+        }
+        
+        function getSecondsFromMidnight() {
+            //$log.debug('Playlist getSecondsFromMidnight for SAVEAS modal; ', vm.timeUserInput);
+            if (vm.timeUserInput !== undefined) {
+                var hms = vm.timeUserInput.split(':');
+                if (hms.length < 2 || hms.length > 3) {
+                    return 0;
+                }
+                if (hms.length === 2) {
+                    hms.push(0);
+                }
+                return (+hms[0]) * 60 * 60 + (+hms[1]) * 60 + (+hms[2]); // +infront to enforce number
+            }
+            return 0;
         }
     }
 })();

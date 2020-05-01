@@ -95,13 +95,7 @@
                         repeat: (result.autoPlayNext ? -1 : 0),
                         shufflePlay: result.shufflePlay,
                         scheduled: result.scheduled,
-                        scheduledOnMon: result.scheduledOnMon, 
-                        scheduledOnTue: result.scheduledOnTue,
-                        scheduledOnWed: result.scheduledOnWed,
-                        scheduledOnThu: result.scheduledOnThu,
-                        scheduledOnFri: result.scheduledOnFri,
-                        scheduledOnSat: result.scheduledOnSat,
-                        scheduledOnSun: result.scheduledOnSun,
+                        scheduledMonSun: result.scheduledMonSun,
                         scheduledTime: result.scheduledTime,
                         items: []
                     };
@@ -234,13 +228,7 @@
                 playlist.repeat = result.autoPlayNext ? -1 : 0;
                 playlist.shufflePlay = result.shufflePlay;
                 playlist.scheduled = result.scheduled;
-                playlist.scheduledOnMon = result.scheduledOnMon; 
-                playlist.scheduledOnTue = result.scheduledOnTue;
-                playlist.scheduledOnWed = result.scheduledOnWed;
-                playlist.scheduledOnThu = result.scheduledOnThu;
-                playlist.scheduledOnFri = result.scheduledOnFri;
-                playlist.scheduledOnSat = result.scheduledOnSat;
-                playlist.scheduledOnSun = result.scheduledOnSun;
+                playlist.scheduledMonSun = result.scheduledMonSun;
                 playlist.scheduledTime = result.scheduledTime;
                 logger.debug('Edit playlist', playlist);
                 playlist.update();

@@ -1,3 +1,4 @@
+/*jshint bitwise: false*/
 (function() {
     'use strict';
 
@@ -33,15 +34,18 @@
         //logger.debug('Playlist shuffleplay for modal; ', vm.shufflePlay);
         //logger.debug('Playlist bootlist for modal; ', vm.bootlist);
         vm.scheduledList = (!!playlist.scheduled);
-        vm.scheduledOnMon = (!!playlist.scheduledOnMon);
-        vm.scheduledOnTue = (!!playlist.scheduledOnTue);
-        vm.scheduledOnWed = (!!playlist.scheduledOnWed);
-        vm.scheduledOnThu = (!!playlist.scheduledOnThu);
-        vm.scheduledOnFri = (!!playlist.scheduledOnFri);
-        vm.scheduledOnSat = (!!playlist.scheduledOnSat);
-        vm.scheduledOnSun = (!!playlist.scheduledOnSun);
-        vm.timeUserInput = playlist.scheduledTime;
-        //logger.debug('Playlist scheduledTime for modal; ', vm.timeUserInput);
+        vm.scheduledMonSun = (playlist.scheduledMonSun === undefined || playlist.scheduledMonSun.length < 7) ? 
+                            [false, false, false, false, false, false, false] : playlist.scheduledMonSun;
+        vm.scheduledOnMon = (!!vm.scheduledMonSun[0]);
+        vm.scheduledOnTue = (!!vm.scheduledMonSun[1]);
+        vm.scheduledOnWed = (!!vm.scheduledMonSun[2]);
+        vm.scheduledOnThu = (!!vm.scheduledMonSun[3]);
+        vm.scheduledOnFri = (!!vm.scheduledMonSun[4]);
+        vm.scheduledOnSat = (!!vm.scheduledMonSun[5]);
+        vm.scheduledOnSun = (!!vm.scheduledMonSun[6]);
+        vm.timeUserInput = getScheduledTime(playlist);
+        vm.getSecondsFromMidnight = getSecondsFromMidnight;
+        //logger.debug('Playlist  for modal; ', playlist);
 
         $uibModalInstance.opened.then(function() {
             // focus to input field
@@ -69,14 +73,11 @@
                     autoPlayNext: vm.autoPlayNext,
                     shufflePlay: vm.shufflePlay,
                     scheduled: vm.scheduledList,
-                    scheduledOnMon: vm.scheduledOnMon,
-                    scheduledOnTue: vm.scheduledOnTue,
-                    scheduledOnWed: vm.scheduledOnWed,
-                    scheduledOnThu: vm.scheduledOnThu,
-                    scheduledOnFri: vm.scheduledOnFri,
-                    scheduledOnSat: vm.scheduledOnSat,
-                    scheduledOnSun: vm.scheduledOnSun,
-                    scheduledTime: vm.timeUserInput,
+                    scheduledMonSun : [vm.scheduledOnMon, vm.scheduledOnTue,
+                        vm.scheduledOnWed, vm.scheduledOnThu,
+                        vm.scheduledOnFri, vm.scheduledOnSat,
+                        vm.scheduledOnSun],
+                    scheduledTime: vm.getSecondsFromMidnight(),
                 });
             }
         }
@@ -129,6 +130,33 @@
                 }
             }
             return false;
+        }
+        
+        function getSecondsFromMidnight() {
+            //logger.debug('Playlist getSecondsFromMidnight for edit modal; ', vm.timeUserInput);
+            if (vm.timeUserInput !== undefined) {
+                var hms = vm.timeUserInput.split(':');
+                if (hms.length < 2 || hms.length > 3) {
+                    return 0;
+                }
+                if (hms.length === 2) {
+                    hms.push(0);
+                }
+                return (+hms[0]) * 60 * 60 + (+hms[1]) * 60 + (+hms[2]); // +infront to enforce number
+            }
+            return 0;
+        }
+
+        function getScheduledTime(playlist) {
+            var time = (playlist.scheduledTime === undefined) ? 0 : playlist.scheduledTime;
+            // slice to pad with front zeros, |0 to keep it integer
+            var res = ('0' + ((time / (60 * 60)) | 0)).slice(-2) + ':' +  
+                      ('0' + (((time / 60) | 0) % 60)).slice(-2);
+            if (time % 60 !== 0) {
+                res = res + ':' + ('0' + time % 60).slice(-2);
+            }
+            //logger.debug('Playlist getSscheduledTime for modal; ', res);
+            return res;
         }
     }
 })();

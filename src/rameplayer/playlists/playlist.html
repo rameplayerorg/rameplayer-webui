@@ -9,17 +9,19 @@
                     </span>
                     <span class="pull-right">
                         <!-- scheduled play time -->
-                        <span ng-show="vm.lists[vm.listId].scheduled">
-                            <i class="glyphicon glyphicon-calendar"></i>
-                            <span ng-show="vm.lists[vm.listId].scheduledOnMon" translate>Mon</span>
-                            <span ng-show="vm.lists[vm.listId].scheduledOnTue" translate>Tue</span>
-                            <span ng-show="vm.lists[vm.listId].scheduledOnWed" translate>Wed</span>
-                            <span ng-show="vm.lists[vm.listId].scheduledOnThu" translate>Thu</span>
-                            <span ng-show="vm.lists[vm.listId].scheduledOnFri" translate>Fri</span>
-                            <span ng-show="vm.lists[vm.listId].scheduledOnSat" translate>Sat</span>
-                            <span ng-show="vm.lists[vm.listId].scheduledOnSun" translate>Sun</span>&nbsp;
-                            <i class="glyphicon glyphicon-time"></i>
-                            {{ vm.lists[vm.listId].scheduledTime }}&nbsp;&nbsp;
+                       <span ng-show="vm.lists[vm.listId].scheduled">
+                           <i class="glyphicon glyphicon-calendar"></i>
+                           <span ng-show="vm.lists[vm.listId].scheduledMonSun">
+                               <span ng-show="vm.lists[vm.listId].scheduledMonSun[0]" translate>Mon</span>
+                               <span ng-show="vm.lists[vm.listId].scheduledMonSun[1]" translate>Tue</span>
+                               <span ng-show="vm.lists[vm.listId].scheduledMonSun[2]" translate>Wed</span>
+                               <span ng-show="vm.lists[vm.listId].scheduledMonSun[3]" translate>Thu</span>
+                               <span ng-show="vm.lists[vm.listId].scheduledMonSun[4]" translate>Fri</span>
+                               <span ng-show="vm.lists[vm.listId].scheduledMonSun[5]" translate>Sat</span>
+                               <span ng-show="vm.lists[vm.listId].scheduledMonSun[6]" translate>Sun</span>&nbsp;
+                           </span>
+                           <i class="glyphicon glyphicon-time"></i>
+                           <span>{{ vm.lists[vm.listId].scheduledTime | rameHHmmss }}</span>&nbsp;&nbsp;
                         </span>
                         
                         <!-- existing synchronizations -->
