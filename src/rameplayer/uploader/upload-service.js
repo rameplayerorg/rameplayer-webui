@@ -50,7 +50,7 @@
                     // check mime type, must be video or image
                     var t = item.type.substr(0, 6);
                     // '.ts': allow mpeg ts (it's mime is often text/plain or unknown)
-                    var allow = (t === 'video/' || t === 'image/' ||
+                    var allow = (t === 'video/' || t === 'image/' || t === 'audio/' ||
                                  item.name.substr(item.name.length - 3) === '.ts');
                     if (!allow) {
                         logger.debug('Upload file rejected by filter', item);
